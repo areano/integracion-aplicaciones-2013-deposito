@@ -2,30 +2,40 @@ package dto;
 
 public class ElectrodomesticoDTO {
 	
-	private int codigo;
-	private int codigoDeposito;
+	private long codigo;
+	private String nombre;
+	private long idModulo;
 	private String descripcion;
 	private String marca;
-	private String nombre;
 	private float precio;
+	private String origen;
+	private String foto;
 	private String fichaTecnica;
 	
 	public ElectrodomesticoDTO(){}
 
-	public int getCodigo() {
+	public long getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(int codigo) {
+	public void setCodigo(long codigo) {
 		this.codigo = codigo;
 	}
 
-	public int getCodigoDeposito() {
-		return codigoDeposito;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setCodigoDeposito(int codigoDeposito) {
-		this.codigoDeposito = codigoDeposito;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public long getIdModulo() {
+		return idModulo;
+	}
+
+	public void setIdModulo(long idModulo) {
+		this.idModulo = idModulo;
 	}
 
 	public String getDescripcion() {
@@ -44,20 +54,28 @@ public class ElectrodomesticoDTO {
 		this.marca = marca;
 	}
 
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
 	public float getPrecio() {
 		return precio;
 	}
 
 	public void setPrecio(float precio) {
 		this.precio = precio;
+	}
+
+	public String getOrigen() {
+		return origen;
+	}
+
+	public void setOrigen(String origen) {
+		this.origen = origen;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
 	public String getFichaTecnica() {

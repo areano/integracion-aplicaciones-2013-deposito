@@ -7,16 +7,15 @@ import javax.persistence.Entity;
 @DiscriminatorValue(value="infantil")
 public class Infantil {
 	
-	private int edadRecomendada;
+	private String edadRecomendada;
 	
 	public Infantil(){}
 
-	public int getEdadRecomendada() {
+	public String getEdadRecomendada() {
 		return edadRecomendada;
 	}
 
-	public void setEdadRecomendada(int edadRecomendada) {
+	public void setEdadRecomendada(String edadRecomendada) {
 		this.edadRecomendada = edadRecomendada;
 	}
-
 }
