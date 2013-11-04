@@ -24,12 +24,6 @@ public class Articulo {
 	private String origen;
 	private String foto;
 	
-	/*Por ahora pongo el stock aca, despues vemos si
-	 * hay una mejor manera de manejarlo
-	 * Igualmente no lo incluyo en el dto
-	 * */
-	private long stock;
-	
 	public Articulo(){}
 
 	public long getCodigo() {
@@ -94,13 +88,5 @@ public class Articulo {
 
 	public void setFoto(String foto) {
 		this.foto = foto;
-	}
-
-	public long getStock() {
-		return stock;
-	}
-
-	public void setStock(long stock) {
-		this.stock = stock;
 	}
 }

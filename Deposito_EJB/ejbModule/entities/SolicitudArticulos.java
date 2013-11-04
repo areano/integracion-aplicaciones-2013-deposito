@@ -5,6 +5,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import auxiliares.CantidadArticulos;
+
 @Entity
 @Table(name="SolicitudesArticulos")
 public class SolicitudArticulos {
@@ -14,8 +16,8 @@ public class SolicitudArticulos {
 	private long idModulo;
 	
 	@OneToOne
-	private Articulo articulo;
-	private int cantidad;
+	private CantidadArticulos articulos;
+
 	private boolean cumplida;
 	
 	public SolicitudArticulos(){}
@@ -35,21 +37,13 @@ public class SolicitudArticulos {
 	public void setIdModulo(long idModulo) {
 		this.idModulo = idModulo;
 	}
-
-	public Articulo getArticulo() {
-		return articulo;
+	
+	public CantidadArticulos getArticulos() {
+		return articulos;
 	}
 
-	public void setArticulo(Articulo articulo) {
-		this.articulo = articulo;
-	}
-
-	public int getCantidad() {
-		return cantidad;
-	}
-
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
+	public void setArticulos(CantidadArticulos articulos) {
+		this.articulos = articulos;
 	}
 
 	public boolean isCumplida() {
