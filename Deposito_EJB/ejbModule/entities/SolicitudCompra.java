@@ -1,10 +1,13 @@
 package entities;
 
+import java.util.Calendar;
 import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import auxiliares.CantidadArticulos;
 
 @Entity
@@ -18,6 +21,10 @@ public class SolicitudCompra {
 	private List<CantidadArticulos> articulos;
 	
 	private boolean completada;
+	
+	private Calendar fechaInicio;
+	
+	private Calendar fechaFin;
 	
 	
 	public SolicitudCompra(){}
@@ -44,5 +51,21 @@ public class SolicitudCompra {
 
 	public void setCompletada(boolean completada) {
 		this.completada = completada;
+	}
+
+	public Calendar getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public void setFechaInicio(Calendar fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	public Calendar getFechaFin() {
+		return fechaFin;
+	}
+
+	public void setFechaFin(Calendar fechaFin) {
+		this.fechaFin = fechaFin;
 	}
 }

@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.Calendar;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -20,7 +22,13 @@ public class SolicitudArticulos {
 
 	private boolean cumplida;
 	
+	private Calendar fechaInicio;
+	
+	private Calendar fechaFin;
+	
+	
 	public SolicitudArticulos(){}
+
 
 	public long getIdSolicitud() {
 		return idSolicitud;
@@ -37,7 +45,7 @@ public class SolicitudArticulos {
 	public void setIdModulo(long idModulo) {
 		this.idModulo = idModulo;
 	}
-	
+
 	public CantidadArticulos getArticulos() {
 		return articulos;
 	}
@@ -52,5 +60,21 @@ public class SolicitudArticulos {
 
 	public void setCumplida(boolean cumplida) {
 		this.cumplida = cumplida;
+	}
+
+	public Calendar getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public void setFechaInicio(Calendar fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	public Calendar getFechaFin() {
+		return fechaFin;
+	}
+
+	public void setFechaFin(Calendar fechaFin) {
+		this.fechaFin = fechaFin;
 	}
 }
