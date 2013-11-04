@@ -6,7 +6,7 @@ import javax.ejb.MessageDriven;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 
-import dto.SolicitudDTO;
+import dto.SolicitudArticulosDTO;
 import sessionBeans.Facade;
 
 /**
@@ -36,7 +36,7 @@ public class RecepcionSolicitudArticulos implements MessageListener {
     public void onMessage(Message message) {
         // TODO Auto-generated method stub
         
-    	SolicitudDTO solicitud = new SolicitudDTO();
+    	SolicitudArticulosDTO solicitud = new SolicitudArticulosDTO();
 		facade.recibirSolicitudArticulos(solicitud);
     }
 

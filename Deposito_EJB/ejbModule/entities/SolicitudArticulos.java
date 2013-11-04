@@ -1,15 +1,24 @@
 package entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-public class Solicitud {
+@Entity
+@Table(name="SolicitudesArticulos")
+public class SolicitudArticulos {
 	
+	@Id
 	private long idSolicitud;
 	private long idModulo;
+	
+	@OneToOne
 	private Articulo articulo;
 	private int cantidad;
 	private boolean cumplida;
 	
-	public Solicitud(){}
+	public SolicitudArticulos(){}
 
 	public long getIdSolicitud() {
 		return idSolicitud;
