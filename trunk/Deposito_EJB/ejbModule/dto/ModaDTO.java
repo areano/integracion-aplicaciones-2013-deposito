@@ -4,7 +4,7 @@ public class ModaDTO {
 	
 	private long codigo;
 	private String nombre;
-	private long idModulo;
+	private long codigoDeposito;
 	private String descripcion;
 	private String marca;
 	private float precio;
@@ -31,12 +31,12 @@ public class ModaDTO {
 		this.nombre = nombre;
 	}
 
-	public long getIdModulo() {
-		return idModulo;
+	public long getCodigoDeposito() {
+		return codigoDeposito;
 	}
 
-	public void setIdModulo(long idModulo) {
-		this.idModulo = idModulo;
+	public void setCodigoDeposito(long codigoDeposito) {
+		this.codigoDeposito = codigoDeposito;
 	}
 
 	public String getDescripcion() {

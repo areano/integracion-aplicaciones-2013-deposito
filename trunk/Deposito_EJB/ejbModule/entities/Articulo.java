@@ -17,12 +17,18 @@ public class Articulo {
 	@Id
 	private long codigo;
 	private String nombre;
-	private long idModulo;
+	private long codigoDeposito;
 	private String descripcion;
 	private String marca;
 	private float precio;
 	private String origen;
 	private String foto;
+	
+	/*Por ahora pongo el stock aca, despues vemos si
+	 * hay una mejor manera de manejarlo
+	 * Igualmente no lo incluyo en el dto
+	 * */
+	private long stock;
 	
 	public Articulo(){}
 
@@ -42,12 +48,12 @@ public class Articulo {
 		this.nombre = nombre;
 	}
 
-	public long getIdModulo() {
-		return idModulo;
+	public long getCodigoDeposito() {
+		return codigoDeposito;
 	}
 
-	public void setIdModulo(long idModulo) {
-		this.idModulo = idModulo;
+	public void setCodigoDeposito(long codigoDeposito) {
+		this.codigoDeposito = codigoDeposito;
 	}
 
 	public String getDescripcion() {
@@ -88,5 +94,13 @@ public class Articulo {
 
 	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+
+	public long getStock() {
+		return stock;
+	}
+
+	public void setStock(long stock) {
+		this.stock = stock;
 	}
 }
