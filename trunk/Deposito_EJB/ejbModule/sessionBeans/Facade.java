@@ -2,8 +2,8 @@ package sessionBeans;
 
 import javax.ejb.Remote;
 
-import dto.CompraDTO;
-import dto.SolicitudDTO;
+import dto.SolicitudCompraDTO;
+import dto.SolicitudArticulosDTO;
 
 @Remote
 public interface Facade {
@@ -11,11 +11,11 @@ public interface Facade {
 	/**
 	 * Recibe una solicitud de articulos
 	 */
-	public void recibirSolicitudArticulos(SolicitudDTO solicitud);
+	public void recibirSolicitudArticulos(SolicitudArticulosDTO solicitud);
 
 	/**
 	 * Recibe una compra de articulos
 	 */
-	public void recibirCompra(CompraDTO compra);
+	public void recibirCompra(SolicitudCompraDTO compra);
 
 }

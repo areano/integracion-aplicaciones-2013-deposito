@@ -3,8 +3,8 @@ package sessionBeans;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import dto.CompraDTO;
-import dto.SolicitudDTO;
+import dto.SolicitudCompraDTO;
+import dto.SolicitudArticulosDTO;
 
 /**
  * Session Bean implementation class FacadeBean
@@ -20,11 +20,11 @@ public class FacadeBean implements Facade {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void recibirSolicitudArticulos(SolicitudDTO solicitud) {
+	public void recibirSolicitudArticulos(SolicitudArticulosDTO solicitud) {
 
 	}
 
-	public void recibirCompra(CompraDTO compra) {
+	public void recibirCompra(SolicitudCompraDTO compra) {
 
 	}
 

@@ -6,7 +6,7 @@ import javax.ejb.MessageDriven;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 
-import dto.CompraDTO;
+import dto.SolicitudCompraDTO;
 import sessionBeans.Facade;
 
 /**
@@ -37,7 +37,7 @@ public class RecepcionCompras implements MessageListener {
         // TODO Auto-generated method stub
     	
     	
-    	CompraDTO compra = new CompraDTO();
+    	SolicitudCompraDTO compra = new SolicitudCompraDTO();
     	facade.recibirCompra(compra);
     }
 
