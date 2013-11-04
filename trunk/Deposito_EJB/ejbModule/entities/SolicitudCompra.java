@@ -17,6 +17,9 @@ public class SolicitudCompra {
 	@OneToMany
 	private List<CantidadArticulos> articulos;
 	
+	private boolean completada;
+	
+	
 	public SolicitudCompra(){}
 
 	public long getCodigo() {
@@ -33,5 +36,13 @@ public class SolicitudCompra {
 
 	public void setArticulos(List<CantidadArticulos> articulos) {
 		this.articulos = articulos;
+	}
+
+	public boolean isCompletada() {
+		return completada;
+	}
+
+	public void setCompletada(boolean completada) {
+		this.completada = completada;
 	}
 }
