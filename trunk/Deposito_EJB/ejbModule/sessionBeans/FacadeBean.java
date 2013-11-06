@@ -1,8 +1,10 @@
 package sessionBeans;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import servicios.AdministradorSolicitudArticulos;
 import dto.SolicitudCompraDTO;
 import dto.SolicitudArticulosDTO;
 
@@ -13,19 +15,21 @@ import dto.SolicitudArticulosDTO;
 @LocalBean
 public class FacadeBean implements Facade {
 
+	@EJB
+	private AdministradorSolicitudArticulos adm;
+
 	/**
 	 * Default constructor.
 	 */
 	public FacadeBean() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public void recibirSolicitudArticulos(SolicitudArticulosDTO solicitud) {
-
+		adm.recibirSolicitudArticulos(solicitud);
 	}
 
 	public void recibirCompra(SolicitudCompraDTO compra) {
-
+		// TODO AR - recepcion de compras desde fabrica
 	}
 
 }
