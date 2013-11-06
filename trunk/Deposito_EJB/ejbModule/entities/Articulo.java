@@ -23,6 +23,7 @@ public class Articulo {
 	private float precio;
 	private String origen;
 	private String foto;
+	private long stock;
 	
 	public Articulo(){}
 
@@ -88,5 +89,13 @@ public class Articulo {
 
 	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+
+	public long getStock() {
+		return stock;
+	}
+
+	public void setStock(long stock) {
+		this.stock = stock;
 	}
 }
