@@ -2,7 +2,7 @@ package servicios;
 
 import entities.Articulo;
 
-public interface AdministradorArticulo {
+public interface AdministradorArticulos {
 	
 	public void guardarArticulo(Articulo articulo);
     

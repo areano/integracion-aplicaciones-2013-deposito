@@ -12,24 +12,24 @@ import entities.Articulo;
  */
 @Stateless
 @LocalBean
-public class AdministradorArticulosBean implements AdministradorArticulo{
+public class AdministradorArticulosBean implements AdministradorArticulos {
 
 	@PersistenceContext
 	EntityManager em;
-	
-    public AdministradorArticulosBean() {}
-    
-    
-    public void guardarArticulo(Articulo articulo){
-    	em.persist(articulo);
-    }
-    
-    public void actualizarArticulo(Articulo articulo){
-    	em.merge(articulo);
-    }
-    
-    public void eliminarArticulo(Articulo articulo){
-    	em.remove(articulo);
-    }
+
+	public AdministradorArticulosBean() {
+	}
+
+	public void guardarArticulo(Articulo articulo) {
+		em.persist(articulo);
+	}
+
+	public void actualizarArticulo(Articulo articulo) {
+		em.merge(articulo);
+	}
+
+	public void eliminarArticulo(Articulo articulo) {
+		em.remove(articulo);
+	}
 
 }
