@@ -16,6 +16,11 @@ public interface Facade {
 	/**
 	 * Recibe una compra de articulos
 	 */
-	public void recibirCompra(SolicitudCompraDTO compra);
+	public void recibirSolicitudCompra(SolicitudCompraDTO compra);
+	
+	/**
+	 * Crea una nueva solicitud de compra y la envia
+	 */
+	public void crearSolicitudCompra(SolicitudCompraDTO compra);
 
 }

@@ -5,6 +5,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import servicios.AdministradorSolicitudArticulos;
+import servicios.AdministradorSolicitudCompra;
 import dto.SolicitudCompraDTO;
 import dto.SolicitudArticulosDTO;
 
@@ -16,7 +17,10 @@ import dto.SolicitudArticulosDTO;
 public class FacadeBean implements Facade {
 
 	@EJB
-	private AdministradorSolicitudArticulos adm;
+	private AdministradorSolicitudArticulos admArticulos;
+
+	@EJB
+	private AdministradorSolicitudCompra admSolicitudCompra;
 
 	/**
 	 * Default constructor.
@@ -25,11 +29,16 @@ public class FacadeBean implements Facade {
 	}
 
 	public void recibirSolicitudArticulos(SolicitudArticulosDTO solicitud) {
-		adm.recibirSolicitudArticulos(solicitud);
+		admArticulos.recibirSolicitudArticulos(solicitud);
 	}
 
-	public void recibirCompra(SolicitudCompraDTO compra) {
-		// TODO AR - recepcion de compras desde fabrica
+	public void recibirSolicitudCompra(SolicitudCompraDTO compra) {
+		admSolicitudCompra.recibir(compra);
+	}
+
+	@Override
+	public void crearSolicitudCompra(SolicitudCompraDTO compra) {
+		admSolicitudCompra.crear(compra);
 	}
 
 }
