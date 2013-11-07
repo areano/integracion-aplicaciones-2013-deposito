@@ -18,7 +18,8 @@ import sessionBeans.Facade;
  */
 @MessageDriven(activationConfig = {
 		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
-		@ActivationConfigProperty(propertyName = "destination", propertyValue = "aaaaaaaaaaa") }, mappedName = "aaaaaaaaaaa")
+		@ActivationConfigProperty(propertyName = "destination", propertyValue = "queue/solicitudArticulos") }, 
+		mappedName = "queue/solicitudArticulos")
 public class RecepcionSolicitudArticulos implements MessageListener {
 
 	@EJB
@@ -39,7 +40,8 @@ public class RecepcionSolicitudArticulos implements MessageListener {
 		try {
 			TextMessage txtMessage = (TextMessage) message;
 			SolicitudArticulosParser parser = new SolicitudArticulosParser();
-			SolicitudArticulosDTO solicitud = parser.toDTO(txtMessage.getText());
+			SolicitudArticulosDTO solicitud = parser
+					.toDTO(txtMessage.getText());
 			facade.recibirSolicitudArticulos(solicitud);
 		} catch (JMSException e) {
 			// TODO AR - log error
