@@ -20,7 +20,8 @@ import sessionBeans.Facade;
  */
 @MessageDriven(activationConfig = {
 		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
-		@ActivationConfigProperty(propertyName = "destination", propertyValue = "compras") }, mappedName = "compras")
+		@ActivationConfigProperty(propertyName = "destination", propertyValue = "queue/recepcionCompra") }, 
+		mappedName = "queue/recepcionCompra")
 public class RecepcionCompras implements MessageListener {
 
 	@EJB
