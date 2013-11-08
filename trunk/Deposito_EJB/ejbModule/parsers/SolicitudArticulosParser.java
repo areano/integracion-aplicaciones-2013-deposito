@@ -1,11 +1,41 @@
 package parsers;
 
+import java.io.StringReader;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.ValidationEvent;
+import javax.xml.bind.ValidationEventHandler;
+
 import dto.SolicitudArticulosDTO;
 
 public class SolicitudArticulosParser {
 
 	public SolicitudArticulosDTO toDTO(String xml) throws ParseException {
-		// TODO AR - parsear xml y crear dto
-		return null;
+		JAXBContext jaxbCtx;
+		SolicitudArticulosDTO sa=null;
+		
+		try {
+			jaxbCtx = JAXBContext.newInstance(SolicitudArticulosDTO.class);
+			Unmarshaller u = jaxbCtx.createUnmarshaller();
+			
+			u.setEventHandler(
+				    new ValidationEventHandler() {
+				        public boolean handleEvent(ValidationEvent event ) {
+				            throw new RuntimeException(event.getMessage(),
+				                                       event.getLinkedException());
+				        }
+
+
+				});
+			StringReader reader = new StringReader(xml);
+			sa = (SolicitudArticulosDTO)u.unmarshal(reader);
+		} catch (JAXBException e) {
+			// TODO AR - Log error
+			e.printStackTrace();
+		}
+
+		return sa;
 	}
 }
