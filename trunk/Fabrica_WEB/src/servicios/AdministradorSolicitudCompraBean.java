@@ -3,6 +3,7 @@ package servicios;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import dao.DepositoDAO;
 import dao.SolicitudCompraDAO;
 import dto.SolicitudCompraDTO;
 import entities.SolicitudCompra;
@@ -16,6 +17,9 @@ public class AdministradorSolicitudCompraBean implements
 
 	@EJB
 	private SolicitudCompraDAO solicitudCompraDao;
+
+	@EJB
+	private DepositoDAO depositoDao;
 
 	/**
 	 * Default constructor.
@@ -37,6 +41,23 @@ public class AdministradorSolicitudCompraBean implements
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public void entregarCompra(SolicitudCompraDTO compra) {
+		try {
+			// TODO AR: Validar entity
+			SolicitudCompra entity = getEntity(compra);
+
+			// TODO AR: actualizar estado
+			solicitudCompraDao.persist(entity);
+
+			depositoDao.entregarCompra(compra);
+
+		} catch (Exception e) {
+			// TODO AR: log de errores y rollback de las operaciones
+			e.printStackTrace();
+		}
 	}
 
 	private SolicitudCompra getEntity(SolicitudCompraDTO compra) {
