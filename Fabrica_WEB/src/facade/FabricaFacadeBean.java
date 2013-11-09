@@ -12,7 +12,7 @@ import dto.SolicitudCompraDTO;
  */
 @Stateless
 @LocalBean
-public class DepositoFacadeBean implements DepositoFacade {
+public class FabricaFacadeBean implements FabricaFacade {
 
 	@EJB
 	private AdministradorSolicitudCompra adminSolicitudCompra;
@@ -20,7 +20,7 @@ public class DepositoFacadeBean implements DepositoFacade {
 	/**
 	 * Default constructor.
 	 */
-	public DepositoFacadeBean() {
+	public FabricaFacadeBean() {
 	}
 
 	@Override

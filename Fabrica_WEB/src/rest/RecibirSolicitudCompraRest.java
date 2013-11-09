@@ -9,13 +9,13 @@ import javax.ws.rs.core.MediaType;
 import parsers.ParserException;
 import parsers.SolicitudCompraParser;
 import dto.SolicitudCompraDTO;
-import facade.DepositoFacade;
+import facade.FabricaFacade;
 
 @Path("/ejemplo")
 public class RecibirSolicitudCompraRest {
 
 	@EJB
-	DepositoFacade facade;
+	FabricaFacade facade;
 
 	// @GET
 	// @Path("/obtener/{id}")
@@ -33,13 +33,11 @@ public class RecibirSolicitudCompraRest {
 		try {
 			SolicitudCompraParser parser = new SolicitudCompraParser();
 
-			SolicitudCompraDTO dto;
-
-			dto = parser.toDTO(compra);
+			SolicitudCompraDTO dto = parser.toDTO(compra);
 
 			facade.recibirSolicitudCompra(dto);
 		} catch (ParserException e) {
-			// TODO AR: log error y rollback
+			// TODO AR: log error
 			e.printStackTrace();
 		}
 
