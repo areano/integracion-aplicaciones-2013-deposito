@@ -2,9 +2,10 @@ package parsers;
 
 import dto.SolicitudCompraDTO;
 
-public class SolicitudCompraParser {
+public class SolicitudCompraParser implements Parser<SolicitudCompraDTO> {
 
-	public SolicitudCompraDTO toDTO(String text) throws ParseException {
+	@Override
+	public SolicitudCompraDTO toDTO(String data) throws ParserException {
 		// TODO AR: Parsear xml y crear DTO
 		return null;
 	}

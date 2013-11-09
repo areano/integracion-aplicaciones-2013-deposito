@@ -3,6 +3,7 @@
 	<name>Fabrica_WEB</name>
 	<comment></comment>
 	<projects>
+		<project>Common</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

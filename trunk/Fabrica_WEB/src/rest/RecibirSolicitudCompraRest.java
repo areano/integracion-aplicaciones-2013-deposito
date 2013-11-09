@@ -36,7 +36,7 @@ public class RecibirSolicitudCompraRest {
 
 			SolicitudCompraDTO dto;
 
-			dto = parser.toDto(compra);
+			dto = parser.toDTO(compra);
 
 			facade.recibirSolicitudCompra(dto);
 		} catch (ParserException e) {
