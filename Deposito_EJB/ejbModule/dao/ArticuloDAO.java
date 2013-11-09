@@ -20,4 +20,7 @@ public class ArticuloDAO {
 		em.persist(a);
 	}
 	
+	public void actualizarArticulo(Articulo a){
+		em.merge(a);
+	}
 }
