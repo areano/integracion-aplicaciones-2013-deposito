@@ -13,9 +13,8 @@ public class DepositoFacadeBean implements DepositoFacade{
 	AdministradorArticulos admin;
 	
 	@Override
-	public void altaElectrodomestico(ElectrodomesticoDTO e) {
-		
-		
+	public void altaElectrodomestico(ElectrodomesticoDTO dto) {
+		admin.guardarElectrodomestico(dto);
 	}
 	
 
