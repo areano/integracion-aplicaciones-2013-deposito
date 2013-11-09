@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue(value="infantil")
-public class Infantil {
+public class Infantil extends Articulo{
 	
 	private String edadRecomendada;
 	

@@ -78,5 +78,11 @@ public abstract class ArticuloDTO implements Serializable{
 		this.origen = origen;
 	}
 	
+	public Long getCodigoDeposito() {
+		return codigoDeposito;
+	}
 	
+	public void setCodigoDeposito(Long codigoDeposito) {
+		this.codigoDeposito = codigoDeposito;
+	}
 }
