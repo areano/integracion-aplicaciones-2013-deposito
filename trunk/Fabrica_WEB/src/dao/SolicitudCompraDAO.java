@@ -2,7 +2,6 @@ package dao;
 
 import javax.ejb.Local;
 
-import dto.SolicitudCompraDTO;
 import entities.SolicitudCompra;
 
 @Local

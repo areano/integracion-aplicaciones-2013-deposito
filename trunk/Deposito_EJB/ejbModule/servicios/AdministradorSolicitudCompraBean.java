@@ -5,10 +5,8 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import dao.FabricaDAO;
-import dao.SolicitudArticulosDAO;
 import dao.SolicitudCompraDAO;
 import dto.SolicitudCompraDTO;
-import entities.Articulo;
 import entities.SolicitudCompra;
 
 /**
@@ -63,24 +61,22 @@ public class AdministradorSolicitudCompraBean implements
 	@Override
 	public void recibir(SolicitudCompraDTO compraDTO) {
 		/*
-		 * getEntity
-		 * validar
-		 * actualizar el stock de cada articulo
-		 * marcar la solicitud de compra com recibida
-		 * */
+		 * getEntity validar actualizar el stock de cada articulo marcar la
+		 * solicitud de compra com recibida
+		 */
 		SolicitudCompra compra = getEntity(compraDTO);
-		
-//		for (Articulo art : compra.getArticulos()) {
-//			/*
-//			 * buscar entity stock stock
-//			 * actualizar stock
-//			 * validar que se persista
-//			 * */
-//		}
-		
+
+		// for (Articulo art : compra.getArticulos()) {
+		// /*
+		// * buscar entity stock stock
+		// * actualizar stock
+		// * validar que se persista
+		// * */
+		// }
+
 		compra.setCompletada(true);
 		solicitudCompraDAO.merge(compra);
-		
+
 	}
 
 }
