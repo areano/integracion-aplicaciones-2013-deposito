@@ -28,4 +28,9 @@ public class FabricaFacadeBean implements FabricaFacade {
 		adminSolicitudCompra.recibirSolicitudCompra(compra);
 	}
 
+	@Override
+	public void entregarCompra(SolicitudCompraDTO compra) {
+		adminSolicitudCompra.entregarCompra(compra);
+	}
+
 }

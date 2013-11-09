@@ -9,4 +9,6 @@ public interface AdministradorSolicitudCompra {
 
 	void recibirSolicitudCompra(SolicitudCompraDTO compra);
 
+	void entregarCompra(SolicitudCompraDTO compra);
+
 }
