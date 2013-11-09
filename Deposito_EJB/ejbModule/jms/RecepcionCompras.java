@@ -8,10 +8,8 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
-import parsers.ParseException;
-import parsers.SolicitudArticulosParser;
+import parsers.ParserException;
 import parsers.SolicitudCompraParser;
-import dto.SolicitudArticulosDTO;
 import dto.SolicitudCompraDTO;
 import sessionBeans.Facade;
 
@@ -20,8 +18,7 @@ import sessionBeans.Facade;
  */
 @MessageDriven(activationConfig = {
 		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
-		@ActivationConfigProperty(propertyName = "destination", propertyValue = "queue/recepcionCompra") }, 
-		mappedName = "queue/recepcionCompra")
+		@ActivationConfigProperty(propertyName = "destination", propertyValue = "queue/recepcionCompra") }, mappedName = "queue/recepcionCompra")
 public class RecepcionCompras implements MessageListener {
 
 	@EJB
@@ -46,7 +43,7 @@ public class RecepcionCompras implements MessageListener {
 		} catch (JMSException e) {
 			// TODO AR - log error
 			e.printStackTrace();
-		} catch (ParseException e) {
+		} catch (ParserException e) {
 			// TODO AR - log error
 			e.printStackTrace();
 		}

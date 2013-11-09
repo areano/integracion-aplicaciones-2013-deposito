@@ -10,27 +10,26 @@ import javax.xml.bind.ValidationEventHandler;
 
 import dto.SolicitudArticulosDTO;
 
-public class SolicitudArticulosParser {
+public class SolicitudArticulosParser implements Parser<SolicitudArticulosDTO> {
 
-	public SolicitudArticulosDTO toDTO(String xml) throws ParseException {
+	@Override
+	public SolicitudArticulosDTO toDTO(String data) throws ParserException {
 		JAXBContext jaxbCtx;
-		SolicitudArticulosDTO sa=null;
-		
+		SolicitudArticulosDTO sa = null;
+
 		try {
 			jaxbCtx = JAXBContext.newInstance(SolicitudArticulosDTO.class);
 			Unmarshaller u = jaxbCtx.createUnmarshaller();
-			
-			u.setEventHandler(
-				    new ValidationEventHandler() {
-				        public boolean handleEvent(ValidationEvent event ) {
-				            throw new RuntimeException(event.getMessage(),
-				                                       event.getLinkedException());
-				        }
 
+			u.setEventHandler(new ValidationEventHandler() {
+				public boolean handleEvent(ValidationEvent event) {
+					throw new RuntimeException(event.getMessage(), event
+							.getLinkedException());
+				}
 
-				});
-			StringReader reader = new StringReader(xml);
-			sa = (SolicitudArticulosDTO)u.unmarshal(reader);
+			});
+			StringReader reader = new StringReader(data);
+			sa = (SolicitudArticulosDTO) u.unmarshal(reader);
 		} catch (JAXBException e) {
 			// TODO AR - Log error
 			e.printStackTrace();
@@ -38,4 +37,5 @@ public class SolicitudArticulosParser {
 
 		return sa;
 	}
+
 }
