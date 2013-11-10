@@ -6,6 +6,9 @@ import javax.ejb.Stateless;
 import servicios.AdministradorArticulos;
 import dto.ArticuloDTO;
 import dto.ElectrodomesticoDTO;
+import dto.InfantilDTO;
+import dto.ModaDTO;
+import dto.MuebleDTO;
 
 @Stateless
 public class DepositoFacadeBean implements DepositoFacade{
@@ -19,11 +22,22 @@ public class DepositoFacadeBean implements DepositoFacade{
 	}
 
 	@Override
+	public void altaModa(ModaDTO m) {
+		admin.guardarModa(m);
+	}
+
+	@Override
+	public void altaMueble(MuebleDTO m) {
+		admin.guardarMueble(m);
+	}
+
+	@Override
+	public void altaInfatil(InfantilDTO i) {
+		admin.guardarInfantil(i);
+	}
+	
+	@Override
 	public void actualizarStock(ArticuloDTO dto, long stock) {
 		admin.actualizarStock(dto, stock);
 	}
-	
-	
-	
-
 }
