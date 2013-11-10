@@ -1,9 +1,11 @@
 package transformer;
 
+import dto.ArticuloDTO;
 import dto.ElectrodomesticoDTO;
 import dto.InfantilDTO;
 import dto.ModaDTO;
 import dto.MuebleDTO;
+import entities.Articulo;
 import entities.Electrodomestico;
 import entities.Infantil;
 import entities.Moda;
@@ -20,6 +22,19 @@ public class Transfomer {
 	}
 	
 	private Transfomer(){}
+	
+	public Articulo converToClass(ArticuloDTO dto){
+		Articulo a = new Articulo();
+		a.setCodigo(dto.getCodigo());
+		a.setCodigoDeposito(dto.getCodigoDeposito());
+		a.setDescripcion(dto.getDescripcion());
+		a.setFoto(dto.getFoto());
+		a.setMarca(dto.getMarca());
+		a.setNombre(dto.getNombre());
+		a.setOrigen(dto.getOrigen());
+		a.setPrecio(dto.getPrecio());
+		return a;
+	}
 	
 	public Electrodomestico converToClass(ElectrodomesticoDTO dto){
 		Electrodomestico e = new Electrodomestico();

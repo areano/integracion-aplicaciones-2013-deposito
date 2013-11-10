@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import transformer.Transfomer;
 import dao.ArticuloDAO;
 import dao.PortalDAO;
+import dto.ArticuloDTO;
 import dto.ElectrodomesticoDTO;
 import dto.InfantilDTO;
 import dto.ModaDTO;
@@ -71,5 +72,12 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	public void guardarMueble(MuebleDTO dto){
 		Mueble m = transformer.converToClass(dto);
 		articuloDAO.guardarArticulo(m);
+	}
+
+	@Override
+	public void actualizarStock(ArticuloDTO dto, long stock) {
+		Articulo a = transformer.converToClass(dto);
+		a.setStock(stock);
+		articuloDAO.actualizarArticulo(a);
 	}
 }
