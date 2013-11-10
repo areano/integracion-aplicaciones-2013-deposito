@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 
 import transformer.Transfomer;
 import dao.ArticuloDAO;
+import dao.PortalDAO;
 import dto.ElectrodomesticoDTO;
 import dto.InfantilDTO;
 import dto.ModaDTO;
@@ -26,7 +27,10 @@ import entities.Mueble;
 public class AdministradorArticulosBean implements AdministradorArticulos {
 	
 	@EJB
-	ArticuloDAO dao;
+	ArticuloDAO articuloDAO;
+	
+	@EJB
+	PortalDAO portalDAO;
 	
 	private Transfomer transformer;
 
@@ -50,21 +54,22 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	
 	public void guardarElectrodomestico(ElectrodomesticoDTO dto){
 		Electrodomestico e = transformer.converToClass(dto);
-		dao.guardarArticulo(e);
+		articuloDAO.guardarArticulo(e);
+		portalDAO.enviar(e);
 	}
 	
 	public void guardarInfantil(InfantilDTO dto){
 		Infantil i = transformer.converToClass(dto);
-		dao.guardarArticulo(i);
+		articuloDAO.guardarArticulo(i);
 	}
 	
 	public void guardarModa(ModaDTO dto){
 		Moda m = transformer.converToClass(dto);
-		dao.guardarArticulo(m);
+		articuloDAO.guardarArticulo(m);
 	}
 	
 	public void guardarMueble(MuebleDTO dto){
 		Mueble m = transformer.converToClass(dto);
-		dao.guardarArticulo(m);
+		articuloDAO.guardarArticulo(m);
 	}
 }

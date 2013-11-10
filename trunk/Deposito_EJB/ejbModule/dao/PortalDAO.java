@@ -3,6 +3,8 @@ package dao;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import entities.Articulo;
+
 /**
  * Session Bean implementation class PortalDAO
  */
@@ -15,6 +17,10 @@ public class PortalDAO {
      */
     public PortalDAO() {
         // TODO Auto-generated constructor stub
+    }
+    
+    public void enviar(Articulo a){
+    	
     }
 
 }
