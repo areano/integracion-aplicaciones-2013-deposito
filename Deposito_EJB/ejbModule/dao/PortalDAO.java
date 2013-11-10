@@ -3,6 +3,8 @@ package dao;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import jms.GenericQueueClient;
+import parsers.ArticuloParser;
 import entities.Articulo;
 
 /**
@@ -12,15 +14,13 @@ import entities.Articulo;
 @LocalBean
 public class PortalDAO {
 
-    /**
-     * Default constructor. 
-     */
-    public PortalDAO() {
-        // TODO Auto-generated constructor stub
-    }
+    public PortalDAO() {}
     
     public void enviar(Articulo a){
-    	
+    	ArticuloParser parser = new ArticuloParser();
+    	String xml = parser.electrodomesticoToXML(a);
+    	GenericQueueClient cliente = new GenericQueueClient();
+    	cliente.enviar(xml);
     }
 
 }
