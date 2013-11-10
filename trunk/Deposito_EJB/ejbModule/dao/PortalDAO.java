@@ -18,7 +18,7 @@ public class PortalDAO {
     
     public void enviar(Articulo a){
     	ArticuloParser parser = new ArticuloParser();
-    	String xml = parser.electrodomesticoToXML(a);
+    	String xml = parser.articuloToXML(a);
     	GenericQueueClient cliente = new GenericQueueClient();
     	cliente.enviar(xml);
     }
