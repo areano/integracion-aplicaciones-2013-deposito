@@ -14,6 +14,7 @@ public class ElectrodomesticoDTO extends ArticuloDTO{
 	public ElectrodomesticoDTO(){
 		super();
 		fichaTecnica = null;
+		setTipo("electrodomestico");
 		
 		
 	}

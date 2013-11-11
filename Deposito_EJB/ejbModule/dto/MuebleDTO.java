@@ -15,6 +15,7 @@ public class MuebleDTO extends ArticuloDTO{
 	public MuebleDTO(){
 		super();
 		material = null;
+		setTipo("mueble");
 	}
 
 	public String getMaterial() {
