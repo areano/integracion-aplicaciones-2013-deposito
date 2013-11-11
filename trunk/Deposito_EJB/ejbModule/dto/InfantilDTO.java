@@ -14,6 +14,7 @@ public class InfantilDTO extends ArticuloDTO{
 	public InfantilDTO(){
 		super();
 		edadRecomendada = null;
+		setTipo("infantil");
 	}
 
 

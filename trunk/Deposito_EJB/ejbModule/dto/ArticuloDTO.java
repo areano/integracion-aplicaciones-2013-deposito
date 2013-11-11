@@ -24,7 +24,7 @@ public abstract class ArticuloDTO implements Serializable{
 	private String origen;
 	@NotNull
 	private String foto;	
-
+	private String tipo;
 	public ArticuloDTO(){
 	    codigo=null;
 	    descripcion=null;
@@ -84,5 +84,11 @@ public abstract class ArticuloDTO implements Serializable{
 	
 	public void setCodigoDeposito(Long codigoDeposito) {
 		this.codigoDeposito = codigoDeposito;
+	}
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 }

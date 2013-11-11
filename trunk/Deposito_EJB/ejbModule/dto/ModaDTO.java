@@ -17,6 +17,7 @@ public class ModaDTO extends ArticuloDTO{
 		super();
 		talle = null;
 		color= null;
+		setTipo("moda");
 	}
 
 	public String getColor() {
