@@ -41,4 +41,9 @@ public class FacadeBean implements Facade {
 		admSolicitudCompra.crear(compra);
 	}
 
+	@Override
+	public void enviarArticulos(SolicitudCompraDTO compra) {
+		admSolicitudCompra.enviarArticulos(compra);
+	}
+
 }
