@@ -11,13 +11,13 @@ import dto.MuebleDTO;
 @Remote
 public interface DepositoFacade {
 
-	public void altaElectrodomestico(ElectrodomesticoDTO e);
+	public void altaElectrodomestico(ElectrodomesticoDTO dto);
 	
-	public void altaModa(ModaDTO m);
+	public void altaModa(ModaDTO dto);
 	
-	public void altaMueble(MuebleDTO m);
+	public void altaMueble(MuebleDTO dto);
 	
-	public void altaInfatil(InfantilDTO i);
+	public void altaInfatil(InfantilDTO dto);
 	
 	public void actualizarStock(ArticuloDTO dto, long stock);
 }
