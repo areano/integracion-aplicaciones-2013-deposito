@@ -11,4 +11,6 @@ public interface AdministradorSolicitudCompra {
 
 	void recibir(SolicitudCompraDTO compra);
 
+	void enviarArticulos(SolicitudCompraDTO compra);
+
 }
