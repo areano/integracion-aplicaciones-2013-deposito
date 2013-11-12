@@ -1,24 +1,30 @@
 package auxiliares;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import entities.Articulo;
 
 @Entity
-@Table(name="CantidadArticulos")
+@Table(name = "CantidadArticulos")
 public class CantidadArticulos {
-	
+
 	@Id
+	@Column(name = "cantidadArticuloId")
 	private int id;
-	
+
 	@OneToOne
+	@JoinColumn(name = "codigo")
 	private Articulo articulo;
+
 	private int cantidad;
-	
-	public CantidadArticulos(){}
+
+	public CantidadArticulos() {
+	}
 
 	public int getId() {
 		return id;
