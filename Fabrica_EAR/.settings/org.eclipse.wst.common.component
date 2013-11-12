@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="Fabrica_EAR">
         <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
         <dependent-module archiveName="Fabrica_WEB.war" deploy-path="/" handle="module:/resource/Fabrica_WEB/Fabrica_WEB">
             <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Common.jar" deploy-path="/lib" handle="module:/resource/Common/Common">
             <dependency-type>uses</dependency-type>
         </dependent-module>
     </wb-module>

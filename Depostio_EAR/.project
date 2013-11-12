@@ -5,6 +5,7 @@
 	<projects>
 		<project>Deposito_EJB</project>
 		<project>Deposito_WEB</project>
+		<project>Common</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
