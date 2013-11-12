@@ -4,31 +4,32 @@ import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import auxiliares.CantidadArticulos;
 
 @Entity
-@Table(name="SolicitudesArticulos")
+@Table(name = "SolicitudesArticulos")
 public class SolicitudArticulos {
-	
+
 	@Id
 	private long idSolicitud;
 	private long idModulo;
-	
+
 	@OneToOne
+	@JoinColumn(name = "cantidadArticuloId")
 	private CantidadArticulos articulos;
 
 	private boolean cumplida;
-	
-	private Calendar fechaInicio;
-	
-	private Calendar fechaFin;
-	
-	
-	public SolicitudArticulos(){}
 
+	private Calendar fechaInicio;
+
+	private Calendar fechaFin;
+
+	public SolicitudArticulos() {
+	}
 
 	public long getIdSolicitud() {
 		return idSolicitud;
