@@ -2,11 +2,13 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.ejb.EJB;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
 import jms.GenericQueueClient;
 import parsers.ArticuloParser;
 import entities.Articulo;
@@ -19,7 +21,7 @@ import entities.PortalConexion;
 @LocalBean
 public class PortalDAO {
 	
-	@EJB
+	@PersistenceContext
 	EntityManager em;
 	
 	private List<PortalConexion> conexiones;
