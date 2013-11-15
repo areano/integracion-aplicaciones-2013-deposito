@@ -3,6 +3,7 @@ package dao;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import entities.Articulo;
 import entities.SolicitudArticulos;
 
 /**
@@ -21,6 +22,11 @@ public class SolicitudArticulosDAO {
 	public void persist(SolicitudArticulos solicitud) {
 		// TODO AR - Persistir entidad, manejo de errores
 		
+	}
+
+	public Articulo buscarArticulo(String codigo) {
+		// TODO AR: Buscar el acticulo dado
+		return null;
 	}
 
 }

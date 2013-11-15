@@ -1,12 +1,13 @@
 package dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "solicitudArticulos")
-public class SolicitudArticulosDTO {
-	
+public class SolicitudArticulosDTO implements Serializable {
+
 	public SolicitudArticulosDTO() {
 		super();
 	}
@@ -14,7 +15,6 @@ public class SolicitudArticulosDTO {
 	List<SolicitudArticuloItemDTO> lista;
 	Integer idSolicitud;
 	Integer idModulo;
-	
 
 	@XmlElement
 	public Integer getIdSolicitud() {
@@ -24,7 +24,7 @@ public class SolicitudArticulosDTO {
 	public void setIdSolicitud(Integer idSolicitud) {
 		this.idSolicitud = idSolicitud;
 	}
-	
+
 	@XmlElement
 	public Integer getIdModulo() {
 		return idModulo;
@@ -34,7 +34,7 @@ public class SolicitudArticulosDTO {
 		this.idModulo = idModulo;
 	}
 
-	@XmlElementWrapper(name="articulos")
+	@XmlElementWrapper(name = "articulos")
 	@XmlElement(name = "articulo")
 	public List<SolicitudArticuloItemDTO> getLista() {
 		return lista;
@@ -45,7 +45,3 @@ public class SolicitudArticulosDTO {
 	}
 
 }
-
-
-
-

@@ -1,20 +1,23 @@
 package servicios;
 
+import java.util.Calendar;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import dao.SolicitudArticulosDAO;
+import dto.SolicitudArticuloItemDTO;
 import dto.SolicitudArticulosDTO;
 import entities.SolicitudArticulos;
+import entities.SolicitudArticulosItem;
 
 /**
  * Session Bean implementation class AdministradorSolicitudArticulosBean
  */
 @Stateless
 @LocalBean
-public class AdministradorSolicitudArticulosBean implements
-		AdministradorSolicitudArticulos {
+public class AdministradorSolicitudArticulosBean implements AdministradorSolicitudArticulos {
 
 	@EJB
 	private SolicitudArticulosDAO dao;
@@ -39,7 +42,20 @@ public class AdministradorSolicitudArticulosBean implements
 
 	private SolicitudArticulos getEntity(SolicitudArticulosDTO solicitud) {
 		// TODO AR - crear entity desde dto
-		return null;
+
+		SolicitudArticulos solicitudEntity = new SolicitudArticulos();
+		solicitudEntity.setModuloId(solicitud.getIdSolicitud());
+
+		for (SolicitudArticuloItemDTO item : solicitud.getLista()) {
+
+			SolicitudArticulosItem itemEntity = new SolicitudArticulosItem();
+			itemEntity.setArticulo(dao.buscarArticulo(item.getCodigo()));
+			itemEntity.setCantidad(item.getCantidad());
+
+			solicitudEntity.getItems().add(itemEntity);
+		}
+
+		return solicitudEntity;
 	}
 
 }

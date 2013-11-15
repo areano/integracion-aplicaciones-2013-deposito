@@ -1,5 +1,6 @@
 package entities;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -9,11 +10,11 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Articulos")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="tipo", discriminatorType=DiscriminatorType.STRING)
+@Table(name = "Articulo")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
 public class Articulo {
-	
+
 	@Id
 	private long codigo;
 	private String nombre;
@@ -24,8 +25,9 @@ public class Articulo {
 	private String origen;
 	private String foto;
 	private long stock;
-	
-	public Articulo(){}
+
+	public Articulo() {
+	}
 
 	public long getCodigo() {
 		return codigo;
