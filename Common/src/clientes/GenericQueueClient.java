@@ -54,7 +54,7 @@ public class GenericQueueClient {
 			this.destination = (Destination) context.lookup(destinationString);
 
 			// Create the JMS connection, session, producer, and consumer
-			this.connection = connectionFactory.createConnection(System.getProperty("username", "usuario"), System.getProperty("password", "1234"));
+			this.connection = connectionFactory.createConnection(username, password);
 			this.session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 			connection.start();
 
