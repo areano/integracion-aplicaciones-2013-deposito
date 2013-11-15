@@ -9,8 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import auxiliares.CantidadArticulos;
-
 @Entity
 @Table(name = "SolicitudesCompra")
 public class SolicitudCompra {

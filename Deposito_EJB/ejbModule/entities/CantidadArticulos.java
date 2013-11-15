@@ -1,4 +1,4 @@
-package auxiliares;
+package entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,8 +6,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import entities.Articulo;
 
 @Entity
 @Table(name = "CantidadArticulos")

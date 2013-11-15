@@ -1,10 +1,12 @@
 package dto;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "articulo")
-public class SolicitudArticuloItemDTO {
+public class SolicitudArticuloItemDTO implements Serializable {
 	public SolicitudArticuloItemDTO() {
 		super();
 	}

@@ -1,26 +1,30 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import auxiliares.CantidadArticulos;
-
 @Entity
-@Table(name = "SolicitudesArticulos")
+@Table(name = "SolicitudArticulos")
 public class SolicitudArticulos {
 
 	@Id
-	private long idSolicitud;
-	private long idModulo;
+	@Column(name = "solicitudArticulosId")
+	private long solicitudId;
 
-	@OneToOne
-	@JoinColumn(name = "cantidadArticuloId")
-	private CantidadArticulos articulos;
+	private long moduloId;
+
+	@OneToMany()
+	@JoinColumn(referencedColumnName = "solicitudArticulosId")
+	private List<SolicitudArticulosItem> items = new ArrayList<SolicitudArticulosItem>();
 
 	private boolean cumplida;
 
@@ -28,31 +32,23 @@ public class SolicitudArticulos {
 
 	private Calendar fechaFin;
 
+	public List<SolicitudArticulosItem> getItems() {
+		return items;
+	}
+
 	public SolicitudArticulos() {
 	}
 
-	public long getIdSolicitud() {
-		return idSolicitud;
+	public long getSolicitudId() {
+		return solicitudId;
 	}
 
-	public void setIdSolicitud(long idSolicitud) {
-		this.idSolicitud = idSolicitud;
+	public long getModuloId() {
+		return moduloId;
 	}
 
-	public long getIdModulo() {
-		return idModulo;
-	}
-
-	public void setIdModulo(long idModulo) {
-		this.idModulo = idModulo;
-	}
-
-	public CantidadArticulos getArticulos() {
-		return articulos;
-	}
-
-	public void setArticulos(CantidadArticulos articulos) {
-		this.articulos = articulos;
+	public void setModuloId(long idModulo) {
+		this.moduloId = idModulo;
 	}
 
 	public boolean isCumplida() {
@@ -65,10 +61,6 @@ public class SolicitudArticulos {
 
 	public Calendar getFechaInicio() {
 		return fechaInicio;
-	}
-
-	public void setFechaInicio(Calendar fechaInicio) {
-		this.fechaInicio = fechaInicio;
 	}
 
 	public Calendar getFechaFin() {
