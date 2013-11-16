@@ -101,28 +101,6 @@ public class Transformer {
 	}
 	
 	
-	public MuebleDTO toDTO(Mueble m){
-		MuebleDTO mDTO=new MuebleDTO();
-		//TODO MF: Mueble -> MuebleDTO
-//		ArticuloDTO a = new Articulo();
-//		a.setCodigo(dto.getCodigo());
-//		a.setCodigoDeposito(dto.getCodigoDeposito());
-//		a.setDescripcion(dto.getDescripcion());
-//		a.setFoto(dto.getFoto());
-//		a.setMarca(dto.getMarca());
-//		a.setNombre(dto.getNombre());
-//		a.setOrigen(dto.getOrigen());
-//		a.setPrecio(dto.getPrecio());
-		mDTO.setFecha(new Timestamp(new java.util.Date().getTime()).toString());
-		return mDTO;
-	}
-	
-	public InfantilDTO toDTO(Infantil i){
-		InfantilDTO iDTO=new InfantilDTO();
-		setArticuloDTO(i, iDTO);
-		return iDTO;
-	}
-	
 	private void setArticuloDTO(Articulo a, ArticuloDTO dto){
 		dto.setCodigo(a.getCodigo());
 		dto.setCodigoDeposito(6L);
@@ -135,16 +113,33 @@ public class Transformer {
 		dto.setPrecio(a.getPrecio());
 	}
 	
+	public MuebleDTO toDTO(Mueble m){
+		MuebleDTO mDTO=new MuebleDTO();
+		setArticuloDTO(m, mDTO);		
+		mDTO.setMaterial(m.getMaterial());
+		return mDTO;
+	}
+	
+	public InfantilDTO toDTO(Infantil i){
+		InfantilDTO iDTO=new InfantilDTO();
+		setArticuloDTO(i, iDTO);		
+		iDTO.setEdadRecomendada(i.getEdadRecomendada());
+		return iDTO;
+	}
+	
 	public ModaDTO toDTO(Moda m){
 		ModaDTO mDTO=new ModaDTO();
-		//TODO MF:Infantil -> InfantilDTO
-		mDTO.setFecha(new Timestamp(new java.util.Date().getTime()).toString());
+		setArticuloDTO(m, mDTO);
+		mDTO.setColor(m.getColor());
+		mDTO.setTalle(m.getTalle());		
 		return mDTO;
 	}
 
 	public ElectrodomesticoDTO toDTO(Electrodomestico e) {
-		// TODO MF: Electrodomestico -> ElectrodomesticoDTO
-		return null;
+		ElectrodomesticoDTO eDTO=new ElectrodomesticoDTO();
+		setArticuloDTO(e, eDTO);		
+		eDTO.setFichaTecnica(e.getFichaTecnica());		
+		return eDTO;	
 	}
 
 	
