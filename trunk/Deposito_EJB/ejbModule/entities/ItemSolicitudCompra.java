@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "CantidadArticulos")
-public class CantidadArticulos {
+public class ItemSolicitudCompra {
 
 	@Id
 	@Column(name = "cantidadArticuloId")
@@ -21,7 +21,7 @@ public class CantidadArticulos {
 
 	private int cantidad;
 
-	public CantidadArticulos() {
+	public ItemSolicitudCompra() {
 	}
 
 	public int getId() {
