@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 
 import transformer.Transformer;
 import dao.ArticuloDAO;
+import dao.DespachoDAO;
 import dao.PortalDAO;
 import dto.ArticuloDTO;
 import dto.ElectrodomesticoDTO;
@@ -31,6 +32,9 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	@EJB
 	PortalDAO portalDAO;
 	
+	@EJB
+	DespachoDAO despachoDAO;
+	
 	private Transformer transformer;
 
 	public AdministradorArticulosBean() {
@@ -55,21 +59,28 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 		Electrodomestico e = transformer.converToClass(dto);
 		articuloDAO.guardarArticulo(e);
 		portalDAO.enviar(e);
+		despachoDAO.enviar(e);
 	}
 	
 	public void guardarInfantil(InfantilDTO dto){
 		Infantil i = transformer.converToClass(dto);
 		articuloDAO.guardarArticulo(i);
+		portalDAO.enviar(i);
+		despachoDAO.enviar(i);
 	}
 	
 	public void guardarModa(ModaDTO dto){
 		Moda m = transformer.converToClass(dto);
 		articuloDAO.guardarArticulo(m);
+		portalDAO.enviar(m);
+		despachoDAO.enviar(m);
 	}
 	
 	public void guardarMueble(MuebleDTO dto){
 		Mueble m = transformer.converToClass(dto);
 		articuloDAO.guardarArticulo(m);
+		portalDAO.enviar(m);
+		despachoDAO.enviar(m);
 	}
 
 	@Override
