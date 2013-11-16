@@ -4,6 +4,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import transformer.Transformer;
 import dao.DespachoDAO;
 import dao.FabricaDAO;
 import dao.SolicitudCompraDAO;
@@ -26,6 +27,7 @@ public class AdministradorSolicitudCompraBean implements
 
 	@EJB
 	private DespachoDAO despachoDAO;
+	
 
 	/**
 	 * Default constructor.
@@ -59,7 +61,9 @@ public class AdministradorSolicitudCompraBean implements
 	private SolicitudCompra getEntity(SolicitudCompraDTO compraDTO) {
 		// TODO AR: crear entity desde dto.
 		// los articulos debe recuperarlos
-		return null;
+		
+		SolicitudCompra solicitud = Transformer.obtenerInstancia().converToClass(compraDTO);
+		return solicitud;
 	}
 
 	@Override
