@@ -30,8 +30,21 @@ public class ArticuloParser {
 	}
 
 	public String toXML(MuebleDTO mDTO) {
-		// TODO MF:MuebleDTO-> xml
-		return null;
+		JAXBContext jaxbCtx;
+		String xml = null;
+		java.io.StringWriter sw = new StringWriter();
+		try {
+			jaxbCtx = JAXBContext.newInstance(MuebleDTO.class);
+			Marshaller m = jaxbCtx.createMarshaller();
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			m.marshal(mDTO, sw );			
+			xml=sw.toString();
+			
+		} catch (JAXBException e) {
+			// TODO AR - Log error
+			e.printStackTrace();
+		}
+		return xml;
 	}
 	
 	public String toXML(InfantilDTO iDTO) {
@@ -53,12 +66,38 @@ public class ArticuloParser {
 	}
 	
 	public String toXML(ModaDTO mDTO) {
-		// TODO MF:MuebleDTO -> xml
-		return null;
+		JAXBContext jaxbCtx;
+		String xml = null;
+		java.io.StringWriter sw = new StringWriter();
+		try {
+			jaxbCtx = JAXBContext.newInstance(ModaDTO.class);
+			Marshaller m = jaxbCtx.createMarshaller();
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			m.marshal(mDTO, sw );			
+			xml=sw.toString();
+			
+		} catch (JAXBException e) {
+			// TODO AR - Log error
+			e.printStackTrace();
+		}
+		return xml;		
 	}
 
 	public String toXML(ElectrodomesticoDTO eDTO) {
-		// TODO MF:ElectrodomesticoDTO -> xml
-		return null;
+		JAXBContext jaxbCtx;
+		String xml = null;
+		java.io.StringWriter sw = new StringWriter();
+		try {
+			jaxbCtx = JAXBContext.newInstance(ElectrodomesticoDTO.class);
+			Marshaller m = jaxbCtx.createMarshaller();
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			m.marshal(eDTO, sw );			
+			xml=sw.toString();
+			
+		} catch (JAXBException e) {
+			// TODO AR - Log error
+			e.printStackTrace();
+		}
+		return xml;		
 	}
 }
