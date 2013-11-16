@@ -1,8 +1,7 @@
 package entities;
 
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -18,13 +17,13 @@ public class SolicitudCompra {
 
 	@OneToMany
 	@JoinColumn(name = "cantidadArticuloId")
-	private List<CantidadArticulos> articulos;
+	private List<ItemSolicitudCompra> articulos;
 
 	private boolean completada;
 
-	private Calendar fechaInicio;
+	private Date fechaInicio;
 
-	private Calendar fechaFin;
+	private Date fechaFin;
 
 	public SolicitudCompra() {
 	}
@@ -37,11 +36,11 @@ public class SolicitudCompra {
 		this.codigo = codigo;
 	}
 
-	public List<CantidadArticulos> getArticulos() {
+	public List<ItemSolicitudCompra> getArticulos() {
 		return articulos;
 	}
 
-	public void setArticulos(List<CantidadArticulos> articulos) {
+	public void setArticulos(List<ItemSolicitudCompra> articulos) {
 		this.articulos = articulos;
 	}
 
@@ -53,19 +52,19 @@ public class SolicitudCompra {
 		this.completada = completada;
 	}
 
-	public Calendar getFechaInicio() {
+	public Date getFechaInicio() {
 		return fechaInicio;
 	}
 
-	public void setFechaInicio(Calendar fechaInicio) {
+	public void setFechaInicio(Date fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 
-	public Calendar getFechaFin() {
+	public Date getFechaFin() {
 		return fechaFin;
 	}
 
-	public void setFechaFin(Calendar fechaFin) {
+	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 }
