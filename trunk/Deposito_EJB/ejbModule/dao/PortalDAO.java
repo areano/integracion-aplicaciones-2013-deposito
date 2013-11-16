@@ -34,7 +34,7 @@ public class PortalDAO {
 
 	@SuppressWarnings("unchecked")
 	private void obtenerConexiones() {
-		Query q = em.createQuery("select from PortalConexion");
+		Query q = em.createQuery("select from PortalConexion and active = TRUE");
 		conexiones = (List<PortalConexion>) q.getResultList();
 	}
 
