@@ -1,7 +1,10 @@
 package dto;
 
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name = "articulo")
 public class InfantilDTO extends ArticuloDTO{
 
 	/**
@@ -17,7 +20,7 @@ public class InfantilDTO extends ArticuloDTO{
 		setTipo("infantil");
 	}
 
-
+	@XmlElement
 	public String getEdadRecomendada() {
 		return edadRecomendada;
 	}

@@ -4,7 +4,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import transformer.Transfomer;
+import transformer.Transformer;
 import dao.ArticuloDAO;
 import dao.PortalDAO;
 import dto.ArticuloDTO;
@@ -31,10 +31,10 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	@EJB
 	PortalDAO portalDAO;
 	
-	private Transfomer transformer;
+	private Transformer transformer;
 
 	public AdministradorArticulosBean() {
-		transformer=Transfomer.obtenerInstancia();
+		transformer=Transformer.obtenerInstancia();
 	}
 
 	/*

@@ -8,12 +8,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
-
 import dto.SolicitudArticulosDTO;
-import entities.Articulo;
-import entities.Electrodomestico;
 import entities.SolicitudArticulos;
 
 public class SolicitudArticulosParser implements Parser<SolicitudArticulosDTO> {

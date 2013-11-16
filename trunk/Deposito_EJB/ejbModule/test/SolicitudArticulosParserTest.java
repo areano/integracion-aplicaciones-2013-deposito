@@ -5,13 +5,17 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import dto.SolicitudArticulosDTO;
+import parsers.ArticuloParser;
 import parsers.ParserException;
 import parsers.SolicitudArticulosParser;
 
 public class SolicitudArticulosParserTest {
 
 	@Test
-	public void test() {
+	public void testParseo() {
+		
+		ArticuloParser AParser =new ArticuloParser();
+		
 		SolicitudArticulosParser SAParser = new SolicitudArticulosParser();
 		SolicitudArticulosDTO SADTO = null;
 		String xml = new String(
@@ -33,3 +37,23 @@ public class SolicitudArticulosParserTest {
 	}
 
 }
+
+//<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+//<articulo>
+//	<codigo>int</codigo>
+//	<codigoDeposito>int</codigoDeposito>
+//	<nombre>String</nombre>
+//	<descripcion>String</descripcion>
+//	<marca>String</marca>     
+//	<origen>String</origen>
+//	<precio>float</precio> 
+//	<tipo>String</tipo>
+//	<fecha>String</fecha><!--Formato: yyyy-MM-dd hh:mm:ss -->
+//	<fotoURL>String</fotoURL><!--URL de la Imagen -->
+//	<color>String</color><!--Dependiendo del tipo de articulo va vacio --> 
+//	<edadRecomendada>String</edadRecomendada><!--Dependiendo del tipo de articulo va vacio -->
+//	<fichaTecnica>String</fichaTecnica><!--Dependiendo del tipo de articulo va vacio -->
+//	<talle>String</talle><!--Dependiendo del tipo de articulo va vacio -->
+//	<material>String</material><!--Dependiendo del tipo de articulo va vacio --> 
+//</articulo>
+

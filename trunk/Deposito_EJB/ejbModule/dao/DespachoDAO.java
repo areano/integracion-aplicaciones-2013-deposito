@@ -8,12 +8,18 @@ import javax.jms.JMSException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
 import parsers.ArticuloParser;
 import parsers.SolicitudArticulosParser;
+import transformer.Transformer;
 import clientes.GenericQueueClient;
+import dto.InfantilDTO;
+import dto.ModaDTO;
+import dto.MuebleDTO;
 import entities.Articulo;
 import entities.DespachoConexion;
+import entities.Infantil;
+import entities.Moda;
+import entities.Mueble;
 import entities.PortalConexion;
 import entities.SolicitudArticulos;
 
@@ -46,10 +52,31 @@ public class DespachoDAO {
 		conexion =  (DespachoConexion) q.getSingleResult();
 		return conexion;
 	}
-	public void enviar(Articulo a) {
-		this.obtenerConexiones();
+	
+	public void enviar (Mueble m){
 		ArticuloParser parser = new ArticuloParser();
-		String xml = parser.articuloToXML(a);
+		MuebleDTO mDTO = Transformer.obtenerInstancia().toDTO(m);
+		String xml=parser.toXML(mDTO);
+		enviar(xml);
+	}
+
+	public void enviar (Infantil i){
+		ArticuloParser parser = new ArticuloParser();
+		InfantilDTO mDTO = Transformer.obtenerInstancia().toDTO(i);
+		String xml=parser.toXML(mDTO);
+		enviar(xml);
+	}
+
+	public void enviar (Moda m){
+		ArticuloParser parser = new ArticuloParser();
+		ModaDTO mDTO = Transformer.obtenerInstancia().toDTO(m);
+		String xml=parser.toXML(mDTO);
+		enviar(xml);
+	}
+
+	
+	public void enviar(String xml) {
+		this.obtenerConexiones();
 
 		for (DespachoConexion p : conexiones) {
 			GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(), "user", "pass");

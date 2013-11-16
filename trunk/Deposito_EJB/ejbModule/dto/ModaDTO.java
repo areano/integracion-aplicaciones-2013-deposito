@@ -1,7 +1,10 @@
 package dto;
 
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name = "articulo")
 public class ModaDTO extends ArticuloDTO{
 	
 	/**
@@ -20,6 +23,7 @@ public class ModaDTO extends ArticuloDTO{
 		setTipo("moda");
 	}
 
+	@XmlElement
 	public String getColor() {
 		return color;
 	}
@@ -28,6 +32,7 @@ public class ModaDTO extends ArticuloDTO{
 		this.color = color;
 	}
 
+	@XmlElement
 	public String getTalle() {
 		return talle;
 	}
