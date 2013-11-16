@@ -5,13 +5,19 @@ import java.sql.Timestamp;
 import dto.ArticuloDTO;
 import dto.ElectrodomesticoDTO;
 import dto.InfantilDTO;
+import dto.ItemSolicitudCompraDTO;
 import dto.ModaDTO;
 import dto.MuebleDTO;
+import dto.SolicitudArticulosDTO;
+import dto.SolicitudCompraDTO;
 import entities.Articulo;
 import entities.Electrodomestico;
 import entities.Infantil;
+import entities.ItemSolicitudCompra;
 import entities.Moda;
 import entities.Mueble;
+import entities.SolicitudArticulos;
+import entities.SolicitudCompra;
 
 public class Transformer {
 	
@@ -24,8 +30,6 @@ public class Transformer {
 	}
 	
 	private Transformer(){}
-	
-	
 	
 	public Articulo converToClass(ArticuloDTO dto){
 		Articulo a = new Articulo();
@@ -100,6 +104,25 @@ public class Transformer {
 		return m;
 	}
 	
+	public SolicitudCompra converToClass(SolicitudCompraDTO dto){
+		SolicitudCompra solicitud = new SolicitudCompra();
+		solicitud.setCodigo(dto.getCodigo());
+		solicitud.setFechaInicio(dto.getFechaInicio());
+		solicitud.setFechaFin(dto.getFechaFin());
+		
+		for(ItemSolicitudCompraDTO item:dto.getArticulos()){
+			solicitud.getArticulos().add(this.converToClass(item));
+		}
+		
+		return solicitud;
+	}
+	
+	private ItemSolicitudCompra converToClass(ItemSolicitudCompraDTO dto){
+		ItemSolicitudCompra item = new ItemSolicitudCompra();
+		item.setArticulo(this.converToClass(dto.getArticulo()));
+		item.setCantidad(dto.getCantidad());
+		return item;
+	}
 	
 	private void setArticuloDTO(Articulo a, ArticuloDTO dto){
 		dto.setCodigo(a.getCodigo());
