@@ -2,7 +2,7 @@ package entities;
 
 public class SolicitudCompra {
 
-	private void SolicitudCompra() {
+	private SolicitudCompra() {
 	}
 
 }
