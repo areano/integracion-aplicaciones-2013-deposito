@@ -38,7 +38,7 @@ public class RecepcionCompras implements MessageListener {
 		try {
 			TextMessage txtMessage = (TextMessage) message;
 			SolicitudCompraParser parser = new SolicitudCompraParser();
-			SolicitudCompraDTO compra = parser.toDTO(txtMessage.getText());
+			SolicitudCompraDTO compra = parser.toObject(txtMessage.getText());
 			facade.recibirSolicitudCompra(compra);
 		} catch (JMSException e) {
 			// TODO AR - log error
