@@ -1,7 +1,6 @@
 package dao;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -12,8 +11,6 @@ import log.EntradaLog;
 import dao.logistica.Log;
 import dao.logistica.LogAsincronico;
 import dao.logistica.LogSincronico;
-import dao.logistica.webservice.LogisticaMonitoreoBeanService;
-import dao.logistica.webservice.LogisticaMonitoreoWS;
 
 /**
  * Session Bean implementation class LogSincronico

@@ -1,7 +1,5 @@
 package servicios;
 
-import java.util.Calendar;
-
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
