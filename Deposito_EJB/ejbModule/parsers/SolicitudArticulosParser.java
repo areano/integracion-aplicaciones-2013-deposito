@@ -8,7 +8,13 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
 import dto.SolicitudArticulosDTO;
+import entities.Articulo;
+import entities.Electrodomestico;
+import entities.SolicitudArticulos;
 
 public class SolicitudArticulosParser implements Parser<SolicitudArticulosDTO> {
 
@@ -40,6 +46,10 @@ public class SolicitudArticulosParser implements Parser<SolicitudArticulosDTO> {
 	@Override
 	public String toString(SolicitudArticulosDTO data) throws ParserException {
 		// TODO Auto-generated method stub
+		return null;
+	}
+	public String toXML(SolicitudArticulos a){
+		// TODO 
 		return null;
 	}
 
