@@ -1,9 +1,10 @@
 package dto;
 
-public class ItemSolicitudCompra {
+public class ItemSolicitudCompraDTO {
 	private ArticuloDTO articulo;
 	private int cantidad;
-	public ItemSolicitudCompra(ArticuloDTO articulo, int cantidad){
+	
+	public ItemSolicitudCompraDTO(ArticuloDTO articulo, int cantidad){
 		this.articulo = articulo;
 		this.cantidad = cantidad;		
 	}
