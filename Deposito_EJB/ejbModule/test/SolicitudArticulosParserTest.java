@@ -18,7 +18,7 @@ public class SolicitudArticulosParserTest {
 				"<solicitudArticulos><idSolicitud>1</idSolicitud><idModulo>2</idModulo><articulos><articulo><codigo>PEPE1</codigo><cantidad>10</cantidad></articulo></articulos></solicitudArticulos>");
 
 		try {
-			SADTO = SAParser.toDTO(xml);
+			SADTO = SAParser.toObject(xml);
 		} catch (ParserException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

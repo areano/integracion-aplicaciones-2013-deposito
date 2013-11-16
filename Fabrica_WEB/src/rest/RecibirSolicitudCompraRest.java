@@ -33,7 +33,7 @@ public class RecibirSolicitudCompraRest {
 		try {
 			SolicitudCompraParser parser = new SolicitudCompraParser();
 
-			SolicitudCompraDTO dto = parser.toDTO(compra);
+			SolicitudCompraDTO dto = parser.toObject(compra);
 
 			facade.recibirSolicitudCompra(dto);
 		} catch (ParserException e) {

@@ -13,7 +13,7 @@ import dto.SolicitudArticulosDTO;
 public class SolicitudArticulosParser implements Parser<SolicitudArticulosDTO> {
 
 	@Override
-	public SolicitudArticulosDTO toDTO(String data) throws ParserException {
+	public SolicitudArticulosDTO toObject(String data) throws ParserException {
 		JAXBContext jaxbCtx;
 		SolicitudArticulosDTO sa = null;
 
@@ -23,8 +23,7 @@ public class SolicitudArticulosParser implements Parser<SolicitudArticulosDTO> {
 
 			u.setEventHandler(new ValidationEventHandler() {
 				public boolean handleEvent(ValidationEvent event) {
-					throw new RuntimeException(event.getMessage(), event
-							.getLinkedException());
+					throw new RuntimeException(event.getMessage(), event.getLinkedException());
 				}
 
 			});
@@ -36,6 +35,12 @@ public class SolicitudArticulosParser implements Parser<SolicitudArticulosDTO> {
 		}
 
 		return sa;
+	}
+
+	@Override
+	public String toString(SolicitudArticulosDTO data) throws ParserException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
