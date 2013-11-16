@@ -2,7 +2,9 @@ package dto;
 
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name = "articulo")
 public class ElectrodomesticoDTO extends ArticuloDTO{
 	
 	/**
