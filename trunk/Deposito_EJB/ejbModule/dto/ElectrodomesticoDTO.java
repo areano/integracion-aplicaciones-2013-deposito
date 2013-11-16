@@ -1,6 +1,7 @@
 package dto;
 
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlElement;
 
 public class ElectrodomesticoDTO extends ArticuloDTO{
 	
@@ -18,6 +19,8 @@ public class ElectrodomesticoDTO extends ArticuloDTO{
 		
 		
 	}
+	
+	@XmlElement
 	public String getFichaTecnica() {
 		return fichaTecnica;
 	}

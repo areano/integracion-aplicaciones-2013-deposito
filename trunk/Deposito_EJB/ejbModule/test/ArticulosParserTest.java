@@ -4,23 +4,49 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import dto.InfantilDTO;
 import dto.SolicitudArticulosDTO;
 import entities.Articulo;
+import entities.Infantil;
 import entities.Mueble;
 import parsers.ArticuloParser;
 import parsers.ParserException;
 import parsers.SolicitudArticulosParser;
+import transformer.Transformer;
 
 public class ArticulosParserTest {
 
 	@Test
 	public void testParseo() {
 		ArticuloParser SAParser = new ArticuloParser();
-		Articulo a= new Mueble();
-		String s=SAParser.articuloToXML(a);
+		Infantil i= new Infantil();
+		i.setCodigo(1);
+		i.setDescripcion("Cthulhu Action Figure");
+		i.setEdadRecomendada("666");
+		i.setFoto("http://2.bp.blogspot.com/_qVXhZGcRcIA/TOwcBaEiiiI/AAAAAAAAAGo/QSizgG6VLiE/s1600/cthulhu02.jpg");
+		i.setMarca("Hell Inc.");
+		i.setNombre("Cthulhu");
+		i.setOrigen("HELL");
+		i.setPrecio(666.66F);
+		i.setStock(666);
 
-		System.out.println(s);
-
+		InfantilDTO iDTO= new InfantilDTO();
+		iDTO=Transformer.obtenerInstancia().toDTO(i);
+		String s=SAParser.toXML(iDTO);
+		assertEquals(s,"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
+				+ "<articulo>\n"
+				+ "    <codigo>1</codigo>\n"
+				+ "    <codigoDeposito>6</codigoDeposito>\n"
+				+ "    <descripcion>Cthulhu Action Figure</descripcion>\n"
+				+ "    <fecha>"+iDTO.getFecha()+"</fecha>\n"
+				+ "    <foto>http://2.bp.blogspot.com/_qVXhZGcRcIA/TOwcBaEiiiI/AAAAAAAAAGo/QSizgG6VLiE/s1600/cthulhu02.jpg</foto>\n"
+				+ "    <marca>Hell Inc.</marca>\n"
+				+ "    <nombre>Cthulhu</nombre>\n"
+				+ "    <origen>HELL</origen>\n"
+				+ "    <precio>666.66</precio>\n"
+				+ "    <tipo>infantil</tipo>\n"
+				+ "    <edadRecomendada>666</edadRecomendada>\n"
+				+ "</articulo>\n");
 	}
 	
 //	<?xml version="1.0" encoding="UTF-8"?>

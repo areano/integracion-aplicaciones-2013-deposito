@@ -49,9 +49,7 @@ public class ArticuloParser {
 			// TODO AR - Log error
 			e.printStackTrace();
 		}
-
-
-		return null;
+		return xml;
 	}
 	
 	public String toXML(ModaDTO mDTO) {
