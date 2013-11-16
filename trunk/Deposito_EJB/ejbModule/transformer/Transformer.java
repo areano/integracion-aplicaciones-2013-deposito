@@ -117,11 +117,22 @@ public class Transformer {
 		return mDTO;
 	}
 	
-	public InfantilDTO toDTO(Infantil m){
+	public InfantilDTO toDTO(Infantil i){
 		InfantilDTO iDTO=new InfantilDTO();
-		//TODO MF:Infantil -> InfantilDTO
-		iDTO.setFecha(new Timestamp(new java.util.Date().getTime()).toString());
+		setArticuloDTO(i, iDTO);
 		return iDTO;
+	}
+	
+	private void setArticuloDTO(Articulo a, ArticuloDTO dto){
+		dto.setCodigo(a.getCodigo());
+		dto.setCodigoDeposito(6L);
+		dto.setDescripcion(a.getDescripcion());
+		dto.setFecha(new Timestamp(new java.util.Date().getTime()).toString());
+		dto.setFoto(a.getFoto());
+		dto.setMarca(a.getMarca());
+		dto.setNombre(a.getNombre());
+		dto.setOrigen(a.getOrigen());
+		dto.setPrecio(a.getPrecio());
 	}
 	
 	public ModaDTO toDTO(Moda m){
@@ -129,6 +140,11 @@ public class Transformer {
 		//TODO MF:Infantil -> InfantilDTO
 		mDTO.setFecha(new Timestamp(new java.util.Date().getTime()).toString());
 		return mDTO;
+	}
+
+	public ElectrodomesticoDTO toDTO(Electrodomestico e) {
+		// TODO MF: Electrodomestico -> ElectrodomesticoDTO
+		return null;
 	}
 
 	

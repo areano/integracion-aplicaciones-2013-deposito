@@ -8,15 +8,18 @@ import javax.jms.JMSException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
 import parsers.ArticuloParser;
 import parsers.SolicitudArticulosParser;
 import transformer.Transformer;
 import clientes.GenericQueueClient;
+import dto.ElectrodomesticoDTO;
 import dto.InfantilDTO;
 import dto.ModaDTO;
 import dto.MuebleDTO;
 import entities.Articulo;
 import entities.DespachoConexion;
+import entities.Electrodomestico;
 import entities.Infantil;
 import entities.Moda;
 import entities.Mueble;
@@ -67,6 +70,12 @@ public class DespachoDAO {
 		enviar(xml);
 	}
 
+	public void enviar (Electrodomestico e){
+		ArticuloParser parser = new ArticuloParser();
+		ElectrodomesticoDTO eDTO = Transformer.obtenerInstancia().toDTO(e);
+		String xml=parser.toXML(eDTO);
+		enviar(xml);
+	}
 	public void enviar (Moda m){
 		ArticuloParser parser = new ArticuloParser();
 		ModaDTO mDTO = Transformer.obtenerInstancia().toDTO(m);
