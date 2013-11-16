@@ -29,6 +29,7 @@ public class ArticuloParser {
 		return xml;
 	}
 
+	
 	public String toXML(MuebleDTO mDTO) {
 		JAXBContext jaxbCtx;
 		String xml = null;
@@ -99,5 +100,48 @@ public class ArticuloParser {
 			e.printStackTrace();
 		}
 		return xml;		
+	}
+
+	public String toXMLSmall(MuebleDTO mDTO) {
+		String xml = toXML(mDTO);
+		xml=shrinkXML(xml);
+		return xml;
+	}
+	
+	public String toXMLSmall(InfantilDTO iDTO) {
+		String xml=toXML(iDTO);
+		xml=shrinkXML(xml);
+		return xml;
+	}
+	
+	public String toXMLSmall(ModaDTO mDTO) {
+		String xml=toXML(mDTO);
+		xml=shrinkXML(xml);
+		return xml;		
+	}
+
+	public String toXMLSmall(ElectrodomesticoDTO eDTO) {
+		String xml=toXML(eDTO);
+		xml=shrinkXML(xml);
+		return xml;		
+	}
+
+	private String shrinkXML ( String xml){
+		xml=xml.replaceAll("<\\?.*\\?>\n","");
+		xml=xml.replaceAll("codigoDeposito>", "idModulo>");
+		xml=xml.replaceAll("    <descripcion.*descripcion>\n", "");
+		xml=xml.replaceAll("    <marca.*marca>\n", "");
+		xml=xml.replaceAll("    <origen.*origen>\n", "");
+		xml=xml.replaceAll("    <precio.*precio>\n", "");
+		xml=xml.replaceAll("    <fecha.*fecha>\n", "");
+		xml=xml.replaceAll("    <tipo.*tipo>\n", "");
+		xml=xml.replaceAll("    <fotoURL.*fotoURL>\n", "");
+		xml=xml.replaceAll("    <color.*color>\n", "");
+		xml=xml.replaceAll("    <edadRecomendada.*edadRecomendada>\n", "");
+		xml=xml.replaceAll("    <fichaTecnica.*fichaTecnica>\n", "");
+		xml=xml.replaceAll("    <edadRecomendada.*edadRecomendada>\n", "");
+		xml=xml.replaceAll("    <talle.*talle>\n", "");
+		xml=xml.replaceAll("    <material.*material>\n", "");
+		return xml;
 	}
 }

@@ -55,7 +55,7 @@ public abstract class ArticuloDTO implements Serializable{
 		this.descripcion = descripcion;
 	}
 	
-	@XmlElement
+	@XmlElement(name="fotoURL")
 	public String getFoto() {
 		return foto;
 	}
