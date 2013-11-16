@@ -1,38 +1,37 @@
 package dto;
 
 import java.util.Date;
-import java.util.ArrayList;
+import java.util.List;
 
 public class SolicitudCompraDTO {
 
-	private ArrayList<ItemSolicitudCompra> items;
-	private long codigoDespacho;
-	private Date date;
-	public ArrayList<ItemSolicitudCompra> getItems() {
-		return items;
-	}
-
-	public void setItems(ArrayList<ItemSolicitudCompra> items) {
-		this.items = items;
-	}
-	public void addItemSolicitudCompra(ItemSolicitudCompra item){
-		items.add(item);
-	}
-
-	public long getCodigoDespacho() {
-		return codigoDespacho;
-	}
-
-	public void setCodigoDespacho(long codigoDespacho) {
-		this.codigoDespacho = codigoDespacho;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
+	private long codigo;
+	private List<ItemSolicitudCompraDTO> articulos;
+	private Date fechaInicio;
+	private Date fechaFin;
 	
+	public long getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+	public List<ItemSolicitudCompraDTO> getArticulos() {
+		return articulos;
+	}
+	public void setArticulos(List<ItemSolicitudCompraDTO> articulos) {
+		this.articulos = articulos;
+	}
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+	public Date getFechaFin() {
+		return fechaFin;
+	}
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
+	}
 }
