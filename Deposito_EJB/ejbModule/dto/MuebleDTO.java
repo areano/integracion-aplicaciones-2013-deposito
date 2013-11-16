@@ -1,7 +1,10 @@
 package dto;
 
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name = "articulo")
 public class MuebleDTO extends ArticuloDTO{
 	
 
@@ -18,6 +21,7 @@ public class MuebleDTO extends ArticuloDTO{
 		setTipo("mueble");
 	}
 
+	@XmlElement
 	public String getMaterial() {
 		return material;
 	}

@@ -1,5 +1,7 @@
 package transformer;
 
+import java.sql.Timestamp;
+
 import dto.ArticuloDTO;
 import dto.ElectrodomesticoDTO;
 import dto.InfantilDTO;
@@ -11,17 +13,19 @@ import entities.Infantil;
 import entities.Moda;
 import entities.Mueble;
 
-public class Transfomer {
+public class Transformer {
 	
-	private static Transfomer instancia;
+	private static Transformer instancia;
 	
-	public static Transfomer obtenerInstancia(){
+	public static Transformer obtenerInstancia(){
 		if(instancia==null)
-			instancia=new Transfomer();
+			instancia=new Transformer();
 		return instancia;
 	}
 	
-	private Transfomer(){}
+	private Transformer(){}
+	
+	
 	
 	public Articulo converToClass(ArticuloDTO dto){
 		Articulo a = new Articulo();
@@ -95,4 +99,37 @@ public class Transfomer {
 		m.setPrecio(dto.getPrecio());
 		return m;
 	}
+	
+	
+	public MuebleDTO toDTO(Mueble m){
+		MuebleDTO mDTO=new MuebleDTO();
+		//TODO MF: Mueble -> MuebleDTO
+//		ArticuloDTO a = new Articulo();
+//		a.setCodigo(dto.getCodigo());
+//		a.setCodigoDeposito(dto.getCodigoDeposito());
+//		a.setDescripcion(dto.getDescripcion());
+//		a.setFoto(dto.getFoto());
+//		a.setMarca(dto.getMarca());
+//		a.setNombre(dto.getNombre());
+//		a.setOrigen(dto.getOrigen());
+//		a.setPrecio(dto.getPrecio());
+		mDTO.setFecha(new Timestamp(new java.util.Date().getTime()).toString());
+		return mDTO;
+	}
+	
+	public InfantilDTO toDTO(Infantil m){
+		InfantilDTO iDTO=new InfantilDTO();
+		//TODO MF:Infantil -> InfantilDTO
+		iDTO.setFecha(new Timestamp(new java.util.Date().getTime()).toString());
+		return iDTO;
+	}
+	
+	public ModaDTO toDTO(Moda m){
+		ModaDTO mDTO=new ModaDTO();
+		//TODO MF:Infantil -> InfantilDTO
+		mDTO.setFecha(new Timestamp(new java.util.Date().getTime()).toString());
+		return mDTO;
+	}
+
+	
 }
