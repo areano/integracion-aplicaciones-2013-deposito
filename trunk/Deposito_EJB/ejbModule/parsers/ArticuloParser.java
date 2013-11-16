@@ -4,28 +4,14 @@ import java.io.StringWriter;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
-import dto.ArticuloDTO;
 import dto.ElectrodomesticoDTO;
 import dto.InfantilDTO;
 import dto.ModaDTO;
 import dto.MuebleDTO;
-import entities.Articulo;
-import entities.Electrodomestico;
 
 public class ArticuloParser {
 
 	public ArticuloParser(){}
-	
-//	public String articuloToXML(Articulo a){
-//		XStream xstream = new XStream(new DomDriver());
-//		xstream.alias("Articulo", Articulo.class);
-//		xstream.alias("Electrodomestico", Electrodomestico.class);
-//		String xml = xstream.toXML(a);
-//		return xml;
-//	}
-
 	
 	public String toXML(MuebleDTO mDTO) {
 		JAXBContext jaxbCtx;
