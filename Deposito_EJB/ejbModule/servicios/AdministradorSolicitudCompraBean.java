@@ -48,9 +48,11 @@ public class AdministradorSolicitudCompraBean implements
 			// TODO AR: Validar entity
 
 			solicitudCompraDAO.persist(compra);
+			
+			SolicitudCompraDTO dto =Transformer.obtenerInstancia().toDTO(compra);
 
 			// TODO AR: recepcion de respuesta?
-			fabricaDAO.enviar(compra);
+			fabricaDAO.enviar(dto);
 		} catch (Exception e) {
 			// TODO AR: log de errores y rollback de TODO
 			e.printStackTrace();
@@ -87,25 +89,5 @@ public class AdministradorSolicitudCompraBean implements
 
 	}
 
-	@Override
-	public void enviarArticulos(SolicitudCompraDTO compraDTO) {
-		try {
-			SolicitudCompra entity = getEntity(compraDTO);
-
-			// TODO AR: Validar entity
-
-			// TODO AR: actualizar objeto y stock
-			solicitudCompraDAO.merge(entity);
-
-			fabricaDAO.enviar(entity);
-
-			// TODO AR: recepcion de respuesta?
-
-		} catch (Exception e) {
-			// TODO AR: log de errores y rollback de TODO
-			e.printStackTrace();
-		}
-
-	}
 
 }
