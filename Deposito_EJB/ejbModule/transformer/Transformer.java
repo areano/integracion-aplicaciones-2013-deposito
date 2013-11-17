@@ -21,7 +21,7 @@ import entities.Moda;
 import entities.Mueble;
 import entities.SolicitudArticulos;
 import entities.SolicitudCompra;
-
+import view.*;
 public class Transformer {
 	@EJB
 	ArticuloDAO articuloDAO;
@@ -189,4 +189,29 @@ public class Transformer {
 		dto.setNomArticulo(item.getArticulo().getNombre());
 		return dto;
 	}
+	public Electrodomestico converToClass(ElectrodomesticoView dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Infantil converToClass(InfantilView dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Moda converToClass(ModaView dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Mueble converToClass(MuebleView dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Articulo converToClass(ArticuloView dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
