@@ -29,7 +29,11 @@ public class MonitorepIpConfigurator extends CustomComponent {
 	private static final long serialVersionUID = -6583013919244415167L;
 	
 	public class AddNewIPWindow extends Window {
-		private static final long serialVersionUID = -1867392910754863989L;
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1917252061443099391L;
 		private TextField ip =  new TextField("IP");	
 		private TextField id =  new TextField("ID");
 		final NativeSelect selectSyncro = new NativeSelect("Tipo Comunicacion");
@@ -130,7 +134,12 @@ public class MonitorepIpConfigurator extends CustomComponent {
 		
 		// button_1
 		button_1 = new Button("+",new Button.ClickListener() {
-			private static final long serialVersionUID = 3809094252530243514L;
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -1691288338526117398L;
+
 			@Override
 			public void buttonClick(ClickEvent event) {
 		         UI.getCurrent().addWindow(newIPConfiguratorWindow);
