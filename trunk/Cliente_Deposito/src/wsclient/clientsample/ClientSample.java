@@ -16,7 +16,7 @@ public class ClientSample {
 	        //LogisticaMonitoreoBeanService service1 = new LogisticaMonitoreoBeanService();
 	        URL wsdlLocation;
 			try {
-				wsdlLocation = new URL("http://172.16.174.43:8080/LogisticaMonitoreo/LogisticaMonitoreoWS");
+				wsdlLocation = new URL("http://172.16.174.55:8080/LogisticaMonitoreo/LogisticaMonitoreoWS");
 				 LogisticaMonitoreoBeanService service1 =  new LogisticaMonitoreoBeanService(wsdlLocation);
 			        
 			        System.out.println("Create Web Service...");
