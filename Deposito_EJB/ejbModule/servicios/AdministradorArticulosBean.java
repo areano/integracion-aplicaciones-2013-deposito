@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import org.apache.log4j.Logger;
 
 import transformer.Transformer;
+import transformer.ViewTransformer;
 import view.ArticuloView;
 import view.ElectrodomesticoView;
 import view.InfantilView;
@@ -38,11 +39,11 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	@EJB
 	DespachoDAO despachoDAO;
 	
-	private Transformer transformer;
+	private ViewTransformer transformer;
 	private static final Logger logger = 
 			   Logger.getLogger(AdministradorArticulosBean.class);
 	public AdministradorArticulosBean() {
-		transformer=Transformer.obtenerInstancia();
+		transformer=ViewTransformer.obtenerInstancia();
 	}
 
 	/*
