@@ -10,6 +10,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.apache.log4j.Logger;
+
 import clientes.GenericQueueClient;
 import dto.ElectrodomesticoDTO;
 import dto.InfantilDTO;
@@ -35,7 +37,8 @@ public class PortalDAO {
 	EntityManager em;
 
 	private List<PortalConexion> conexiones;
-
+	private static final Logger logger = 
+			   Logger.getLogger(PortalDAO.class);
 	public PortalDAO() {
 		conexiones = new ArrayList<PortalConexion>();
 		this.obtenerConexiones();
@@ -78,14 +81,15 @@ public class PortalDAO {
 
 	public void enviar(String xml) {
 		this.obtenerConexiones();
+		String errorMessage = new String();
 		for (PortalConexion p : conexiones) {
 			GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(), "user", "pass");
 			try {
 				cliente.enviar(xml);
 				cliente.cerrarConexion();
 			} catch (JMSException e) {
-				// TODO AR: log de errores
-				e.printStackTrace();
+				errorMessage = "*** Error enviando xml a jms de Portal IP["+p.getIp()+"] Grupo ["+p.getPortalId()+"]***"; 
+				logger.error(errorMessage, e);
 			}
 		}
 	}
