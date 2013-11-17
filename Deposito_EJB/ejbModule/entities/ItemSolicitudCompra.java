@@ -13,7 +13,7 @@ public class ItemSolicitudCompra {
 
 	@Id
 	@Column(name = "cantidadArticuloId")
-	private int id;
+	private long id;
 
 	@OneToOne
 	@JoinColumn(name = "codigo")
@@ -24,13 +24,15 @@ public class ItemSolicitudCompra {
 	public ItemSolicitudCompra() {
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
+
+
 
 	public Articulo getArticulo() {
 		return articulo;
