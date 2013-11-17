@@ -14,6 +14,8 @@ public class GenericRestClient {
 	private String port;
 	private String metodo;
 
+	public GenericRestClient(){}
+	
 	public GenericRestClient(String ip, String port, String metodo) {
 		this.ip = ip;
 		this.port = port;
@@ -33,5 +35,17 @@ public class GenericRestClient {
 		response.close();
 
 		return respuesta;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public void setPort(String port) {
+		this.port = port;
+	}
+
+	public void setMetodo(String metodo) {
+		this.metodo = metodo;
 	}
 }
