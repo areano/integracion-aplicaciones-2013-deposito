@@ -16,9 +16,14 @@ public class FabricaDAO {
 
 	GenericRestClient clienteRest ;
 	
-    /**
-     * Default constructor. 
-     */
+
+	public FabricaDAO(){
+		clienteRest = new GenericRestClient();
+		clienteRest.setIp("127.0.0.1");
+		clienteRest.setPort("8080");
+		clienteRest.setMetodo("");
+	}
+	
     public FabricaDAO(String ip, String puerto, String metodo) {
         // TODO AR: levantar parametros de comunicacion REST y crear el cliente
     	
