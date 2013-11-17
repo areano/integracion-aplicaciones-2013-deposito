@@ -1,10 +1,6 @@
 package servicios;
 
-import dto.ArticuloDTO;
-import dto.ElectrodomesticoDTO;
-import dto.InfantilDTO;
-import dto.ModaDTO;
-import dto.MuebleDTO;
+import view.*;
 
 public interface AdministradorArticulos {
 
@@ -16,14 +12,14 @@ public interface AdministradorArticulos {
 	 * public void eliminarArticulo(Articulo articulo);
 	 */
 
-	public void guardarElectrodomestico(ElectrodomesticoDTO dto);
+	public void guardarElectrodomestico(ElectrodomesticoView dto);
 
-	public void guardarInfantil(InfantilDTO dto);
+	public void guardarInfantil(InfantilView dto);
 
-	public void guardarModa(ModaDTO dto);
+	public void guardarModa(ModaView dto);
 
-	public void guardarMueble(MuebleDTO dto);
+	public void guardarMueble(MuebleView dto);
 
-	public void actualizarStock(ArticuloDTO dto, long stock);
+	public void actualizarStock(ArticuloView dto, long stock);
 
 }
