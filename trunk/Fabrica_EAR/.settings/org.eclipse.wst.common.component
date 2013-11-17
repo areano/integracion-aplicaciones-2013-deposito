@@ -12,9 +12,6 @@
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="Fabrica_EJBClient.jar" deploy-path="/" handle="module:/resource/Fabrica_EJBClient/Fabrica_EJBClient">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="Fabrica_EJB.jar" deploy-path="/" handle="module:/resource/Fabrica_EJB/Fabrica_EJB">
             <dependency-type>uses</dependency-type>
         </dependent-module>
