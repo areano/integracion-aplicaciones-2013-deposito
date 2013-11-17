@@ -2,6 +2,9 @@ package transformer;
 
 import java.sql.Timestamp;
 
+import javax.ejb.EJB;
+
+import dao.ArticuloDAO;
 import dto.ArticuloDTO;
 import dto.ElectrodomesticoDTO;
 import dto.InfantilDTO;
@@ -20,6 +23,8 @@ import entities.SolicitudArticulos;
 import entities.SolicitudCompra;
 
 public class Transformer {
+	@EJB
+	ArticuloDAO articuloDAO;
 	
 	private static Transformer instancia;
 	
@@ -119,8 +124,7 @@ public class Transformer {
 	
 	private ItemSolicitudCompra converToClass(ItemSolicitudCompraDTO dto){
 		ItemSolicitudCompra item = new ItemSolicitudCompra();
-//		item.setArticulo(this.converToClass(dto.getArticulo()));
-//		TODO: MF acá debe hacer el find con el codigo de articulo.
+		item.setArticulo(articuloDAO.find(dto.getCodArticulo()));
 		item.setCantidad(dto.getCantidad());
 		return item;
 	}
