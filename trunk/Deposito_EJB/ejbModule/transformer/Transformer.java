@@ -119,7 +119,8 @@ public class Transformer {
 	
 	private ItemSolicitudCompra converToClass(ItemSolicitudCompraDTO dto){
 		ItemSolicitudCompra item = new ItemSolicitudCompra();
-		item.setArticulo(this.converToClass(dto.getArticulo()));
+//		item.setArticulo(this.converToClass(dto.getArticulo()));
+//		TODO: MF acá debe hacer el find con el codigo de articulo.
 		item.setCantidad(dto.getCantidad());
 		return item;
 	}

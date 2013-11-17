@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
 
+
 public abstract class ArticuloDTO implements Serializable{
 	/**
 	 * 
