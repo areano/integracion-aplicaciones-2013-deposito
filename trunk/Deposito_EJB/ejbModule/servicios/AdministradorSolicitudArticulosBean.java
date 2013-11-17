@@ -7,8 +7,10 @@ import javax.ejb.Stateless;
 import dao.SolicitudArticulosDAO;
 import dto.SolicitudArticuloItemDTO;
 import dto.SolicitudArticulosDTO;
+import dto.SolicitudCompraDTO;
 import entities.SolicitudArticulos;
 import entities.SolicitudArticulosItem;
+import entities.SolicitudCompra;
 
 /**
  * Session Bean implementation class AdministradorSolicitudArticulosBean
@@ -55,5 +57,28 @@ public class AdministradorSolicitudArticulosBean implements AdministradorSolicit
 
 		return solicitudEntity;
 	}
+	
+	@Override
+	//envia los articulos a despacho
+	public void enviarArticulos(SolicitudCompraDTO compraDTO) {
+		try {
+//			SolicitudCompra entity = getEntity(compraDTO);
+
+			// TODO AR: Validar entity
+
+			// TODO AR: actualizar objeto y stock
+//			solicitudCompraDAO.merge(entity);
+
+//			fabricaDAO.enviar(entity);
+
+			// TODO AR: recepcion de respuesta?
+
+		} catch (Exception e) {
+			// TODO AR: log de errores y rollback de TODO
+			e.printStackTrace();
+		}
+
+	}
+
 
 }
