@@ -2,22 +2,19 @@ package sessionBeans;
 
 import javax.ejb.Remote;
 
-import dto.ArticuloDTO;
-import dto.ElectrodomesticoDTO;
-import dto.InfantilDTO;
-import dto.ModaDTO;
-import dto.MuebleDTO;
+import view.*;
+
 
 @Remote
 public interface DepositoFacade {
 
-	public void altaElectrodomestico(ElectrodomesticoDTO dto);
+	public void altaElectrodomestico(ElectrodomesticoView dto);
 	
-	public void altaModa(ModaDTO dto);
+	public void altaModa(ModaView dto);
 	
-	public void altaMueble(MuebleDTO dto);
+	public void altaMueble(MuebleView dto);
 	
-	public void altaInfatil(InfantilDTO dto);
+	public void altaInfatil(InfantilView dto);
 	
-	public void actualizarStock(ArticuloDTO dto, long stock);
+	public void actualizarStock(ArticuloView dto, long stock);
 }

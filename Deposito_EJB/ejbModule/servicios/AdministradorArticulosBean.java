@@ -7,14 +7,15 @@ import javax.ejb.Stateless;
 import org.apache.log4j.Logger;
 
 import transformer.Transformer;
+import view.ArticuloView;
+import view.ElectrodomesticoView;
+import view.InfantilView;
+import view.ModaView;
+import view.MuebleView;
 import dao.ArticuloDAO;
 import dao.DespachoDAO;
 import dao.PortalDAO;
-import dto.ArticuloDTO;
-import dto.ElectrodomesticoDTO;
-import dto.InfantilDTO;
-import dto.ModaDTO;
-import dto.MuebleDTO;
+import dto.*;
 import entities.Articulo;
 import entities.Electrodomestico;
 import entities.Infantil;
@@ -58,7 +59,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	}
 	*/
 	
-	public void guardarElectrodomestico(ElectrodomesticoDTO dto){
+	public void guardarElectrodomestico(ElectrodomesticoView dto){
 		try{
 			
 			Electrodomestico e = transformer.converToClass(dto);
@@ -71,7 +72,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 		}
 	}
 	
-	public void guardarInfantil(InfantilDTO dto){
+	public void guardarInfantil(InfantilView dto){
 		try{
 			Infantil i = transformer.converToClass(dto);
 			articuloDAO.guardarArticulo(i);
@@ -82,7 +83,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 		}
 	}
 	
-	public void guardarModa(ModaDTO dto){
+	public void guardarModa(ModaView dto){
 		try{
 			Moda m = transformer.converToClass(dto);
 			articuloDAO.guardarArticulo(m);
@@ -93,7 +94,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 		}
 	}
 	
-	public void guardarMueble(MuebleDTO dto){
+	public void guardarMueble(MuebleView dto){
 		try{
 			Mueble m = transformer.converToClass(dto);
 			articuloDAO.guardarArticulo(m);
@@ -105,7 +106,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	}
 
 	@Override
-	public void actualizarStock(ArticuloDTO dto, long stock) {
+	public void actualizarStock(ArticuloView dto, long stock) {
 		try{
 			Articulo a = transformer.converToClass(dto);
 			a.setStock(stock);
@@ -115,3 +116,5 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 		}
 	}
 }
+
+

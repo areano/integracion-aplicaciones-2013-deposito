@@ -7,12 +7,7 @@ import org.apache.log4j.Logger;
 
 
 import servicios.AdministradorArticulosBean;
-import dto.ArticuloDTO;
-import dto.ElectrodomesticoDTO;
-import dto.InfantilDTO;
-import dto.ModaDTO;
-import dto.MuebleDTO;
-
+import view.*;
 @Stateless
 public class DepositoFacadeBean implements DepositoFacade {
 
@@ -21,31 +16,31 @@ public class DepositoFacadeBean implements DepositoFacade {
 	private static final Logger logger = 
 			   Logger.getLogger(DepositoFacadeBean.class.getName());
 	@Override
-	public void altaElectrodomestico(ElectrodomesticoDTO dto) {
+	public void altaElectrodomestico(ElectrodomesticoView dto) {
 		logger.info("*** Alta Electrodomestico  ***" );
 		admin.guardarElectrodomestico(dto);
 	}
 
 	@Override
-	public void altaModa(ModaDTO m) {
+	public void altaModa(ModaView m) {
 		logger.info("*** Alta Articulo de moda  ***" );
 		admin.guardarModa(m);
 	}
 
 	@Override
-	public void altaMueble(MuebleDTO m) {
+	public void altaMueble(MuebleView m) {
 		logger.info("*** Alta Mueble ***" );
 		admin.guardarMueble(m);
 	}
 
 	@Override
-	public void altaInfatil(InfantilDTO i) {
+	public void altaInfatil(InfantilView i) {
 		logger.info("*** Alta Infantil  ***" );
 		admin.guardarInfantil(i);
 	}
 
 	@Override
-	public void actualizarStock(ArticuloDTO dto, long stock) {
+	public void actualizarStock(ArticuloView dto, long stock) {
 		logger.info("*** Actualizar Stock  ***" );
 		admin.actualizarStock(dto, stock);
 	}
