@@ -33,58 +33,59 @@ import entities.SolicitudArticulos;
 @LocalBean
 public class DespachoDAO {
 
-    /**
-     * Default constructor. 
-     */
+	/**
+	 * Default constructor.
+	 */
 	@PersistenceContext
 	EntityManager em;
-	private static final Logger logger = 
-			   Logger.getLogger(DespachoDAO.class);
+	private static final Logger logger = Logger.getLogger(DespachoDAO.class);
 	private List<DespachoConexion> conexiones;
 	private DespachoConexion conexion;
-    public DespachoDAO() {
-        // TODO Auto-generated constructor stub
-    }
+
+	public DespachoDAO() {
+	}
+
 	@SuppressWarnings("unchecked")
 	private void obtenerConexiones() {
-		Query q = em.createQuery("select from DespachoConexion where active = TRUE");
+		Query q = em.createQuery("from DespachoConexion where active = TRUE");
 		conexiones = (List<DespachoConexion>) q.getResultList();
 	}
+
 	private DespachoConexion obtenerConexion(final long despachoId) {
-		Query q = em.createQuery("select from DespachoConexion where id =:despachoId and active = TRUE");
+		Query q = em.createQuery("from DespachoConexion where id =:despachoId and active = TRUE");
 		q.setParameter("despachoId", despachoId);
-		conexion =  (DespachoConexion) q.getSingleResult();
+		conexion = (DespachoConexion) q.getSingleResult();
 		return conexion;
 	}
-	
-	public void enviar (Mueble m){
+
+	public void enviar(Mueble m) {
 		ArticuloParser parser = new ArticuloParser();
 		MuebleDTO mDTO = Transformer.obtenerInstancia().toDTO(m);
-		String xml=parser.toXML(mDTO);
+		String xml = parser.toXML(mDTO);
 		enviar(xml);
 	}
 
-	public void enviar (Infantil i){
+	public void enviar(Infantil i) {
 		ArticuloParser parser = new ArticuloParser();
 		InfantilDTO mDTO = Transformer.obtenerInstancia().toDTO(i);
-		String xml=parser.toXML(mDTO);
+		String xml = parser.toXML(mDTO);
 		enviar(xml);
 	}
 
-	public void enviar (Electrodomestico e){
+	public void enviar(Electrodomestico e) {
 		ArticuloParser parser = new ArticuloParser();
 		ElectrodomesticoDTO eDTO = Transformer.obtenerInstancia().toDTO(e);
-		String xml=parser.toXML(eDTO);
-		enviar(xml);
-	}
-	public void enviar (Moda m){
-		ArticuloParser parser = new ArticuloParser();
-		ModaDTO mDTO = Transformer.obtenerInstancia().toDTO(m);
-		String xml=parser.toXML(mDTO);
+		String xml = parser.toXML(eDTO);
 		enviar(xml);
 	}
 
-	
+	public void enviar(Moda m) {
+		ArticuloParser parser = new ArticuloParser();
+		ModaDTO mDTO = Transformer.obtenerInstancia().toDTO(m);
+		String xml = parser.toXML(mDTO);
+		enviar(xml);
+	}
+
 	public void enviar(String xml) {
 		String errorMessage = new String();
 		this.obtenerConexiones();
@@ -95,27 +96,27 @@ public class DespachoDAO {
 				cliente.enviar(xml);
 				cliente.cerrarConexion();
 			} catch (JMSException e) {
-				errorMessage = "*** Error enviando xml a jms de Despacho IP["+p.getIp()+"] Grupo ["+p.getDespachoId()+"]***"; 
+				errorMessage = "*** Error enviando xml a jms de Despacho IP[" + p.getIp() + "] Grupo [" + p.getDespachoId() + "]***";
 				logger.error(errorMessage, e);
 				e.printStackTrace();
 			}
 		}
 	}
-	public void enviar(SolicitudArticulos a){
+
+	public void enviar(SolicitudArticulos a) {
 		String errorMessage = new String();
-		DespachoConexion p =  obtenerConexion(a.getModuloId());	
-		SolicitudArticulosParser  parser = new SolicitudArticulosParser();
+		DespachoConexion p = obtenerConexion(a.getModuloId());
+		SolicitudArticulosParser parser = new SolicitudArticulosParser();
 		String xml = parser.toXML(a);
-		GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(), "user", "pass"); 
+		GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(), "user", "pass");
 		try {
 			cliente.enviar(xml);
 			cliente.cerrarConexion();
 		} catch (JMSException e) {
-			errorMessage = "*** Error enviando xml a jms de Despacho IP["+p.getIp()+"] Grupo ["+p.getDespachoId()+"]***"; 
+			errorMessage = "*** Error enviando xml a jms de Despacho IP[" + p.getIp() + "] Grupo [" + p.getDespachoId() + "]***";
 			logger.error(errorMessage, e);
 			e.printStackTrace();
 		}
 	}
-	
 
 }

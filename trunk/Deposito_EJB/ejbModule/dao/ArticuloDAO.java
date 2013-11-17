@@ -17,7 +17,9 @@ public class ArticuloDAO {
 	EntityManager em;
 	private static final Logger logger = 
 			   Logger.getLogger(ArticuloDAO.class);
-	private ArticuloDAO(){}
+
+	public ArticuloDAO() {
+	}
 	
 	public Articulo find(Long cod){
 		Articulo a=null;
