@@ -57,8 +57,8 @@ public class AdministradorSolicitudCompraBean implements
 			// TODO AR: log de errores y rollback de TODO
 			e.printStackTrace();
 		}
-
 	}
+	
 
 	private SolicitudCompra getEntity(SolicitudCompraDTO compraDTO) {
 		// TODO AR: crear entity desde dto.
