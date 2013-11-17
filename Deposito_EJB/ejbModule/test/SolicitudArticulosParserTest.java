@@ -36,24 +36,91 @@ public class SolicitudArticulosParserTest {
 
 	}
 
+	
+	@Test
+	public void testJson1() {
+		
+		ArticuloParser AParser =new ArticuloParser();
+		
+		SolicitudArticulosParser SAParser = new SolicitudArticulosParser();
+		SolicitudArticulosDTO SADTO = null;
+		String xml = new String(
+				"<solicitudArticulos><idSolicitud>1</idSolicitud><idModulo>2</idModulo><articulos></articulos></solicitudArticulos>");
+		String json=null;
+		try {
+			SADTO = SAParser.toObject(xml);
+			json=SAParser.toJson(SADTO);
+			
+		} catch (ParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		assertEquals("{\n"
+					+ "   idModulo:6,\n"
+					+ "   idSolicitud:1\n"
+					+ "}\n",json);
+		
+	}
+	
+	@Test
+	public void testJson2() {
+		
+		ArticuloParser AParser =new ArticuloParser();
+		
+		SolicitudArticulosParser SAParser = new SolicitudArticulosParser();
+		SolicitudArticulosDTO SADTO = null;
+		String xml = new String(
+				"<solicitudArticulos><idSolicitud>1</idSolicitud><idModulo>2</idModulo><articulos><articulo><codigo>PEPE1</codigo><cantidad>10</cantidad></articulo></articulos></solicitudArticulos>");
+		String json=null;
+		try {
+			SADTO = SAParser.toObject(xml);
+			json=SAParser.toJson(SADTO);
+			
+		} catch (ParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		assertEquals("{\n"
+				+ "   idModulo:6,\n"
+				+ "   idSolicitud:1,\n\n"
+				+ "   items: [\n"
+				+ "   {codigo:PEPE1, cantidad: 10}\n"
+				+ "   ]\n"
+				+ "}\n",json);
+		
+	}
+	
+	@Test
+	public void testJson4() {
+		
+		ArticuloParser AParser =new ArticuloParser();
+		
+		SolicitudArticulosParser SAParser = new SolicitudArticulosParser();
+		SolicitudArticulosDTO SADTO = null;
+		String xml = new String(
+				"<solicitudArticulos><idSolicitud>1</idSolicitud><idModulo>2</idModulo><articulos><articulo><codigo>PEPE1</codigo><cantidad>10</cantidad></articulo><articulo><codigo>PEPE2</codigo><cantidad>11</cantidad></articulo></articulos></solicitudArticulos>");
+		String json=null;
+		try {
+			SADTO = SAParser.toObject(xml);
+			json=SAParser.toJson(SADTO);
+			
+		} catch (ParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		assertEquals("{\n"
+				+ "   idModulo:6,\n"
+				+ "   idSolicitud:1,\n\n"
+				+ "   items: [\n"
+				+ "   {codigo:PEPE1, cantidad: 10},\n"
+				+ "   {codigo:PEPE2, cantidad: 11}\n"
+				+ "   ]\n"
+				+ "}\n",json);
+		
+	}
+
+
+
 }
 
-//<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-//<articulo>
-//	<codigo>int</codigo>
-//	<codigoDeposito>int</codigoDeposito>
-//	<nombre>String</nombre>
-//	<descripcion>String</descripcion>
-//	<marca>String</marca>     
-//	<origen>String</origen>
-//	<precio>float</precio> 
-//	<tipo>String</tipo>
-//	<fecha>String</fecha><!--Formato: yyyy-MM-dd hh:mm:ss -->
-//	<fotoURL>String</fotoURL><!--URL de la Imagen -->
-//	<color>String</color><!--Dependiendo del tipo de articulo va vacio --> 
-//	<edadRecomendada>String</edadRecomendada><!--Dependiendo del tipo de articulo va vacio -->
-//	<fichaTecnica>String</fichaTecnica><!--Dependiendo del tipo de articulo va vacio -->
-//	<talle>String</talle><!--Dependiendo del tipo de articulo va vacio -->
-//	<material>String</material><!--Dependiendo del tipo de articulo va vacio --> 
-//</articulo>
 
