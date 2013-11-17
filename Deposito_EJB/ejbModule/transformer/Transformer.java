@@ -166,5 +166,23 @@ public class Transformer {
 		return eDTO;	
 	}
 
+	public SolicitudCompraDTO toDTO(SolicitudCompra solicitud){
+		SolicitudCompraDTO dto = new SolicitudCompraDTO();
+		dto.setCodigo(solicitud.getCodigo());
+		dto.setFechaInicio(solicitud.getFechaInicio());
+		dto.setFechaFin(solicitud.getFechaFin());
+		
+		for(ItemSolicitudCompra i:solicitud.getArticulos()){
+			dto.getArticulos().add(this.toDTO(i));
+		}
+		return dto;
+	}
 	
+	private ItemSolicitudCompraDTO toDTO(ItemSolicitudCompra item){
+		ItemSolicitudCompraDTO dto = new ItemSolicitudCompraDTO();
+		dto.setCantidad(item.getCantidad());
+		dto.setCodArticulo(item.getId());
+		dto.setNomArticulo(item.getArticulo().getNombre());
+		return dto;
+	}
 }
