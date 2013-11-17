@@ -19,12 +19,12 @@ public interface Facade {
 	public void recibirSolicitudCompra(SolicitudCompraDTO compra);
 
 	/**
-	 * Crea una nueva solicitud de compra y la envia
+	 * Crea una nueva solicitud de compra y la envia a Fabrica
 	 */
 	public void crearSolicitudCompra(SolicitudCompraDTO compra);
 
 	/**
-	 * Envia los articulos de la solicitud compra
+	 * Envia los articulos de la solicitud compra a Despacho
 	 */
 	public void enviarArticulos(SolicitudCompraDTO compra);
 
