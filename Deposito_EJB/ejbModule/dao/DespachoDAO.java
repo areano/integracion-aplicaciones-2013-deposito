@@ -9,6 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.apache.log4j.Logger;
+
 import parsers.ArticuloParser;
 import parsers.SolicitudArticulosParser;
 import transformer.Transformer;
@@ -17,13 +19,11 @@ import dto.ElectrodomesticoDTO;
 import dto.InfantilDTO;
 import dto.ModaDTO;
 import dto.MuebleDTO;
-import entities.Articulo;
 import entities.DespachoConexion;
 import entities.Electrodomestico;
 import entities.Infantil;
 import entities.Moda;
 import entities.Mueble;
-import entities.PortalConexion;
 import entities.SolicitudArticulos;
 
 /**
@@ -38,7 +38,8 @@ public class DespachoDAO {
      */
 	@PersistenceContext
 	EntityManager em;
-
+	private static final Logger logger = 
+			   Logger.getLogger(DespachoDAO.class);
 	private List<DespachoConexion> conexiones;
 	private DespachoConexion conexion;
     public DespachoDAO() {
@@ -85,6 +86,7 @@ public class DespachoDAO {
 
 	
 	public void enviar(String xml) {
+		String errorMessage = new String();
 		this.obtenerConexiones();
 
 		for (DespachoConexion p : conexiones) {
@@ -93,12 +95,14 @@ public class DespachoDAO {
 				cliente.enviar(xml);
 				cliente.cerrarConexion();
 			} catch (JMSException e) {
-				// TODO AR: log de errores
+				errorMessage = "*** Error enviando xml a jms de Despacho IP["+p.getIp()+"] Grupo ["+p.getDespachoId()+"]***"; 
+				logger.error(errorMessage, e);
 				e.printStackTrace();
 			}
 		}
 	}
 	public void enviar(SolicitudArticulos a){
+		String errorMessage = new String();
 		DespachoConexion p =  obtenerConexion(a.getModuloId());	
 		SolicitudArticulosParser  parser = new SolicitudArticulosParser();
 		String xml = parser.toXML(a);
@@ -107,7 +111,8 @@ public class DespachoDAO {
 			cliente.enviar(xml);
 			cliente.cerrarConexion();
 		} catch (JMSException e) {
-			// TODO AR: log de errores
+			errorMessage = "*** Error enviando xml a jms de Despacho IP["+p.getIp()+"] Grupo ["+p.getDespachoId()+"]***"; 
+			logger.error(errorMessage, e);
 			e.printStackTrace();
 		}
 	}

@@ -4,6 +4,8 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import org.apache.log4j.Logger;
+
 import transformer.Transformer;
 import dao.ArticuloDAO;
 import dao.DespachoDAO;
@@ -36,7 +38,8 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	DespachoDAO despachoDAO;
 	
 	private Transformer transformer;
-
+	private static final Logger logger = 
+			   Logger.getLogger(AdministradorArticulosBean.class);
 	public AdministradorArticulosBean() {
 		transformer=Transformer.obtenerInstancia();
 	}
@@ -56,37 +59,59 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	*/
 	
 	public void guardarElectrodomestico(ElectrodomesticoDTO dto){
-		Electrodomestico e = transformer.converToClass(dto);
-		articuloDAO.guardarArticulo(e);
-		portalDAO.enviar(e);
-		despachoDAO.enviar(e);
+		try{
+			
+			Electrodomestico e = transformer.converToClass(dto);
+			articuloDAO.guardarArticulo(e);
+			logger.info("Electrodomestico codigo ["+e.getCodigo()+"] creado");
+			portalDAO.enviar(e);
+			despachoDAO.enviar(e);
+		}catch(Exception e ){
+			 logger.error("Error",e);
+		}
 	}
 	
 	public void guardarInfantil(InfantilDTO dto){
-		Infantil i = transformer.converToClass(dto);
-		articuloDAO.guardarArticulo(i);
-		portalDAO.enviar(i);
-		despachoDAO.enviar(i);
+		try{
+			Infantil i = transformer.converToClass(dto);
+			articuloDAO.guardarArticulo(i);
+			portalDAO.enviar(i);
+			despachoDAO.enviar(i);
+		}catch(Exception e ){
+			 logger.error("Error",e);
+		}
 	}
 	
 	public void guardarModa(ModaDTO dto){
-		Moda m = transformer.converToClass(dto);
-		articuloDAO.guardarArticulo(m);
-		portalDAO.enviar(m);
-		despachoDAO.enviar(m);
+		try{
+			Moda m = transformer.converToClass(dto);
+			articuloDAO.guardarArticulo(m);
+			portalDAO.enviar(m);
+			despachoDAO.enviar(m);
+		}catch(Exception e ){
+			 logger.error("Error",e);
+		}
 	}
 	
 	public void guardarMueble(MuebleDTO dto){
-		Mueble m = transformer.converToClass(dto);
-		articuloDAO.guardarArticulo(m);
-		portalDAO.enviar(m);
-		despachoDAO.enviar(m);
+		try{
+			Mueble m = transformer.converToClass(dto);
+			articuloDAO.guardarArticulo(m);
+			portalDAO.enviar(m);
+			despachoDAO.enviar(m);
+		}catch(Exception e ){
+			 logger.error("Error",e);
+		}
 	}
 
 	@Override
 	public void actualizarStock(ArticuloDTO dto, long stock) {
-		Articulo a = transformer.converToClass(dto);
-		a.setStock(stock);
-		articuloDAO.actualizarArticulo(a);
+		try{
+			Articulo a = transformer.converToClass(dto);
+			a.setStock(stock);
+			articuloDAO.actualizarArticulo(a);
+		}catch(Exception e ){
+			 logger.error("Error",e);
+		}
 	}
 }
