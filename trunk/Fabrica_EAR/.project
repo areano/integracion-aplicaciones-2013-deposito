@@ -5,6 +5,9 @@
 	<projects>
 		<project>Fabrica_WEB</project>
 		<project>Common</project>
+		<project>Fabrica_EJB</project>
+		<project>Fabrica_EJBClient</project>
+		<project>Fabrica_EJBClient1</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

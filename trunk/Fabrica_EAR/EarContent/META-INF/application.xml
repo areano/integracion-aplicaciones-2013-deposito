@@ -7,4 +7,7 @@
       <context-root>Fabrica_WEB</context-root>
     </web>
   </module>
+  <module>
+    <ejb>Fabrica_EJB.jar</ejb>
+  </module>
 </application>
