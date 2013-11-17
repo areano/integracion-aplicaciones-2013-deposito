@@ -2,8 +2,10 @@ package dao;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-
-import entities.SolicitudCompra;
+import parsers.ParserException;
+import parsers.SolicitudCompraParser;
+import clientes.GenericRestClient;
+import dto.SolicitudCompraDTO;
 
 /**
  * Session Bean implementation class FabricaDAO
@@ -12,16 +14,30 @@ import entities.SolicitudCompra;
 @LocalBean
 public class FabricaDAO {
 
+	GenericRestClient clienteRest ;
+	
     /**
      * Default constructor. 
      */
-    public FabricaDAO() {
+    public FabricaDAO(String ip, String puerto, String metodo) {
         // TODO AR: levantar parametros de comunicacion REST y crear el cliente
+    	
+		this.clienteRest = new GenericRestClient(ip, puerto, metodo);
+    	
     }
 
-	public void enviar(SolicitudCompra compra) {
+	public void enviar(SolicitudCompraDTO compra) {
 		// TODO AR: enviar solicitud mediante REST
 		
+		try {
+			SolicitudCompraParser parser = new SolicitudCompraParser();
+			String mensaje = parser.toString(compra);
+			clienteRest.enviar(mensaje);
+			
+		} catch (ParserException e) {
+			e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-
 }
