@@ -1,6 +1,12 @@
 package ar.com.edu.uade.view.articulo;
+import javax.naming.NamingException;
+
+import org.apache.log4j.Logger;
+
+import ar.com.edu.uade.ejbfacade.EJBFacade;
 import ar.com.edu.uade.utils.InstallArticuloValidatorBlurListener;
 import ar.com.edu.uade.utils.ValidatorUtils;
+import view.ElectrodomesticoView;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
@@ -8,9 +14,8 @@ import com.vaadin.ui.AbstractTextField;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CustomComponent;
+import com.vaadin.ui.Field;
 import com.vaadin.ui.FormLayout;
-
-import dto.ElectrodomesticoDTO;
 
 
 
@@ -18,33 +23,35 @@ import dto.ElectrodomesticoDTO;
 public class ElectrodomesticoFormView extends CustomComponent {
 	
 	private static final long serialVersionUID = 1739709695326530748L;
-	protected final BeanFieldGroup<ElectrodomesticoDTO> binder;
+	protected final BeanFieldGroup<ElectrodomesticoView> binder;
 	protected FormLayout layout;
-	private ElectrodomesticoDTO bindeable;
+	private ElectrodomesticoView bindeable;
 	private boolean editable;
+	private static final Logger logger = 
+			   Logger.getLogger(ElectrodomesticoFormView.class);
     public ElectrodomesticoFormView() {
     		super();
             layout = new FormLayout();
             setCompositionRoot(layout);
-            binder = new BeanFieldGroup<ElectrodomesticoDTO>(ElectrodomesticoDTO.class);
-            bindeable = new ElectrodomesticoDTO();
+            binder = new BeanFieldGroup<ElectrodomesticoView>(ElectrodomesticoView.class);
+            bindeable = new ElectrodomesticoView();
 	        binder.setItemDataSource(bindeable);
 	        editable = false;
 	        buildLayout(layout, binder);
 	}
-    public ElectrodomesticoFormView(ElectrodomesticoDTO bean){
+    public ElectrodomesticoFormView(ElectrodomesticoView bean){
 		super();
         layout = new FormLayout();
         layout.setStyleName("chameleon");
         setCompositionRoot(layout);
-        binder = new BeanFieldGroup<ElectrodomesticoDTO>(ElectrodomesticoDTO.class);
+        binder = new BeanFieldGroup<ElectrodomesticoView>(ElectrodomesticoView.class);
         bindeable = bean;
         binder.setItemDataSource(bindeable);
         editable = true;
         buildLayout(layout, binder);
     }
     private void buildLayout(FormLayout layout,
-			final BeanFieldGroup<ElectrodomesticoDTO> binder) {
+			final BeanFieldGroup<ElectrodomesticoView> binder) {
     	
     	final AbstractTextField  descripcion = (AbstractTextField) binder.buildAndBind("Descripcion", "descripcion");
     	descripcion.setNullRepresentation("");
@@ -56,30 +63,32 @@ public class ElectrodomesticoFormView extends CustomComponent {
     	precio.setNullRepresentation("");
     	final AbstractTextField  foto=(AbstractTextField) binder.buildAndBind("Foto", "foto");
     	foto.setNullRepresentation("");
-    	final AbstractTextField  codigoDeposito=(AbstractTextField) binder.buildAndBind("Codigo Deposito", "codigoDeposito");
-    	codigoDeposito.setNullRepresentation("");
+    	final AbstractTextField  codigo=(AbstractTextField) binder.buildAndBind("Codigo", "codigo");
+    	codigo.setNullRepresentation("");
     	final AbstractTextField  fichaTecnica=(AbstractTextField) binder.buildAndBind("Ficha Tecnica", "fichaTecnica");
     	fichaTecnica.setNullRepresentation("");
     	final AbstractTextField  stock =(AbstractTextField) binder.buildAndBind("Stock", "stock");
     	stock.setNullRepresentation("");
 
-    	
+    	final AbstractTextField  origen =(AbstractTextField) binder.buildAndBind("Origen", "origen");
+    	origen.setNullRepresentation("");
     	
     	descripcion.addBlurListener(new InstallArticuloValidatorBlurListener(descripcion, "descripcion"));
     	marca.addBlurListener(new InstallArticuloValidatorBlurListener(marca,"marca"));
     	nombre.addBlurListener(new InstallArticuloValidatorBlurListener(nombre,"nombre"));
     	precio.addBlurListener(new InstallArticuloValidatorBlurListener(precio,"precio"));
     	foto.addBlurListener(new InstallArticuloValidatorBlurListener(foto,"tipo"));
-    	codigoDeposito.addBlurListener(new InstallArticuloValidatorBlurListener(codigoDeposito,"codigoDeposito"));
     	fichaTecnica.addBlurListener(new InstallArticuloValidatorBlurListener(fichaTecnica,"fichaTecnica"));
-    	
+    	origen.addBlurListener(new InstallArticuloValidatorBlurListener(origen,"origen"));
+    	codigo.addBlurListener(new InstallArticuloValidatorBlurListener(codigo,"codigo"));
+    	layout.addComponent(codigo);
     	layout.addComponent(descripcion );
     	layout.addComponent(marca);
     	layout.addComponent(nombre);
     	layout.addComponent(precio);
     	layout.addComponent(foto);
-    	layout.addComponent(codigoDeposito);
     	layout.addComponent(fichaTecnica);
+    	layout.addComponent(origen);
     	if (editable){	    		
     		layout.addComponent(stock);
     		stock.addBlurListener(new InstallArticuloValidatorBlurListener(stock,"stock"));
@@ -94,15 +103,29 @@ public class ElectrodomesticoFormView extends CustomComponent {
     	        	if (editable) {
     	        		ValidatorUtils.installSingleValidator(stock,"stock");
     	        	}
+    	        	ValidatorUtils.installSingleValidator(codigo,"codigo");
     	        	ValidatorUtils.installSingleValidator(marca,"marca");
     	        	ValidatorUtils.installSingleValidator(nombre,"nombre");
     	        	ValidatorUtils.installSingleValidator(precio,"precio");
     	        	ValidatorUtils.installSingleValidator(foto,"foto");
-    	        	ValidatorUtils.installSingleValidator(codigoDeposito,"codigoDeposito");
     	        	ValidatorUtils.installSingleValidator(fichaTecnica,"fichaTecnica");
-    	            binder.commit();
+    	        	ValidatorUtils.installSingleValidator(origen,"origen");
+    	        	binder.commit();
+    	            EJBFacade.getIntance().altaElectrodomestico(bindeable);
     	        } catch (CommitException e) {
-    	        }
+    	        	try{
+    	        		for(Field<?> f:binder.getFields()){
+    	        			f.validate();
+    	        		}
+    	        	
+    	        	}catch(Exception j){
+    	        		logger.error(j);
+    	        		j.printStackTrace();
+    	        	}
+    	        } catch (NamingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 			}
 		} ));

@@ -22,6 +22,7 @@
 @import "components/table.scss";
 @import "components/window.scss";
 @import "components/menubar.scss";
+@import "components/panel.scss";
 @import "views/schedule.scss";
 @import "views/sales.scss";
 @import "views/reports.scss";
@@ -44,6 +45,7 @@
 	@include dashboard-textfield;
 	@include dashboard-window;
 	@include dashboard-menubar;
+	@include dashboard-panel;
 	@include dashboard-schedule-view;
 	@include dashboard-sales-view;
 	@include dashboard-reports-view;

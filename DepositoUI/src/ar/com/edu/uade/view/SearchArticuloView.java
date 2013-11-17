@@ -10,6 +10,7 @@ import ar.com.edu.uade.view.articulo.ElectrodomesticoFormView;
 import ar.com.edu.uade.view.articulo.InfantilFormView;
 import ar.com.edu.uade.view.articulo.ModaFormView;
 import ar.com.edu.uade.view.articulo.MuebleFormView;
+import view.*;
 
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
@@ -27,12 +28,6 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
-
-import dto.ArticuloDTO;
-import dto.ElectrodomesticoDTO;
-import dto.InfantilDTO;
-import dto.ModaDTO;
-import dto.MuebleDTO;
 
 @SuppressWarnings("serial")
 public class SearchArticuloView extends VerticalLayout implements View  {
@@ -122,31 +117,31 @@ public class SearchArticuloView extends VerticalLayout implements View  {
 				// TODO Auto-generated method stub
 				if (!event.isDoubleClick())
 					 return;
-				ArticuloDTO selected =  (ArticuloDTO) articuloList.getValue();
+				ArticuloView selected =  (ArticuloView) articuloList.getValue();
 				viewEditableForm(selected);
 			}
 		});
 
     }
-    private void viewEditableForm(ArticuloDTO selected){
+    private void viewEditableForm(ArticuloView selected){
     	final VerticalLayout content = new VerticalLayout();
 		Articulos item =  Articulos.valueOf(selected.getTipo().toUpperCase());		
 		switch (item) {
 			case ELECTRODOMESTICO:					
 				content.removeAllComponents();
-				content.addComponent( new ElectrodomesticoFormView((ElectrodomesticoDTO) selected));					
+				content.addComponent( new ElectrodomesticoFormView((ElectrodomesticoView) selected));					
 				break;
 			case MODA:
 				content.removeAllComponents();
-				content.addComponent( new ModaFormView( (ModaDTO)selected ));
+				content.addComponent( new ModaFormView( (ModaView)selected ));
 				break;
 			case MUEBLE:
 				content.removeAllComponents();
-				content.addComponent( new MuebleFormView((MuebleDTO)selected));
+				content.addComponent( new MuebleFormView((MuebleView)selected));
 				break;
 			case INFANTIL:	
 				content.removeAllComponents();
-				content.addComponent( new InfantilFormView((InfantilDTO)selected));
+				content.addComponent( new InfantilFormView((InfantilView)selected));
 				break;	
 			default:
 				break;

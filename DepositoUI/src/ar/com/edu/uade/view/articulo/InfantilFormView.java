@@ -1,6 +1,12 @@
 package ar.com.edu.uade.view.articulo;
+import javax.naming.NamingException;
+
+import org.apache.log4j.Logger;
+
+import ar.com.edu.uade.ejbfacade.EJBFacade;
 import ar.com.edu.uade.utils.InstallArticuloValidatorBlurListener;
 import ar.com.edu.uade.utils.ValidatorUtils;
+import view.InfantilView;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
@@ -8,30 +14,36 @@ import com.vaadin.ui.AbstractTextField;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CustomComponent;
+import com.vaadin.ui.Field;
 import com.vaadin.ui.FormLayout;
 
 
-import dto.InfantilDTO;
+
+
+
+
 
 public class InfantilFormView extends CustomComponent {
 	
 	private static final long serialVersionUID = 1739709695326530748L;
 	private boolean editable;
-	private InfantilDTO bindeable;
+	private InfantilView bindeable;
+	private static final Logger logger = 
+			   Logger.getLogger(InfantilFormView.class);
     public InfantilFormView() {
 	        FormLayout layout = new FormLayout();
 	        setCompositionRoot(layout);
-	        final BeanFieldGroup<InfantilDTO> binder = new BeanFieldGroup<InfantilDTO>(InfantilDTO.class);
-	        binder.setItemDataSource(new InfantilDTO());
+	        final BeanFieldGroup<InfantilView> binder = new BeanFieldGroup<InfantilView>(InfantilView.class);
+	        binder.setItemDataSource(new InfantilView());
 	        editable = false;
 	        /* Field Creation Section*/	    	
 	    	buildLayout(layout, binder);  	
 
 	    }
-    public InfantilFormView(InfantilDTO bean) {
+    public InfantilFormView(InfantilView bean) {
         FormLayout layout = new FormLayout();
         setCompositionRoot(layout);
-        final BeanFieldGroup<InfantilDTO> binder = new BeanFieldGroup<InfantilDTO>(InfantilDTO.class);
+        final BeanFieldGroup<InfantilView> binder = new BeanFieldGroup<InfantilView>(InfantilView.class);
         bindeable = bean;
         binder.setItemDataSource(bindeable);
         editable = true;
@@ -41,7 +53,7 @@ public class InfantilFormView extends CustomComponent {
 
     }
 	private void buildLayout(FormLayout layout,
-			final BeanFieldGroup<InfantilDTO> binder) {
+			final BeanFieldGroup<InfantilView> binder) {
 		final AbstractTextField  descripcion = (AbstractTextField) binder.buildAndBind("Descripcion", "descripcion");
 		descripcion.setNullRepresentation("");
 		final AbstractTextField  marca=(AbstractTextField) binder.buildAndBind("Marca", "marca");
@@ -52,30 +64,31 @@ public class InfantilFormView extends CustomComponent {
 		precio.setNullRepresentation("");
 		final AbstractTextField  foto=(AbstractTextField) binder.buildAndBind("Foto", "foto");
 		foto.setNullRepresentation("");
-		final AbstractTextField  codigoDeposito=(AbstractTextField) binder.buildAndBind("Codigo Deposito", "codigoDeposito");
-		codigoDeposito.setNullRepresentation("");
+		final AbstractTextField  codigo=(AbstractTextField) binder.buildAndBind("Codigo", "codigo");
+		codigo.setNullRepresentation("");
 		final AbstractTextField  edadRecomendada=(AbstractTextField) binder.buildAndBind("Edad Recomendada", "edadRecomendada");
 		edadRecomendada.setNullRepresentation("");
 		final AbstractTextField  stock =(AbstractTextField) binder.buildAndBind("Stock", "stock");
 		stock.setNullRepresentation("");
-		
+    	final AbstractTextField  origen =(AbstractTextField) binder.buildAndBind("Origen", "origen");
+    	origen.setNullRepresentation("");		
 
 		descripcion.addBlurListener(new InstallArticuloValidatorBlurListener(descripcion, "descripcion"));
 		marca.addBlurListener(new InstallArticuloValidatorBlurListener(marca,"marca"));
 		nombre.addBlurListener(new InstallArticuloValidatorBlurListener(nombre,"nombre"));
 		precio.addBlurListener(new InstallArticuloValidatorBlurListener(precio,"precio"));
 		foto.addBlurListener(new InstallArticuloValidatorBlurListener(foto,"foto"));
-		codigoDeposito.addBlurListener(new InstallArticuloValidatorBlurListener(codigoDeposito,"codigoDeposito"));
+		codigo.addBlurListener(new InstallArticuloValidatorBlurListener(codigo,"codigo"));
 		edadRecomendada.addBlurListener(new InstallArticuloValidatorBlurListener(edadRecomendada,"edadRecomendada"));
-
-
+		origen.addBlurListener(new InstallArticuloValidatorBlurListener(origen,"origen"));
+		layout.addComponent(codigo);
 		layout.addComponent(descripcion );
 		layout.addComponent(marca);
 		layout.addComponent(nombre);
 		layout.addComponent(precio);
-		layout.addComponent(foto);
-		layout.addComponent(codigoDeposito);
+		layout.addComponent(foto);		
 		layout.addComponent(edadRecomendada);
+		layout.addComponent(origen);
 		if (editable){	    		
 			layout.addComponent(stock);
 			stock.addBlurListener(new InstallArticuloValidatorBlurListener(stock,"stock"));
@@ -96,11 +109,25 @@ public class InfantilFormView extends CustomComponent {
 		        	ValidatorUtils.installSingleValidator(nombre,"nombre");
 		        	ValidatorUtils.installSingleValidator(precio,"precio");
 		        	ValidatorUtils.installSingleValidator(foto,"foto");
-		        	ValidatorUtils.installSingleValidator(codigoDeposito,"codigoDeposito");
+		        	ValidatorUtils.installSingleValidator(codigo,"codigo");
 		        	ValidatorUtils.installSingleValidator(edadRecomendada,"edadRecomendada");
+		        	ValidatorUtils.installSingleValidator(origen,"origen");
 		            binder.commit();
+		            EJBFacade.getIntance().altaInfatil(bindeable);
 		        } catch (CommitException e) {
-		        }
+    	        	try{
+    	        		for(Field<?> f:binder.getFields()){
+    	        			f.validate();
+    	        		}
+    	        	
+    	        	}catch(Exception j){
+    	        		logger.error(j);
+    	        		j.printStackTrace();
+    	        	}
+		        } catch (NamingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 			}
 		} ));

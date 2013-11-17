@@ -2,11 +2,11 @@ package ar.com.edu.uade.utils;
 
 import java.util.Collection;
 
+import view.ArticuloView;
+
 import com.vaadin.data.Validator;
 import com.vaadin.data.validator.BeanValidator;
 import com.vaadin.ui.AbstractTextField;
-
-import dto.ArticuloDTO;
 
 
 
@@ -20,7 +20,7 @@ public  class ValidatorUtils {
 
         if (validators == null || validators.isEmpty()) {
 
-            field.addValidator(new BeanValidator(ArticuloDTO.class, attribute));
+            field.addValidator(new BeanValidator(ArticuloView.class, attribute));
         }
     }
 }

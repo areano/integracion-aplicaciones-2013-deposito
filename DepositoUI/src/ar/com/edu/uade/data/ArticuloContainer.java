@@ -5,14 +5,15 @@ package ar.com.edu.uade.data;
 import java.io.Serializable;
 import java.util.Random;
 
+import javax.naming.NamingException;
+
 import ar.com.edu.uade.ejbfacade.EJBFacade;
+import view.ArticuloView;
 
 import com.vaadin.data.util.BeanItemContainer;
 
-import dto.ArticuloDTO;
-
 @SuppressWarnings("serial")
-public class ArticuloContainer extends BeanItemContainer<ArticuloDTO> implements
+public class ArticuloContainer extends BeanItemContainer<ArticuloView> implements
         Serializable {
 
     /**
@@ -30,7 +31,7 @@ public class ArticuloContainer extends BeanItemContainer<ArticuloDTO> implements
 
     public ArticuloContainer() throws InstantiationException,
             IllegalAccessException {
-        super(ArticuloDTO.class);
+        super(ArticuloView.class);
     }
 //    public  void init(){
 //    	EJBFacade facade = new EJBFacade();
@@ -41,7 +42,7 @@ public class ArticuloContainer extends BeanItemContainer<ArticuloDTO> implements
     	ArticuloContainer c = null;
         try {
             c = new ArticuloContainer();
-            EJBFacade facade = new EJBFacade();
+            EJBFacade facade = EJBFacade.getIntance();
         	c.addAll(facade.getAllArticulos());
 
         } catch (InstantiationException e) {
@@ -50,7 +51,10 @@ public class ArticuloContainer extends BeanItemContainer<ArticuloDTO> implements
         } catch (IllegalAccessException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }
+        } catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
         return c;
     }

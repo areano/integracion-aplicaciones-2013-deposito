@@ -1,29 +1,20 @@
 package ar.com.edu.uade.searcher;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
+import view.ArticuloView;
 import ar.com.edu.uade.data.ArticuloContainer;
 
 import com.vaadin.data.Item;
-import com.vaadin.data.util.BeanItem;
-import com.vaadin.data.validator.EmailValidator;
-import com.vaadin.data.validator.RegexpValidator;
-
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.DefaultFieldFactory;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
-import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.TextField;
-
-import dto.ArticuloDTO;
 
 @SuppressWarnings("serial")
 public class ArticuloForm extends Form implements ClickListener {
@@ -35,7 +26,7 @@ public class ArticuloForm extends Form implements ClickListener {
 
     
     private boolean newContactMode = false;
-    private ArticuloDTO newPerson = null;
+    private ArticuloView newPerson = null;
     private ArticuloContainer container = ArticuloContainer.init();
     public ArticuloForm() {
         

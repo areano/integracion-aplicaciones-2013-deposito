@@ -4,12 +4,8 @@ package ar.com.edu.uade.searcher;
 
 import ar.com.edu.uade.data.ArticuloContainer;
 
-import com.vaadin.ui.Component;
-import com.vaadin.ui.Link;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.Runo;
-
-import dto.ArticuloDTO;
 
 @SuppressWarnings("serial")
 public class ArticuloList extends Table {

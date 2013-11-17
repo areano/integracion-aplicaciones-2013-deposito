@@ -43,21 +43,22 @@ import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.NativeButton;
 import com.vaadin.ui.Notification;
-import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.Table;
-import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-
+import org.apache.log4j.Logger;
 @Theme("dashboard")
 @Title("Administrador de Deposito")
 public class DepositoUI extends UI {
 	@WebServlet(value = "/*", asyncSupported = true)
 	@VaadinServletConfiguration(productionMode = false, ui = DepositoUI.class)
 	public static class Servlet extends VaadinServlet {
+	
 	}
-    //DataProvider dataProvider = new DataProvider();
-
+    
+	//DataProvider dataProvider = new DataProvider();
+	private static final Logger logger = 
+			   Logger.getLogger(DepositoUI.class.getName());
     private static final long serialVersionUID = 1L;
 
     CssLayout root = new CssLayout();
@@ -84,6 +85,7 @@ public class DepositoUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
+    	logger.info("*** Enter Application ***");
     	getSession().setConverterFactory(new MyConverterFactory());
 
         helpManager = new HelpManager(this);

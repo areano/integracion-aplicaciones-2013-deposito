@@ -2,82 +2,108 @@ package ar.com.edu.uade.ejbfacade;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Properties;
 
-import dto.ArticuloDTO;
-import dto.ConnectionDTO;
-import dto.ElectrodomesticoDTO;
-import dto.ItemSolicitudCompra;
-import dto.ModaDTO;
-import dto.SolicitudCompraDTO;
+import javax.ejb.EJB;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import org.apache.log4j.Logger;
+
+
+
+
+
+import ar.com.edu.uade.beans.DepositoFacade;
+import view.ArticuloView;
+import view.ConnectionView;
+import view.ElectrodomesticoView;
+import view.InfantilView;
+import view.SolicitudArticulosItemView;
+import view.SolicitudArticulosView;
+import view.ModaView;
+import view.MuebleView;
+import view.SolicitudCompraView;
+
+
 
 public class EJBFacade {
 
-	
-	public ArrayList<ConnectionDTO> getPortalConections(){
+	private static final Logger logger = 
+			   Logger.getLogger(EJBFacade.class);
+	static EJBFacade instance =null;
+	@EJB
+	DepositoFacade systemFacade ;
+	private EJBFacade() throws NamingException{
+		getDepositoFacade();
+	}
+	public static EJBFacade getIntance() throws NamingException{
+		if(instance==null)
+			instance= new EJBFacade();
+		return instance;
+	}
+	public ArrayList<ConnectionView> getPortalConections(){
 		
-		ArrayList<ConnectionDTO> retorno = new ArrayList<ConnectionDTO>();
-		ConnectionDTO dto = new ConnectionDTO();
+		ArrayList<ConnectionView> retorno = new ArrayList<ConnectionView>();
+		ConnectionView dto = new ConnectionView();
 		for (int i = 0; i < 9; i++) {
-			dto.setID(String.valueOf(i));
+			dto.setModuleId(i);
 			dto.setActive(true);
-			dto.setType("PORTAL");
-			dto.setID("192.168.0."+String.valueOf(i));
-			dto.setSynchronic(false);
+			dto.setIp("192.168.0."+String.valueOf(i));
+			dto.setSyncronic(false);
 			retorno.add(dto);
 		}
 		return retorno;
 		
 	}
-	public ArrayList<ConnectionDTO> getDespachoConnection(){
-		ArrayList<ConnectionDTO> retorno = new ArrayList<ConnectionDTO>();
-		ConnectionDTO dto = new ConnectionDTO();
+	public ArrayList<ConnectionView> getDespachoConnection(){
+		ArrayList<ConnectionView> retorno = new ArrayList<ConnectionView>();
+		ConnectionView dto = new ConnectionView();
 		for (int i = 0; i < 9; i++) {
-			dto.setID(String.valueOf(i));
+			dto.setModuleId(i);
 			dto.setActive(true);
-			dto.setType("DESPACHO");
-			dto.setID("192.168.1."+String.valueOf(i));
-			dto.setSynchronic(false);
+			dto.setIp("192.168.0."+String.valueOf(i));
+			dto.setSyncronic(false);
 			retorno.add(dto);
 		}
 		return retorno;
 	}
-	public ArrayList<ConnectionDTO> getMonitoreoConnection(){
-		ArrayList<ConnectionDTO> retorno = new ArrayList<ConnectionDTO>();
-		ConnectionDTO dto = new ConnectionDTO();
+	public ArrayList<ConnectionView> getMonitoreoConnection(){
+		ArrayList<ConnectionView> retorno = new ArrayList<ConnectionView>();
+		ConnectionView dto = new ConnectionView();
 		for (int i = 0; i < 9; i++) {
-			dto.setID(String.valueOf(i));
+			dto.setModuleId(i);
 			dto.setActive(true);
-			dto.setType("MONITOREO");
-			dto.setID("192.168.2."+String.valueOf(i));			
-			dto.setSynchronic(false);
+			dto.setIp("192.168.0."+String.valueOf(i));
+			dto.setSyncronic(false);
 			retorno.add(dto);
 		}
 		return retorno;
 	}
-	public ArrayList<ConnectionDTO> getFabricaConnection(){
-		ArrayList<ConnectionDTO> retorno = new ArrayList<ConnectionDTO>();
-		ConnectionDTO dto = new ConnectionDTO();
+	public ArrayList<ConnectionView> getFabricaConnection(){
+		ArrayList<ConnectionView> retorno = new ArrayList<ConnectionView>();
+		ConnectionView dto = new ConnectionView();
 		for (int i = 0; i < 9; i++) {
-			dto.setID(String.valueOf(i));
+			dto.setModuleId(i);
 			dto.setActive(true);
-			dto.setType("FABRICA");
-			dto.setID("192.168.3."+String.valueOf(i));			
-			dto.setSynchronic(false);
+			dto.setIp("192.168.0."+String.valueOf(i));
+			dto.setSyncronic(false);
 			retorno.add(dto);
 		}
 		return retorno;
 	}
-	public ArrayList<SolicitudCompraDTO> getSolicitudesDeCompra(){		
+	public ArrayList<SolicitudArticulosView> getSolicitudesDeArticulos(){
 		
-		ElectrodomesticoDTO electro =new ElectrodomesticoDTO();
-		ModaDTO moda =  new ModaDTO();
+		ElectrodomesticoView electro =new ElectrodomesticoView();
+		ModaView moda =  new ModaView();
 		electro.setCodigo(Long.valueOf(1));
 		electro.setDescripcion("Un electro");
 		electro.setFichaTecnica("una url");
 		electro.setMarca("Modila");
 		electro.setNombre("Supercalifragitisticoespiralidoso");
 		electro.setOrigen("Tierra cdel fuego");
-		electro.setPrecio(Float.valueOf((float) 12.5));
+		electro.setPrecio( Float.parseFloat("12.5"));
 		
 		moda.setCodigo(Long.valueOf(1));
 		moda.setDescripcion("una remera");
@@ -85,41 +111,85 @@ public class EJBFacade {
 		moda.setMarca("Mota");
 		moda.setNombre("Motta inside");
 		moda.setOrigen("El Salvador");
-		moda.setPrecio(Float.valueOf((float) 12.5));
+		moda.setPrecio( Float.parseFloat("12.5"));
 		moda.setColor("Azul");
 		
-		ArrayList<SolicitudCompraDTO> solicitudes =  new ArrayList<SolicitudCompraDTO>();
-		SolicitudCompraDTO dto = new SolicitudCompraDTO();
+		ArrayList<SolicitudArticulosView> solicitudes =  new ArrayList<SolicitudArticulosView>();
+		SolicitudArticulosView dto = new SolicitudArticulosView();
 		
-		dto.setCodigoDespacho(1);
-		dto.addItemSolicitudCompra(new ItemSolicitudCompra(electro, 2));
-		dto.addItemSolicitudCompra(new ItemSolicitudCompra(moda, 2));
+		dto.setIdModulo(1);
+		SolicitudArticulosItemView item = new SolicitudArticulosItemView(electro, 2);
+		dto.addItemSolicitudArticulos(item);
+
 		dto.setDate(new java.util.Date());
 		dto.setCodigoSolicitud(1);
 		solicitudes.add(dto);
 		
-		dto = new SolicitudCompraDTO();
-		dto.setCodigoDespacho(2);
+		dto = new SolicitudArticulosView();
+		dto.setIdModulo(2);
 		dto.setDate(new java.util.Date());
-		dto.addItemSolicitudCompra(new ItemSolicitudCompra(electro, 5));
-		dto.addItemSolicitudCompra(new ItemSolicitudCompra(moda, 5));
+		dto.addItemSolicitudArticulos(new SolicitudArticulosItemView(electro, 5));
+		dto.addItemSolicitudArticulos(new SolicitudArticulosItemView(moda, 5));
 		dto.setCodigoSolicitud(2);
 		solicitudes.add(dto);
-		
-		
 		return solicitudes;
 	}
-	public Collection<? extends ArticuloDTO> getAllArticulos() {
-		ArrayList<ArticuloDTO> articulos =  new ArrayList<ArticuloDTO>();
-		ElectrodomesticoDTO electro =new ElectrodomesticoDTO();
-		ModaDTO moda =  new ModaDTO();
+	public ArrayList<SolicitudCompraView> getSolicitudesDeCompra(){		
+//		
+//		ElectrodomesticoDTO electro =new ElectrodomesticoDTO();
+//		ModaDTO moda =  new ModaDTO();
+//		electro.setCodigo(Long.valueOf(1));
+//		electro.setDescripcion("Un electro");
+//		electro.setFichaTecnica("una url");
+//		electro.setMarca("Modila");
+//		electro.setNombre("Supercalifragitisticoespiralidoso");
+//		electro.setOrigen("Tierra cdel fuego");
+//		electro.setPrecio( Float.parseFloat("12.5"));
+//		
+//		moda.setCodigo(Long.valueOf(1));
+//		moda.setDescripcion("una remera");
+//		moda.setTalle("XL");
+//		moda.setMarca("Mota");
+//		moda.setNombre("Motta inside");
+//		moda.setOrigen("El Salvador");
+//		moda.setPrecio( Float.parseFloat("12.5"));
+//		moda.setColor("Azul");
+//		
+//		ArrayList<SolicitudArticulosDTO> solicitudes =  new ArrayList<SolicitudArticulosDTO>();
+//		SolicitudArticulosDTO dto = new SolicitudArticulosDTO();
+//		
+//		dto.setIdModulo(1);
+//		SolicitudArticuloItemDTO item = new SolicitudArticuloItemDTO();
+//		item.setCantidad(2);
+//		item.setCodigo(codigo);
+//		dto.addItemSolicitudCompra();
+//		dto.addItemSolicitudCompra(new ItemSolicitudCompra(moda, 2));
+//		dto.setDate(new java.util.Date());
+//		dto.setCodigoSolicitud(1);
+//		solicitudes.add(dto);
+//		
+//		dto = new SolicitudCompraDTO();
+//		dto.setCodigoDespacho(2);
+//		dto.setDate(new java.util.Date());
+//		dto.addItemSolicitudCompra(new ItemSolicitudCompra(electro, 5));
+//		dto.addItemSolicitudCompra(new ItemSolicitudCompra(moda, 5));
+//		dto.setCodigoSolicitud(2);
+//		solicitudes.add(dto);
+//		
+		return null;
+		//return solicitudes;
+	}
+	public Collection<? extends ArticuloView> getAllArticulos() {
+		ArrayList<ArticuloView> articulos =  new ArrayList<ArticuloView>();
+		ElectrodomesticoView electro =new ElectrodomesticoView();
+		ModaView moda =  new ModaView();
 		electro.setCodigo(Long.valueOf(1));
 		electro.setDescripcion("Un electro");
 		electro.setFichaTecnica("una url");
 		electro.setMarca("Modila");
 		electro.setNombre("Supercalifragitisticoespiralidoso");
 		electro.setOrigen("Tierra cdel fuego");
-		electro.setPrecio(Float.valueOf((float) 12.5));
+		electro.setPrecio(Float.parseFloat("12.5"));
 		electro.setFoto("una Foto");
 		
 		moda.setCodigo(Long.valueOf(1));
@@ -128,7 +198,7 @@ public class EJBFacade {
 		moda.setMarca("Mota");
 		moda.setNombre("Motta inside");
 		moda.setOrigen("El Salvador");
-		moda.setPrecio(Float.valueOf((float) 12.5));
+		moda.setPrecio(Float.parseFloat("12.5"));
 		moda.setColor("Azul");
 		moda.setFoto("otra Foto");
 			
@@ -136,4 +206,39 @@ public class EJBFacade {
 		articulos.add(moda);
 		return articulos;
 	}
+	public void altaElectrodomestico(ElectrodomesticoView e){
+		systemFacade.altaElectrodomestico(e);
+	}
+
+	public void altaModa(ModaView m) {
+		systemFacade.altaModa(m);
+	}
+
+
+	public void altaMueble(MuebleView m) {
+		systemFacade.altaMueble(m);
+	}
+
+
+	public void altaInfatil(InfantilView i) {
+		systemFacade.altaInfatil(i);
+	}
+	 public void getDepositoFacade() throws NamingException{
+		  	final String appName = "Depostio_EAR";
+	        final String moduleName = "Deposito_EJB";
+	        final String sessionBeanName = "AdministradorProductosBean";
+	        final String viewClassName = DepositoFacade.class.getName();
+			 Properties jndiProps = new Properties();
+			 jndiProps.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+			 jndiProps.put(Context.PROVIDER_URL,"remote://127.0.0.1:4447");
+			 // username
+			 jndiProps.put(Context.SECURITY_PRINCIPAL, "user");
+			 // password
+			 jndiProps.put(Context.SECURITY_CREDENTIALS, "user123");
+			 // This is an important property to set if you want to do EJB invocations via the remote-naming project
+			 jndiProps.put("jboss.naming.client.ejb.context", true);
+			 // create a context passing these properties
+			 Context context = new InitialContext(jndiProps);
+			 systemFacade = (DepositoFacade)context.lookup(appName+"/"+moduleName+"/"+sessionBeanName+"!"+viewClassName);
+	 }
 }

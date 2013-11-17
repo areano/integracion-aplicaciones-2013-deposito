@@ -2,12 +2,19 @@ package ar.com.edu.uade.view;
 
 import java.util.HashMap;
 
+import javax.naming.NamingException;
+
 import ar.com.edu.uade.customcomponents.IPConfiguratorPanel;
 import ar.com.edu.uade.customcomponents.IpConfigurator;
+import ar.com.edu.uade.ejbfacade.EJBFacade;
+import view.ConnectionView;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.shared.ui.label.ContentMode;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ChameleonTheme;
 
 public class CrearConfiguracionView extends VerticalLayout implements View {
 
@@ -18,15 +25,35 @@ public class CrearConfiguracionView extends VerticalLayout implements View {
 
 	@Override
 	public void enter(ViewChangeEvent event) {
-		addStyleName("articulos");
-		String planets[] = {"192.168.0.1", "192.168.0.2", "192.168.0.3", "192.168.0.4",
-		        "192.168.0.5", "192.168.0.6", "192.168.0.7", "192.168.0.8"};
-		HashMap<String, String> portales = new HashMap<String, String>();
-		 for (int i=0; i<planets.length; i++)
-	            portales.put(String.valueOf(i), planets[i]);
-		 
-		IPConfiguratorPanel ipConfigurator =  new IPConfiguratorPanel(portales, portales, portales, portales);
-		addComponent(ipConfigurator);
+		addStyleName("reindeer");
+		Label caption = new Label("Configuracion de IP's <span>Seleccione para Desactivar</span>", ContentMode.HTML);
+		caption.addStyleName(ChameleonTheme.LABEL_H1);
+		addComponent(caption);
+		
+		try {
+			HashMap<Integer, ConnectionView> portales = new HashMap<Integer, ConnectionView>();
+			for (ConnectionView conn : EJBFacade.getIntance().getDespachoConnection()) {
+				portales.put(conn.getModuleId(), conn);
+			}
+			HashMap<Integer, ConnectionView> despachos = new HashMap<Integer, ConnectionView>();
+			for (ConnectionView conn : EJBFacade.getIntance().getDespachoConnection()) {
+				despachos.put(conn.getModuleId(), conn);
+			} 
+			HashMap<Integer, ConnectionView> fabricas = new HashMap<Integer, ConnectionView>();
+			for (ConnectionView conn : EJBFacade.getIntance().getDespachoConnection()) {
+				fabricas.put(conn.getModuleId(), conn);
+			} 
+			HashMap<Integer, ConnectionView> monitoreos = new HashMap<Integer, ConnectionView>();
+			for (ConnectionView conn : EJBFacade.getIntance().getDespachoConnection()) {
+				monitoreos.put(conn.getModuleId(), conn);
+			} 
+			IPConfiguratorPanel ipConfigurator =  new IPConfiguratorPanel(portales,despachos, monitoreos, fabricas);
+			addComponent(ipConfigurator);
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+
 		
 		
 	}
