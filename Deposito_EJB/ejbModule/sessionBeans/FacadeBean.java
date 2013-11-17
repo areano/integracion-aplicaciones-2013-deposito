@@ -43,7 +43,7 @@ public class FacadeBean implements Facade {
 
 	@Override
 	public void enviarArticulos(SolicitudCompraDTO compra) {
-		admSolicitudCompra.enviarArticulos(compra);
+		admArticulos.enviarArticulos(compra);
 	}
 
 }
