@@ -19,6 +19,20 @@ public class ArticuloDAO {
 			   Logger.getLogger(ArticuloDAO.class);
 	private ArticuloDAO(){}
 	
+	public Articulo find(Long cod){
+		Articulo a=null;
+		try{
+			
+			a= em.find(Articulo.class, cod);
+			logger.info("Find articulo persistido con código: ["+cod+"] ");
+		}catch(Exception e)
+		{
+			logger.error("Error buscando Articulo codigo ["+cod+"]");
+			logger.error(e);
+		}
+		return a;
+	}
+	
 	public void guardarArticulo(Articulo a){
 		try{
 			
