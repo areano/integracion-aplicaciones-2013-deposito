@@ -37,7 +37,7 @@ public class SolicitudCompraView {
 		this.codigoSolicitud = codigoSolicitud;
 	}
 
-	public Object getArticulos() {
+	public  ArrayList<SolicitudArticulosItemView>  getArticulos() {
 		return items;
 	}
 	
