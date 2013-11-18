@@ -6,14 +6,14 @@
   </module>
   <module>
     <web>
-      <web-uri>Deposito_WEB.war</web-uri>
-      <context-root>Deposito_WEB</context-root>
+      <web-uri>DepositoUI.war</web-uri>
+      <context-root>DepositoUI</context-root>
     </web>
   </module>
   <module>
     <web>
-      <web-uri>DepositoUI.war</web-uri>
-      <context-root>DepositoUI</context-root>
+      <web-uri>Deposito_WEB.war</web-uri>
+      <context-root>Deposito_WEB</context-root>
     </web>
   </module>
 </application>
