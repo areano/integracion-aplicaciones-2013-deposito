@@ -5,9 +5,9 @@ import java.io.Serializable;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+
 public abstract class ArticuloView implements Serializable{
 
-	
 	/**
 	 * 
 	 */
@@ -30,6 +30,8 @@ public abstract class ArticuloView implements Serializable{
 	private String foto;
 	private Integer stock;
 	private String tipo;
+	private Number textPrecio;
+	private Number textCodigo;
 	public ArticuloView(){
 	    codigo=null;
 	    descripcion=null;
@@ -110,4 +112,18 @@ public abstract class ArticuloView implements Serializable{
 	public abstract String getTalle() ;
 	public abstract String getMaterial() ;
 	public abstract String getEdadRecomendada() ;
+	public Number getTextPrecio() {
+		return textPrecio;
+	}
+	public void setTextPrecio(Number textPrecio) {
+		this.textPrecio = textPrecio;
+		precio = textPrecio.floatValue();
+	}
+	public Number getTextCodigo() {
+		return textCodigo;
+	}
+	public void setTextCodigo(Number textCodigo) {
+		this.textCodigo = textCodigo;
+		codigo =  textCodigo.longValue();
+	}
 }
