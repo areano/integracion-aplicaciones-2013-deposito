@@ -16,6 +16,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.TextField;
 
 
 
@@ -60,11 +61,12 @@ public class ModaFormView extends CustomComponent {
 		marca.setNullRepresentation("");
 		final AbstractTextField  nombre=(AbstractTextField) binder.buildAndBind("Nombre", "nombre");
 		nombre.setNullRepresentation("");
-		final AbstractTextField  precio=(AbstractTextField) binder.buildAndBind("Precio", "precio");
+		final AbstractTextField  precio=(AbstractTextField) binder.buildAndBind("Precio", "textPrecio");
+		precio.setNullRepresentation("");
 		precio.setNullRepresentation("");
 		final AbstractTextField  foto=(AbstractTextField) binder.buildAndBind("foto", "foto");
 		foto.setNullRepresentation("");
-		final AbstractTextField  codigo=(AbstractTextField) binder.buildAndBind("Codigo", "codigo");
+		final AbstractTextField  codigo=(AbstractTextField) binder.buildAndBind("Codigo", "textCodigo");
 		codigo.setNullRepresentation("");
 
 		final AbstractTextField  color=(AbstractTextField) binder.buildAndBind("Color", "color");
@@ -78,9 +80,9 @@ public class ModaFormView extends CustomComponent {
 		descripcion.addBlurListener(new InstallArticuloValidatorBlurListener(descripcion, "descripcion"));
 		marca.addBlurListener(new InstallArticuloValidatorBlurListener(marca,"marca"));
 		nombre.addBlurListener(new InstallArticuloValidatorBlurListener(nombre,"nombre"));
-		precio.addBlurListener(new InstallArticuloValidatorBlurListener(precio,"precio"));
+		precio.addBlurListener(new InstallArticuloValidatorBlurListener(precio,"textPrecio"));
 		foto.addBlurListener(new InstallArticuloValidatorBlurListener(foto,"foto"));
-		codigo.addBlurListener(new InstallArticuloValidatorBlurListener(codigo,"codigo"));
+		codigo.addBlurListener(new InstallArticuloValidatorBlurListener(codigo,"textCodigo"));
 		color.addBlurListener(new InstallArticuloValidatorBlurListener(color,"color"));
 		talle.addBlurListener(new InstallArticuloValidatorBlurListener(talle,"talle"));    	
 		origen.addBlurListener(new InstallArticuloValidatorBlurListener(origen,"origen"));
@@ -111,9 +113,9 @@ public class ModaFormView extends CustomComponent {
 		        	}
 		        	ValidatorUtils.installSingleValidator(marca,"marca");
 		        	ValidatorUtils.installSingleValidator(nombre,"nombre");
-		        	ValidatorUtils.installSingleValidator(precio,"precio");
+		        	ValidatorUtils.installSingleValidator(precio,"textPrecio");
 		        	ValidatorUtils.installSingleValidator(foto,"foto");
-		        	ValidatorUtils.installSingleValidator(codigo,"codigo");
+		        	ValidatorUtils.installSingleValidator(codigo,"textCodigo");
 		        	ValidatorUtils.installSingleValidator(color,"color");
 		        	ValidatorUtils.installSingleValidator(talle,"talle");
 		        	ValidatorUtils.installSingleValidator(origen,"origen");

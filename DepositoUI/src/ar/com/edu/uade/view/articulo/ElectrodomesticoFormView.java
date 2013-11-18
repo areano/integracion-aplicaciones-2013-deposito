@@ -60,12 +60,12 @@ public class ElectrodomesticoFormView extends CustomComponent {
     	marca.setNullRepresentation("");
     	final AbstractTextField  nombre=(AbstractTextField) binder.buildAndBind("Nombre", "nombre");
     	nombre.setNullRepresentation("");
-//    	final AbstractTextField  precio=(AbstractTextField) binder.buildAndBind("Precio", "precio");
-    	final TextField  precio = new TextField("Precio","0"); 
+    	final AbstractTextField  precio=(AbstractTextField) binder.buildAndBind("Precio", "textPrecio");
     	precio.setNullRepresentation("");
     	final AbstractTextField  foto=(AbstractTextField) binder.buildAndBind("Foto", "foto");
     	foto.setNullRepresentation("");
-    	final AbstractTextField  codigo=(AbstractTextField) binder.buildAndBind("Codigo", "codigo");
+    	final AbstractTextField  codigo=(AbstractTextField) binder.buildAndBind("Codigo", "textCodigo");
+    	//final LongField  codigo=(LongField) binder.buildAndBind("Codigo", "codigo");
     	codigo.setNullRepresentation("");
     	final AbstractTextField  fichaTecnica=(AbstractTextField) binder.buildAndBind("Ficha Tecnica", "fichaTecnica");
     	fichaTecnica.setNullRepresentation("");
@@ -78,11 +78,11 @@ public class ElectrodomesticoFormView extends CustomComponent {
     	descripcion.addBlurListener(new InstallArticuloValidatorBlurListener(descripcion, "descripcion"));
     	marca.addBlurListener(new InstallArticuloValidatorBlurListener(marca,"marca"));
     	nombre.addBlurListener(new InstallArticuloValidatorBlurListener(nombre,"nombre"));
-//    	precio.addBlurListener(new InstallArticuloValidatorBlurListener(precio,"precio"));
+    	precio.addBlurListener(new InstallArticuloValidatorBlurListener(precio,"textPrecio"));
     	foto.addBlurListener(new InstallArticuloValidatorBlurListener(foto,"tipo"));
     	fichaTecnica.addBlurListener(new InstallArticuloValidatorBlurListener(fichaTecnica,"fichaTecnica"));
     	origen.addBlurListener(new InstallArticuloValidatorBlurListener(origen,"origen"));
-    	codigo.addBlurListener(new InstallArticuloValidatorBlurListener(codigo,"codigo"));
+    	codigo.addBlurListener(new InstallArticuloValidatorBlurListener(codigo,"textCodigo"));
     	layout.addComponent(codigo);
     	layout.addComponent(descripcion );
     	layout.addComponent(marca);
@@ -105,11 +105,11 @@ public class ElectrodomesticoFormView extends CustomComponent {
     	        	if (editable) {
     	        		ValidatorUtils.installSingleValidator(stock,"stock");
     	        	}
-    	        	ValidatorUtils.installSingleValidator(codigo,"codigo");
+    	        	ValidatorUtils.installSingleValidator(codigo,"textCodigo");
     	        	ValidatorUtils.installSingleValidator(marca,"marca");
     	        	ValidatorUtils.installSingleValidator(nombre,"nombre");
-//    	        	ValidatorUtils.installSingleValidator(precio,"precio");
-    	        	bindeable.setPrecio(Float.parseFloat(precio.getValue()));
+    	        	ValidatorUtils.installSingleValidator(precio,"textPrecio");
+    	        	//bindeable.setPrecio(Float.parseFloat(precio.getValue()));
     	        	ValidatorUtils.installSingleValidator(foto,"foto");
     	        	ValidatorUtils.installSingleValidator(fichaTecnica,"fichaTecnica");
     	        	ValidatorUtils.installSingleValidator(origen,"origen");
@@ -118,6 +118,8 @@ public class ElectrodomesticoFormView extends CustomComponent {
     	        } catch (CommitException e) {
     	        	try{
     	        		for(Field<?> f:binder.getFields()){
+    	        			System.out.println(f.getCaption());
+    	        			System.out.println(f.getValue());
     	        			f.validate();
     	        		}
     	        	

@@ -16,6 +16,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.TextField;
 
 
 
@@ -60,11 +61,12 @@ public class InfantilFormView extends CustomComponent {
 		marca.setNullRepresentation("");
 		final AbstractTextField  nombre=(AbstractTextField) binder.buildAndBind("Nombre", "nombre");
 		nombre.setNullRepresentation("");
-		final AbstractTextField  precio=(AbstractTextField) binder.buildAndBind("Precio", "precio");
+		final AbstractTextField  precio=(AbstractTextField) binder.buildAndBind("Precio", "textPrecio");
+		//final TextField precio= new TextField("Precio","0");
 		precio.setNullRepresentation("");
 		final AbstractTextField  foto=(AbstractTextField) binder.buildAndBind("Foto", "foto");
 		foto.setNullRepresentation("");
-		final AbstractTextField  codigo=(AbstractTextField) binder.buildAndBind("Codigo", "codigo");
+		final AbstractTextField  codigo=(AbstractTextField) binder.buildAndBind("Codigo", "textCodigo");
 		codigo.setNullRepresentation("");
 		final AbstractTextField  edadRecomendada=(AbstractTextField) binder.buildAndBind("Edad Recomendada", "edadRecomendada");
 		edadRecomendada.setNullRepresentation("");
@@ -76,9 +78,9 @@ public class InfantilFormView extends CustomComponent {
 		descripcion.addBlurListener(new InstallArticuloValidatorBlurListener(descripcion, "descripcion"));
 		marca.addBlurListener(new InstallArticuloValidatorBlurListener(marca,"marca"));
 		nombre.addBlurListener(new InstallArticuloValidatorBlurListener(nombre,"nombre"));
-		precio.addBlurListener(new InstallArticuloValidatorBlurListener(precio,"precio"));
+		precio.addBlurListener(new InstallArticuloValidatorBlurListener(precio,"textPrecio"));
 		foto.addBlurListener(new InstallArticuloValidatorBlurListener(foto,"foto"));
-		codigo.addBlurListener(new InstallArticuloValidatorBlurListener(codigo,"codigo"));
+		codigo.addBlurListener(new InstallArticuloValidatorBlurListener(codigo,"textCodigo"));
 		edadRecomendada.addBlurListener(new InstallArticuloValidatorBlurListener(edadRecomendada,"edadRecomendada"));
 		origen.addBlurListener(new InstallArticuloValidatorBlurListener(origen,"origen"));
 		layout.addComponent(codigo);
@@ -107,9 +109,9 @@ public class InfantilFormView extends CustomComponent {
 		        	}
 		        	ValidatorUtils.installSingleValidator(marca,"marca");
 		        	ValidatorUtils.installSingleValidator(nombre,"nombre");
-		        	ValidatorUtils.installSingleValidator(precio,"precio");
+		        	ValidatorUtils.installSingleValidator(precio,"textPrecio");
 		        	ValidatorUtils.installSingleValidator(foto,"foto");
-		        	ValidatorUtils.installSingleValidator(codigo,"codigo");
+		        	ValidatorUtils.installSingleValidator(codigo,"textCodigo");
 		        	ValidatorUtils.installSingleValidator(edadRecomendada,"edadRecomendada");
 		        	ValidatorUtils.installSingleValidator(origen,"origen");
 		            binder.commit();

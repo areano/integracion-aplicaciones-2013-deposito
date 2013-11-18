@@ -3,6 +3,7 @@ package ar.com.edu.uade.ejbfacade;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.naming.NamingException;
 
@@ -10,7 +11,6 @@ import org.apache.log4j.Logger;
 
 import sessionBeans.DepositoFacade;
 import sessionBeans.DepositoFacadeBean;
-
 import view.ArticuloView;
 import view.ConnectionView;
 import view.ElectrodomesticoView;
@@ -32,6 +32,7 @@ public class EJBFacade {
 	private EJBFacade() throws NamingException{
 
 	}
+	@PostConstruct
 	public static EJBFacade getIntance() throws NamingException{
 		if(instance==null)
 			instance= new EJBFacade();
