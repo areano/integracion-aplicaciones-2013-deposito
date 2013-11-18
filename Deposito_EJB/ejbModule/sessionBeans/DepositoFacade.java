@@ -1,11 +1,12 @@
 package sessionBeans;
 
+import javax.ejb.Local;
 import javax.ejb.Remote;
 
 import view.*;
 
 
-@Remote
+@Local
 public interface DepositoFacade {
 
 	public void altaElectrodomestico(ElectrodomesticoView dto);

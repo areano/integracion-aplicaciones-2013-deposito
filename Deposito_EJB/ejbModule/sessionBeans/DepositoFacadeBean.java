@@ -15,6 +15,7 @@ public class DepositoFacadeBean implements DepositoFacade {
 	AdministradorArticulosBean admin;
 	private static final Logger logger = 
 			   Logger.getLogger(DepositoFacadeBean.class.getName());
+	public DepositoFacadeBean(){}
 	@Override
 	public void altaElectrodomestico(ElectrodomesticoView dto) {
 		logger.info("*** Alta Electrodomestico  ***" );
