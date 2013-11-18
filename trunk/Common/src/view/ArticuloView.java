@@ -6,10 +6,12 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 public abstract class ArticuloView implements Serializable{
+
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 9148281066552614168L;
 	@NotNull
 	private Long codigo;
 	@NotNull

@@ -5,11 +5,11 @@ import javax.validation.constraints.NotNull;
 
 
 public class ModaView extends ArticuloView{
-	
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2987887305063852144L;
+	private static final long serialVersionUID = 664934071835647707L;
 	@NotNull
 	private String color;
 	@NotNull
