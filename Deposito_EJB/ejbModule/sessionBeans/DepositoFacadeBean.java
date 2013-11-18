@@ -12,7 +12,7 @@ import view.*;
 public class DepositoFacadeBean implements DepositoFacade {
 
 	@EJB
-	AdministradorArticulosBean admin;
+	AdministradorArticulosBean admin =new AdministradorArticulosBean() ;
 	private static final Logger logger = 
 			   Logger.getLogger(DepositoFacadeBean.class.getName());
 	public DepositoFacadeBean(){}
