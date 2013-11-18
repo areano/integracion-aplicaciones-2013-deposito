@@ -1,13 +1,13 @@
 package ar.com.edu.uade.view;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.naming.NamingException;
 
-import ar.com.edu.uade.customcomponents.IPConfiguratorPanel;
-import ar.com.edu.uade.customcomponents.IpConfigurator;
-import ar.com.edu.uade.ejbfacade.EJBFacade;
 import view.ConnectionView;
+import ar.com.edu.uade.customcomponents.IPConfiguratorPanel;
+import ar.com.edu.uade.ejbfacade.EJBFacade;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -26,27 +26,41 @@ public class CrearConfiguracionView extends VerticalLayout implements View {
 	@Override
 	public void enter(ViewChangeEvent event) {
 		addStyleName("reindeer");
-		Label caption = new Label("Configuracion de IP's <span>Seleccione para Desactivar</span>", ContentMode.HTML);
+		Label caption = new Label("Configuracion de IP's <span>Seleccione para Activar</span>", ContentMode.HTML);
 		caption.addStyleName(ChameleonTheme.LABEL_H1);
 		addComponent(caption);
 		
 		try {
 			HashMap<Integer, ConnectionView> portales = new HashMap<Integer, ConnectionView>();
-			for (ConnectionView conn : EJBFacade.getIntance().getDespachoConnection()) {
-				portales.put(conn.getModuleId(), conn);
+			
+			ArrayList<ConnectionView> connections =  EJBFacade.getIntance().getPortalConections();
+			if (connections!=null){
+				for (ConnectionView conn : connections) {
+					portales.put(conn.getModuleId(), conn);
+				}
 			}
 			HashMap<Integer, ConnectionView> despachos = new HashMap<Integer, ConnectionView>();
-			for (ConnectionView conn : EJBFacade.getIntance().getDespachoConnection()) {
-				despachos.put(conn.getModuleId(), conn);
-			} 
+			connections =  EJBFacade.getIntance().getDespachoConnection();
+			if (connections!=null){
+				for (ConnectionView conn : connections) {
+					despachos.put(conn.getModuleId(), conn);
+				}
+			}
 			HashMap<Integer, ConnectionView> fabricas = new HashMap<Integer, ConnectionView>();
-			for (ConnectionView conn : EJBFacade.getIntance().getDespachoConnection()) {
-				fabricas.put(conn.getModuleId(), conn);
+			connections =  EJBFacade.getIntance().getFabricaConnection();
+			if (connections!=null){
+				for (ConnectionView conn : connections) {
+					fabricas.put(conn.getModuleId(), conn);
+				}
 			} 
 			HashMap<Integer, ConnectionView> monitoreos = new HashMap<Integer, ConnectionView>();
-			for (ConnectionView conn : EJBFacade.getIntance().getDespachoConnection()) {
-				monitoreos.put(conn.getModuleId(), conn);
-			} 
+			connections =  EJBFacade.getIntance().getMonitoreoConnection();
+			if (connections!=null){
+				for (ConnectionView conn : connections) {
+					monitoreos.put(conn.getModuleId(), conn);
+				}
+			}
+			
 			IPConfiguratorPanel ipConfigurator =  new IPConfiguratorPanel(portales,despachos, monitoreos, fabricas);
 			addComponent(ipConfigurator);
 		} catch (NamingException e) {
