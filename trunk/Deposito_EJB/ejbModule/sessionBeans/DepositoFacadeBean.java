@@ -2,10 +2,13 @@ package sessionBeans;
 
 import java.util.ArrayList;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import org.apache.log4j.Logger;
+
+
 
 
 
@@ -24,6 +27,7 @@ public class DepositoFacadeBean implements DepositoFacade {
 	private static final Logger logger = 
 			   Logger.getLogger(DepositoFacadeBean.class.getName());
 	public DepositoFacadeBean(){}
+
 	@Override
 	public void altaElectrodomestico(ElectrodomesticoView dto) {
 		logger.info("*** Alta Electrodomestico  ***" );
@@ -53,21 +57,25 @@ public class DepositoFacadeBean implements DepositoFacade {
 		logger.info("*** Actualizar Stock  ***" );
 		admin.actualizarStock(dto, stock);
 	}
+	
 	@Override
 	public ArrayList<SolicitudCompraView> getSolicitudesCompra() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 	@Override
 	public ArrayList<SolicitudArticulosView> getSolicitudesArticulos() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 	@Override
 	public ArrayList<ArticuloView> getArticulos() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 	@Override
 	public ArrayList<ConnectionView> getFabricasConnection() {
 		// TODO Auto-generated method stub
@@ -78,11 +86,13 @@ public class DepositoFacadeBean implements DepositoFacade {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 	@Override
 	public ArrayList<ConnectionView> getDespachosConnection() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 	@Override
 	public ArrayList<ConnectionView> getDespachoConnection(int idModulo) {
 		// TODO Auto-generated method stub
@@ -93,21 +103,25 @@ public class DepositoFacadeBean implements DepositoFacade {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@PostConstruct
 	@Override
 	public void savePortalesConnection(ArrayList<ConnectionView> activas) {
 		connAdmin.savePortalesConnection(activas);
 		
 	}
+
 	@Override
 	public void saveDespachosConnection(ArrayList<ConnectionView> activas) {
 		connAdmin.saveDespachosConnection(activas);
 		
 	}
+	
 	@Override
 	public void saveFabricasConnection(ArrayList<ConnectionView> activas) {
 		// TODO Auto-generated method stub
 		
 	}
+
 	@Override
 	public void saveMonitoreoConnection(ArrayList<ConnectionView> activas) {
 		connAdmin.saveMonitoreoConnection(activas);
