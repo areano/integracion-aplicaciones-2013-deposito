@@ -2,20 +2,15 @@ package ar.com.edu.uade.ejbfacade;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Properties;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import org.apache.log4j.Logger;
 
-import sessionBeans.DepositoFacade;
-import sessionBeans.DepositoFacadeBean;
+import ar.com.edu.uade.beans.DepositoFacade;
 import view.ArticuloView;
 import view.ConnectionView;
 import view.ElectrodomesticoView;
@@ -25,15 +20,45 @@ import view.MuebleView;
 import view.SolicitudArticulosView;
 import view.SolicitudCompraView;
 
-@Named @RequestScoped
+
 public class EJBFacade {
 
 	private static final Logger logger = 
 			   Logger.getLogger(EJBFacade.class);
-	@Inject
-	DepositoFacadeBean systemFacade ;//= new DepositoFacadeBean();
+	
+	DepositoFacade systemFacade ;//= new DepositoFacadeBean();
+	public class Client {
+		
+		public DepositoFacade  getEJB() throws NamingException{
+	        final String appName = "Depostio_EAR";
+	        final String moduleName = "Depostio_EAR";
+	        final String sessionBeanName = "DepositoFacadeBean";
+	        final String viewClassName = DepositoFacade.class.getName();
+			 Properties jndiProps = new Properties();
+			 jndiProps.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+			 jndiProps.put(Context.PROVIDER_URL,"remote://127.0.0.1:4447");
+			 // username
+			 jndiProps.put(Context.SECURITY_PRINCIPAL, "user");
+			 // password
+			 jndiProps.put(Context.SECURITY_CREDENTIALS, "user123");
+			 // This is an important property to set if you want to do EJB invocations via the remote-naming project
+			 jndiProps.put("jboss.naming.client.ejb.context", true);
+			 // create a context passing these properties
+			 Context context = new InitialContext(jndiProps);
+			 // lookup the bean     Foo
+			 DepositoFacade administradorProductos =(DepositoFacade)context.lookup(appName+"/"+moduleName+"/"+sessionBeanName+"!"+viewClassName);	
+			 return administradorProductos;
+		}
+		
+	}
 	public EJBFacade(){
-
+			Client c = new Client();
+			try {
+				systemFacade = c.getEJB();
+			} catch (NamingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 
 	public ArrayList<ConnectionView> getPortalConections(){
