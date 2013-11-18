@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project-modules id="moduleCoreId" project-version="1.5.0">
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="Depostio_EAR">
         <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
         <dependent-module archiveName="Deposito_EJB.jar" deploy-path="/" handle="module:/resource/Deposito_EJB/Deposito_EJB">
@@ -11,6 +10,10 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="Common.jar" deploy-path="/lib" handle="module:/resource/Common/Common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="DepositoUI.war" deploy-path="/" handle="module:/resource/DepositoUI/DepositoUI">
+            <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
     </wb-module>
