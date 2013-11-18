@@ -5,6 +5,11 @@ import java.util.Collection;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.naming.NamingException;
 
 import org.apache.log4j.Logger;
@@ -20,24 +25,17 @@ import view.MuebleView;
 import view.SolicitudArticulosView;
 import view.SolicitudCompraView;
 
-
-
+@Named @RequestScoped
 public class EJBFacade {
 
 	private static final Logger logger = 
 			   Logger.getLogger(EJBFacade.class);
-	static EJBFacade instance =null;
-	@EJB
-	DepositoFacade systemFacade = new DepositoFacadeBean();
-	private EJBFacade() throws NamingException{
+	@Inject
+	DepositoFacadeBean systemFacade ;//= new DepositoFacadeBean();
+	public EJBFacade(){
 
 	}
-	@PostConstruct
-	public static EJBFacade getIntance() throws NamingException{
-		if(instance==null)
-			instance= new EJBFacade();
-		return instance;
-	}
+
 	public ArrayList<ConnectionView> getPortalConections(){
 		
 		ArrayList<ConnectionView> retorno = systemFacade.getPortalesConnection();
