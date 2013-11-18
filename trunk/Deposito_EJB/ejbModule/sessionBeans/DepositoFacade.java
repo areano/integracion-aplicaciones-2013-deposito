@@ -1,5 +1,7 @@
 package sessionBeans;
 
+import java.util.ArrayList;
+
 import javax.ejb.Local;
 import javax.ejb.Remote;
 
@@ -18,4 +20,17 @@ public interface DepositoFacade {
 	public void altaInfatil(InfantilView dto);
 	
 	public void actualizarStock(ArticuloView dto, long stock);
+	public ArrayList<SolicitudCompraView> getSolicitudesCompra();
+	public ArrayList<SolicitudArticulosView> getSolicitudesArticulos();
+	public ArrayList<ArticuloView>  getArticulos();
+	public ArrayList<ConnectionView>  getFabricasConnection();
+	public ArrayList<ConnectionView>  getMonitoreosConnection();
+	public ArrayList<ConnectionView>  getDespachosConnection();
+	public ArrayList<ConnectionView>  getDespachoConnection(int idModulo);
+	public ArrayList<ConnectionView>  getPortalesConnection();	
+	public void savePortalesConnection(ArrayList<ConnectionView> activas);
+	public void saveDespachosConnection(ArrayList<ConnectionView> activas);
+	public void saveFabricasConnection(ArrayList<ConnectionView> activas);
+	public void saveMonitoreoConnection(ArrayList<ConnectionView> activas);
+	
 }

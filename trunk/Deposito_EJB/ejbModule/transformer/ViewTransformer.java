@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import javax.ejb.EJB;
 
 import view.ArticuloView;
+import view.ConnectionView;
 import view.ElectrodomesticoView;
 import view.InfantilView;
 import view.ModaView;
@@ -22,11 +23,14 @@ import dto.ModaDTO;
 import dto.MuebleDTO;
 import dto.SolicitudCompraDTO;
 import entities.Articulo;
+import entities.DespachoConexion;
 import entities.Electrodomestico;
 import entities.Infantil;
 import entities.ItemSolicitudCompra;
 import entities.Moda;
+import entities.MonitoreoConexion;
 import entities.Mueble;
+import entities.PortalConexion;
 import entities.SolicitudArticulos;
 import entities.SolicitudArticulosItem;
 import entities.SolicitudCompra;
@@ -230,5 +234,28 @@ public class ViewTransformer {
 		SolicitudArticulosItemView view = new SolicitudArticulosItemView(av,item.getCantidad());
 		return view;
 	}
+	public  DespachoConexion despachoToClass(ConnectionView c){
+			DespachoConexion conn = new DespachoConexion();
+			conn.setDespachoId(c.getModuleId());
+			conn.setIp(c.getIp());
+			conn.setActive(true);
+			return conn;
+	}
+	public PortalConexion portalToClass(ConnectionView c){
+		PortalConexion conn = new PortalConexion();
+		conn.setPortalId(c.getModuleId());
+		conn.setIp(c.getIp());
+		conn.setActive(true);
+		return conn;
+	}
+	public MonitoreoConexion monitoreoToClass(ConnectionView c){
+		MonitoreoConexion conn = new MonitoreoConexion();
+		conn.setMonitoreoId(c.getModuleId());
+		conn.setIp(c.getIp());
+		conn.setActive(true);
+		conn.setSyncronico(c.isSyncronic());
+		return conn;
+	}
+
 
 }
