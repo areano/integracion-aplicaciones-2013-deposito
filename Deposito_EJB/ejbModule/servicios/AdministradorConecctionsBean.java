@@ -8,7 +8,6 @@ import javax.ejb.Stateless;
 
 import org.apache.log4j.Logger;
 
-import transformer.Transformer;
 import transformer.ViewTransformer;
 import view.ArticuloView;
 import view.ConnectionView;
@@ -20,7 +19,6 @@ import dao.ArticuloDAO;
 import dao.ConnectionDAO;
 import dao.DespachoDAO;
 import dao.PortalDAO;
-import dto.*;
 import entities.Articulo;
 import entities.Electrodomestico;
 import entities.Infantil;
@@ -49,6 +47,7 @@ public class AdministradorConecctionsBean implements AdministradorConecctions {
 	private ViewTransformer transformer;
 	private static final Logger logger = 
 			   Logger.getLogger(AdministradorConecctionsBean.class);
+	
 	public AdministradorConecctionsBean() {
 		transformer=ViewTransformer.obtenerInstancia();
 	}

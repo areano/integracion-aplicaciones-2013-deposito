@@ -44,6 +44,9 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 			   Logger.getLogger(AdministradorArticulosBean.class);
 	public AdministradorArticulosBean() {
 		transformer=ViewTransformer.obtenerInstancia();
+		articuloDAO = new ArticuloDAO();
+		portalDAO = new PortalDAO();
+		despachoDAO = new DespachoDAO();
 	}
 
 	/*
@@ -59,7 +62,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 		em.remove(articulo);
 	}
 	*/
-	
+
 	public void guardarElectrodomestico(ElectrodomesticoView dto){
 		try{
 			
