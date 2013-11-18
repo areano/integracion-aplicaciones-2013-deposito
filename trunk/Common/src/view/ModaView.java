@@ -10,9 +10,9 @@ public class ModaView extends ArticuloView{
 	 * 
 	 */
 	private static final long serialVersionUID = 664934071835647707L;
-	@NotNull
+	
 	private String color;
-	@NotNull
+	
 	private String talle;
 	
 	public ModaView(){
