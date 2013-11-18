@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class SolicitudCompraView {
 
 	private ArrayList<SolicitudArticulosItemView> items = new ArrayList<SolicitudArticulosItemView>();
-	private long codigoDespacho;
 	private Date date;
 	private long codigoSolicitud;
 	public ArrayList<SolicitudArticulosItemView> getItems() {
@@ -20,13 +19,7 @@ public class SolicitudCompraView {
 		items.add(item);
 	}
 
-	public long getCodigoDespacho() {
-		return codigoDespacho;
-	}
 
-	public void setCodigoDespacho(long codigoDespacho) {
-		this.codigoDespacho = codigoDespacho;
-	}
 
 	public Date getDate() {
 		return date;
