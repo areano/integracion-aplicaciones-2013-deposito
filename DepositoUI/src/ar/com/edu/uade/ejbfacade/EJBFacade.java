@@ -11,13 +11,8 @@ import javax.naming.NamingException;
 
 import org.apache.log4j.Logger;
 
-
-
-
-
-
-
-import ar.com.edu.uade.beans.DepositoFacade;
+import sessionBeans.DepositoFacade;
+//import ar.com.edu.uade.beans.DepositoFacade;
 import view.ArticuloView;
 import view.ConnectionView;
 import view.ElectrodomesticoView;
@@ -38,7 +33,8 @@ public class EJBFacade {
 	@EJB
 	DepositoFacade systemFacade ;
 	private EJBFacade() throws NamingException{
-		getDepositoFacade();
+		systemFacade.altaInfatil(new InfantilView());
+		//getDepositoFacade();
 	}
 	public static EJBFacade getIntance() throws NamingException{
 		if(instance==null)

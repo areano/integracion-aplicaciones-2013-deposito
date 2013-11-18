@@ -16,6 +16,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.TextField;
 
 
 
@@ -59,7 +60,8 @@ public class ElectrodomesticoFormView extends CustomComponent {
     	marca.setNullRepresentation("");
     	final AbstractTextField  nombre=(AbstractTextField) binder.buildAndBind("Nombre", "nombre");
     	nombre.setNullRepresentation("");
-    	final AbstractTextField  precio=(AbstractTextField) binder.buildAndBind("Precio", "precio");
+//    	final AbstractTextField  precio=(AbstractTextField) binder.buildAndBind("Precio", "precio");
+    	final TextField  precio = new TextField("Precio","0"); 
     	precio.setNullRepresentation("");
     	final AbstractTextField  foto=(AbstractTextField) binder.buildAndBind("Foto", "foto");
     	foto.setNullRepresentation("");
@@ -76,7 +78,7 @@ public class ElectrodomesticoFormView extends CustomComponent {
     	descripcion.addBlurListener(new InstallArticuloValidatorBlurListener(descripcion, "descripcion"));
     	marca.addBlurListener(new InstallArticuloValidatorBlurListener(marca,"marca"));
     	nombre.addBlurListener(new InstallArticuloValidatorBlurListener(nombre,"nombre"));
-    	precio.addBlurListener(new InstallArticuloValidatorBlurListener(precio,"precio"));
+//    	precio.addBlurListener(new InstallArticuloValidatorBlurListener(precio,"precio"));
     	foto.addBlurListener(new InstallArticuloValidatorBlurListener(foto,"tipo"));
     	fichaTecnica.addBlurListener(new InstallArticuloValidatorBlurListener(fichaTecnica,"fichaTecnica"));
     	origen.addBlurListener(new InstallArticuloValidatorBlurListener(origen,"origen"));
@@ -106,7 +108,8 @@ public class ElectrodomesticoFormView extends CustomComponent {
     	        	ValidatorUtils.installSingleValidator(codigo,"codigo");
     	        	ValidatorUtils.installSingleValidator(marca,"marca");
     	        	ValidatorUtils.installSingleValidator(nombre,"nombre");
-    	        	ValidatorUtils.installSingleValidator(precio,"precio");
+//    	        	ValidatorUtils.installSingleValidator(precio,"precio");
+    	        	bindeable.setPrecio(Float.parseFloat(precio.getValue()));
     	        	ValidatorUtils.installSingleValidator(foto,"foto");
     	        	ValidatorUtils.installSingleValidator(fichaTecnica,"fichaTecnica");
     	        	ValidatorUtils.installSingleValidator(origen,"origen");

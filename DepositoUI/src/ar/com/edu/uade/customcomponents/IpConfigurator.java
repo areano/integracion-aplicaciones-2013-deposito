@@ -141,8 +141,8 @@ public class IpConfigurator extends CustomComponent {
 		         
 				String list = optionGroup_2.getValue().toString();
 				System.out.println(
-				optionGroup_2.getValue().toString().substring(2, 
-						optionGroup_2.getValue().toString().length())
+				optionGroup_2.getValue().toString().substring(1, 
+						optionGroup_2.getValue().toString().length()-1)
 				);
 		         
 			}
@@ -203,7 +203,7 @@ public class IpConfigurator extends CustomComponent {
 		String groupValue =  new String();
 		Item added;
 		for (Integer key:actualSet.keySet()){
-			groupValue = "ID: "+key+" - IP:"+actualSet.get(key).getIp();
+			groupValue = +key+"-"+actualSet.get(key).getIp();
 			added = optionGroup_2.addItem(groupValue);
 			
 			mappedIPs.put(added,actualSet.get(key));
@@ -220,7 +220,7 @@ public class IpConfigurator extends CustomComponent {
 	}
 	 protected void addNewIP(String newID, String newIP){
 		 Item added;
-		 String groupValue =  "ID: "+newID+" - IP:"+newIP;
+		 String groupValue =newID+"-"+newIP;
 		 added=optionGroup_2.addItem(groupValue);
 		 mappedIPs.put(added,new ConnectionView(Integer.parseInt(newID),false,newIP,false));
 	 }
