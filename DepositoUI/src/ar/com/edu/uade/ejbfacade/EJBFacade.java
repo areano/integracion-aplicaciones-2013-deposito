@@ -15,6 +15,8 @@ import org.apache.log4j.Logger;
 
 
 
+
+
 import ar.com.edu.uade.beans.DepositoFacade;
 import view.ArticuloView;
 import view.ConnectionView;
@@ -224,21 +226,40 @@ public class EJBFacade {
 		systemFacade.altaInfatil(i);
 	}
 	 public void getDepositoFacade() throws NamingException{
-		  	final String appName = "Depostio_EAR";
-	        final String moduleName = "Deposito_EJB";
-	        final String sessionBeanName = "AdministradorProductosBean";
-	        final String viewClassName = DepositoFacade.class.getName();
-			 Properties jndiProps = new Properties();
-			 jndiProps.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			 jndiProps.put(Context.PROVIDER_URL,"remote://127.0.0.1:4447");
-			 // username
-			 jndiProps.put(Context.SECURITY_PRINCIPAL, "user");
-			 // password
-			 jndiProps.put(Context.SECURITY_CREDENTIALS, "user123");
-			 // This is an important property to set if you want to do EJB invocations via the remote-naming project
-			 jndiProps.put("jboss.naming.client.ejb.context", true);
-			 // create a context passing these properties
-			 Context context = new InitialContext(jndiProps);
-			 systemFacade = (DepositoFacade)context.lookup(appName+"/"+moduleName+"/"+sessionBeanName+"!"+viewClassName);
+		   try {
+			systemFacade= (DepositoFacade) getRemote("Depostio_EAR", "Deposito_EJB", "DepositoFacadeBean", DepositoFacade.class.getName(), "user", "user123");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		  	final String appName = "Depostio_EAR";
+//	        final String moduleName = "Deposito_EJB";
+//	        final String sessionBeanName = "AdministradorProductosBean";
+//	        final String viewClassName = DepositoFacade.class.getName();
+//			 Properties jndiProps = new Properties();
+//			 jndiProps.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+//			 jndiProps.put(Context.PROVIDER_URL,"remote://127.0.0.1:4447");
+//			 // username
+//			 jndiProps.put(Context.SECURITY_PRINCIPAL, "user");
+//			 // password
+//			 jndiProps.put(Context.SECURITY_CREDENTIALS, "user123");
+//			 // This is an important property to set if you want to do EJB invocations via the remote-naming project
+//			 jndiProps.put("jboss.naming.client.ejb.context", true);
+//			 // create a context passing these properties
+//			 Context context = new InitialContext(jndiProps);
+//			 systemFacade = (DepositoFacade)context.lookup(appName+"/"+moduleName+"/"+sessionBeanName+"!"+viewClassName);
 	 }
+	public static Object getRemote(String appName, String moduleName, String sessionBeanName, String viewClassName, Object user, Object pass) throws Exception {
+
+			Properties jndiProps = new Properties();
+			jndiProps.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+			jndiProps.put(Context.PROVIDER_URL, "remote://localhots:4447");
+			jndiProps.put(Context.SECURITY_PRINCIPAL, user);
+			jndiProps.put(Context.SECURITY_CREDENTIALS, pass);
+			jndiProps.put("jboss.naming.client.ejb.context", true);
+			Context context = new InitialContext(jndiProps);
+
+			return context.lookup(appName + "/" + moduleName + "/" + sessionBeanName + "!" + viewClassName);
+
+	}
 }
