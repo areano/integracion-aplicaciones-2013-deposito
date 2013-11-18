@@ -16,7 +16,6 @@ public abstract class ArticuloView implements Serializable{
 	private Long codigo;
 	@NotNull
 	private String nombre;
-	@NotNull
 	private Long codigoDeposito;
 	@NotNull
 	private String descripcion;
@@ -28,9 +27,12 @@ public abstract class ArticuloView implements Serializable{
 	private String origen;
 	@NotNull
 	private String foto;
+	@Min (value=0)
 	private Integer stock;
 	private String tipo;
+	@Min (value=0)
 	private Number textPrecio;
+	@NotNull
 	private Number textCodigo;
 	public ArticuloView(){
 	    codigo=null;
@@ -38,10 +40,12 @@ public abstract class ArticuloView implements Serializable{
 	    foto = null;
 	    marca=null;
 	    nombre=null;
-	    precio=null;
+	    precio=(float) 0;
 	    origen =null;
 	    codigoDeposito=Long.valueOf(6);
 	    stock = 0;
+	    textCodigo = null;
+	    textPrecio = null;
 	}
 	public Long getCodigo() {
 		return codigo;

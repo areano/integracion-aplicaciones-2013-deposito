@@ -4,12 +4,14 @@ import javax.validation.constraints.NotNull;
 
 
 
+
 public class InfantilView extends ArticuloView{
+
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8079686246371671720L;
+	private static final long serialVersionUID = 7572526671415901547L;
 	@NotNull
 	private String edadRecomendada;
 	
