@@ -8,7 +8,7 @@ import javax.ejb.Remote;
 import view.*;
 
 
-@Local
+@Remote
 public interface DepositoFacade {
 
 	public void altaElectrodomestico(ElectrodomesticoView dto);
