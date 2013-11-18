@@ -3,7 +3,7 @@
 	<name>Deposito_EJB</name>
 	<comment></comment>
 	<projects>
-		<project>Common</project>
+		<project>Depostio_EAR</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
