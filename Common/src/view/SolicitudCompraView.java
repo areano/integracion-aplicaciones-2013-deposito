@@ -2,6 +2,7 @@ package view;
 
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SolicitudCompraView {
 
@@ -37,7 +38,7 @@ public class SolicitudCompraView {
 		this.codigoSolicitud = codigoSolicitud;
 	}
 
-	public  ArrayList<SolicitudArticulosItemView>  getArticulos() {
+	public List<SolicitudArticulosItemView> getArticulos() {
 		return items;
 	}
 	
