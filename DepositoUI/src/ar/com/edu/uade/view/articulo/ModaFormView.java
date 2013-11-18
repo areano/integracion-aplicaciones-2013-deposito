@@ -1,4 +1,5 @@
 package ar.com.edu.uade.view.articulo;
+import javax.ejb.EJB;
 import javax.naming.NamingException;
 
 import org.apache.log4j.Logger;
@@ -29,21 +30,14 @@ public class ModaFormView extends CustomComponent {
 	private static final long serialVersionUID = 1739709695326530748L;
 	private boolean editable;
 	private ModaView bindeable;
+	@EJB
+	EJBFacade facade;
 	private static final Logger logger = 
 			   Logger.getLogger(ModaFormView.class);
     public ModaFormView() {
-	        FormLayout layout = new FormLayout();
-	        setCompositionRoot(layout);
-	        final BeanFieldGroup<ModaView> binder = new BeanFieldGroup<ModaView>(ModaView.class);
-	        bindeable = new ModaView();
-	        binder.setItemDataSource(bindeable);
-	        editable = false;
-	        /* Field Creation Section*/	    	
-	    	buildLayout(layout, binder);
-	    	
-
+    		super();
 	}
-    public ModaFormView( ModaView bean) {
+    public void init( ModaView bean) {
         FormLayout layout = new FormLayout();
         setCompositionRoot(layout);
         final BeanFieldGroup<ModaView> binder = new BeanFieldGroup<ModaView>(ModaView.class);
@@ -120,7 +114,8 @@ public class ModaFormView extends CustomComponent {
 		        	ValidatorUtils.installSingleValidator(talle,"talle");
 		        	ValidatorUtils.installSingleValidator(origen,"origen");
 		            binder.commit();
-		            EJBFacade.getIntance().altaModa(bindeable);
+		            //EJBFacade.getIntance().altaModa(bindeable);
+		            facade.altaModa(bindeable);
 		        } catch (CommitException e) {
     	        	try{
     	        		for(Field<?> f:binder.getFields()){
@@ -131,12 +126,25 @@ public class ModaFormView extends CustomComponent {
     	        		logger.error(j);
     	        		j.printStackTrace();
     	        	}
-		        } catch (NamingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		        } 
+//		        catch (NamingException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 				
 			}
 		} ));
 	}
+	public void init() {
+        FormLayout layout = new FormLayout();
+        setCompositionRoot(layout);
+        final BeanFieldGroup<ModaView> binder = new BeanFieldGroup<ModaView>(ModaView.class);
+        bindeable = new ModaView();
+        binder.setItemDataSource(bindeable);
+        editable = false;
+        /* Field Creation Section*/	    	
+    	buildLayout(layout, binder);
+		
+	}
+
 }

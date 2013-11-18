@@ -5,6 +5,7 @@ package ar.com.edu.uade.data;
 import java.io.Serializable;
 import java.util.Random;
 
+import javax.ejb.EJB;
 import javax.naming.NamingException;
 
 import ar.com.edu.uade.ejbfacade.EJBFacade;
@@ -28,35 +29,39 @@ public class ArticuloContainer extends BeanItemContainer<ArticuloView> implement
      */
     public static final String[] COL_HEADERS_ENGLISH = new String[] {
     	 "Codigo Artitulo","Marca","Nombre", "Descripcion", "Foto","precio","Stock Disponible" };
-
+    @EJB
+    EJBFacade facade;
     public ArticuloContainer() throws InstantiationException,
             IllegalAccessException {
         super(ArticuloView.class);
+
     }
 //    public  void init(){
 //    	EJBFacade facade = new EJBFacade();
 //    	addAll(facade.getAllArticulos());
 //    	
 //    }
-    public static ArticuloContainer init() {
-    	ArticuloContainer c = null;
-        try {
-            c = new ArticuloContainer();
-            EJBFacade facade = EJBFacade.getIntance();
-        	c.addAll(facade.getAllArticulos());
+    public  void init() {
+//    	ArticuloContainer c = null;
+//        try {
+//            c = new ArticuloContainer();
+////            EJBFacade facade = EJBFacade.getIntance();
+//        	c.addAll(facade.getAllArticulos());
+        	this.addAll(facade.getAllArticulos());
 
-        } catch (InstantiationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//        } catch (InstantiationException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        } catch (IllegalAccessException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        } 
+//            catch (NamingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
-        return c;
+        //return this;
     }
    
 

@@ -27,7 +27,7 @@ public class ArticuloForm extends Form implements ClickListener {
     
     private boolean newContactMode = false;
     private ArticuloView newPerson = null;
-    private ArticuloContainer container = ArticuloContainer.init();
+    private ArticuloContainer container ;
     public ArticuloForm() {
         
 
@@ -37,7 +37,15 @@ public class ArticuloForm extends Form implements ClickListener {
          * through to the underlying object.)
          */
         
-
+    	try {
+			container = new ArticuloContainer();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         HorizontalLayout footer = new HorizontalLayout();
         footer.setSpacing(true);
         footer.addComponent(save);

@@ -1,4 +1,5 @@
 package ar.com.edu.uade.view.articulo;
+import javax.ejb.EJB;
 import javax.naming.NamingException;
 
 import org.apache.log4j.Logger;
@@ -27,11 +28,16 @@ import com.vaadin.ui.TextField;
 public class InfantilFormView extends CustomComponent {
 	
 	private static final long serialVersionUID = 1739709695326530748L;
+	@EJB
+	EJBFacade facade;
 	private boolean editable;
 	private InfantilView bindeable;
 	private static final Logger logger = 
 			   Logger.getLogger(InfantilFormView.class);
-    public InfantilFormView() {
+	public InfantilFormView(){
+		super();
+	}
+    public  void init () {
 	        FormLayout layout = new FormLayout();
 	        setCompositionRoot(layout);
 	        final BeanFieldGroup<InfantilView> binder = new BeanFieldGroup<InfantilView>(InfantilView.class);
@@ -41,7 +47,7 @@ public class InfantilFormView extends CustomComponent {
 	    	buildLayout(layout, binder);  	
 
 	    }
-    public InfantilFormView(InfantilView bean) {
+    public void init (InfantilView bean) {
         FormLayout layout = new FormLayout();
         setCompositionRoot(layout);
         final BeanFieldGroup<InfantilView> binder = new BeanFieldGroup<InfantilView>(InfantilView.class);
@@ -115,7 +121,8 @@ public class InfantilFormView extends CustomComponent {
 		        	ValidatorUtils.installSingleValidator(edadRecomendada,"edadRecomendada");
 		        	ValidatorUtils.installSingleValidator(origen,"origen");
 		            binder.commit();
-		            EJBFacade.getIntance().altaInfatil(bindeable);
+		            //EJBFacade.getIntance().altaInfatil(bindeable);
+		            facade.altaInfatil(bindeable);
 		        } catch (CommitException e) {
     	        	try{
     	        		for(Field<?> f:binder.getFields()){
@@ -126,10 +133,11 @@ public class InfantilFormView extends CustomComponent {
     	        		logger.error(j);
     	        		j.printStackTrace();
     	        	}
-		        } catch (NamingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		        } 
+//		        catch (NamingException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 				
 			}
 		} ));

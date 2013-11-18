@@ -4,16 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
+import javax.ejb.EJB;
 import javax.naming.NamingException;
 
 import org.vaadin.hene.flexibleoptiongroup.FlexibleOptionGroup;
 
 import ar.com.edu.uade.ejbfacade.EJBFacade;
 import view.*;
-
-
-
-
 
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.ObjectProperty;
@@ -102,7 +99,11 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 	
 	private static final long serialVersionUID = 4883440977426352624L;
 	private enum Articulos{ELECTRODOMESTICO, MODA, MUEBLE, INFANTIL}
-	
+	@EJB
+	EJBFacade facade;
+	public EnviarPedidosADespachoView(){
+		
+	}
 	private FormLayout  convertFromDTO(ArticuloView articulo){
 		FormLayout form = new FormLayout();
 		PropertysetItem item = new PropertysetItem();
@@ -184,9 +185,9 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 	@Override
 	public void enter(ViewChangeEvent event) {
 		addStyleName("chameleon");
-		EJBFacade facade;
-		try {
-			facade = EJBFacade.getIntance();
+		//EJBFacade facade;
+//		try {
+			//facade = EJBFacade.getIntance();
 		
 			ArrayList<SolicitudArticulosView> solicitudes =  facade.getSolicitudesDeArticulos();
 			OptionGroup selectSolitudes =  new OptionGroup("Solicitudes Pendientes");
@@ -274,9 +275,9 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 	//	 		addComponent(new Button(caption,new MyButton(newItems)));
 	//	 	
 	//	 	}
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		} catch (NamingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 }

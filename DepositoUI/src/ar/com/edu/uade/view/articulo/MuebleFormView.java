@@ -1,4 +1,5 @@
 package ar.com.edu.uade.view.articulo;
+import javax.ejb.EJB;
 import javax.naming.NamingException;
 
 import org.apache.log4j.Logger;
@@ -23,22 +24,28 @@ public class MuebleFormView extends CustomComponent {
 	private static final long serialVersionUID = 1739709695326530748L;
 	private boolean editable;
 	private MuebleView bindeable;
+	@EJB
+	EJBFacade facade;
 	private static final Logger logger = 
 			   Logger.getLogger(MuebleFormView.class);
     public MuebleFormView() {
-	        FormLayout layout = new FormLayout();
-	        setCompositionRoot(layout);
-	        final BeanFieldGroup<MuebleView> binder = new BeanFieldGroup<MuebleView>(MuebleView.class);
-	        bindeable = new MuebleView();
-	        binder.setItemDataSource(bindeable);
-	        editable = false;
-	        /* Field Creation Section*/
    	
-	    	buildLayout(layout, binder);
-	    	
 
-	    }
-    public MuebleFormView(MuebleView bean) {
+    }
+    public void init() {
+        FormLayout layout = new FormLayout();
+        setCompositionRoot(layout);
+        final BeanFieldGroup<MuebleView> binder = new BeanFieldGroup<MuebleView>(MuebleView.class);
+        bindeable = new MuebleView();
+        binder.setItemDataSource(bindeable);
+        editable = false;
+        /* Field Creation Section*/
+	
+    	buildLayout(layout, binder);
+    	
+
+    }
+    public void init(MuebleView bean) {
         FormLayout layout = new FormLayout();
         setCompositionRoot(layout);
         final BeanFieldGroup<MuebleView> binder = new BeanFieldGroup<MuebleView>(MuebleView.class);
@@ -110,7 +117,8 @@ public class MuebleFormView extends CustomComponent {
 		        	ValidatorUtils.installSingleValidator(material,"material");
 		        	ValidatorUtils.installSingleValidator(origen,"origen");
 		            binder.commit();
-		            EJBFacade.getIntance().altaMueble(bindeable);
+		            //EJBFacade.getIntance().altaMueble(bindeable);
+		            facade.altaMueble(bindeable);
 		        } catch (CommitException e) {
     	        	try{
     	        		for(Field<?> f:binder.getFields()){
@@ -121,11 +129,12 @@ public class MuebleFormView extends CustomComponent {
     	        		logger.error(j);
     	        		j.printStackTrace();
     	        	}
-		        } catch (NamingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
+		        } 
+//		        catch (NamingException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				
 			}
 		} ));
 	}

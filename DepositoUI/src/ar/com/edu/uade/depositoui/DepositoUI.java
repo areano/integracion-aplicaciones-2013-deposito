@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 
+import javax.ejb.Stateful;
 import javax.servlet.annotation.WebServlet;
 
 import ar.com.edu.uade.data.MyConverterFactory;
@@ -46,17 +47,13 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+
 import org.apache.log4j.Logger;
 @Theme("dashboard")
 @Title("Administrador de Deposito")
+@Stateful
 public class DepositoUI extends UI {
-	@WebServlet(value = "/*", asyncSupported = true)
-	@VaadinServletConfiguration(productionMode = false, ui = DepositoUI.class)
-	public static class Servlet extends VaadinServlet {
-	
-	}
     
-	//DataProvider dataProvider = new DataProvider();
 	private static final Logger logger = 
 			   Logger.getLogger(DepositoUI.class.getName());
     private static final long serialVersionUID = 1L;

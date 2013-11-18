@@ -3,6 +3,7 @@ package ar.com.edu.uade.view;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.ejb.EJB;
 import javax.naming.NamingException;
 
 import view.ConnectionView;
@@ -22,7 +23,11 @@ public class CrearConfiguracionView extends VerticalLayout implements View {
 	 * 
 	 */
 	private static final long serialVersionUID = -8923865045603639957L;
-
+	@EJB
+	EJBFacade facade;
+	public  CrearConfiguracionView(){
+		
+	}
 	@Override
 	public void enter(ViewChangeEvent event) {
 		addStyleName("reindeer");
@@ -30,31 +35,31 @@ public class CrearConfiguracionView extends VerticalLayout implements View {
 		caption.addStyleName(ChameleonTheme.LABEL_H1);
 		addComponent(caption);
 		
-		try {
+//		try {
 			HashMap<Integer, ConnectionView> portales = new HashMap<Integer, ConnectionView>();
 			
-			ArrayList<ConnectionView> connections =  EJBFacade.getIntance().getPortalConections();
+			ArrayList<ConnectionView> connections =  facade.getPortalConections();//EJBFacade.getIntance().getPortalConections();
 			if (connections!=null){
 				for (ConnectionView conn : connections) {
 					portales.put(conn.getModuleId(), conn);
 				}
 			}
 			HashMap<Integer, ConnectionView> despachos = new HashMap<Integer, ConnectionView>();
-			connections =  EJBFacade.getIntance().getDespachoConnection();
+			connections =  facade.getDespachoConnection();
 			if (connections!=null){
 				for (ConnectionView conn : connections) {
 					despachos.put(conn.getModuleId(), conn);
 				}
 			}
 			HashMap<Integer, ConnectionView> fabricas = new HashMap<Integer, ConnectionView>();
-			connections =  EJBFacade.getIntance().getFabricaConnection();
+			connections =  facade.getFabricaConnection();
 			if (connections!=null){
 				for (ConnectionView conn : connections) {
 					fabricas.put(conn.getModuleId(), conn);
 				}
 			} 
 			HashMap<Integer, ConnectionView> monitoreos = new HashMap<Integer, ConnectionView>();
-			connections =  EJBFacade.getIntance().getMonitoreoConnection();
+			connections =  facade.getMonitoreoConnection();
 			if (connections!=null){
 				for (ConnectionView conn : connections) {
 					monitoreos.put(conn.getModuleId(), conn);
@@ -63,10 +68,10 @@ public class CrearConfiguracionView extends VerticalLayout implements View {
 			
 			IPConfiguratorPanel ipConfigurator =  new IPConfiguratorPanel(portales,despachos, monitoreos, fabricas);
 			addComponent(ipConfigurator);
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+//		} catch (NamingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} 
 
 		
 		

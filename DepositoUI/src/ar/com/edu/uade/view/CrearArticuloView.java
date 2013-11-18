@@ -53,19 +53,29 @@ public class CrearArticuloView extends VerticalLayout implements View {
 				switch (item) {
 					case ELECTRODOMESTICO:	
 						content.removeAllComponents();
-						content.addComponent( new ElectrodomesticoFormView());						
+						ElectrodomesticoFormView eForm =  new ElectrodomesticoFormView();
+						eForm.init();
+						content.addComponent( eForm);
+						
 						break;
 					case MODA:
 						content.removeAllComponents();
-						content.addComponent( new ModaFormView());
+						ModaFormView mForm =  new ModaFormView();
+						mForm.init();
+						content.addComponent( mForm);
 						break;
 					case MUEBLE:
 						content.removeAllComponents();
-						content.addComponent( new MuebleFormView());
+						MuebleFormView uForm = new MuebleFormView();
+						uForm.init();
+						content.addComponent( uForm);
 						break;
 					case INFANTIL:	
 						content.removeAllComponents();
-						content.addComponent( new InfantilFormView());
+						InfantilFormView iForm = new InfantilFormView();
+						iForm.init();
+						content.addComponent( iForm);
+
 						break;	
 					default:
 						break;
