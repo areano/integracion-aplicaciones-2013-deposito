@@ -39,7 +39,7 @@ import com.vaadin.ui.Window;
 public class IpConfigurator extends CustomComponent {
 
 	private static final long serialVersionUID = -6583013919244415167L;
-	@EJB
+
 	EJBFacade facade;
 	public class AddNewIPWindow extends Window {
 		private static final long serialVersionUID = -1867392910754863989L;

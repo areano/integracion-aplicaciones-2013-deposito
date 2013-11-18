@@ -31,7 +31,12 @@ public class ElectrodomesticoFormView extends CustomComponent {
 		EJBFacade facade;
 		public ButtonSave(){
 			super();
-			facade = new EJBFacade();
+			try {
+				facade = EJBFacade.getIntance();
+			} catch (NamingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		@Override
 		public void buttonClick(ClickEvent event) {
