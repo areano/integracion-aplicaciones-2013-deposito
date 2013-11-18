@@ -4,7 +4,6 @@
 	<comment></comment>
 	<projects>
 		<project>Deposito_EJB</project>
-		<project>Deposito_WEB</project>
 		<project>Common</project>
 		<project>DepositoUI</project>
 	</projects>
