@@ -4,6 +4,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import dao.ArticuloDAO;
 import dao.SolicitudArticulosDAO;
 import dto.SolicitudArticuloItemDTO;
 import dto.SolicitudArticulosDTO;
@@ -21,6 +22,9 @@ public class AdministradorSolicitudArticulosBean implements AdministradorSolicit
 
 	@EJB
 	private SolicitudArticulosDAO dao;
+
+	@EJB
+	private ArticuloDAO articuloDao;
 
 	/**
 	 * Default constructor.
@@ -49,9 +53,8 @@ public class AdministradorSolicitudArticulosBean implements AdministradorSolicit
 		for (SolicitudArticuloItemDTO item : solicitud.getLista()) {
 
 			SolicitudArticulosItem itemEntity = new SolicitudArticulosItem();
-			itemEntity.setArticulo(dao.buscarArticulo(item.getCodigo()));
+			itemEntity.setArticulo(articuloDao.find(Long.parseLong(item.getCodigo())));
 			itemEntity.setCantidad(item.getCantidad());
-
 			solicitudEntity.getItems().add(itemEntity);
 		}
 

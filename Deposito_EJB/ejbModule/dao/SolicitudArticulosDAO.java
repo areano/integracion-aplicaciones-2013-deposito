@@ -24,7 +24,7 @@ public class SolicitudArticulosDAO {
 		
 	}
 
-	public Articulo buscarArticulo(String codigo) {
+	public SolicitudArticulos buscarSolicitud(long codigo) {
 		// TODO AR: Buscar el acticulo dado
 		return null;
 	}
