@@ -37,7 +37,8 @@ public class ArticuloDAO {
 	
 	public void guardarArticulo(Articulo a){
 		try{
-			
+			System.out.println(a==null);
+			System.out.println(em==null);
 			em.persist(a);
 			logger.info("Articuo codigo ["+a.getCodigo()+"] persistido");
 		}catch(Exception e)

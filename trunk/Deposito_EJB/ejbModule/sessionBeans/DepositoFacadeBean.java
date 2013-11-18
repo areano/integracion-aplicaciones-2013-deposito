@@ -103,7 +103,6 @@ public class DepositoFacadeBean implements DepositoFacade {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	@PostConstruct
 	@Override
 	public void savePortalesConnection(ArrayList<ConnectionView> activas) {
 		connAdmin.savePortalesConnection(activas);
