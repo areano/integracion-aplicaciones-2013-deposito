@@ -23,13 +23,18 @@ public class CrearConfiguracionView extends VerticalLayout implements View {
 	 * 
 	 */
 	private static final long serialVersionUID = -8923865045603639957L;
-	@EJB
 	EJBFacade facade;
 	public  CrearConfiguracionView(){
-		
+		try {
+			EJBFacade facade =  EJBFacade.getIntance();
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	@Override
 	public void enter(ViewChangeEvent event) {
+		
 		addStyleName("reindeer");
 		Label caption = new Label("Configuracion de IP's <span>Seleccione para Activar</span>", ContentMode.HTML);
 		caption.addStyleName(ChameleonTheme.LABEL_H1);
