@@ -12,5 +12,9 @@
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="DepositoUI.war" deploy-path="/" handle="module:/resource/DepositoUI/DepositoUI">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>
