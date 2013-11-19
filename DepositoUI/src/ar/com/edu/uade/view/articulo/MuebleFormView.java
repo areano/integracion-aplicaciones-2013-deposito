@@ -24,13 +24,16 @@ public class MuebleFormView extends CustomComponent {
 	private static final long serialVersionUID = 1739709695326530748L;
 	private boolean editable;
 	private MuebleView bindeable;
-	@EJB
 	EJBFacade facade;
 	private static final Logger logger = 
 			   Logger.getLogger(MuebleFormView.class);
     public MuebleFormView() {
-   	
-
+        try {
+			facade = EJBFacade.getIntance();
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
     }
     public void init() {
         FormLayout layout = new FormLayout();

@@ -29,12 +29,17 @@ public class ArticuloContainer extends BeanItemContainer<ArticuloView> implement
      */
     public static final String[] COL_HEADERS_ENGLISH = new String[] {
     	 "Codigo Artitulo","Marca","Nombre", "Descripcion", "Foto","precio","Stock Disponible" };
-    @EJB
+
     EJBFacade facade;
     public ArticuloContainer() throws InstantiationException,
             IllegalAccessException {
         super(ArticuloView.class);
-
+        try {
+			facade = EJBFacade.getIntance();
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
     }
 //    public  void init(){
 //    	EJBFacade facade = new EJBFacade();

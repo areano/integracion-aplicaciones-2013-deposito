@@ -28,7 +28,6 @@ import com.vaadin.ui.TextField;
 public class InfantilFormView extends CustomComponent {
 	
 	private static final long serialVersionUID = 1739709695326530748L;
-	@EJB
 	EJBFacade facade;
 	private boolean editable;
 	private InfantilView bindeable;
@@ -36,6 +35,12 @@ public class InfantilFormView extends CustomComponent {
 			   Logger.getLogger(InfantilFormView.class);
 	public InfantilFormView(){
 		super();
+        try {
+			facade = EJBFacade.getIntance();
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
 	}
     public  void init () {
 	        FormLayout layout = new FormLayout();

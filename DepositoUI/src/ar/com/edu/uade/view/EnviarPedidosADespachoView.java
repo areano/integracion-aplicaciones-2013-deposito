@@ -99,9 +99,14 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 	
 	private static final long serialVersionUID = 4883440977426352624L;
 	private enum Articulos{ELECTRODOMESTICO, MODA, MUEBLE, INFANTIL}
-	@EJB
 	EJBFacade facade;
 	public EnviarPedidosADespachoView(){
+        try {
+			facade = EJBFacade.getIntance();
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
 		
 	}
 	private FormLayout  convertFromDTO(ArticuloView articulo){

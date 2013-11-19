@@ -33,7 +33,6 @@ import com.vaadin.ui.Window;
 public class MonitorepIpConfigurator extends CustomComponent {
 
 	private static final long serialVersionUID = -6583013919244415167L;
-	@EJB
 	EJBFacade facade;
 	public class AddNewIPWindow extends Window {
 
@@ -51,6 +50,14 @@ public class MonitorepIpConfigurator extends CustomComponent {
 		public AddNewIPWindow() {
 			super("Agregue nueva IP"); // Set window caption
 	        center();
+	        
+	        try {
+				facade = EJBFacade.getIntance();
+			} catch (NamingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        
 	        configuredIP = "";
 	        selectSyncro.addItem("Sincronico");
 	        selectSyncro.addItem("Asincronico");

@@ -52,6 +52,13 @@ public class IpConfigurator extends CustomComponent {
 			super("Agregue nueva IP"); // Set window caption
 			setDraggable(true);
 			
+			try {
+				facade = EJBFacade.getIntance();
+			} catch (NamingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 	        center();
 	        configuredIP = "";
 	        setStyleName(ChameleonTheme.WINDOW_OPAQUE);

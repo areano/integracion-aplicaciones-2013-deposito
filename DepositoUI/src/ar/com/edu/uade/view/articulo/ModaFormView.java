@@ -30,12 +30,18 @@ public class ModaFormView extends CustomComponent {
 	private static final long serialVersionUID = 1739709695326530748L;
 	private boolean editable;
 	private ModaView bindeable;
-	@EJB
+
 	EJBFacade facade;
 	private static final Logger logger = 
 			   Logger.getLogger(ModaFormView.class);
     public ModaFormView() {
     		super();
+    		try {
+				facade = EJBFacade.getIntance();
+			} catch (NamingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
     public void init( ModaView bean) {
         FormLayout layout = new FormLayout();
