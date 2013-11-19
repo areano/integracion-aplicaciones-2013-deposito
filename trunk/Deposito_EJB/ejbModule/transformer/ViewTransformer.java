@@ -257,5 +257,30 @@ public class ViewTransformer {
 		return conn;
 	}
 
+	public ConnectionView toView(PortalConexion c) {
+		ConnectionView view =  new ConnectionView();
+		view.setActive(true);
+		view.setIp(c.getIp());
+		view.setModuleId(c.getPortalId());
+		return view;
+	}
+
+	public ConnectionView toView(DespachoConexion c) {
+		ConnectionView view =  new ConnectionView();
+		view.setActive(true);
+		view.setIp(c.getIp());
+		view.setModuleId(c.getDespachoId());
+		return view;
+	}
+
+	public ConnectionView toView(MonitoreoConexion c) {
+		ConnectionView view =  new ConnectionView();
+		view.setActive(true);
+		view.setIp(c.getIp());
+		view.setModuleId(c.getMonitoreoId());
+		view.setSyncronic(c.isSyncronico());
+		return view;
+	}
+
 
 }
