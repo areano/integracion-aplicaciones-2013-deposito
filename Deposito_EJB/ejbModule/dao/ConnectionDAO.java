@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -70,108 +72,34 @@ public class ConnectionDAO {
 		}
 	}
 	public void borrarDespachos(){
-		try {
-			utx.begin();
-		} catch (NotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SystemException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		Query q = em.createNativeQuery("Delete from DespachoConexion");
 		q.executeUpdate();
-		try {
-			utx.commit();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RollbackException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (HeuristicMixedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (HeuristicRollbackException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SystemException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 
 	public void borrarPortales(){
-		try {
-			utx.begin();
-		} catch (NotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SystemException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		Query q = em.createNativeQuery("Delete from PortalConexion");
 		q.executeUpdate();
-		try {
-			utx.commit();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RollbackException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (HeuristicMixedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (HeuristicRollbackException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SystemException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 	}
 	public void borrarMonitoreos(){
-		try {
-			utx.begin();
-		} catch (NotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SystemException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		Query q = em.createNativeQuery("Delete from MonitoreoConexion");
 		q.executeUpdate();
-		try {
-			utx.commit();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RollbackException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (HeuristicMixedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (HeuristicRollbackException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SystemException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+	}
+	@SuppressWarnings("unchecked")
+	public List<PortalConexion> getPortales() {
+			Query q = em.createQuery("from PortalConexion where active = TRUE");
+			return  (List<PortalConexion>) q.getResultList();	
+	}
+	@SuppressWarnings("unchecked")
+	public List<DespachoConexion> getDespachos() {
+		Query q = em.createQuery("from DespachoConexion where active = TRUE");
+		return  (List<DespachoConexion>) q.getResultList();	
+	}
+	@SuppressWarnings("unchecked")
+	public List<MonitoreoConexion> getMonitoreos() {
+		Query q = em.createQuery("from MonitoreoConexion where active = TRUE");
+		return  (List<MonitoreoConexion>) q.getResultList();	
 	}
 }
