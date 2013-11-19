@@ -48,14 +48,13 @@ public class AdministradorConecctionsBean implements AdministradorConecctions {
 	@EJB 
 	ConnectionDAO connectionDAO;
 	
+	@EJB
 	private ViewTransformer transformer;
 	private static final Logger logger = 
 			   Logger.getLogger(AdministradorConecctionsBean.class);
 	
 	public AdministradorConecctionsBean() {
-		transformer=ViewTransformer.obtenerInstancia();
 	}
-
 
 	public void guardarElectrodomestico(ElectrodomesticoView dto){
 		try{

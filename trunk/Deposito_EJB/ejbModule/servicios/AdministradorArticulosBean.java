@@ -44,14 +44,12 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	@EJB
 	DespachoDAO despachoDAO;
 	
+	@EJB
 	private ViewTransformer transformer;
-	private static final Logger logger = 
-			   Logger.getLogger(AdministradorArticulosBean.class);
+	
+	private static final Logger logger = Logger.getLogger(AdministradorArticulosBean.class);
+
 	public AdministradorArticulosBean() {
-		transformer=ViewTransformer.obtenerInstancia();
-		articuloDAO = new ArticuloDAO();
-		portalDAO = new PortalDAO();
-		despachoDAO = new DespachoDAO();
 	}
 
 	/*
