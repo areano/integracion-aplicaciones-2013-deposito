@@ -46,7 +46,8 @@ public class InfantilFormView extends CustomComponent {
 	        FormLayout layout = new FormLayout();
 	        setCompositionRoot(layout);
 	        final BeanFieldGroup<InfantilView> binder = new BeanFieldGroup<InfantilView>(InfantilView.class);
-	        binder.setItemDataSource(new InfantilView());
+	        bindeable = new InfantilView();
+	        binder.setItemDataSource(bindeable);
 	        editable = false;
 	        /* Field Creation Section*/	    	
 	    	buildLayout(layout, binder);  	
