@@ -48,28 +48,14 @@ public class EJBFacade {
 	}
 	public ArrayList<ConnectionView> getPortalConections(){
 		
-		ArrayList<ConnectionView> retorno = new ArrayList<ConnectionView>();
-		ConnectionView dto = new ConnectionView();
-		for (int i = 0; i < 9; i++) {
-			dto.setModuleId(i);
-			dto.setActive(true);
-			dto.setIp("192.168.0."+String.valueOf(i));
-			dto.setSyncronic(false);
-			retorno.add(dto);
-		}
-		return retorno;
+		return systemFacade.getPortalesConnection();
+
 		
 	}
 	public ArrayList<ConnectionView> getDespachoConnection(){
 		ArrayList<ConnectionView> retorno = new ArrayList<ConnectionView>();
 		ConnectionView dto = new ConnectionView();
-		for (int i = 0; i < 9; i++) {
-			dto.setModuleId(i);
-			dto.setActive(true);
-			dto.setIp("192.168.0."+String.valueOf(i));
-			dto.setSyncronic(false);
-			retorno.add(dto);
-		}
+
 		return retorno;
 	}
 	public ArrayList<ConnectionView> getMonitoreoConnection(){
