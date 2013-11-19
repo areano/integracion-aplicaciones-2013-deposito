@@ -1,11 +1,16 @@
 package view;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SolicitudCompraView {
+public class SolicitudCompraView implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4708137109886579361L;
 	private ArrayList<SolicitudArticulosItemView> items = new ArrayList<SolicitudArticulosItemView>();
 	private Date date;
 	private long codigoSolicitud;
