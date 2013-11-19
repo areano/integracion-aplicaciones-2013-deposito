@@ -138,6 +138,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	public ArrayList<ArticuloView> getArticulos() {
 		
 		ArrayList<ArticuloView> retorno = new ArrayList<ArticuloView>(); 
+		
 		retorno.addAll(getModa());
 		retorno.addAll(getElectroDomesticos());
 		retorno.addAll(getInfantil());
@@ -155,7 +156,9 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	public ArrayList<ModaView> getModa() {
 		List<Moda> al =articuloDAO.findAllByModa();
 		ArrayList<ModaView> retorno = new ArrayList<ModaView>(); 
-		for (Moda articulo : al) {
+		Moda articulo;
+		for (int i = 0; i < al.size(); i++) {
+			articulo = al.get(i); 
 			retorno.add(transformer.toView(articulo));
 		}
 		return retorno;

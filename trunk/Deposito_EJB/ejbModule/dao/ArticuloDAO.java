@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -80,12 +81,27 @@ public class ArticuloDAO {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	public Collection<Articulo> findAllArticulos() {
+		
+		try{
+			Query q = em.createQuery("from Articulo ");
+			
+			logger.info("Get All Electrodomestico ");
+			return (Collection<Articulo>) q.getResultList();
+		}catch(Exception e)
+		{
+			logger.error("Error on Get All Electrodomestico");
+			logger.error(e);
+		}
+		return null;
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<Electrodomestico> findAllElectrodomesticos() {
 		List<Electrodomestico> al = new ArrayList<Electrodomestico>();
 		try{
-			Query q = em.createNativeQuery("from Electrodomestico");
+			Query q = em.createNativeQuery("select * from Articulo a where tipo 'Electrodomestico'");
 			al =(List<Electrodomestico> ) q.getResultList();
 			logger.info("Get All Electrodomestico ");
 		}catch(Exception e)
@@ -99,7 +115,7 @@ public class ArticuloDAO {
 	public List<Moda> findAllByModa() {
 		List<Moda> al = new ArrayList<Moda>();
 		try{
-			Query q = em.createNativeQuery("from Moda");
+			Query q = em.createQuery("from Moda");
 			al =(List<Moda> ) q.getResultList();
 			logger.info("Get All Moda ");
 		}catch(Exception e)
@@ -113,7 +129,7 @@ public class ArticuloDAO {
 	public List<Infantil> findAllInfantil() {
 		List<Infantil> al = new ArrayList<Infantil>();
 		try{
-			Query q = em.createNativeQuery("from Infantil");
+			Query q = em.createQuery("from infantil");
 			al =(List<Infantil> ) q.getResultList();
 			logger.info("Get All Articulos ");
 		}catch(Exception e)
@@ -127,7 +143,7 @@ public class ArticuloDAO {
 	public List<Mueble> findAllMuebles() {
 		List<Mueble> al = new ArrayList<Mueble>();
 		try{
-			Query q = em.createNativeQuery("from Mueble");
+			Query q = em.createQuery("from Mueble");
 			al =(List<Mueble> ) q.getResultList();
 			logger.info("Get All Mueble ");
 		}catch(Exception e)
