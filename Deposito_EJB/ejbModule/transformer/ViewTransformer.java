@@ -3,6 +3,8 @@ package transformer;
 import java.sql.Timestamp;
 
 import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 
 import view.ArticuloView;
 import view.ConnectionView;
@@ -35,6 +37,8 @@ import entities.SolicitudArticulos;
 import entities.SolicitudArticulosItem;
 import entities.SolicitudCompra;
 
+@Stateless
+@LocalBean
 public class ViewTransformer {
 	@EJB
 	ArticuloDAO articuloDAO;
@@ -42,15 +46,9 @@ public class ViewTransformer {
 	@EJB
 	SolicitudArticulosDAO solicitudArticulosDAO;
 	
-	private static ViewTransformer instancia;
-	
-	public static ViewTransformer obtenerInstancia(){
-		if(instancia==null)
-			instancia=new ViewTransformer();
-		return instancia;
+	public ViewTransformer(){
+		
 	}
-	
-	private ViewTransformer(){}
 	
 	public Articulo converToClass(ArticuloView av){
 		Articulo a = new Articulo();
