@@ -42,29 +42,64 @@ public class SearchArticuloView extends VerticalLayout implements View  {
 	}
     private TextField tf;
     private NativeSelect fieldToSearch;
-    private CheckBox saveSearch;
-    private TextField searchCode;
+
     private ListView articuloView = null;
     private VerticalLayout test;
-    private ArticuloContainer  container; 
-    		//ArticuloContainer.init();
+    private ArticuloContainer  container ;
     ArticuloList articuloList ;
     ArticuloForm articuloForm;
     Window editWindow;
     private enum Articulos{ELECTRODOMESTICO, MODA, MUEBLE, INFANTIL}
-    
     public SearchArticuloView() {
-    	
+    	editWindow =  new Window();	
+        setCaption("Search contacts");
+        setSizeFull();
+
+        /* Use a FormLayout as main layout for this Panel */
+        FormLayout formLayout = new FormLayout();
+        addComponent(formLayout);
+        try {
+			container = new ArticuloContainer();
+			container.init();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        /* Create UI components */
+        tf = new TextField("Search term");
+        fieldToSearch = new NativeSelect("Field to search");
+        Button search = new Button("Search");
+        test = new VerticalLayout();
+        /* Initialize fieldToSearch */
+        for (int i = 0; i < container.NATURAL_COL_ORDER.length; i++) {
+            fieldToSearch.addItem(container.NATURAL_COL_ORDER[i]);
+            fieldToSearch.setItemCaption(container.NATURAL_COL_ORDER[i],
+            		container.COL_HEADERS_ENGLISH[i]);
+        }
+
+        fieldToSearch.setValue("nombre");
+        fieldToSearch.setNullSelectionAllowed(false);        
+        search.addClickListener(new PerformSearhButton());
+        /* Add all the created components to the form */
+        addComponent(tf);
+        addComponent(fieldToSearch);
+
+        addComponent(search);
+        addComponent(test);
     }
-   // public void init(){}
+
     private void performSearch() {
         String searchTerm = (String) tf.getValue();
         if (searchTerm == null || searchTerm.equals("")) {
-            Notification.show("La busqueda no puede estar vacia",Notification.Type.WARNING_MESSAGE);
-            return;
+//            Notification.show("La busqueda no puede estar vacia",Notification.Type.WARNING_MESSAGE);
+//            return;
+        	searchTerm = "";
         }
         SearchFilter searchFilter = new SearchFilter(fieldToSearch.getValue(),
-                searchTerm, (String) searchCode.getValue());
+                searchTerm);
         search(searchFilter);
        
 
@@ -73,8 +108,10 @@ public class SearchArticuloView extends VerticalLayout implements View  {
         // clear previous filters
         container.removeAllContainerFilters();
         // filter contacts with given filter
+        if (!searchFilter.getTerm().equalsIgnoreCase("")){
         container.addContainerFilter(searchFilter.getPropertyId(),
                 searchFilter.getTerm(), true, false);
+        }
         test.removeAllComponents();
         articuloList = new ArticuloList(container);
         test.addComponent(articuloList);
@@ -156,48 +193,7 @@ public class SearchArticuloView extends VerticalLayout implements View  {
 
 	@Override
 	public void enter(ViewChangeEvent event) {
-		try {
-			container=  new ArticuloContainer();
-			container.init();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	editWindow =  new Window();	
-        setCaption("Search contacts");
-        setSizeFull();
-
-        /* Use a FormLayout as main layout for this Panel */
-        FormLayout formLayout = new FormLayout();
-        addComponent(formLayout);
-
-        /* Create UI components */
-        tf = new TextField("Search term");
-        fieldToSearch = new NativeSelect("Field to search");
-        saveSearch = new CheckBox("Save search");
-        searchCode = new TextField("Search name");
-        Button search = new Button("Search");
-        test = new VerticalLayout();
-        /* Initialize fieldToSearch */
-        for (int i = 0; i < container.NATURAL_COL_ORDER.length; i++) {
-            fieldToSearch.addItem(container.NATURAL_COL_ORDER[i]);
-            fieldToSearch.setItemCaption(container.NATURAL_COL_ORDER[i],
-            		container.COL_HEADERS_ENGLISH[i]);
-        }
-
-        fieldToSearch.setValue("nombre");
-        fieldToSearch.setNullSelectionAllowed(false);        
-        search.addClickListener(new PerformSearhButton());
-        /* Add all the created components to the form */
-        addComponent(tf);
-        addComponent(fieldToSearch);
-        addComponent(saveSearch);
-        addComponent(searchCode);
-        addComponent(search);
-        addComponent(test);
+		// TODO Auto-generated method stub
 		
 	}
 

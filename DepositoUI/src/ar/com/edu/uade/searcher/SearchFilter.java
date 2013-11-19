@@ -8,12 +8,12 @@ public class SearchFilter implements Serializable {
 
     private final String term;
     private final Object propertyId;
-    private String searchName;
 
-    public SearchFilter(Object propertyId, String searchTerm, String name) {
+
+    public SearchFilter(Object propertyId, String searchTerm) {
         this.propertyId = propertyId;
         term = searchTerm;
-        searchName = name;
+
     }
 
     /**
@@ -30,16 +30,5 @@ public class SearchFilter implements Serializable {
         return propertyId;
     }
 
-    /**
-     * @return the name of the search
-     */
-    public String getSearchName() {
-        return searchName;
-    }
-
-    @Override
-    public String toString() {
-        return getSearchName();
-    }
 
 }

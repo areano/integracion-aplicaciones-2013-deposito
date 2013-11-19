@@ -56,30 +56,13 @@ public class EJBFacade {
 		ArrayList<ConnectionView> retorno = new ArrayList<ConnectionView>();
 		ConnectionView dto = new ConnectionView();
 
-		return retorno;
+		return systemFacade.getDespachosConnection();
 	}
 	public ArrayList<ConnectionView> getMonitoreoConnection(){
-		ArrayList<ConnectionView> retorno = new ArrayList<ConnectionView>();
-		ConnectionView dto = new ConnectionView();
-		for (int i = 0; i < 9; i++) {
-			dto.setModuleId(i);
-			dto.setActive(true);
-			dto.setIp("192.168.0."+String.valueOf(i));
-			dto.setSyncronic(false);
-			retorno.add(dto);
-		}
-		return retorno;
+		return systemFacade.getMonitoreosConnection();
 	}
 	public ArrayList<ConnectionView> getFabricaConnection(){
 		ArrayList<ConnectionView> retorno = new ArrayList<ConnectionView>();
-		ConnectionView dto = new ConnectionView();
-		for (int i = 0; i < 9; i++) {
-			dto.setModuleId(i);
-			dto.setActive(true);
-			dto.setIp("192.168.0."+String.valueOf(i));
-			dto.setSyncronic(false);
-			retorno.add(dto);
-		}
 		return retorno;
 	}
 	public ArrayList<SolicitudArticulosView> getSolicitudesDeArticulos(){
@@ -129,31 +112,33 @@ public class EJBFacade {
 
 	}
 	public Collection<? extends ArticuloView> getAllArticulos() {
-		ArrayList<ArticuloView> articulos =  new ArrayList<ArticuloView>();
-		ElectrodomesticoView electro =new ElectrodomesticoView();
-		ModaView moda =  new ModaView();
-		electro.setCodigo(Long.valueOf(1));
-		electro.setDescripcion("Un electro");
-		electro.setFichaTecnica("una url");
-		electro.setMarca("Modila");
-		electro.setNombre("Supercalifragitisticoespiralidoso");
-		electro.setOrigen("Tierra cdel fuego");
-		electro.setPrecio(Float.parseFloat("12.5"));
-		electro.setFoto("una Foto");
+//		ArrayList<ArticuloView> articulos =  new ArrayList<ArticuloView>();
+//		ElectrodomesticoView electro =new ElectrodomesticoView();
+//		ModaView moda =  new ModaView();
+//		electro.setCodigo(Long.valueOf(1));
+//		electro.setDescripcion("Un electro");
+//		electro.setFichaTecnica("una url");
+//		electro.setMarca("Modila");
+//		electro.setNombre("Supercalifragitisticoespiralidoso");
+//		electro.setOrigen("Tierra cdel fuego");
+//		electro.setPrecio(Float.parseFloat("12.5"));
+//		electro.setFoto("una Foto");
+//		
+//		moda.setCodigo(Long.valueOf(1));
+//		moda.setDescripcion("una remera");
+//		moda.setTalle("XL");
+//		moda.setMarca("Mota");
+//		moda.setNombre("Motta inside");
+//		moda.setOrigen("El Salvador");
+//		moda.setPrecio(Float.parseFloat("12.5"));
+//		moda.setColor("Azul");
+//		moda.setFoto("otra Foto");
+//			
+//		articulos.add(electro);
+//		articulos.add(moda);
+//		return articulos;
+		return systemFacade.getArticulos();
 		
-		moda.setCodigo(Long.valueOf(1));
-		moda.setDescripcion("una remera");
-		moda.setTalle("XL");
-		moda.setMarca("Mota");
-		moda.setNombre("Motta inside");
-		moda.setOrigen("El Salvador");
-		moda.setPrecio(Float.parseFloat("12.5"));
-		moda.setColor("Azul");
-		moda.setFoto("otra Foto");
-			
-		articulos.add(electro);
-		articulos.add(moda);
-		return articulos;
 	}
 	public void altaElectrodomestico(ElectrodomesticoView e){
 		systemFacade.altaElectrodomestico(e);
