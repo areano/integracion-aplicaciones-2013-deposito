@@ -1,6 +1,12 @@
 package view;
 
-public class ConnectionView {
+import java.io.Serializable;
+
+public class ConnectionView implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int moduleId;
 	private boolean active;
 	private String ip;

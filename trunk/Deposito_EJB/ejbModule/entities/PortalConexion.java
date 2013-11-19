@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="PortalConexiones")
+@Table(name="PortalConexion")
 public class PortalConexion {
 
 	@Id
