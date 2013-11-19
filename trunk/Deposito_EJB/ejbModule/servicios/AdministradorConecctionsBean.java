@@ -1,6 +1,7 @@
 package servicios;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
@@ -20,10 +21,13 @@ import dao.ConnectionDAO;
 import dao.DespachoDAO;
 import dao.PortalDAO;
 import entities.Articulo;
+import entities.DespachoConexion;
 import entities.Electrodomestico;
 import entities.Infantil;
 import entities.Moda;
+import entities.MonitoreoConexion;
 import entities.Mueble;
+import entities.PortalConexion;
 
 /**
  * Session Bean implementation class AdministradorArticulos
@@ -157,6 +161,50 @@ public class AdministradorConecctionsBean implements AdministradorConecctions {
 				 logger.error("Error",e);
 			}
 		}		
+	}
+
+
+	@Override
+	public ArrayList<ConnectionView> getPortales() {
+		List<PortalConexion> pc = connectionDAO.getPortales();
+		ArrayList<ConnectionView> retorno = new ArrayList<ConnectionView>();
+		for (PortalConexion c : pc) {
+				retorno.add(transformer.toView(c));
+				
+		}
+		return retorno;
+	}
+
+
+	@Override
+	public ArrayList<ConnectionView> getDespachos() {
+		List<DespachoConexion> pc = connectionDAO.getDespachos();
+		ArrayList<ConnectionView> retorno = new ArrayList<ConnectionView>();
+		for (DespachoConexion c : pc) {
+				retorno.add(transformer.toView(c));
+				
+		}
+		return retorno;
+	}
+
+
+	@Override
+	public ArrayList<ConnectionView> getMonitoreos() {
+		
+		List<MonitoreoConexion> pc = connectionDAO.getMonitoreos();
+		ArrayList<ConnectionView> retorno = new ArrayList<ConnectionView>();
+		for (MonitoreoConexion c : pc) {
+				retorno.add(transformer.toView(c));
+				
+		}
+		return retorno;
+	}
+
+
+	@Override
+	public ConnectionView getDespacho(int depachoID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
