@@ -26,7 +26,7 @@ public interface DepositoFacade {
 	public ArrayList<ConnectionView>  getFabricasConnection();
 	public ArrayList<ConnectionView>  getMonitoreosConnection();
 	public ArrayList<ConnectionView>  getDespachosConnection();
-	public ArrayList<ConnectionView>  getDespachoConnection(int idModulo);
+	public ConnectionView  getDespachoConnection(int idModulo);
 	public ArrayList<ConnectionView>  getPortalesConnection();	
 	public void savePortalesConnection(ArrayList<ConnectionView> activas);
 	public void saveDespachosConnection(ArrayList<ConnectionView> activas);
