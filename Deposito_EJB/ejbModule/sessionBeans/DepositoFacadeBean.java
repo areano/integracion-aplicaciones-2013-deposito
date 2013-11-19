@@ -21,9 +21,9 @@ import view.*;
 public class DepositoFacadeBean implements DepositoFacade {
 
 	@EJB
-	AdministradorArticulosBean admin =new AdministradorArticulosBean() ;
+	AdministradorArticulosBean admin ;
 	@EJB
-	AdministradorConecctionsBean connAdmin = new AdministradorConecctionsBean();
+	AdministradorConecctionsBean connAdmin ;
 	private static final Logger logger = 
 			   Logger.getLogger(DepositoFacadeBean.class.getName());
 	public DepositoFacadeBean(){}
@@ -60,48 +60,41 @@ public class DepositoFacadeBean implements DepositoFacade {
 	
 	@Override
 	public ArrayList<SolicitudCompraView> getSolicitudesCompra() {
-		// TODO Auto-generated method stub
-		return null;
+		return admin.getSolicitudesCompra();
 	}
 	
 	@Override
 	public ArrayList<SolicitudArticulosView> getSolicitudesArticulos() {
-		// TODO Auto-generated method stub
-		return null;
+		return admin.getSolicitudesArticulos();
 	}
 	
 	@Override
 	public ArrayList<ArticuloView> getArticulos() {
-		// TODO Auto-generated method stub
-		return null;
+		return admin.getArticulos();
 	}
 	
 	@Override
 	public ArrayList<ConnectionView> getFabricasConnection() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
 	public ArrayList<ConnectionView> getMonitoreosConnection() {
-		// TODO Auto-generated method stub
-		return null;
+		return connAdmin.getMonitoreos();
 	}
 	
 	@Override
 	public ArrayList<ConnectionView> getDespachosConnection() {
-		// TODO Auto-generated method stub
-		return null;
+		return connAdmin.getDespachos();
 	}
 	
 	@Override
-	public ArrayList<ConnectionView> getDespachoConnection(int idModulo) {
-		// TODO Auto-generated method stub
-		return null;
+	public ConnectionView getDespachoConnection(int idModulo) {
+		return connAdmin.getDespacho(idModulo);
 	}
 	@Override
 	public ArrayList<ConnectionView> getPortalesConnection() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return connAdmin.getPortales();
 	}
 	@Override
 	public void savePortalesConnection(ArrayList<ConnectionView> activas) {

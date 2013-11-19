@@ -1,5 +1,8 @@
 package servicios;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -13,6 +16,8 @@ import view.ElectrodomesticoView;
 import view.InfantilView;
 import view.ModaView;
 import view.MuebleView;
+import view.SolicitudArticulosView;
+import view.SolicitudCompraView;
 import dao.ArticuloDAO;
 import dao.DespachoDAO;
 import dao.PortalDAO;
@@ -119,6 +124,61 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 			 logger.error("Error",e);
 		}
 	}
+
+	public ArrayList<SolicitudCompraView> getSolicitudesCompra() {
+		
+		return null;
+	}
+
+	public ArrayList<SolicitudArticulosView> getSolicitudesArticulos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<ArticuloView> getArticulos() {
+		
+		ArrayList<ArticuloView> retorno = new ArrayList<ArticuloView>(); 
+		retorno.addAll(getModa());
+		retorno.addAll(getElectroDomesticos());
+		retorno.addAll(getInfantil());
+		retorno.addAll(getMueble());
+		return retorno;
+	}
+	public ArrayList<ElectrodomesticoView> getElectroDomesticos() {
+		List<Electrodomestico> al = articuloDAO.findAllElectrodomesticos();
+		ArrayList<ElectrodomesticoView> retorno = new ArrayList<ElectrodomesticoView>(); 
+		for (Electrodomestico articulo : al) {
+			retorno.add(transformer.toView(articulo));
+		}
+		return retorno;
+	}
+	public ArrayList<ModaView> getModa() {
+		List<Moda> al =articuloDAO.findAllByModa();
+		ArrayList<ModaView> retorno = new ArrayList<ModaView>(); 
+		for (Moda articulo : al) {
+			retorno.add(transformer.toView(articulo));
+		}
+		return retorno;
+	}
+	public ArrayList<InfantilView> getInfantil() {
+		List<Infantil> al = articuloDAO.findAllInfantil();
+		ArrayList<InfantilView> retorno = new ArrayList<InfantilView>(); 
+		for (Infantil articulo : al) {
+			retorno.add(transformer.toView(articulo));
+		}
+		return retorno;
+	}
+	public ArrayList<MuebleView> getMueble() {
+		List<Mueble> al = articuloDAO.findAllMuebles();
+		ArrayList<MuebleView> retorno = new ArrayList<MuebleView>(); 
+		for (Mueble articulo : al) {
+			retorno.add(transformer.toView(articulo));
+		}
+		return retorno;
+	}
+	
+	
+	
 }
 
 
