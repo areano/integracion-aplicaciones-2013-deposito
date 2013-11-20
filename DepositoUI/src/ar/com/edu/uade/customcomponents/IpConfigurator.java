@@ -248,6 +248,9 @@ public class IpConfigurator extends CustomComponent {
 		optionGroup_2.setImmediate(false);
 		optionGroup_2.setWidth("-1px");
 		optionGroup_2.setHeight("-1px");
+		
+		optionGroup_2.setNewItemsAllowed(true);
+		
 		verticalLayout_2.addComponent(optionGroup_2);
 		return verticalLayout_2;
 	}
@@ -279,6 +282,7 @@ public class IpConfigurator extends CustomComponent {
 		 mappedIPs.put(groupValue,new ConnectionView(Integer.parseInt(newID),false,newIP,false));
 		 
 		 System.out.println(mappedIPs.get(groupValue));
+		 
 	
 	 }
 	 
