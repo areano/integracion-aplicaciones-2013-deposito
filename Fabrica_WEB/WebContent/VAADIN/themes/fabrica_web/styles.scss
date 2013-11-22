@@ -1,0 +1,9 @@
+@import "addons.scss";
+@import "fabrica_web.scss";
+
+/* This file prefixes all rules with the theme name to avoid causing conflicts with other themes. */
+/* The actual styles should be defined in fabrica_web.scss */
+.fabrica_web {
+  @include addons;
+  @include fabrica_web;
+}
