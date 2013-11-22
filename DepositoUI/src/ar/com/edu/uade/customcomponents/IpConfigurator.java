@@ -8,6 +8,8 @@ import java.util.HashMap;
 
 
 
+
+
 import javax.ejb.EJB;
 import javax.naming.NamingException;
 
@@ -23,6 +25,8 @@ import com.vaadin.ui.themes.ChameleonTheme;
 import com.vaadin.ui.themes.Runo;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.OptionGroup;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
@@ -170,34 +174,22 @@ public class IpConfigurator extends CustomComponent {
 					activas.add(mappedIPs.get(string.trim()));					
 					System.out.println(mappedIPs.get(string.trim()));
 					}
-				if (grupo.equalsIgnoreCase("portales")){
-//					try {
-						//EJBFacade.getIntance().savePortalesConnection(activas);
+				
+		        if (mappedIPs.size()==0) {
+		        	Notification.show("No IP's Selected, select at least one", Type.WARNING_MESSAGE);
+		        	return;
+		        }
+		        if (grupo.equalsIgnoreCase("portales")){
 						facade.savePortalesConnection(activas);
-//					} catch (NamingException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
 				}
 				if (grupo.equalsIgnoreCase("despachos")){
-//					try {
-						//EJBFacade.getIntance().saveDespachosConnection(activas);
 						facade.saveDespachosConnection(activas);
-//					} catch (NamingException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
 				}
 
 				if (grupo.equalsIgnoreCase("Fabrica")){
-//					try {
-						//EJBFacade.getIntance().saveFabricaConnection(activas);
 						facade.saveFabricaConnection(activas);
-//					} catch (NamingException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
 				}
+				
 			}
 		});
 		button_2.setCaption("Aceptar");
@@ -249,7 +241,7 @@ public class IpConfigurator extends CustomComponent {
 		optionGroup_2.setWidth("-1px");
 		optionGroup_2.setHeight("-1px");
 		
-		optionGroup_2.setNewItemsAllowed(true);
+		
 		
 		verticalLayout_2.addComponent(optionGroup_2);
 		return verticalLayout_2;

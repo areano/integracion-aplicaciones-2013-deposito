@@ -14,11 +14,13 @@ import com.vaadin.data.Item;
 import com.vaadin.ui.AbsoluteLayout;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.themes.ChameleonTheme;
 import com.vaadin.ui.themes.Runo;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.NativeSelect;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.OptionGroup;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
@@ -193,13 +195,11 @@ public class MonitorepIpConfigurator extends CustomComponent {
 					activas.add(mappedIPs.get(string.trim()));					
 					System.out.println(string);
 				}
-//				try {
-//					EJBFacade.getIntance().saveMonitoreosConnection(activas);
+		        if (mappedIPs.size()==0) {
+		        	Notification.show("No IP's Selected, select at least one", Type.WARNING_MESSAGE);
+		        	return;
+		        }
 					facade.saveMonitoreosConnection(activas);
-//				} catch (NamingException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
 
 		         
 			}

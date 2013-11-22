@@ -57,7 +57,7 @@ public class IPConfiguratorPanel extends CustomComponent {
 
 		mainLayout = new AbsoluteLayout();
 		mainLayout.setImmediate(false);
-		mainLayout.setWidth("620px");
+		mainLayout.setWidth("930px");
 		mainLayout.setHeight("440px");
 		// top-level component properties
 		setWidth("620px");
@@ -112,13 +112,14 @@ public class IPConfiguratorPanel extends CustomComponent {
 		ipConfigurator_3.setWidth("-1px");
 		ipConfigurator_3.setHeight("-1px");
 		gridLayout_1.addComponent(ipConfigurator_3, 0, 1);
+		//gridLayout_1.addComponent(ipConfigurator_3, 2, 0);
 //		// ipConfigurator_4
-		ipConfigurator_4 = new IpConfigurator();
-		ipConfigurator_4.init("Fabrica", fabrica);
-		ipConfigurator_4.setImmediate(false);
-		ipConfigurator_4.setWidth("-1px");
-		ipConfigurator_4.setHeight("-1px");
-		gridLayout_1.addComponent(ipConfigurator_4, 1, 1);
+//		ipConfigurator_4 = new IpConfigurator();
+//		ipConfigurator_4.init("Fabrica", fabrica);
+//		ipConfigurator_4.setImmediate(false);
+//		ipConfigurator_4.setWidth("-1px");
+//		ipConfigurator_4.setHeight("-1px");
+//		gridLayout_1.addComponent(ipConfigurator_4, 1, 1);
 
 		
 		gridLayout_1.setColumnExpandRatio(0, 1);
