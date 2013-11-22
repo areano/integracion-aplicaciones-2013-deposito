@@ -3,37 +3,32 @@ package rest;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
+import javax.ws.rs.Produces;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 
-import parsers.ParserException;
-import parsers.SolicitudCompraParser;
 import dto.SolicitudCompraDTO;
 import facade.FabricaFacade;
+import parsers.ParserException;
+import parsers.SolicitudCompraParser;
 
-@Path("/ejemplo")
+@Path("/REST")
 public class RecibirSolicitudCompraRest {
 
 	@EJB
 	FabricaFacade facade;
 
-	// @GET
-	// @Path("/obtener/{id}")
-	// @Produces(MediaType.TEXT_PLAIN)
-	// public String obtener(@PathParam("id") String id) {
-	// return "ingresaste " + id;
-	// }
-
-	@POST
-	@Path("/recibirSolicitud")
+	@POST()
+	@Path("/RecibirSolicitudCompra")
 	@Consumes(MediaType.APPLICATION_JSON)
-	// @Produces(MediaType.APPLICATION_JSON)
-	public void guardar(String compra) {
+	@Produces(MediaType.APPLICATION_JSON)
+	public String recibirCompra(String solicitudCompra) {
 
 		try {
 			SolicitudCompraParser parser = new SolicitudCompraParser();
 
-			SolicitudCompraDTO dto = parser.toObject(compra);
+			SolicitudCompraDTO dto = parser.toObject(solicitudCompra);
 
 			facade.recibirSolicitudCompra(dto);
 		} catch (ParserException e) {
@@ -41,6 +36,6 @@ public class RecibirSolicitudCompraRest {
 			e.printStackTrace();
 		}
 
-		// TODO AR: Verificar si necesitamos devolver algo para el otro lado...
+		return "Hello World!";
 	}
 }
