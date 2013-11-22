@@ -246,18 +246,23 @@ public class IpConfigurator extends CustomComponent {
 		verticalLayout_2.addComponent(optionGroup_2);
 		return verticalLayout_2;
 	}
-	private void configureGroupBox(HashMap<Integer, ConnectionView> actualSet){
-		optionGroup_2.setMultiSelect(true);
-		String groupValue =  new String();
-		Item added;
-		for (Integer key:actualSet.keySet()){
-			groupValue = key+"-"+actualSet.get(key).getIp();
-			added = optionGroup_2.addItem(groupValue);
-			
-			mappedIPs.put(groupValue,actualSet.get(key));
-		}
 
+	private void configureGroupBox(HashMap<Integer, ConnectionView> actualSet) {
+		optionGroup_2.setMultiSelect(true);
+
+		for (Integer key : actualSet.keySet()) {
+			ConnectionView connectionView = actualSet.get(key);
+			String groupValue = key + "-" + connectionView.getIp();
+			optionGroup_2.addItem(groupValue);
+
+			if (connectionView.isActive()) {
+				optionGroup_2.select(groupValue);
+			}
+			
+			mappedIPs.put(groupValue, connectionView);
+		}
 	}
+
 	private void configureLabel(String label){
 		// label_1
 		label_1 = new Label(label);
