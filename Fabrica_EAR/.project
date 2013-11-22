@@ -3,10 +3,9 @@
 	<name>Fabrica_EAR</name>
 	<comment></comment>
 	<projects>
-		<project>Fabrica_WEB</project>
 		<project>Common</project>
 		<project>Fabrica_EJB</project>
-		<project>Fabrica_EJBClient1</project>
+		<project>Fabrica_WEB_OLD</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
