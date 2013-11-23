@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 
 
 
+
 import servicios.AdministradorArticulosBean;
 import servicios.AdministradorConecctionsBean;
 import view.*;
@@ -63,10 +64,10 @@ public class DepositoFacadeBean implements DepositoFacade {
 		return admin.getSolicitudesCompra();
 	}
 	
-	@Override
-	public ArrayList<SolicitudArticulosView> getSolicitudesArticulos() {
-		return admin.getSolicitudesArticulos();
-	}
+//	@Override
+//	public ArrayList<SolicitudArticulosView> getSolicitudesArticulos() {
+
+//	}
 	
 	@Override
 	public ArrayList<ArticuloView> getArticulos() {
