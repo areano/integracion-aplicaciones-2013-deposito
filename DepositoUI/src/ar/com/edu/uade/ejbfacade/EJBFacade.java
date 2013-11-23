@@ -41,7 +41,7 @@ public class EJBFacade {
 	static DespachoSolicitudesFacade despachoSolicitudesFacade;
 	private EJBFacade() throws NamingException{
 		getDepositoFacade();
-		getDespachoConnection();
+		getDespachoFacade();
 	}
 	public static EJBFacade getIntance() throws NamingException{
 		if(instance==null){
@@ -117,7 +117,7 @@ public class EJBFacade {
 	 public void getDespachoFacade() throws NamingException{
 		   try {
 				InitialContext ic = new InitialContext();
-				despachoSolicitudesFacade = (DespachoSolicitudesFacade) ic.lookup("java:global/Depostio_EAR/Deposito_EJB/DespachoSolicitudesFacadeBean");
+				despachoSolicitudesFacade = (DespachoSolicitudesFacade) ic.lookup("java:global/Depostio_EAR/Deposito_EJB/DespachoSolicitudesFacadebean");
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
