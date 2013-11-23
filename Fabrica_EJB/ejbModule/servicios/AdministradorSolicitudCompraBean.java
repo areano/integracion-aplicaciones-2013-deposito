@@ -35,7 +35,7 @@ public class AdministradorSolicitudCompraBean implements
 			SolicitudCompra entity = getEntity(compra);
 
 			solicitudCompraDao.persist(entity);
-
+			entregarCompra(compra); //TODO : sacar el automático
 		} catch (Exception e) {
 			// TODO AR: log de errores y rollback de
 			e.printStackTrace();

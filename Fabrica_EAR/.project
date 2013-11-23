@@ -4,8 +4,8 @@
 	<comment></comment>
 	<projects>
 		<project>Common</project>
+		<project>Fabrica_WEB</project>
 		<project>Fabrica_EJB</project>
-		<project>Fabrica_WEB_OLD</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

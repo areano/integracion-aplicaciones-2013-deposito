@@ -4,14 +4,11 @@
         <dependent-module archiveName="Common.jar" deploy-path="/lib" handle="module:/resource/Common/Common">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="Fabrica_EJB.jar" deploy-path="/" handle="module:/resource/Fabrica_EJB/Fabrica_EJB">
+        <dependent-module archiveName="Fabrica_WEB.war" deploy-path="/" handle="module:/resource/Fabrica_WEB/Fabrica_WEB">
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="Fabrica_EJB.jar" deploy-path="/" handle="module:/resource/Fabrica_EJB/Fabrica_EJB">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="Fabrica_WEB_OLD.war" deploy-path="/" handle="module:/resource/Fabrica_WEB_OLD/Fabrica_WEB_OLD">
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
