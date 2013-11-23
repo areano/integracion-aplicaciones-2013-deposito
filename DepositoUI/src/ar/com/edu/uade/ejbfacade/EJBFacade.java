@@ -13,7 +13,9 @@ import org.apache.log4j.Logger;
 
 
 
+
 import sessionBeans.DepositoFacade;
+import sessionBeans.DespachoSolicitudesFacade;
 //import ar.com.edu.uade.beans.DepositoFacade;
 import view.ArticuloView;
 import view.ConnectionView;
@@ -34,9 +36,9 @@ public class EJBFacade {
 	
 	
 	static EJBFacade instance =null;
-	
+
 	static DepositoFacade systemFacade ;
-	
+	static DespachoSolicitudesFacade despachoSolicitudesFacade;
 	private EJBFacade() throws NamingException{
 		getDepositoFacade();
 	}
@@ -67,93 +69,24 @@ public class EJBFacade {
 	}
 	public ArrayList<SolicitudArticulosView> getSolicitudesDeArticulos(){
 		
-		ElectrodomesticoView electro =new ElectrodomesticoView();
-		ModaView moda =  new ModaView();
-		electro.setCodigo(Long.valueOf(1));
-		electro.setDescripcion("Un electro");
-		electro.setFichaTecnica("una url");
-		electro.setMarca("Modila");
-		electro.setNombre("Supercalifragitisticoespiralidoso");
-		electro.setOrigen("Tierra cdel fuego");
-		electro.setPrecio( Float.parseFloat("12.5"));
-		
-		moda.setCodigo(Long.valueOf(1));
-		moda.setDescripcion("una remera");
-		moda.setTalle("XL");
-		moda.setMarca("Mota");
-		moda.setNombre("Motta inside");
-		moda.setOrigen("El Salvador");
-		moda.setPrecio( Float.parseFloat("12.5"));
-		moda.setColor("Azul");
-		
-		ArrayList<SolicitudArticulosView> solicitudes =  new ArrayList<SolicitudArticulosView>();
-		SolicitudArticulosView dto = new SolicitudArticulosView();
-		
-		dto.setIdModulo(1);
-		SolicitudArticulosItemView item = new SolicitudArticulosItemView(electro, 2);
-		dto.addItemSolicitudArticulos(item);
-
-		dto.setDate(new java.util.Date());
-		dto.setCodigoSolicitud(1);
-		solicitudes.add(dto);
-		
-		dto = new SolicitudArticulosView();
-		dto.setIdModulo(2);
-		dto.setDate(new java.util.Date());
-		dto.addItemSolicitudArticulos(new SolicitudArticulosItemView(electro, 5));
-		dto.addItemSolicitudArticulos(new SolicitudArticulosItemView(moda, 5));
-		dto.setCodigoSolicitud(2);
-		solicitudes.add(dto);
-		return solicitudes;
+		return despachoSolicitudesFacade.getSolicitudes();
+		//return systemFacade.getSolicitudesArticulos();
 	}
-	public ArrayList<SolicitudCompraView> getSolicitudesDeCompra(){		
-	
+	public ArrayList<SolicitudCompraView> getSolicitudesDeCompra(){			
 		return null;
-
 	}
 	public Collection<? extends ArticuloView> getAllArticulos() {
-//		ArrayList<ArticuloView> articulos =  new ArrayList<ArticuloView>();
-//		ElectrodomesticoView electro =new ElectrodomesticoView();
-//		ModaView moda =  new ModaView();
-//		electro.setCodigo(Long.valueOf(1));
-//		electro.setDescripcion("Un electro");
-//		electro.setFichaTecnica("una url");
-//		electro.setMarca("Modila");
-//		electro.setNombre("Supercalifragitisticoespiralidoso");
-//		electro.setOrigen("Tierra cdel fuego");
-//		electro.setPrecio(Float.parseFloat("12.5"));
-//		electro.setFoto("una Foto");
-//		
-//		moda.setCodigo(Long.valueOf(1));
-//		moda.setDescripcion("una remera");
-//		moda.setTalle("XL");
-//		moda.setMarca("Mota");
-//		moda.setNombre("Motta inside");
-//		moda.setOrigen("El Salvador");
-//		moda.setPrecio(Float.parseFloat("12.5"));
-//		moda.setColor("Azul");
-//		moda.setFoto("otra Foto");
-//			
-//		articulos.add(electro);
-//		articulos.add(moda);
-//		return articulos;
 		return systemFacade.getArticulos();
-		
 	}
 	public void altaElectrodomestico(ElectrodomesticoView e){
 		systemFacade.altaElectrodomestico(e);
 	}
-
 	public void altaModa(ModaView m) {
 		systemFacade.altaModa(m);
 	}
-
-
 	public void altaMueble(MuebleView m) {
 		systemFacade.altaMueble(m);
 	}
-
-
 	public void altaInfatil(InfantilView i) {
 		systemFacade.altaInfatil(i);
 	}
@@ -179,18 +112,17 @@ public class EJBFacade {
 			e.printStackTrace();
 		}
 
-	 }
-	public static Object getRemote(String appName, String moduleName, String sessionBeanName, String viewClassName, Object user, Object pass) throws Exception {
+	 }	 
+	 public void getDespachoFacade() throws NamingException{
+		   try {
+				InitialContext ic = new InitialContext();
+				despachoSolicitudesFacade = (DespachoSolicitudesFacade) ic.lookup("java:global/Depostio_EAR/Deposito_EJB/DespachoSolicitudesFacadeBean");
 
-			Properties jndiProps = new Properties();
-			jndiProps.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			jndiProps.put(Context.PROVIDER_URL, "remote://localhots:4447");
-			jndiProps.put(Context.SECURITY_PRINCIPAL, user);
-			jndiProps.put(Context.SECURITY_CREDENTIALS, pass);
-			jndiProps.put("jboss.naming.client.ejb.context", true);
-			Context context = new InitialContext(jndiProps);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-			return context.lookup(appName + "/" + moduleName + "/" + sessionBeanName + "!" + viewClassName);
+	 } 
 
-	}
 }

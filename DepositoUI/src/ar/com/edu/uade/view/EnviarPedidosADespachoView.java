@@ -32,7 +32,8 @@ import com.vaadin.ui.themes.Runo;
 
 
 public class EnviarPedidosADespachoView extends VerticalLayout implements View {
-	
+	private ArrayList<SolicitudArticulosView> solicitudes;
+	private HashMap<Long, SolicitudArticulosView> solicitudesMap = new HashMap<Long, SolicitudArticulosView>();
 	public class MyButton implements Button.ClickListener{
 		Table items;
 		public MyButton(Table items){
@@ -47,6 +48,11 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 		}
 		
 	}
+	private void createMapfromList(){
+		for (SolicitudArticulosView solicitud : solicitudes) {
+			solicitudesMap.put(solicitud.getCodigoSolicitud(), solicitud);
+		}
+	}
 	public class ConfirmSend implements Button.ClickListener{
 		private ArrayList<OptionGroup> checks;
 		public ConfirmSend(ArrayList<OptionGroup> checks){
@@ -59,6 +65,7 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 				selection = (Set)option.getValue();
 				for (Object object : selection) {
 					System.out.println(((Long)object).toString());
+					System.out.println(solicitudesMap.get((Long)object));
 				}
 				
 			}
@@ -189,12 +196,9 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 	}
 	@Override
 	public void enter(ViewChangeEvent event) {
-		addStyleName("chameleon");
-		//EJBFacade facade;
-//		try {
-			//facade = EJBFacade.getIntance();
 		
-			ArrayList<SolicitudArticulosView> solicitudes =  facade.getSolicitudesDeArticulos();
+		addStyleName("chameleon");
+			 solicitudes =  facade.getSolicitudesDeArticulos();
 			OptionGroup selectSolitudes =  new OptionGroup("Solicitudes Pendientes");
 			FormLayout form ;
 			HashMap<Object, Long> mappedSolicitudes =  new HashMap<Object, Long>();
@@ -203,7 +207,6 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 			OptionGroup helper = new OptionGroup();
 			PopupView popUpView;
 			fop.setMultiSelect(true);
-			//FlexibleOptionGroupItemComponent fopItem = new FlexibleOptionGroupItemComponent();
 			ArrayList<OptionGroup> checks =  new ArrayList<OptionGroup>();
 			VerticalLayout base = new VerticalLayout();
 			
@@ -228,61 +231,29 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 					items.addItem(new Object[] {new PopupView(itemSolictud.getArticulo().getNombre(),form) , itemSolictud.getCantidad()}, null);
 				}
 				
-	//			fop.addItem(selectSolitudes.addItem(new PopupView("Despacho: " + solicitudCompraDTO.getCodigoDespacho() +" fecha:  "+ solicitudCompraDTO.getDate(), 
-	//					items)));
+
 				popUpView = new PopupView("Despacho: " + solicitudArticulosView.getIdModulo() +" fecha:  "+ solicitudArticulosView.getDate(), 
 						items);
 				popUpView.addStyleName("chameleon");
-	//			mappedSolicitudes.put(new PopupView("Despacho: " + solicitudCompraDTO.getCodigoDespacho() +" fecha:  "+ solicitudCompraDTO.getDate(), 
-	//					items),solicitudCompraDTO.getCodigoSolicitud());
+
 				helper = new OptionGroup();
 				helper.setMultiSelect(true);
 				helper.addItem(solicitudArticulosView.getCodigoSolicitud());
 				helper.setCaption("");
+				if (!solicitudArticulosView.isSelectable()) {
+					helper.setEnabled(false);
+				}
 				checks.add(helper);
 				
 				base.addComponent(new VerticalLayout(helper,popUpView));
 				addComponent(base);
 	
-				
-	//			addComponent(new PopupView("Despacho: " + solicitudCompraDTO.getCodigoDespacho() +" fecha:  "+ solicitudCompraDTO.getDate(), 
-	//					items));
+
 					
 			}
 			Button confirm =  new Button("Confirm");
 			confirm.addClickListener(new ConfirmSend(checks));
 			addComponent(confirm);
-	//	 	//addComponent(selectSolitudes);
-	//	 	for (Iterator<FlexibleOptionGroupItemComponent> iter = fop
-	//                .getItemComponentIterator(); iter.hasNext();) {
-	//        FlexibleOptionGroupItemComponent comp = iter.next();
-	//        	addComponent(comp);
-	//	 	}
-		 	
-		 	
-	//	 	String caption;
-	//		Table items2 = new Table ("Pedido");
-	//		items2.addContainerProperty("Articulo", PopupView.class, null);
-	//		items2.addContainerProperty("Cantidad",  Integer.class, null);
-	//		items2.setStyleName(Runo.TABLE_SMALL);
-	//	 	Table newItems;
-	//	 	for (SolicitudCompraDTO solicitudCompraDTO : solicitudes) {
-	//	 		
-	//	 		
-	//			for (ItemSolicitudCompra itemSolictud : solicitudCompraDTO.getItems()) {
-	//				//armar tabla popup
-	//				form =  convertFromDTO(itemSolictud.getArticulo());				
-	//				items2.addItem(new Object[] {new PopupView(itemSolictud.getArticulo().getNombre(),form),itemSolictud.getCantidad()}, null);
-	//			}
-	//			
-	//	 		caption =  "Despacho: " + solicitudCompraDTO.getCodigoDespacho() +" fecha:  "+ solicitudCompraDTO.getDate();	
-	//	 		newItems =items2;
-	//	 		addComponent(new Button(caption,new MyButton(newItems)));
-	//	 	
-	//	 	}
-//		} catch (NamingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+
 	}
 }
