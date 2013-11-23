@@ -124,6 +124,14 @@ public class EJBFacade {
 			e.printStackTrace();
 		}
 
-	 } 
+	 }
+	public ArrayList<SolicitudArticulosView> markSolicitud(SolicitudArticulosView solicitud) {
+		return despachoSolicitudesFacade.markSolicitud(solicitud);
+		
+	}
+	public ArrayList<SolicitudArticulosView> unMarkSolicitud(SolicitudArticulosView solicitud) {
+		return despachoSolicitudesFacade.unmarkSolicitud(solicitud);
+		
+	} 
 
 }
