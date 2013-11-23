@@ -101,7 +101,7 @@ public class ArticuloDAO {
 	public List<Electrodomestico> findAllElectrodomesticos() {
 		List<Electrodomestico> al = new ArrayList<Electrodomestico>();
 		try{
-			Query q = em.createNativeQuery("select * from Articulo a where tipo 'Electrodomestico'");
+			Query q = em.createQuery(" from Electrodomestico");
 			al =(List<Electrodomestico> ) q.getResultList();
 			logger.info("Get All Electrodomestico ");
 		}catch(Exception e)
