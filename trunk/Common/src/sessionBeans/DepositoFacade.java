@@ -21,7 +21,8 @@ public interface DepositoFacade {
 	
 	public void actualizarStock(ArticuloView dto, long stock);
 	public ArrayList<SolicitudCompraView> getSolicitudesCompra();
-	public ArrayList<SolicitudArticulosView> getSolicitudesArticulos();
+	// this method is now at the Stateful ejb facade
+	//public ArrayList<SolicitudArticulosView> getSolicitudesArticulos();
 	public ArrayList<ArticuloView>  getArticulos();
 	public ArrayList<ConnectionView>  getFabricasConnection();
 	public ArrayList<ConnectionView>  getMonitoreosConnection();
