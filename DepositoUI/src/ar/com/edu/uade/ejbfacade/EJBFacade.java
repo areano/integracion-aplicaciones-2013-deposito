@@ -41,6 +41,7 @@ public class EJBFacade {
 	static DespachoSolicitudesFacade despachoSolicitudesFacade;
 	private EJBFacade() throws NamingException{
 		getDepositoFacade();
+		getDespachoConnection();
 	}
 	public static EJBFacade getIntance() throws NamingException{
 		if(instance==null){
