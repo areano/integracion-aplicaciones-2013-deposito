@@ -32,6 +32,8 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
+import com.vaadin.ui.themes.ChameleonTheme;
+import com.vaadin.ui.themes.Reindeer;
 import com.vaadin.ui.themes.Runo;
 
 
@@ -58,45 +60,17 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 			solicitudValueChange(solicitud);
 		}
 	}	
-//	private class MyButton implements Button.ClickListener{
-//		private static final long serialVersionUID = -2325159211330203578L;
-//		Table items;
-//		public MyButton(Table items){
-//			this.items = items;
-//		}
-//		@Override
-//		public void buttonClick(ClickEvent event) {
-//			DetailedRequest window =  new DetailedRequest(items);
-//			window.setStyleName(Runo.WINDOW_DIALOG);
-//			UI.getCurrent().addWindow(window);			
-//		}
-//		
-//	}
 	private class ConfirmSend implements Button.ClickListener{
 		private static final long serialVersionUID = -115242109272197249L;
-//		private ArrayList<OptionGroup> checks;
 		private ArrayList<SolicitudArticulosView> solicitudesToSend;
-//		public ConfirmSend(ArrayList<OptionGroup> checks){
-//			this.checks = checks;
-//		}
 		@Override
 		public void buttonClick(ClickEvent event) {
-//			Set selection;
-//			for (OptionGroup option : checks) {
-//				selection = (Set)option.getValue();
-//				for (Object object : selection) {
-//					System.out.println(((Long)object).toString());
-//					System.out.println(solicitudesMap.get((Long)object));
-//				}				
-//			}
 		   	for(SolicitudArticulosView s:map.keySet()){
 				if (map.get(s).getValue()){
 					solicitudesToSend.add(s);
 					System.out.println(s.getCodigoSolicitud());
 				}
-				
 			} 
-			
 		}		
 	}
 	private class DetailedRequest extends Window {
@@ -129,19 +103,21 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 	@Override
 	public void enter(ViewChangeEvent event) {
 		
-		addStyleName("runo");
+			addStyleName("runo");
 			solicitudes =  facade.getSolicitudesDeArticulos();
 			OptionGroup selectSolitudes =  new OptionGroup("Solicitudes Pendientes");
 			FormLayout form ;
-//			HashMap<Object, Long> mappedSolicitudes =  new HashMap<Object, Long>();
+
 			Table items = new Table ("Pedido");
 			FlexibleOptionGroup fop = new FlexibleOptionGroup();
-//			OptionGroup helper = new OptionGroup();
+
 			CheckBox solicitudSelected = new CheckBox();
 			PopupView popUpView;
 			fop.setMultiSelect(true);
-//			ArrayList<OptionGroup> checks =  new ArrayList<OptionGroup>();
+
 			VerticalLayout base = new VerticalLayout();
+			base.addStyleName(Reindeer.THEME_NAME);
+			base.setStyleName(Reindeer.THEME_NAME);
 			items.addStyleName(Runo.TABLE_SMALL);
 			items.addContainerProperty("articulo", PopupView.class, null);
 			items.addContainerProperty("cantidad",  Integer.class, null);
@@ -162,28 +138,16 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 				}
 				popUpView = new PopupView("Despacho: " + solicitudArticulosView.getIdModulo() +" fecha:  "+ solicitudArticulosView.getDate(), 
 						items);
-				popUpView.addStyleName("chameleon");
-
-//				helper = new OptionGroup();
-//				helper.setMultiSelect(true);
-//				helper.addItem(solicitudArticulosView.getCodigoSolicitud());
-//				helper.setCaption("OG");
-//				helper.addValueChangeListener(new CheckValueEventListener(solicitudArticulosView));
-				
+				popUpView.addStyleName(Reindeer.THEME_NAME);
+				popUpView.setStyleName(Reindeer.THEME_NAME);
 				solicitudSelected = new CheckBox("CB");
 				solicitudSelected.addValueChangeListener(new CheckValueEventListener(solicitudArticulosView));
 				
 				if (!solicitudArticulosView.isSelectable()) {
-					//helper.setEnabled(false);
 					solicitudSelected.setEnabled(false);
 				}
-//				checks.add(helper);
-				
-				
-				
-				//map.put(solicitudArticulosView, helper);
+
 				map.put(solicitudArticulosView,solicitudSelected);
-				//base.addComponent(new VerticalLayout(helper,popUpView));
 				base.addComponent(new VerticalLayout(solicitudSelected,popUpView));
 				addComponent(base);
 			}
@@ -194,7 +158,7 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 	private void solicitudValueChange(SolicitudArticulosView solicitud){
 	
 		ArrayList<SolicitudArticulosView> toChange;
-        Notification.show("Value changed:",String.valueOf((map.get(solicitud)).getValue()),Type.TRAY_NOTIFICATION);
+        
         CheckBox cb;
         if (map.get(solicitud).getValue())        
         	toChange = facade.markSolicitud(solicitud);
@@ -206,11 +170,7 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
         }
 		
 	}
-//	private void createMapfromList(){
-//		for (SolicitudArticulosView solicitud : solicitudes) {
-//			solicitudesMap.put(solicitud.getCodigoSolicitud(), solicitud);
-//		}
-//	}
+
 	public  EnviarPedidosADespachoView(){
         try {
 			facade = EJBFacade.getIntance();
