@@ -44,7 +44,7 @@ public class GenericQueueClient {
 			env.put(Context.PROVIDER_URL, System.getProperty(Context.PROVIDER_URL, "remote://" + ip + ":" + port));
 			env.put(Context.SECURITY_PRINCIPAL, System.getProperty("username", username));
 			env.put(Context.SECURITY_CREDENTIALS, System.getProperty("password", password));
-
+			
 			Context context = new InitialContext(env);
 			// Perform the JNDI lookups
 			String connectionFactoryString = System.getProperty("connection.factory", "jms/RemoteConnectionFactory");

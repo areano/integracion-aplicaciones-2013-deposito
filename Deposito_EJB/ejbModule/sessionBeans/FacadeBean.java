@@ -5,7 +5,8 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import servicios.AdministradorSolicitudArticulos;
-import servicios.AdministradorSolicitudCompra;
+
+import servicios.AdministradorSolicitudCompraBean;
 import view.SolicitudCompraView;
 import dto.SolicitudCompraDTO;
 import dto.SolicitudArticulosDTO;
@@ -21,7 +22,7 @@ public class FacadeBean implements Facade {
 	private AdministradorSolicitudArticulos admArticulos;
 
 	@EJB
-	private AdministradorSolicitudCompra admSolicitudCompra;
+	private AdministradorSolicitudCompraBean admSolicitudCompra;
 
 	/**
 	 * Default constructor.

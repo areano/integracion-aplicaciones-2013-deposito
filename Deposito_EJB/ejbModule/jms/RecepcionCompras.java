@@ -10,6 +10,7 @@ import javax.jms.TextMessage;
 
 import parsers.ParserException;
 import parsers.SolicitudCompraJSONParser;
+import parsers.SolicitudCompraXMLParser;
 import dto.SolicitudCompraDTO;
 import sessionBeans.Facade;
 
@@ -25,7 +26,7 @@ public class RecepcionCompras implements MessageListener {
 	Facade facade;
 
 	
-	SolicitudCompraJSONParser parser=SolicitudCompraJSONParser.obtenerInstancia();
+	SolicitudCompraXMLParser parser=SolicitudCompraXMLParser.obtenerInstancia();
 	/**
 	 * Default constructor.
 	 */

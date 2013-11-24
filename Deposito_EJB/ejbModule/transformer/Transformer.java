@@ -3,6 +3,8 @@ package transformer;
 import java.sql.Timestamp;
 
 import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 
 import dao.ArticuloDAO;
 import dto.ArticuloDTO;
@@ -23,19 +25,12 @@ import entities.SolicitudArticulos;
 import entities.SolicitudCompra;
 import view.*;
 
+@Stateless
+@LocalBean
 public class Transformer {
 	@EJB
 	ArticuloDAO articuloDAO;
 	
-	private static Transformer instancia;
-	
-	public static Transformer obtenerInstancia(){
-		if(instancia==null)
-			instancia=new Transformer();
-		return instancia;
-	}
-	
-	private Transformer(){}
 	
 	public Articulo converToClass(ArticuloDTO dto){
 		Articulo a = new Articulo();

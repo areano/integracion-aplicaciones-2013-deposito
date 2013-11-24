@@ -3,6 +3,7 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.jms.JMSException;
@@ -31,7 +32,9 @@ import entities.PortalConexion;
 @Stateless
 @LocalBean
 public class PortalDAO {
-
+	@EJB
+	Transformer t;
+	
 	@PersistenceContext
 	EntityManager em;
 
@@ -50,28 +53,28 @@ public class PortalDAO {
 
 	public void enviar(Mueble m) {
 		ArticuloParser parser = new ArticuloParser();
-		MuebleDTO mDTO = Transformer.obtenerInstancia().toDTO(m);
+		MuebleDTO mDTO = t.toDTO(m);
 		String xml = parser.toXML(mDTO);
 		enviar(xml);
 	}
 
 	public void enviar(Infantil i) {
 		ArticuloParser parser = new ArticuloParser();
-		InfantilDTO mDTO = Transformer.obtenerInstancia().toDTO(i);
+		InfantilDTO mDTO = t.toDTO(i);
 		String xml = parser.toXML(mDTO);
 		enviar(xml);
 	}
 
 	public void enviar(Electrodomestico e) {
 		ArticuloParser parser = new ArticuloParser();
-		ElectrodomesticoDTO eDTO = Transformer.obtenerInstancia().toDTO(e);
+		ElectrodomesticoDTO eDTO = t.toDTO(e);
 		String xml = parser.toXML(eDTO);
 		enviar(xml);
 	}
 
 	public void enviar(Moda m) {
 		ArticuloParser parser = new ArticuloParser();
-		ModaDTO mDTO = Transformer.obtenerInstancia().toDTO(m);
+		ModaDTO mDTO = t.toDTO(m);
 		String xml = parser.toXML(mDTO);
 		enviar(xml);
 	}
