@@ -18,10 +18,19 @@ import org.eclipse.persistence.jaxb.JAXBContextProperties;
 
 import dto.SolicitudCompraDTO;
 
-@LocalBean
-@Stateless
-public class SolicitudCompraXMLParser implements Parser<SolicitudCompraDTO> {
 
+public class SolicitudCompraJSONParser implements Parser<SolicitudCompraDTO> {
+
+	private static SolicitudCompraJSONParser instancia;
+	
+	public static SolicitudCompraJSONParser obtenerInstancia(){
+		if(instancia==null)
+			instancia=new SolicitudCompraJSONParser();
+		return instancia;
+	}
+	
+	private SolicitudCompraJSONParser(){}
+	
 	@Override
 	public SolicitudCompraDTO toObject(String json) throws ParserException {
 		SolicitudCompraDTO dto=null;
@@ -65,4 +74,5 @@ public class SolicitudCompraXMLParser implements Parser<SolicitudCompraDTO> {
         return json;
         
 	}
+   
 }
