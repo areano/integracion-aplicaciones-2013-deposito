@@ -3,7 +3,7 @@ package dao;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import parsers.ParserException;
-import parsers.SolicitudCompraParser;
+import parsers.SolicitudCompraJSONParser;
 import clientes.GenericRestClient;
 import dto.SolicitudCompraDTO;
 
@@ -35,7 +35,7 @@ public class FabricaDAO {
 		// TODO AR: enviar solicitud mediante REST
 		
 		try {
-			SolicitudCompraParser parser = new SolicitudCompraParser();
+			SolicitudCompraJSONParser parser = new SolicitudCompraJSONParser();
 			String mensaje = parser.toString(compra);
 			clienteRest.enviar(mensaje);
 			

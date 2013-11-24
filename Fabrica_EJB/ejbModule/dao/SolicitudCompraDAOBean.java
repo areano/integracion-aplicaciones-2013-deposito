@@ -10,7 +10,7 @@ import entities.SolicitudCompra;
  */
 @Stateless
 @LocalBean
-public class SolicitudCompraDAOBean implements SolicitudCompraDAO {
+public class SolicitudCompraDAOBean  {
 
 	/**
 	 * Default constructor.
@@ -18,7 +18,7 @@ public class SolicitudCompraDAOBean implements SolicitudCompraDAO {
 	public SolicitudCompraDAOBean() {
 	}
 
-	@Override
+
 	public void persist(SolicitudCompra entity) {
 		// TODO Auto-generated method stub
 

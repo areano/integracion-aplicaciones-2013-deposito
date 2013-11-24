@@ -1,6 +1,8 @@
 package rest;
 
 import javax.ejb.EJB;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -15,16 +17,34 @@ import facade.FabricaFacade;
 @Path("/Fabrica")
 public class FabricaRest {
 
-	@EJB
-	FabricaFacade facade;
 
+
+	FabricaFacade facade=null;
+
+	 private void getFabricaFacade() {
+		 if (facade==null){
+		 
+		 try {
+				InitialContext ic = new InitialContext();
+				facade = (FabricaFacade) ic.lookup("java:global/Fabrica_EAR/Fabrica_EJB/FabricaFacadeBean");
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+
+	 }	 
 	@POST
 	@Path("/RecibirSolicitud")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public String guardar(String compra) {
 
+		
 		try {
+			getFabricaFacade();
+			
 			SolicitudCompraParser parser = new SolicitudCompraParser();
 
 			SolicitudCompraDTO dto = parser.toObject(compra);
@@ -33,10 +53,12 @@ public class FabricaRest {
 		} catch (ParserException e) {
 			// TODO AR: log error
 			e.printStackTrace();
-		}
-
+		} 
+		
 		return compra;
 
 		// TODO AR: Verificar si necesitamos devolver algo para el otro lado...
 	}
+	
+	
 }

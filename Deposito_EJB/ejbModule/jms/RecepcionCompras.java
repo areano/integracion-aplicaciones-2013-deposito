@@ -9,7 +9,7 @@ import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
 import parsers.ParserException;
-import parsers.SolicitudCompraParser;
+import parsers.SolicitudCompraJSONParser;
 import dto.SolicitudCompraDTO;
 import sessionBeans.Facade;
 
@@ -37,7 +37,7 @@ public class RecepcionCompras implements MessageListener {
 
 		try {
 			TextMessage txtMessage = (TextMessage) message;
-			SolicitudCompraParser parser = new SolicitudCompraParser();
+			SolicitudCompraJSONParser parser = new SolicitudCompraJSONParser();
 			SolicitudCompraDTO compra = parser.toObject(txtMessage.getText());
 			facade.recibirSolicitudCompra(compra);
 		} catch (JMSException e) {
