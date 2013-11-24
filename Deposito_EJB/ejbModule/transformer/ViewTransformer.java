@@ -46,15 +46,7 @@ public class ViewTransformer {
 	@EJB
 	SolicitudArticulosDAO solicitudArticulosDAO;
 	
-	private static ViewTransformer instancia;
-	
-	public static ViewTransformer obtenerInstancia(){
-		if(instancia==null)
-			instancia=new ViewTransformer();
-		return instancia;
-	}
-	
-	private ViewTransformer(){
+	public ViewTransformer(){
 		
 	}
 	

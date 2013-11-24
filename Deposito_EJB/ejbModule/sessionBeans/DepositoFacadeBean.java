@@ -37,6 +37,9 @@ public class DepositoFacadeBean implements DepositoFacade {
 	@EJB
 	AdministradorSolicitudCompraBean admSC;
 	
+	@EJB 
+	ViewTransformer vt;
+	
 	private static final Logger logger = 
 			   Logger.getLogger(DepositoFacadeBean.class.getName());
 	public DepositoFacadeBean(){}
@@ -121,7 +124,6 @@ public class DepositoFacadeBean implements DepositoFacade {
 		
 	}
 	public void crearSolicitudCompra(SolicitudCompraView compra){
-		ViewTransformer vt=ViewTransformer.obtenerInstancia();
 		Transformer t= Transformer.obtenerInstancia();
 		vt.converToClass(compra);
 		admSC.crear(t.toDTO(vt.converToClass(compra)));	
@@ -130,7 +132,7 @@ public class DepositoFacadeBean implements DepositoFacade {
 	public SolicitudCompraView getRecomendacionCompra(){
 		SolicitudCompra SC=admSC.getRecomendacionCompra();
 		
-		return ViewTransformer.obtenerInstancia().toView(SC);
+		return vt.toView(SC);
 	}
 	
 	@Override
