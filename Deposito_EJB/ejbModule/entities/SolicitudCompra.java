@@ -1,7 +1,9 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -26,6 +28,7 @@ public class SolicitudCompra {
 	private Date fechaFin;
 
 	public SolicitudCompra() {
+			articulos = new ArrayList<ItemSolicitudCompra>();
 	}
 
 	public long getCodigo() {

@@ -127,6 +127,7 @@ public class Transformer {
 		ItemSolicitudCompra item = new ItemSolicitudCompra();
 		item.setArticulo(articuloDAO.find(dto.getCodArticulo()));
 		item.setCantidad(dto.getCantidad());
+		
 		return item;
 	}
 	
@@ -186,7 +187,7 @@ public class Transformer {
 	private ItemSolicitudCompraDTO toDTO(ItemSolicitudCompra item){
 		ItemSolicitudCompraDTO dto = new ItemSolicitudCompraDTO();
 		dto.setCantidad(item.getCantidad());
-		dto.setCodArticulo(item.getId());
+		dto.setCodArticulo(item.getArticulo().getCodigo());
 		dto.setNomArticulo(item.getArticulo().getNombre());
 		return dto;
 	}

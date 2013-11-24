@@ -20,6 +20,8 @@ import org.apache.log4j.Logger;
 
 
 
+
+import dto.SolicitudCompraDTO;
 import entities.SolicitudCompra;
 import servicios.AdministradorArticulosBean;
 import servicios.AdministradorConecctionsBean;
@@ -124,9 +126,8 @@ public class DepositoFacadeBean implements DepositoFacade {
 		
 	}
 	public void crearSolicitudCompra(SolicitudCompraView compra){
-		Transformer t= Transformer.obtenerInstancia();
-		vt.converToClass(compra);
-		admSC.crear(t.toDTO(vt.converToClass(compra)));	
+
+		admSC.crear(compra);	
 	}
 	
 	public SolicitudCompraView getRecomendacionCompra(){
