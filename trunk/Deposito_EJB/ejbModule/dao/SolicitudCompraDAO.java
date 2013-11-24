@@ -40,7 +40,7 @@ public class SolicitudCompraDAO {
 	}
 
 	public SolicitudCompra getRecomendacionCompra() {
-		// TODO MF: aca falta obtener la recomendaicon
+		// TODO MF: aca falta obtener la recomendacion real esto es una truchada
 		SolicitudCompra sc=new SolicitudCompra();
 		sc.setFechaInicio(new Date());
 		sc.setCompletada(false);
@@ -49,7 +49,7 @@ public class SolicitudCompraDAO {
 			
 //			Query = em.createQuery("SELECT Articulo, 1 FROM Articulo'");
 			int i=0;
-			List<Articulo> results = (List<Articulo>) em.createQuery("SELECT Articulo, 1 FROM Articulo'").getResultList();
+			List<Articulo> results = (List<Articulo>) em.createQuery("FROM Articulo").getResultList();
 			for (Articulo a1: results){
 				i++;
 				sc.getArticulos().add(new ItemSolicitudCompra(a1.getCodigo(), a1, i));

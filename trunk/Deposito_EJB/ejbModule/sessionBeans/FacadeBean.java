@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 
 import servicios.AdministradorSolicitudArticulos;
 import servicios.AdministradorSolicitudCompra;
+import view.SolicitudCompraView;
 import dto.SolicitudCompraDTO;
 import dto.SolicitudArticulosDTO;
 
@@ -37,7 +38,7 @@ public class FacadeBean implements Facade {
 	}
 
 	@Override
-	public void crearSolicitudCompra(SolicitudCompraDTO compra) {
+	public void crearSolicitudCompra(SolicitudCompraView compra) {
 		admSolicitudCompra.crear(compra);
 	}
 

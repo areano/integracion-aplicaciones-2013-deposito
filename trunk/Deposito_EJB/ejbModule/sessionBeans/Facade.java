@@ -2,6 +2,7 @@ package sessionBeans;
 
 import javax.ejb.Remote;
 
+import view.SolicitudCompraView;
 import dto.SolicitudCompraDTO;
 import dto.SolicitudArticulosDTO;
 
@@ -21,11 +22,12 @@ public interface Facade {
 	/**
 	 * Crea una nueva solicitud de compra y la envia a Fabrica
 	 */
-	public void crearSolicitudCompra(SolicitudCompraDTO compra);
+	public void crearSolicitudCompra(SolicitudCompraView compra);
 
 	/**
 	 * Envia los articulos de la solicitud compra a Despacho
 	 */
 	public void enviarArticulos(SolicitudCompraDTO compra);
+
 
 }

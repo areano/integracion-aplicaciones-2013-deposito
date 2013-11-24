@@ -7,6 +7,8 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import transformer.Transformer;
+import transformer.ViewTransformer;
+import view.SolicitudCompraView;
 import dao.DespachoDAO;
 import dao.FabricaDAO;
 import dao.SolicitudCompraDAO;
@@ -30,6 +32,8 @@ public class AdministradorSolicitudCompraBean implements
 	@EJB
 	private DespachoDAO despachoDAO;
 	
+	@EJB
+	private ViewTransformer vt;
 
 	/**
 	 * Default constructor.
@@ -37,15 +41,19 @@ public class AdministradorSolicitudCompraBean implements
 	public AdministradorSolicitudCompraBean() {
 	}
 
+	
+	
 	@Override
-	public void crear(SolicitudCompraDTO compraDTO) {
+	public void crear(SolicitudCompraView compraView) {
+
+		Transformer t= Transformer.obtenerInstancia();
+		SolicitudCompra compra= vt.converToClass(compraView);
 
 		/*
 		 * get entity, validar, enviar a fabrica. Si falla, rollback y log
 		 */
 
 		try {
-			SolicitudCompra compra = getEntity(compraDTO);
 
 			// TODO AR: Validar entity
 
@@ -92,7 +100,8 @@ public class AdministradorSolicitudCompraBean implements
 	}
 
 	public SolicitudCompra getRecomendacionCompra(){
-		return solicitudCompraDAO.getRecomendacionCompra();
+		SolicitudCompra SC=solicitudCompraDAO.getRecomendacionCompra(); 
+		return SC;
 	}
 	
 	
