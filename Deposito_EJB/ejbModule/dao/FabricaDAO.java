@@ -21,7 +21,7 @@ public class FabricaDAO {
 		clienteRest = new GenericRestClient();
 		clienteRest.setIp("127.0.0.1");
 		clienteRest.setPort("8080");
-		clienteRest.setMetodo("");
+		clienteRest.setMetodo("Fabrica_WEB/RecibirSolicitud");
 	}
 	
     public FabricaDAO(String ip, String puerto, String metodo) {
