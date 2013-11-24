@@ -14,6 +14,10 @@ import org.apache.log4j.Logger;
 
 
 
+
+
+
+
 import sessionBeans.DepositoFacade;
 import sessionBeans.DespachoSolicitudesFacade;
 //import ar.com.edu.uade.beans.DepositoFacade;
@@ -76,6 +80,17 @@ public class EJBFacade {
 	public ArrayList<SolicitudCompraView> getSolicitudesDeCompra(){			
 		return null;
 	}
+	
+	public void crearSolicitudCompra(SolicitudCompraView compra){
+		systemFacade.crearSolicitudCompra(compra);
+	}
+	
+	
+	public SolicitudCompraView getRecomendacionCompra(){
+		return systemFacade.getRecomendacionCompra();
+	}
+	
+	
 	public Collection<? extends ArticuloView> getAllArticulos() {
 		return systemFacade.getArticulos();
 	}

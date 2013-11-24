@@ -284,6 +284,7 @@ public class DepositoUI extends UI {
             if (view.equals("crearpedidoafabrica")) {
                 // Add drop target to reports button
                 DragAndDropWrapper reports = new DragAndDropWrapper(b);
+                logger.info("*** CrearPedido ***");
                 reports.setDragStartMode(DragStartMode.NONE);
                 reports.setDropHandler(new DropHandler() {
 

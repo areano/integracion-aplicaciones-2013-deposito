@@ -15,8 +15,17 @@ import org.apache.log4j.Logger;
 
 
 
+
+
+
+
+
+import entities.SolicitudCompra;
 import servicios.AdministradorArticulosBean;
 import servicios.AdministradorConecctionsBean;
+import servicios.AdministradorSolicitudCompraBean;
+import transformer.Transformer;
+import transformer.ViewTransformer;
 import view.*;
 @Stateless
 public class DepositoFacadeBean implements DepositoFacade {
@@ -25,6 +34,9 @@ public class DepositoFacadeBean implements DepositoFacade {
 	AdministradorArticulosBean admin ;
 	@EJB
 	AdministradorConecctionsBean connAdmin ;
+	@EJB
+	AdministradorSolicitudCompraBean admSC;
+	
 	private static final Logger logger = 
 			   Logger.getLogger(DepositoFacadeBean.class.getName());
 	public DepositoFacadeBean(){}
@@ -107,6 +119,18 @@ public class DepositoFacadeBean implements DepositoFacade {
 	public void saveDespachosConnection(ArrayList<ConnectionView> activas) {
 		connAdmin.saveDespachosConnection(activas);
 		
+	}
+	public void crearSolicitudCompra(SolicitudCompraView compra){
+		ViewTransformer vt=ViewTransformer.obtenerInstancia();
+		Transformer t= Transformer.obtenerInstancia();
+		vt.converToClass(compra);
+		admSC.crear(t.toDTO(vt.converToClass(compra)));	
+	}
+	
+	public SolicitudCompraView getRecomendacionCompra(){
+		SolicitudCompra SC=admSC.getRecomendacionCompra();
+		
+		return ViewTransformer.obtenerInstancia().toView(SC);
 	}
 	
 	@Override

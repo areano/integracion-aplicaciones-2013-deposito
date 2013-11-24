@@ -11,6 +11,13 @@ import javax.persistence.Table;
 @Table(name = "CantidadArticulos")
 public class ItemSolicitudCompra {
 
+	public ItemSolicitudCompra(long id, Articulo articulo, int cantidad) {
+		super();
+		this.id = id;
+		this.articulo = articulo;
+		this.cantidad = cantidad;
+	}
+
 	@Id
 	@Column(name = "cantidadArticuloId")
 	private long id;
@@ -21,6 +28,7 @@ public class ItemSolicitudCompra {
 
 	private int cantidad;
 
+	
 	public ItemSolicitudCompra() {
 	}
 

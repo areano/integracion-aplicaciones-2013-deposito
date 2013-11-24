@@ -1,5 +1,7 @@
 package servicios;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -89,5 +91,9 @@ public class AdministradorSolicitudCompraBean implements
 
 	}
 
-
+	public SolicitudCompra getRecomendacionCompra(){
+		return solicitudCompraDAO.getRecomendacionCompra();
+	}
+	
+	
 }

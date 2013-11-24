@@ -33,5 +33,6 @@ public interface DepositoFacade {
 	public void saveDespachosConnection(ArrayList<ConnectionView> activas);
 	public void saveFabricasConnection(ArrayList<ConnectionView> activas);
 	public void saveMonitoreoConnection(ArrayList<ConnectionView> activas);
-	
+	public void crearSolicitudCompra(SolicitudCompraView compra);
+	public SolicitudCompraView getRecomendacionCompra();
 }
