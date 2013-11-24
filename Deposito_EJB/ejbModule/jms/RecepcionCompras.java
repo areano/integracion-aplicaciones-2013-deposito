@@ -24,6 +24,8 @@ public class RecepcionCompras implements MessageListener {
 	@EJB
 	Facade facade;
 
+	
+	SolicitudCompraJSONParser parser=SolicitudCompraJSONParser.obtenerInstancia();
 	/**
 	 * Default constructor.
 	 */
@@ -37,7 +39,6 @@ public class RecepcionCompras implements MessageListener {
 
 		try {
 			TextMessage txtMessage = (TextMessage) message;
-			SolicitudCompraJSONParser parser = new SolicitudCompraJSONParser();
 			SolicitudCompraDTO compra = parser.toObject(txtMessage.getText());
 			facade.recibirSolicitudCompra(compra);
 		} catch (JMSException e) {

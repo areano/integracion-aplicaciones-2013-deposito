@@ -6,6 +6,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.ejb.EJB;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,6 +18,8 @@ import dto.SolicitudCompraDTO;
 
 public class SolicitudCompraParserTest {
 
+	SolicitudCompraJSONParser p=SolicitudCompraJSONParser.obtenerInstancia();
+	
 	private String json;
 	private Date fechaInicio;
 	SolicitudCompraDTO dto;
@@ -34,7 +38,7 @@ public class SolicitudCompraParserTest {
 	}
 	@Test
 	public void testToObject() {
-		SolicitudCompraJSONParser p= new SolicitudCompraJSONParser();
+//		SolicitudCompraJSONParser p= new SolicitudCompraJSONParser();
 		SolicitudCompraDTO dto2 = null;
 		try {
 			dto2 = p.toObject(json);
@@ -59,7 +63,7 @@ public class SolicitudCompraParserTest {
 	public void testToStringSolicitudCompraDTO() {
 
 		SolicitudCompraDTO dto2=null;
-		SolicitudCompraJSONParser p= new SolicitudCompraJSONParser();
+//		SolicitudCompraJSONParser p= new SolicitudCompraJSONParser();
 		String json2=null;
 		
 		try {
@@ -79,7 +83,7 @@ public class SolicitudCompraParserTest {
 	public void testIdaYVuelta() {
 		SolicitudCompraDTO dto= new SolicitudCompraDTO();
 		SolicitudCompraDTO dto2=null;
-		SolicitudCompraJSONParser p= new SolicitudCompraJSONParser();
+//		SolicitudCompraJSONParser p= new SolicitudCompraJSONParser();
 		dto.setCodigo(1);
 		dto.getArticulos().add(new ItemSolicitudCompraDTO(1L, "Articulo1", 11));
 		dto.getArticulos().add(new ItemSolicitudCompraDTO(2L, "Articulo2", 22));

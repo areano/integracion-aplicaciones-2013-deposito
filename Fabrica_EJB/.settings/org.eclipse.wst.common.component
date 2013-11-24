@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="Fabrica_EJB">
         <wb-resource deploy-path="/" source-path="/ejbModule" tag="defaultRootSource"/>
-        <dependent-module archiveName="Common.jar" deploy-path="/" handle="module:/resource/Common/Common">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <property name="java-output-path" value="/Fabrica_EJB/build/classes"/>
         <property name="ClientProject" value="Fabrica_EJBClient1"/>
         <property name="ClientJARURI" value="Fabrica_EJBClient1.jar"/>

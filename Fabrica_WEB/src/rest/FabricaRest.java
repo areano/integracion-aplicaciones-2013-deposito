@@ -10,13 +10,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import parsers.ParserException;
-import parsers.SolicitudCompraParser;
+import parsers.SolicitudCompraJSONParser;
 import dto.SolicitudCompraDTO;
 import facade.FabricaFacade;
 
 @Path("/Fabrica")
 public class FabricaRest {
 
+	
+	SolicitudCompraJSONParser parser=SolicitudCompraJSONParser.obtenerInstancia();
 
 
 	FabricaFacade facade=null;
@@ -45,8 +47,6 @@ public class FabricaRest {
 		try {
 			getFabricaFacade();
 			
-			SolicitudCompraParser parser = new SolicitudCompraParser();
-
 			SolicitudCompraDTO dto = parser.toObject(compra);
 
 			facade.recibirSolicitudCompra(dto);
