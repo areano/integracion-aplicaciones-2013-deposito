@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import parsers.ParserException;
-import parsers.SolicitudCompraParser;
+import parsers.SolicitudCompraJSONParser;
 import dto.ItemSolicitudCompraDTO;
 import dto.SolicitudCompraDTO;
 
@@ -22,7 +22,7 @@ public class SolicitudCompraParserTest {
 	
 	@Before
 	public void beforeTest(){
-		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
 		fechaInicio= new Date();
 
 		json="{\n \"solicitudCompra\" : {\n \"articulos\" : {\n \"articulo\" : [ {\n \"cantidad\" : 11,\n \"codArticulo\" : 1,\n \"nomArticulo\" : \"Articulo1\"\n }, {\n \"cantidad\" : 22,\n \"codArticulo\" : 2,\n \"nomArticulo\" : \"Articulo2\"\n } ]\n },\n \"codigo\" : 1,\n \"fechaInicio\" : \""+formatoDelTexto.format(fechaInicio)+"\"\n }\n}\n";
@@ -34,7 +34,7 @@ public class SolicitudCompraParserTest {
 	}
 	@Test
 	public void testToObject() {
-		SolicitudCompraParser p= new SolicitudCompraParser();
+		SolicitudCompraJSONParser p= new SolicitudCompraJSONParser();
 		SolicitudCompraDTO dto2 = null;
 		try {
 			dto2 = p.toObject(json);
@@ -59,7 +59,7 @@ public class SolicitudCompraParserTest {
 	public void testToStringSolicitudCompraDTO() {
 
 		SolicitudCompraDTO dto2=null;
-		SolicitudCompraParser p= new SolicitudCompraParser();
+		SolicitudCompraJSONParser p= new SolicitudCompraJSONParser();
 		String json2=null;
 		
 		try {
@@ -79,7 +79,7 @@ public class SolicitudCompraParserTest {
 	public void testIdaYVuelta() {
 		SolicitudCompraDTO dto= new SolicitudCompraDTO();
 		SolicitudCompraDTO dto2=null;
-		SolicitudCompraParser p= new SolicitudCompraParser();
+		SolicitudCompraJSONParser p= new SolicitudCompraJSONParser();
 		dto.setCodigo(1);
 		dto.getArticulos().add(new ItemSolicitudCompraDTO(1L, "Articulo1", 11));
 		dto.getArticulos().add(new ItemSolicitudCompraDTO(2L, "Articulo2", 22));

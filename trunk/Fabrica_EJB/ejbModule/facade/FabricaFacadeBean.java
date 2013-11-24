@@ -4,18 +4,18 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import servicios.AdministradorSolicitudCompra;
+import servicios.AdministradorSolicitudCompraBean;
 import dto.SolicitudCompraDTO;
 
 /**
  * Session Bean implementation class DepositoFacadeBean
  */
 @Stateless
-@LocalBean
+
 public class FabricaFacadeBean implements FabricaFacade {
 
 	@EJB
-	private AdministradorSolicitudCompra adminSolicitudCompra;
+	private AdministradorSolicitudCompraBean adminSolicitudCompra;
 
 	/**
 	 * Default constructor.

@@ -3,6 +3,7 @@
 	<name>Fabrica_EJB</name>
 	<comment></comment>
 	<projects>
+		<project>Common</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

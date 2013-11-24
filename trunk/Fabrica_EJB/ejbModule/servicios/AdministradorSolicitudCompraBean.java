@@ -3,8 +3,8 @@ package servicios;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import dao.DepositoDAO;
-import dao.SolicitudCompraDAO;
+import dao.DepositoDAOBean;
+import dao.SolicitudCompraDAOBean;
 import dto.SolicitudCompraDTO;
 import entities.SolicitudCompra;
 
@@ -12,14 +12,13 @@ import entities.SolicitudCompra;
  * Session Bean implementation class AdministradorSolicitudCompraBean
  */
 @Stateless
-public class AdministradorSolicitudCompraBean implements
-		AdministradorSolicitudCompra {
+public class AdministradorSolicitudCompraBean  {
 
 	@EJB
-	private SolicitudCompraDAO solicitudCompraDao;
+	private SolicitudCompraDAOBean solicitudCompraDao;
 
 	@EJB
-	private DepositoDAO depositoDao;
+	private DepositoDAOBean depositoDao;
 
 	/**
 	 * Default constructor.
@@ -27,7 +26,7 @@ public class AdministradorSolicitudCompraBean implements
 	public AdministradorSolicitudCompraBean() {
 	}
 
-	@Override
+
 	public void recibirSolicitudCompra(SolicitudCompraDTO compra) {
 
 		try {
@@ -43,7 +42,7 @@ public class AdministradorSolicitudCompraBean implements
 
 	}
 
-	@Override
+
 	public void entregarCompra(SolicitudCompraDTO compra) {
 		try {
 			// TODO AR: Validar entity

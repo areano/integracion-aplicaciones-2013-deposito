@@ -23,9 +23,8 @@ public class SolicitudCompraParser implements Parser<SolicitudCompraDTO> {
 		SolicitudCompraDTO dto=null;
 		Map<String, Object> properties = new HashMap<String, Object>(2);
         properties.put(JAXBContextProperties.MEDIA_TYPE, "application/json");
-//        properties.put(JAXBContextProperties.JSON_INCLUDE_ROOT, false);
 		try {
-			JAXBContext jc = JAXBContext.newInstance(new Class[] {SolicitudCompraDTO.class}, properties);
+			JAXBContext jc = org.eclipse.persistence.jaxb.JAXBContextFactory.createContext(new Class[] {SolicitudCompraDTO.class}, properties);
 			StringReader sr= new StringReader(json);
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
 			dto= (SolicitudCompraDTO) unmarshaller.unmarshal(sr);
@@ -36,32 +35,17 @@ public class SolicitudCompraParser implements Parser<SolicitudCompraDTO> {
 		}
 		return dto;
 		
-		
-//		   public static void main(String[] args) throws Exception {
-//		        Map<String, Object> properties = new HashMap<String, Object>(1);
-//		        properties.put(JAXBContextProperties.MEDIA_TYPE, "application/json");
-//		        JAXBContext jc = JAXBContext.newInstance(new Class[] {ObjectA.class}, properties);
-//
-//		        Unmarshaller unmarshaller = jc.createUnmarshaller();
-//		        File json = new File("src/forum16365788/input.json");
-//		        ObjectA objectA = (ObjectA) unmarshaller.unmarshal(json);
-//
-//		        Marshaller marshaller = jc.createMarshaller();
-//		        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-//		        marshaller.marshal(objectA, System.out);
-//		    }
 	}
 
 	@Override
 	public String toString(SolicitudCompraDTO dto) throws ParserException {
         Map<String, Object> properties = new HashMap<String, Object>(2);
         properties.put(JAXBContextProperties.MEDIA_TYPE, "application/json");
-//        properties.put(JAXBContextProperties.JSON_INCLUDE_ROOT, false);
         StringWriter sw= new StringWriter();
         String json=null;
         
         try {
-			JAXBContext jc = JAXBContext.newInstance(new Class[] {SolicitudCompraDTO.class}, properties);
+			JAXBContext jc = org.eclipse.persistence.jaxb.JAXBContextFactory.createContext(new Class[] {SolicitudCompraDTO.class}, properties);
 			Marshaller marshaller = jc.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			marshaller.marshal(dto, sw);
