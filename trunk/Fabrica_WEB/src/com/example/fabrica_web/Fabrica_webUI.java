@@ -52,7 +52,7 @@ import com.vaadin.ui.VerticalLayout;
 @Theme("fabrica_web")
 public class Fabrica_webUI extends UI {
 
-	@WebServlet(value = "/*", asyncSupported = true)
+	@WebServlet(value = {"/adm/*", "/VAADIN/*"}, asyncSupported = true)
 	@VaadinServletConfiguration(productionMode = false, ui = Fabrica_webUI.class)
 	public static class Servlet extends VaadinServlet {
 	}
