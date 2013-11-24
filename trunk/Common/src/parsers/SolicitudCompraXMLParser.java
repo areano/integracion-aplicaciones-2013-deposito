@@ -39,7 +39,6 @@ public class SolicitudCompraXMLParser implements Parser<SolicitudCompraDTO> {
 			JAXBContext jc = JAXBContext.newInstance(SolicitudCompraDTO.class);
 			StringReader sr= new StringReader(json);
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
-			unmarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			dto= (SolicitudCompraDTO) unmarshaller.unmarshal(sr);
 
 		} catch (JAXBException e) {

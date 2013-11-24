@@ -44,7 +44,7 @@ public class DepositoDAOBean  {
 	public void enviar(String xml) {
 		String errorMessage = new String();
 //TODO: Ajustar y habilitar esto
-		GenericQueueClient cliente = new GenericQueueClient("java:jboss/exported/jms/queue/recepcionCompra", "127.0.0.1" , "4447", "deposito", "deposito123");
+		GenericQueueClient cliente = new GenericQueueClient("jms/queue/recepcionCompra", "localhost" , "4447", "deposito", "deposito123");
 		try {
 			cliente.enviar(xml);
 			cliente.cerrarConexion();

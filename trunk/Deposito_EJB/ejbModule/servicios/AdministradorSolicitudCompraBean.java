@@ -20,8 +20,7 @@ import entities.SolicitudCompra;
  */
 @Stateless
 @LocalBean
-public class AdministradorSolicitudCompraBean implements
-		AdministradorSolicitudCompra {
+public class AdministradorSolicitudCompraBean {
 
 	@EJB
 	private FabricaDAO fabricaDAO;
@@ -35,6 +34,8 @@ public class AdministradorSolicitudCompraBean implements
 	@EJB
 	private ViewTransformer vt;
 
+	@EJB
+	Transformer t;
 	/**
 	 * Default constructor.
 	 */
@@ -43,10 +44,10 @@ public class AdministradorSolicitudCompraBean implements
 
 	
 	
-	@Override
+
 	public void crear(SolicitudCompraView compraView) {
 
-		Transformer t= Transformer.obtenerInstancia();
+
 		SolicitudCompra compra= vt.converToClass(compraView);
 
 		/*
@@ -59,7 +60,7 @@ public class AdministradorSolicitudCompraBean implements
 
 			solicitudCompraDAO.persist(compra);
 			
-			SolicitudCompraDTO dto =Transformer.obtenerInstancia().toDTO(compra);
+			SolicitudCompraDTO dto =t.toDTO(compra);
 
 			// TODO AR: recepcion de respuesta?
 			fabricaDAO.enviar(dto);
@@ -74,11 +75,11 @@ public class AdministradorSolicitudCompraBean implements
 		// TODO AR: crear entity desde dto.
 		// los articulos debe recuperarlos
 		
-		SolicitudCompra solicitud = Transformer.obtenerInstancia().converToClass(compraDTO);
+		SolicitudCompra solicitud = t.converToClass(compraDTO);
 		return solicitud;
 	}
 
-	@Override
+
 	public void recibir(SolicitudCompraDTO compraDTO) {
 		/*
 		 * getEntity validar actualizar el stock de cada articulo marcar la

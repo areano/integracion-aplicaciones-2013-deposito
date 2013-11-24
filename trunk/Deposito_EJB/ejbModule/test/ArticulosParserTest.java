@@ -36,7 +36,7 @@ public class ArticulosParserTest {
 		i.setStock(666);
 
 		InfantilDTO iDTO= new InfantilDTO();
-		iDTO=Transformer.obtenerInstancia().toDTO(i);
+		iDTO=new Transformer().toDTO(i);
 		String s=SAParser.toXML(iDTO);
 		assertEquals(s,"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
 				+ "<articulo>\n"
@@ -69,7 +69,7 @@ public class ArticulosParserTest {
 		i.setStock(666);
 
 		InfantilDTO iDTO= new InfantilDTO();
-		iDTO=Transformer.obtenerInstancia().toDTO(i);
+		iDTO=new Transformer().toDTO(i);
 		String s=SAParser.toXMLSmall(iDTO);
 		assertEquals(s,"<articulo>\n"
 				+ "    <codigo>1</codigo>\n"
@@ -92,7 +92,7 @@ public class ArticulosParserTest {
 		e.setStock(6);
 
 		ElectrodomesticoDTO eDTO= new ElectrodomesticoDTO();
-		eDTO=Transformer.obtenerInstancia().toDTO(e);
+		eDTO=new Transformer().toDTO(e);
 		String s=SAParser.toXML(eDTO);
 		assertEquals(s,"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
 				+ "<articulo>\n"
@@ -126,7 +126,7 @@ public class ArticulosParserTest {
 		e.setStock(6);
 
 		ElectrodomesticoDTO eDTO= new ElectrodomesticoDTO();
-		eDTO=Transformer.obtenerInstancia().toDTO(e);
+		eDTO=new Transformer().toDTO(e);
 		String s=SAParser.toXMLSmall(eDTO);
 		assertEquals(s,"<articulo>\n"
 				+ "    <codigo>2</codigo>\n"
@@ -151,7 +151,7 @@ public class ArticulosParserTest {
 		m.setMaterial("Human Bones");
 
 		MuebleDTO iDTO= new MuebleDTO();
-		iDTO=Transformer.obtenerInstancia().toDTO(m);
+		iDTO=new Transformer().toDTO(m);
 		String s=SAParser.toXML(iDTO);
 		assertEquals(s,"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
 				+ "<articulo>\n"
@@ -184,7 +184,7 @@ public class ArticulosParserTest {
 		m.setMaterial("Human Bones");
 
 		MuebleDTO iDTO= new MuebleDTO();
-		iDTO=Transformer.obtenerInstancia().toDTO(m);
+		iDTO=new Transformer().toDTO(m);
 		String s=SAParser.toXMLSmall(iDTO);
 		assertEquals(s,"<articulo>\n"
 				+ "    <codigo>1</codigo>\n"
@@ -208,7 +208,7 @@ public class ArticulosParserTest {
 		m.setColor("Verde Moho");
 		
 		ModaDTO mDTO= new ModaDTO();
-		mDTO=Transformer.obtenerInstancia().toDTO(m);
+		mDTO=new Transformer().toDTO(m);
 		String s=SAParser.toXML(mDTO);
 		assertEquals(s,"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
 				+ "<articulo>\n"
@@ -242,7 +242,7 @@ public class ArticulosParserTest {
 		m.setColor("Verde Moho");
 		
 		ModaDTO mDTO= new ModaDTO();
-		mDTO=Transformer.obtenerInstancia().toDTO(m);
+		mDTO=new Transformer().toDTO(m);
 		String s=SAParser.toXMLSmall(mDTO);
 		assertEquals(s,"<articulo>\n"
 				+ "    <codigo>1</codigo>\n"
