@@ -1,16 +1,22 @@
 package dao;
 
 import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.jms.JMSException;
 
-import parsers.EntradaLogParser;
+import clientes.GenericQueueClient;
+import parsers.LogParser;
 import parsers.ParserException;
-import log.EntradaLog;
-import dao.logistica.Log;
-import dao.logistica.LogAsincronico;
-import dao.logistica.LogSincronico;
+import dao.logistica.webservice.LogisticaMonitoreoBeanService;
+import dao.logistica.webservice.LogisticaMonitoreoWS;
+import dto.LogDTO;
+import entities.MonitoreoConexion;
+
 
 /**
  * Session Bean implementation class LogSincronico
@@ -19,39 +25,45 @@ import dao.logistica.LogSincronico;
 @LocalBean
 public class LogLogisticaDAO {
 
-	/**
-	 * Default constructor.
-	 */
+	@EJB
+	ConnectionDAO cDAO;
+	private List<MonitoreoConexion> conexiones;
+	
 	public LogLogisticaDAO() {
+		
 	}
 
-	public void log(EntradaLog entrada, boolean sincronico) {
+	public void log(LogDTO entrada){
+		conexiones = cDAO.getMonitoreos();
+		
 		try {
-
-			String data = getData(entrada);
-			Log logger;
-
-			if (sincronico) {
-				logger = new LogSincronico(null);
-			} else {
-				logger = new LogAsincronico();
+			String xml=LogParser.obtenerInstancia().toString(entrada);
+			for (MonitoreoConexion p : conexiones) {
+				if (p.isSyncronico()){
+					
+					URL url = new URL(p.getIp()+":"+p.getPuerto() + p.getQueueName());
+					LogisticaMonitoreoBeanService ws = new LogisticaMonitoreoBeanService(url);
+					LogisticaMonitoreoWS puerto = ws.getLogisticaMonitoreoWSPort();
+					puerto.informarLog(xml);
+					
+				} else {
+					
+					GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(), "user", "pass");
+					cliente.enviar(xml);
+					cliente.cerrarConexion();
+					
+				}
 			}
-
-			logger.informarLog(data);
-
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ParserException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	}
-
-	private String getData(EntradaLog entrada) throws ParserException {
-
-		EntradaLogParser parser = new EntradaLogParser();
-		return parser.toString(entrada);
 	}
 
 }

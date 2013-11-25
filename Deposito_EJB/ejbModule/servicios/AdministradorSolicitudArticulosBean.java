@@ -44,7 +44,6 @@ public class AdministradorSolicitudArticulosBean implements AdministradorSolicit
 	}
 
 	private SolicitudArticulos getEntity(SolicitudArticulosDTO solicitud) {
-		// TODO AR - crear entity desde dto
 
 		SolicitudArticulos solicitudEntity = new SolicitudArticulos();
 		solicitudEntity.setModuloId(solicitud.getIdSolicitud());
@@ -76,7 +75,7 @@ public class AdministradorSolicitudArticulosBean implements AdministradorSolicit
 			// TODO AR: recepcion de respuesta?
 
 		} catch (Exception e) {
-			// TODO AR: log de errores y rollback de TODO
+			// TODO AR: log de errores y rollback de todo
 			e.printStackTrace();
 		}
 

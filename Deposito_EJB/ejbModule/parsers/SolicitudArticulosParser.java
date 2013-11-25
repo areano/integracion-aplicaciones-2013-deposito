@@ -40,11 +40,11 @@ public class SolicitudArticulosParser implements Parser<SolicitudArticulosDTO> {
 
 	@Override
 	public String toString(SolicitudArticulosDTO data) throws ParserException {
-		// TODO Auto-generated method stub
+		// TODO  hace falta esto? 
 		return null;
 	}
 	public String toXML(SolicitudArticulos a){
-		// TODO 
+		// TODO hace falta esto? 
 		return null;
 	}
 

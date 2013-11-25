@@ -29,14 +29,12 @@ public class FabricaDAO {
 	}
 	
     public FabricaDAO(String ip, String puerto, String metodo) {
-        // TODO AR: levantar parametros de comunicacion REST y crear el cliente
     	
 		this.clienteRest = new GenericRestClient(ip, puerto, metodo);
     	
     }
 
 	public void enviar(SolicitudCompraDTO compra) {
-		// TODO AR: enviar solicitud mediante REST
 		
 		try {
 			String mensaje = parser.toString(compra);
