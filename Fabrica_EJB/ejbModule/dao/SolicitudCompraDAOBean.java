@@ -2,6 +2,8 @@ package dao;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import entities.SolicitudCompra;
 
@@ -10,7 +12,10 @@ import entities.SolicitudCompra;
  */
 @Stateless
 @LocalBean
-public class SolicitudCompraDAOBean  {
+public class SolicitudCompraDAOBean {
+
+	@PersistenceContext
+	EntityManager em;
 
 	/**
 	 * Default constructor.
@@ -18,10 +23,13 @@ public class SolicitudCompraDAOBean  {
 	public SolicitudCompraDAOBean() {
 	}
 
-
 	public void persist(SolicitudCompra entity) {
-		// TODO Auto-generated method stub
+		em.persist(entity);
+		em.flush();
+	}
 
+	public SolicitudCompra find(long codigo) {
+		return em.find(SolicitudCompra.class, codigo);
 	}
 
 }
