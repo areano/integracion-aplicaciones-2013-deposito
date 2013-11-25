@@ -26,8 +26,6 @@ public class DepositoDAOBean  {
 	
 	public void entregarCompra(SolicitudCompraDTO compra) {
 
-
-		// TODO AR: create xml y enviar a la cola de Deposito
 		try {
 			String xml=null;
 			xml = parser.toString(compra);

@@ -37,6 +37,9 @@ public class PortalDAO {
 	
 	@PersistenceContext
 	EntityManager em;
+	
+	@EJB
+	ConnectionDAO cDAO;
 
 	private List<PortalConexion> conexiones;
 	private static final Logger logger = Logger.getLogger(PortalDAO.class);
@@ -45,10 +48,8 @@ public class PortalDAO {
 		conexiones = new ArrayList<PortalConexion>();
 	}
 
-	@SuppressWarnings("unchecked")
 	private void obtenerConexiones() {
-		Query q = em.createQuery("from PortalConexion where active = TRUE");
-		conexiones = (List<PortalConexion>) q.getResultList();
+		conexiones = cDAO.getPortales();
 	}
 
 	public void enviar(Mueble m) {

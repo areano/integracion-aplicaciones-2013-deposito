@@ -63,15 +63,13 @@ public class AdministradorSolicitudCompraBean {
 			// TODO AR: recepcion de respuesta?
 			fabricaDAO.enviar(dto);
 		} catch (Exception e) {
-			// TODO AR: log de errores y rollback de TODO
+			// TODO AR: log de errores y rollback de todo
 			e.printStackTrace();
 		}
 	}
 	
 
 	private SolicitudCompra getEntity(SolicitudCompraDTO compraDTO) {
-		// TODO AR: crear entity desde dto.
-		// los articulos debe recuperarlos
 		
 		SolicitudCompra solicitud = t.converToClass(compraDTO);
 		return solicitud;
@@ -80,7 +78,7 @@ public class AdministradorSolicitudCompraBean {
 
 	public void recibir(SolicitudCompraDTO compraDTO) {
 		/*
-		 * getEntity validar actualizar el stock de cada articulo marcar la
+		 * TODO: getEntity validar actualizar el stock de cada articulo marcar la
 		 * solicitud de compra com recibida
 		 */
 		SolicitudCompra compra = getEntity(compraDTO);

@@ -18,6 +18,7 @@ import entities.Electrodomestico;
 import entities.Infantil;
 import entities.Moda;
 import entities.Mueble;
+import excepctions.ErrorDeJPAException;
 
 @Stateless
 @LocalBean
@@ -57,7 +58,7 @@ public class ArticuloDAO {
 		}
 		return al;
 	}
-	public void guardarArticulo(Articulo a){
+	public void guardarArticulo(Articulo a) throws ErrorDeJPAException{
 		try{
 			System.out.println(a==null);
 			System.out.println(em==null);
@@ -65,8 +66,8 @@ public class ArticuloDAO {
 			logger.info("Articuo codigo ["+a.getCodigo()+"] persistido");
 		}catch(Exception e)
 		{
-			logger.error("Error persistiendo Articulo codigo ["+a.getCodigo()+"]");
 			logger.error(e);
+			throw(new ErrorDeJPAException("Error persistiendo Articulo codigo",e));
 		}
 	}
 	

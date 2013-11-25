@@ -19,7 +19,9 @@ import view.SolicitudArticulosView;
 import view.SolicitudCompraView;
 import dao.ArticuloDAO;
 import dao.DespachoDAO;
+import dao.LogLogisticaDAO;
 import dao.PortalDAO;
+import dto.LogDTO;
 import entities.Articulo;
 import entities.Electrodomestico;
 import entities.Infantil;
@@ -45,6 +47,9 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	@EJB
 	private ViewTransformer transformer;
 	
+	@EJB
+	LogLogisticaDAO logisticaDAO;
+	
 	private static final Logger logger = Logger.getLogger(AdministradorArticulosBean.class);
 
 	public AdministradorArticulosBean() {
@@ -64,14 +69,17 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	}
 	*/
 
-	public void guardarElectrodomestico(ElectrodomesticoView dto){
+	public void guardarElectrodomestico(ElectrodomesticoView view){
 		try{
-			
-			Electrodomestico e = transformer.converToClass(dto);
+			Electrodomestico e = transformer.converToClass(view);
+			String log="Electrodomestico codigo ["+e.getCodigo()+"] creado";
+
 			articuloDAO.guardarArticulo(e);
-			logger.info("Electrodomestico codigo ["+e.getCodigo()+"] creado");
 			portalDAO.enviar(e);
 			despachoDAO.enviar(e);
+			logger.info(log);
+			logisticaDAO.log(new LogDTO(log));
+			
 		}catch(Exception e ){
 			 logger.error("Error",e);
 		}
@@ -88,9 +96,9 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 		}
 	}
 	
-	public void guardarModa(ModaView dto){
+	public void guardarModa(ModaView view){
 		try{
-			Moda m = transformer.converToClass(dto);
+			Moda m = transformer.converToClass(view);
 			articuloDAO.guardarArticulo(m);
 			portalDAO.enviar(m);
 			despachoDAO.enviar(m);
@@ -99,9 +107,9 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 		}
 	}
 	
-	public void guardarMueble(MuebleView dto){
+	public void guardarMueble(MuebleView view){
 		try{
-			Mueble m = transformer.converToClass(dto);
+			Mueble m = transformer.converToClass(view);
 			articuloDAO.guardarArticulo(m);
 			portalDAO.enviar(m);
 			despachoDAO.enviar(m);
@@ -111,9 +119,9 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	}
 
 	@Override
-	public void actualizarStock(ArticuloView dto, long stock) {
+	public void actualizarStock(ArticuloView view, long stock) {
 		try{
-			Articulo a = transformer.converToClass(dto);
+			Articulo a = transformer.converToClass(view);
 			a.setStock(stock);
 			articuloDAO.actualizarArticulo(a);
 		}catch(Exception e ){
