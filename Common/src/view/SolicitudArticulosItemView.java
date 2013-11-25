@@ -12,6 +12,7 @@ public class SolicitudArticulosItemView implements Serializable {
 	private ArticuloView articulo;
 	private int cantidad;
 	private String txtCantidad;
+	private int totalSolicitado;
 	
 	public SolicitudArticulosItemView(ArticuloView articulo, int cantidad){
 		this.articulo = articulo;
@@ -36,6 +37,13 @@ public class SolicitudArticulosItemView implements Serializable {
 	public void setTxtCantidad(String txtCantidad) {
 		this.txtCantidad = txtCantidad;
 		this.cantidad = Integer.parseInt(txtCantidad);
+	}
+
+	public int getTotalSolicitado() {
+		return totalSolicitado;
+	}
+	public void setTotalSolicitado(int totalSolicitado) {
+		this.totalSolicitado = totalSolicitado;
 	}
 	
 }
