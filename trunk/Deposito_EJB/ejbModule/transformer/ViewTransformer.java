@@ -223,26 +223,44 @@ public class ViewTransformer {
 		SolicitudArticulosItemView view = new SolicitudArticulosItemView(av,item.getCantidad());
 		return view;
 	}
+	
 	public  DespachoConexion despachoToClass(ConnectionView c){
 			DespachoConexion conn = new DespachoConexion();
 			conn.setDespachoId(c.getModuleId());
 			conn.setIp(c.getIp());
 			conn.setActive(true);
+			conn.setUsuario("despacho");
+			conn.setPassword("despacho");
+			conn.setPuerto("4447");
+			conn.setQueueName("jms/queue/nuevosArticulos");
+			conn.setRestPath("/despacho_web/rest/despachador/recibirArticulos");
+			conn.setRestPort("8080");
 			return conn;
 	}
 	public PortalConexion portalToClass(ConnectionView c){
 		PortalConexion conn = new PortalConexion();
 		conn.setPortalId(c.getModuleId());
 		conn.setIp(c.getIp());
+		conn.setPuerto("4447");
 		conn.setActive(true);
+		conn.setQueueName("jms/queue/deposito");
+		conn.setUsuario("deposito");
+		conn.setPassword("deposito");
+
 		return conn;
 	}
 	public MonitoreoConexion monitoreoToClass(ConnectionView c){
 		MonitoreoConexion conn = new MonitoreoConexion();
 		conn.setMonitoreoId(c.getModuleId());
 		conn.setIp(c.getIp());
+		conn.setPuerto("4447");
 		conn.setActive(true);
 		conn.setSyncronico(c.isSyncronic());
+		conn.setUsuario("log");
+		conn.setPassword("log1234");
+		conn.setQueueName("jms/queue/log");
+		conn.setWsPath("/LogisticaMonitoreo/LogisticaMonitoreoWS");
+		conn.setWsPuerto("8080");
 		return conn;
 	}
 

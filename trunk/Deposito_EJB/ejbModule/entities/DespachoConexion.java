@@ -14,6 +14,11 @@ public class DespachoConexion {
 	private String ip;
 	private String puerto;
 	private String queueName;
+	private String restPath;
+	private String restPort;
+	private String usuario;
+	private String password;
+	
 	
 	public DespachoConexion(){}
 
@@ -55,5 +60,37 @@ public class DespachoConexion {
 
 	public void setQueueName(String queueName) {
 		this.queueName = queueName;
+	}
+
+	public String getRestPath() {
+		return restPath;
+	}
+
+	public void setRestPath(String restPath) {
+		this.restPath = restPath;
+	}
+
+	public String getRestPort() {
+		return restPort;
+	}
+
+	public void setRestPort(String restPort) {
+		this.restPort = restPort;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

@@ -130,7 +130,7 @@ public class AdministradorConecctionsBean implements AdministradorConecctions {
 
 	@Override
 	public void saveDespachosConnection(ArrayList<ConnectionView> activas) {
-		
+		connectionDAO.borrarDespachos();
 		for (ConnectionView connectionView : activas) {
 			
 			try{
@@ -152,6 +152,7 @@ public class AdministradorConecctionsBean implements AdministradorConecctions {
 
 	@Override
 	public void saveMonitoreoConnection(ArrayList<ConnectionView> activas) {
+		connectionDAO.borrarMonitoreos();
 		for (ConnectionView connectionView : activas) {
 			
 			try{
