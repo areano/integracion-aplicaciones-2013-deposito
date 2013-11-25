@@ -1,6 +1,8 @@
 package transformer;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
@@ -20,6 +22,7 @@ import entities.Infantil;
 import entities.ItemSolicitudCompra;
 import entities.Moda;
 import entities.Mueble;
+import entities.SolicitudArticulosItem;
 import entities.SolicitudCompra;
 
 @Stateless
@@ -184,5 +187,15 @@ public class Transformer {
 		return dto;
 	}
 
-
+	public List<ItemSolicitudCompra> toItemCompra(List<SolicitudArticulosItem> items){
+		List<ItemSolicitudCompra> itemsCompra = new ArrayList<ItemSolicitudCompra>();
+		
+		for(SolicitudArticulosItem item:items){
+			ItemSolicitudCompra itemCompra = new ItemSolicitudCompra();
+			itemCompra.setArticulo(item.getArticulo());
+			itemCompra.setCantidad(item.getCantidad());
+			itemsCompra.add(itemCompra);
+		}
+		return itemsCompra;
+	}
 }
