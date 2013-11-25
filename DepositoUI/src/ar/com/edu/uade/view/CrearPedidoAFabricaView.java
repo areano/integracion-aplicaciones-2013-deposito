@@ -1,8 +1,13 @@
 package ar.com.edu.uade.view;
 
+import java.util.Date;
+
 import javax.naming.NamingException;
 
+import view.SolicitudArticulosItemView;
+import view.SolicitudCompraView;
 import ar.com.edu.uade.ejbfacade.EJBFacade;
+import ar.com.edu.uade.view.solicitudcompra.SolicitudCompraFormView;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -22,8 +27,13 @@ public class CrearPedidoAFabricaView extends VerticalLayout implements View {
 	@Override
 	public void enter(ViewChangeEvent event) {
 		// TODO Esto es un hardcode de aquellos, se supone que manda pedido a fabrica que haga falta cuando se entra a esa pantalla.
-		facade.crearSolicitudCompra(facade.getRecomendacionCompra());
 		
+//		SolicitudCompraView solicitud =  facade.getRecomendacionCompra();
+//		facade.crearSolicitudCompra(facade.getRecomendacionCompra());
+//		
+		SolicitudCompraFormView s = new SolicitudCompraFormView();
+		s.init();
+		addComponent(s);
 	}
 
 
