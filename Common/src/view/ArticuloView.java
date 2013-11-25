@@ -130,4 +130,7 @@ public abstract class ArticuloView implements Serializable{
 		this.textCodigo = textCodigo;
 		codigo =  textCodigo.longValue();
 	}
+	public String toString(){
+		return "Art.: "+codigo+" - "+tipo+" - "+marca+" "+ nombre;
+	}
 }
