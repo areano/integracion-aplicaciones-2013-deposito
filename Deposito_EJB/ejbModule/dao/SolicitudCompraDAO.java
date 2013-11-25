@@ -1,17 +1,23 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
 
+import transformer.Transformer;
 import entities.Articulo;
 import entities.ItemSolicitudCompra;
+import entities.SolicitudArticulos;
+import entities.SolicitudArticulosItem;
 import entities.SolicitudCompra;
 
 /**
@@ -25,6 +31,11 @@ public class SolicitudCompraDAO {
 	private static final Logger logger = 
 			   Logger.getLogger(ArticuloDAO.class);
 
+	
+	@EJB
+	Transformer transformer;
+	
+	
 	/**
 	 * Default constructor.
 	 */
@@ -33,12 +44,15 @@ public class SolicitudCompraDAO {
 
 	public void persist(SolicitudCompra compra) {
 		// TODO AR: Persistir compra
+		em.persist(compra);
 	}
 
 	public void merge(SolicitudCompra compra) {
 		// TODO AR: Merge con la solicitud de compra persistida
+		em.merge(compra);
 	}
 
+	@SuppressWarnings("unchecked")
 	public SolicitudCompra getRecomendacionCompra() {
 		// TODO MF: aca falta obtener la recomendacion real esto es una truchada
 		SolicitudCompra sc=new SolicitudCompra();
@@ -47,13 +61,20 @@ public class SolicitudCompraDAO {
 
 		try{
 			
-//			Query = em.createQuery("SELECT Articulo, 1 FROM Articulo'");
-			int i=0;
-			List<Articulo> results = em.createQuery("FROM Articulo", Articulo.class).getResultList();
-			for (Articulo a1: results){
-				i++;
-				sc.getArticulos().add(new ItemSolicitudCompra(a1.getCodigo(), a1, i));
+			Query q = em.createQuery("SELECT sum(s.items),articulo FROM SolicitudArticulos s join s.items where s.cumplida=false "
+					+ "group by s.items.articulo");
+			
+			List<SolicitudArticulosItem> items = q.getResultList();
+			
+			for(SolicitudArticulosItem item: items){
+				item.setCantidad(item.getCantidad()*2);
 			}
+			
+			List<ItemSolicitudCompra> itemsCompra =  transformer.toItemCompra(items);
+			
+			sc.setArticulos(itemsCompra);
+			 
+			
 //			logger.info("Find articulo persistido con código: ["+cod+"] ");
 		}catch(Exception e)
 		{
