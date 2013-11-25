@@ -26,10 +26,11 @@ import entities.SolicitudCompra;
 @Stateless
 @LocalBean
 public class SolicitudCompraDAO {
+	
 	@PersistenceContext
 	EntityManager em;
-	private static final Logger logger = 
-			   Logger.getLogger(ArticuloDAO.class);
+	
+	private static final Logger logger = Logger.getLogger(ArticuloDAO.class);
 
 	
 	@EJB
@@ -43,12 +44,14 @@ public class SolicitudCompraDAO {
 	}
 
 	public void persist(SolicitudCompra compra) {
-		// TODO AR: Persistir compra
+		em.persist(compra);
+		em.flush();
 		em.persist(compra);
 	}
 
 	public void merge(SolicitudCompra compra) {
-		// TODO AR: Merge con la solicitud de compra persistida
+		em.merge(compra);
+		em.flush();
 		em.merge(compra);
 	}
 

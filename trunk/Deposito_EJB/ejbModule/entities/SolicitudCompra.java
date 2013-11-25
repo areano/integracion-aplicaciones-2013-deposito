@@ -4,21 +4,26 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "SolicitudesCompra")
+@Table(name = "SolicitudCompra")
 public class SolicitudCompra {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long codigo;
 
-	@OneToMany
-	@JoinColumn(name = "cantidadArticuloId")
+	@OneToMany(cascade = { CascadeType.ALL })
+	@JoinColumn(name = "codigoSolicitud")
 	private List<ItemSolicitudCompra> articulos;
 
 	private boolean completada;
@@ -28,7 +33,7 @@ public class SolicitudCompra {
 	private Date fechaFin;
 
 	public SolicitudCompra() {
-			articulos = new ArrayList<ItemSolicitudCompra>();
+		articulos = new ArrayList<ItemSolicitudCompra>();
 	}
 
 	public long getCodigo() {

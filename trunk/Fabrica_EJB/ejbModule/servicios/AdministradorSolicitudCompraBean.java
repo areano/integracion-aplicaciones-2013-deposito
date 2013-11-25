@@ -1,18 +1,22 @@
 package servicios;
 
+import java.util.Date;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import dao.DepositoDAOBean;
 import dao.SolicitudCompraDAOBean;
+import dto.ItemSolicitudCompraDTO;
 import dto.SolicitudCompraDTO;
+import entities.ItemSolicitudCompra;
 import entities.SolicitudCompra;
 
 /**
  * Session Bean implementation class AdministradorSolicitudCompraBean
  */
 @Stateless
-public class AdministradorSolicitudCompraBean  {
+public class AdministradorSolicitudCompraBean {
 
 	@EJB
 	private SolicitudCompraDAOBean solicitudCompraDao;
@@ -25,7 +29,6 @@ public class AdministradorSolicitudCompraBean  {
 	 */
 	public AdministradorSolicitudCompraBean() {
 	}
-
 
 	public void recibirSolicitudCompra(SolicitudCompraDTO compra) {
 
@@ -42,15 +45,13 @@ public class AdministradorSolicitudCompraBean  {
 
 	}
 
-
 	public void entregarCompra(SolicitudCompraDTO compra) {
 		try {
 			// TODO AR: Validar entity
-			SolicitudCompra entity = getEntity(compra);
+			SolicitudCompra entity = solicitudCompraDao.find(compra.getCodigo());
 
-			// TODO AR: actualizar estado
-			solicitudCompraDao.persist(entity);
-
+			entity.setEstado(SolicitudCompra.COMPLETA);
+			
 			depositoDao.entregarCompra(compra);
 
 		} catch (Exception e) {
@@ -60,8 +61,22 @@ public class AdministradorSolicitudCompraBean  {
 	}
 
 	private SolicitudCompra getEntity(SolicitudCompraDTO compra) {
-		// TODO AR: Obtener entity desde dto
-		return null;
-	}
 
+		SolicitudCompra entity = new SolicitudCompra();
+
+		entity.setCodigo(compra.getCodigo());
+
+		for (ItemSolicitudCompraDTO item : compra.getArticulos()) {
+
+			ItemSolicitudCompra itemEntity = new ItemSolicitudCompra();
+
+			itemEntity.setCodArticulo(item.getCodArticulo());
+			itemEntity.setCantidad(item.getCantidad());
+
+			entity.getItemArticulos().add(itemEntity);
+
+		}
+
+		return entity;
+	}
 }

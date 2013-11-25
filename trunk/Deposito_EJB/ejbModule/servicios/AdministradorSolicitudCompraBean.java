@@ -45,8 +45,7 @@ public class AdministradorSolicitudCompraBean {
 
 	public void crear(SolicitudCompraView compraView) {
 
-
-		SolicitudCompra compra= vt.converToClass(compraView);
+		SolicitudCompra compra = vt.converToClass(compraView);
 
 		/*
 		 * get entity, validar, enviar a fabrica. Si falla, rollback y log
@@ -57,8 +56,8 @@ public class AdministradorSolicitudCompraBean {
 			// TODO AR: Validar entity
 
 			solicitudCompraDAO.persist(compra);
-			
-			SolicitudCompraDTO dto =t.toDTO(compra);
+
+			SolicitudCompraDTO dto = t.toDTO(compra);
 
 			// TODO AR: recepcion de respuesta?
 			fabricaDAO.enviar(dto);
