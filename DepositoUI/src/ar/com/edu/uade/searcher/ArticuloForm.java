@@ -16,7 +16,7 @@ import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.HorizontalLayout;
 
-@SuppressWarnings("serial")
+@SuppressWarnings({ "serial", "deprecation" })
 public class ArticuloForm extends Form implements ClickListener {
 
     private Button save = new Button("Save", (ClickListener) this);
@@ -28,7 +28,8 @@ public class ArticuloForm extends Form implements ClickListener {
     private boolean newContactMode = false;
     private ArticuloView newPerson = null;
     private ArticuloContainer container ;
-    public ArticuloForm() {
+    @SuppressWarnings("unchecked")
+	public ArticuloForm() {
         
 
         /*

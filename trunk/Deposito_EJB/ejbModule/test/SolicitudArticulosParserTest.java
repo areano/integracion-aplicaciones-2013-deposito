@@ -14,7 +14,7 @@ public class SolicitudArticulosParserTest {
 	@Test
 	public void testParseo() {
 		
-		ArticuloParser AParser =new ArticuloParser();
+
 		
 		SolicitudArticulosParser SAParser = new SolicitudArticulosParser();
 		SolicitudArticulosDTO SADTO = null;
@@ -40,8 +40,6 @@ public class SolicitudArticulosParserTest {
 	@Test
 	public void testJson1() {
 		
-		ArticuloParser AParser =new ArticuloParser();
-		
 		SolicitudArticulosParser SAParser = new SolicitudArticulosParser();
 		SolicitudArticulosDTO SADTO = null;
 		String xml = new String(
@@ -65,7 +63,6 @@ public class SolicitudArticulosParserTest {
 	@Test
 	public void testJson2() {
 		
-		ArticuloParser AParser =new ArticuloParser();
 		
 		SolicitudArticulosParser SAParser = new SolicitudArticulosParser();
 		SolicitudArticulosDTO SADTO = null;
@@ -92,8 +89,6 @@ public class SolicitudArticulosParserTest {
 	
 	@Test
 	public void testJson4() {
-		
-		ArticuloParser AParser =new ArticuloParser();
 		
 		SolicitudArticulosParser SAParser = new SolicitudArticulosParser();
 		SolicitudArticulosDTO SADTO = null;

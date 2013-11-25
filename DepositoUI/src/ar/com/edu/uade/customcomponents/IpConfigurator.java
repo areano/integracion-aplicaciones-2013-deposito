@@ -10,7 +10,6 @@ import java.util.HashMap;
 
 
 
-import javax.ejb.EJB;
 import javax.naming.NamingException;
 
 import view.ConnectionView;
@@ -272,9 +271,9 @@ public class IpConfigurator extends CustomComponent {
 		mainLayout.addComponent(label_1, "top:10.0px;left:20.0px;");		
 	}
 	 protected void addNewIP(String newID, String newIP){
-		 Item added;
+		 
 		 String groupValue =newID+"-"+newIP;
-		 added=optionGroup_2.addItem(groupValue);
+		 optionGroup_2.addItem(groupValue);
 		 
 		 mappedIPs.put(groupValue,new ConnectionView(Integer.parseInt(newID),false,newIP,false));
 		 

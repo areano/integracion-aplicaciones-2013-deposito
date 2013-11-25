@@ -13,7 +13,6 @@ import dto.InfantilDTO;
 import dto.ItemSolicitudCompraDTO;
 import dto.ModaDTO;
 import dto.MuebleDTO;
-import dto.SolicitudArticulosDTO;
 import dto.SolicitudCompraDTO;
 import entities.Articulo;
 import entities.Electrodomestico;
@@ -21,9 +20,7 @@ import entities.Infantil;
 import entities.ItemSolicitudCompra;
 import entities.Moda;
 import entities.Mueble;
-import entities.SolicitudArticulos;
 import entities.SolicitudCompra;
-import view.*;
 
 @Stateless
 @LocalBean

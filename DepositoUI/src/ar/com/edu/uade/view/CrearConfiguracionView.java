@@ -3,7 +3,6 @@ package ar.com.edu.uade.view;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.ejb.EJB;
 import javax.naming.NamingException;
 
 import view.ConnectionView;

@@ -8,11 +8,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 import org.apache.log4j.Logger;
@@ -73,19 +68,16 @@ public class ConnectionDAO {
 	}
 	public void borrarDespachos(){
 
-		Query q = em.createNativeQuery("Delete from DespachoConexion");
-		q.executeUpdate();
+		em.createQuery("Delete from DespachoConexion").executeUpdate();
 		
 	}
 
 	public void borrarPortales(){
-		Query q = em.createNativeQuery("Delete from PortalConexion");
-		q.executeUpdate();
+		em.createQuery("Delete from PortalConexion").executeUpdate();
 		
 	}
 	public void borrarMonitoreos(){
-		Query q = em.createNativeQuery("Delete from MonitoreoConexion");
-		q.executeUpdate();
+		em.createQuery("Delete from MonitoreoConexion").executeUpdate();
 	}
 	@SuppressWarnings("unchecked")
 	public List<PortalConexion> getPortales() {

@@ -1,8 +1,6 @@
 package dto;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
-
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
 

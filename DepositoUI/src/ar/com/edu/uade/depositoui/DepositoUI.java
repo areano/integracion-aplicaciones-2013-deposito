@@ -5,14 +5,11 @@ import java.util.Iterator;
 import java.util.Locale;
 
 import javax.ejb.Stateful;
-import javax.servlet.annotation.WebServlet;
-
 import ar.com.edu.uade.data.MyConverterFactory;
 import ar.com.edu.uade.view.*;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
-import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.event.ShortcutListener;
 import com.vaadin.event.Transferable;
@@ -25,7 +22,6 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.Page;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.server.VaadinServlet;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.AbstractSelect.AcceptItem;
 import com.vaadin.ui.Alignment;

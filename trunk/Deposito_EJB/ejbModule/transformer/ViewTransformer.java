@@ -1,7 +1,5 @@
 package transformer;
 
-import java.sql.Timestamp;
-
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -17,13 +15,6 @@ import view.SolicitudArticulosView;
 import view.SolicitudCompraView;
 import dao.ArticuloDAO;
 import dao.SolicitudArticulosDAO;
-import dto.ArticuloDTO;
-import dto.ElectrodomesticoDTO;
-import dto.InfantilDTO;
-import dto.ItemSolicitudCompraDTO;
-import dto.ModaDTO;
-import dto.MuebleDTO;
-import dto.SolicitudCompraDTO;
 import entities.Articulo;
 import entities.DespachoConexion;
 import entities.Electrodomestico;

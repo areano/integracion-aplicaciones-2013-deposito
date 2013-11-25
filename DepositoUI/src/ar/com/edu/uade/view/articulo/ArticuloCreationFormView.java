@@ -3,7 +3,6 @@ package ar.com.edu.uade.view.articulo;
 import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 @SuppressWarnings("serial")
 @Theme("vadintest")

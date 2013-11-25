@@ -9,7 +9,6 @@ import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
 import parsers.ParserException;
-import parsers.SolicitudCompraJSONParser;
 import parsers.SolicitudCompraXMLParser;
 import dto.SolicitudCompraDTO;
 import sessionBeans.Facade;

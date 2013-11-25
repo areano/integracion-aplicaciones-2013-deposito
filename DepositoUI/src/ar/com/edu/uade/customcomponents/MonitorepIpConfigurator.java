@@ -3,7 +3,6 @@ package ar.com.edu.uade.customcomponents;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.ejb.EJB;
 import javax.naming.NamingException;
 
 import view.ConnectionView;
@@ -253,13 +252,13 @@ public class MonitorepIpConfigurator extends CustomComponent {
 	private void configureGroupBox(HashMap<Integer, ConnectionView> actualSet){
 		optionGroup_2.setMultiSelect(true);
 		String groupValue =  new String();
-		Item added;
+
 		for (Integer key:actualSet.keySet()){
 			if (actualSet.get(key).isSyncronic())
 				groupValue = key+"-"+actualSet.get(key).getIp()+"-"+"Sincronico";
 			else 
 				groupValue = key+"-"+actualSet.get(key).getIp()+"-"+"Asincronico";
-			added = optionGroup_2.addItem(groupValue);
+			optionGroup_2.addItem(groupValue);
 			
 			mappedIPs.put(groupValue,actualSet.get(key));
 		}

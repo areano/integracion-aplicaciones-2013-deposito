@@ -1,6 +1,5 @@
 package dao;
 
-import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.jms.JMSException;
@@ -9,7 +8,6 @@ import org.apache.log4j.Logger;
 
 import clientes.GenericQueueClient;
 import parsers.ParserException;
-import parsers.SolicitudCompraJSONParser;
 import parsers.SolicitudCompraXMLParser;
 import dto.SolicitudCompraDTO;
 

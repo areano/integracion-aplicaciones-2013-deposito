@@ -19,11 +19,8 @@ import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.themes.ChameleonTheme;
-import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.NativeSelect;
-import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -49,7 +46,7 @@ public class SearchArticuloView extends VerticalLayout implements View  {
     ArticuloList articuloList ;
     ArticuloForm articuloForm;
     Window editWindow;
-    private enum Articulos{ELECTRODOMESTICO, MODA, MUEBLE, INFANTIL}
+    static private enum Articulos{ELECTRODOMESTICO, MODA, MUEBLE, INFANTIL}
     public SearchArticuloView() {
     	editWindow =  new Window();	
         setCaption("Search contacts");
@@ -74,10 +71,10 @@ public class SearchArticuloView extends VerticalLayout implements View  {
         Button search = new Button("Search");
         test = new VerticalLayout();
         /* Initialize fieldToSearch */
-        for (int i = 0; i < container.NATURAL_COL_ORDER.length; i++) {
-            fieldToSearch.addItem(container.NATURAL_COL_ORDER[i]);
-            fieldToSearch.setItemCaption(container.NATURAL_COL_ORDER[i],
-            		container.COL_HEADERS_ENGLISH[i]);
+        for (int i = 0; i < ArticuloContainer.NATURAL_COL_ORDER.length; i++) {
+            fieldToSearch.addItem(ArticuloContainer.NATURAL_COL_ORDER[i]);
+            fieldToSearch.setItemCaption(ArticuloContainer.NATURAL_COL_ORDER[i],
+            		ArticuloContainer.COL_HEADERS_ENGLISH[i]);
         }
 
         fieldToSearch.setValue("nombre");

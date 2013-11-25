@@ -1,5 +1,4 @@
 package ar.com.edu.uade.view.articulo;
-import javax.ejb.EJB;
 import javax.naming.NamingException;
 
 import org.apache.log4j.Logger;
@@ -17,7 +16,6 @@ import com.vaadin.ui.Field;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.TextField;
 
 public class MuebleFormView extends CustomComponent {
 

@@ -1,19 +1,12 @@
 package parsers;
 
 import java.io.StringReader;
-import java.io.StringWriter;
-import java.util.HashMap;
-import java.util.Map;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.PropertyException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
 
-import dto.ArticuloDTO;
-import dto.MuebleDTO;
 import dto.SolicitudArticuloItemDTO;
 import dto.SolicitudArticulosDTO;
 import entities.SolicitudArticulos;

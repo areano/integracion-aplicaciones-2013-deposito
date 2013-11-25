@@ -3,9 +3,6 @@ package ar.com.edu.uade.data;
 
 
 import java.io.Serializable;
-import java.util.Random;
-
-import javax.ejb.EJB;
 import javax.naming.NamingException;
 
 import ar.com.edu.uade.ejbfacade.EJBFacade;

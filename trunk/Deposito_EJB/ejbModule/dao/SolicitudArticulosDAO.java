@@ -3,7 +3,6 @@ package dao;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import entities.Articulo;
 import entities.SolicitudArticulos;
 
 /**

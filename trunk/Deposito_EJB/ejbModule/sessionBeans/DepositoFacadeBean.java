@@ -2,7 +2,6 @@ package sessionBeans;
 
 import java.util.ArrayList;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -21,12 +20,10 @@ import org.apache.log4j.Logger;
 
 
 
-import dto.SolicitudCompraDTO;
 import entities.SolicitudCompra;
 import servicios.AdministradorArticulosBean;
 import servicios.AdministradorConecctionsBean;
 import servicios.AdministradorSolicitudCompraBean;
-import transformer.Transformer;
 import transformer.ViewTransformer;
 import view.*;
 @Stateless

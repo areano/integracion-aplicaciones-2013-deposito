@@ -2,7 +2,6 @@ package sessionBeans;
 
 import java.util.ArrayList;
 
-import javax.ejb.Local;
 import javax.ejb.Remote;
 
 import view.*;

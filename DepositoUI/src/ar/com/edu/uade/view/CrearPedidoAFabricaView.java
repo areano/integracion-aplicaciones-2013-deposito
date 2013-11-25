@@ -1,11 +1,7 @@
 package ar.com.edu.uade.view;
 
-import java.util.Date;
-
 import javax.naming.NamingException;
 
-import view.SolicitudArticulosItemView;
-import view.SolicitudCompraView;
 import ar.com.edu.uade.ejbfacade.EJBFacade;
 
 import com.vaadin.navigator.View;

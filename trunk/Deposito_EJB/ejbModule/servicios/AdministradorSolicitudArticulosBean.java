@@ -11,7 +11,6 @@ import dto.SolicitudArticulosDTO;
 import dto.SolicitudCompraDTO;
 import entities.SolicitudArticulos;
 import entities.SolicitudArticulosItem;
-import entities.SolicitudCompra;
 
 /**
  * Session Bean implementation class AdministradorSolicitudArticulosBean

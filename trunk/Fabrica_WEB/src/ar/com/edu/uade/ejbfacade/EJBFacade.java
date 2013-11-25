@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Properties;
 
-import javax.ejb.EJB;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -53,9 +52,6 @@ public class EJBFacade {
 		
 	}
 	public ArrayList<ConnectionView> getDespachoConnection(){
-		ArrayList<ConnectionView> retorno = new ArrayList<ConnectionView>();
-		ConnectionView dto = new ConnectionView();
-
 		return systemFacade.getDespachosConnection();
 	}
 	public ArrayList<ConnectionView> getMonitoreoConnection(){
