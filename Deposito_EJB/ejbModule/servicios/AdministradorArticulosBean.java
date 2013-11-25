@@ -9,7 +9,6 @@ import javax.ejb.Stateless;
 
 import org.apache.log4j.Logger;
 
-import transformer.Transformer;
 import transformer.ViewTransformer;
 import view.ArticuloView;
 import view.ElectrodomesticoView;
@@ -21,7 +20,6 @@ import view.SolicitudCompraView;
 import dao.ArticuloDAO;
 import dao.DespachoDAO;
 import dao.PortalDAO;
-import dto.*;
 import entities.Articulo;
 import entities.Electrodomestico;
 import entities.Infantil;

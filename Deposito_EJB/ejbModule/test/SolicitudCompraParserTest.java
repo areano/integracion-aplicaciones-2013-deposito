@@ -2,11 +2,8 @@ package test;
 
 import static org.junit.Assert.*;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import javax.ejb.EJB;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -62,8 +59,6 @@ public class SolicitudCompraParserTest {
 	@Test
 	public void testToStringSolicitudCompraDTO() {
 
-		SolicitudCompraDTO dto2=null;
-//		SolicitudCompraJSONParser p= new SolicitudCompraJSONParser();
 		String json2=null;
 		
 		try {

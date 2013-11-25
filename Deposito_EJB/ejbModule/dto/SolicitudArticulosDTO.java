@@ -8,6 +8,11 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement(name = "solicitudArticulos")
 public class SolicitudArticulosDTO implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7417975371505234390L;
+
 	public SolicitudArticulosDTO() {
 		super();
 	}

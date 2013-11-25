@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.apache.log4j.Logger;
 
@@ -46,8 +47,8 @@ public class ArticuloDAO {
 	public List<Articulo> findAll(){
 		List<Articulo> al = new ArrayList<Articulo>();
 		try{
-			Query q = em.createNativeQuery("from Articulo");
-			al =(List<Articulo> ) q.getResultList();
+			TypedQuery<Articulo> q = em.createQuery("from Articulo", Articulo.class);
+			al = q.getResultList();
 			logger.info("Get All Articulos ");
 		}catch(Exception e)
 		{

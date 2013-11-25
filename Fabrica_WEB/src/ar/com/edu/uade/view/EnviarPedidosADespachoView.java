@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-import javax.ejb.EJB;
 import javax.naming.NamingException;
 
 import org.vaadin.hene.flexibleoptiongroup.FlexibleOptionGroup;

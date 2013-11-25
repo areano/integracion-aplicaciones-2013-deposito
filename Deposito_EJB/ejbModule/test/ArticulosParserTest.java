@@ -8,15 +8,11 @@ import dto.ElectrodomesticoDTO;
 import dto.InfantilDTO;
 import dto.ModaDTO;
 import dto.MuebleDTO;
-import dto.SolicitudArticulosDTO;
-import entities.Articulo;
 import entities.Electrodomestico;
 import entities.Infantil;
 import entities.Moda;
 import entities.Mueble;
 import parsers.ArticuloParser;
-import parsers.ParserException;
-import parsers.SolicitudArticulosParser;
 import transformer.Transformer;
 
 public class ArticulosParserTest {

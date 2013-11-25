@@ -44,12 +44,12 @@ public class SolicitudCompraDAO {
 		SolicitudCompra sc=new SolicitudCompra();
 		sc.setFechaInicio(new Date());
 		sc.setCompletada(false);
-		Articulo a=null;
+
 		try{
 			
 //			Query = em.createQuery("SELECT Articulo, 1 FROM Articulo'");
 			int i=0;
-			List<Articulo> results = (List<Articulo>) em.createQuery("FROM Articulo").getResultList();
+			List<Articulo> results = em.createQuery("FROM Articulo", Articulo.class).getResultList();
 			for (Articulo a1: results){
 				i++;
 				sc.getArticulos().add(new ItemSolicitudCompra(a1.getCodigo(), a1, i));

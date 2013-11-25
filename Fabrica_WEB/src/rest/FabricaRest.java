@@ -1,8 +1,6 @@
 package rest;
 
-import javax.ejb.EJB;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
