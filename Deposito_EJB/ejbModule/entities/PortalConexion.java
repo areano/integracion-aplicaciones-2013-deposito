@@ -14,6 +14,9 @@ public class PortalConexion {
 	private String ip;
 	private String puerto;
 	private String queueName;
+	private String usuario;
+	private String password;
+	
 	
 	public PortalConexion(){}
 
@@ -55,5 +58,21 @@ public class PortalConexion {
 
 	public void setQueueName(String queueName) {
 		this.queueName = queueName;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

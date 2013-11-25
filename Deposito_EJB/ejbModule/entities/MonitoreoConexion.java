@@ -15,6 +15,11 @@ public class MonitoreoConexion {
 	private String ip;
 	private String puerto;
 	private String queueName;
+	private String wsPath;
+	private String wsPuerto;
+	private String usuario;
+	private String password;
+	
 	
 	public MonitoreoConexion(){}
 
@@ -64,5 +69,37 @@ public class MonitoreoConexion {
 
 	public void setSyncronico(boolean syncronico) {
 		this.syncronico = syncronico;
+	}
+
+	public String getWsPath() {
+		return wsPath;
+	}
+
+	public void setWsPath(String wsPath) {
+		this.wsPath = wsPath;
+	}
+
+	public String getWsPuerto() {
+		return wsPuerto;
+	}
+
+	public void setWsPuerto(String wsPuerto) {
+		this.wsPuerto = wsPuerto;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }
