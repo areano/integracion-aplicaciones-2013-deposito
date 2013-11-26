@@ -245,7 +245,7 @@ public class ViewTransformer {
 		conn.setActive(true);
 		conn.setQueueName("jms/queue/deposito");
 		conn.setUsuario("deposito");
-		conn.setPassword("deposito");
+		conn.setPassword("deposito123");
 
 		return conn;
 	}
