@@ -2,6 +2,7 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -19,7 +20,7 @@ public class SolicitudArticulos {
 	@Column(name = "solicitudArticulosId")
 	private long solicitudId;
 
-	private long moduloId;
+	private int moduloId;
 
 	@OneToMany()
 	@JoinColumn(referencedColumnName = "solicitudArticulosId")
@@ -27,7 +28,7 @@ public class SolicitudArticulos {
 
 	private boolean cumplida;
 
-	private Calendar fechaInicio;
+	private Date fechaInicio;
 
 	private Calendar fechaFin;
 
@@ -42,11 +43,11 @@ public class SolicitudArticulos {
 		return solicitudId;
 	}
 
-	public long getModuloId() {
+	public int getModuloId() {
 		return moduloId;
 	}
 
-	public void setModuloId(long idModulo) {
+	public void setModuloId(int idModulo) {
 		this.moduloId = idModulo;
 	}
 
@@ -58,7 +59,7 @@ public class SolicitudArticulos {
 		this.cumplida = cumplida;
 	}
 
-	public Calendar getFechaInicio() {
+	public Date getFechaInicio() {
 		return fechaInicio;
 	}
 

@@ -1,7 +1,12 @@
 package dao;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import entities.SolicitudArticulos;
 
@@ -12,15 +17,15 @@ import entities.SolicitudArticulos;
 @LocalBean
 public class SolicitudArticulosDAO {
 
-    /**
-     * Default constructor. 
-     */
-    public SolicitudArticulosDAO() {
-    }
+	@PersistenceContext
+	EntityManager em;
+
+	public SolicitudArticulosDAO() {
+	}
 
 	public void persist(SolicitudArticulos solicitud) {
 		// TODO AR - Persistir entidad, manejo de errores
-		
+
 	}
 
 	public SolicitudArticulos buscarSolicitud(long codigo) {
@@ -28,4 +33,9 @@ public class SolicitudArticulosDAO {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<SolicitudArticulos> getSolicitudes() {
+		Query q = em.createQuery("from SolicitudArticulos");
+		return (List<SolicitudArticulos>) q.getResultList();
+	}
 }

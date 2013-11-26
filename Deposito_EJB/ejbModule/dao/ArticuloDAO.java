@@ -131,7 +131,7 @@ public class ArticuloDAO {
 	public List<Infantil> findAllInfantil() {
 		List<Infantil> al = new ArrayList<Infantil>();
 		try{
-			Query q = em.createQuery("from infantil");
+			Query q = em.createQuery("from Infantil");
 			al =(List<Infantil> ) q.getResultList();
 			logger.info("Get All Articulos ");
 		}catch(Exception e)
