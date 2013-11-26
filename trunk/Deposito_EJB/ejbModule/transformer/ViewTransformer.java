@@ -117,13 +117,12 @@ public class ViewTransformer {
 		view.setCodigo(a.getCodigo());
 		view.setCodigoDeposito(6L);
 		view.setDescripcion(a.getDescripcion());
-		// view.setFecha(new Timestamp(new
-		// java.util.Date().getTime()).toString());
 		view.setFoto(a.getFoto());
 		view.setMarca(a.getMarca());
 		view.setNombre(a.getNombre());
 		view.setOrigen(a.getOrigen());
 		view.setPrecio(a.getPrecio());
+		view.setStock(a.getStock());
 	}
 
 	public MuebleView toView(Mueble m) {

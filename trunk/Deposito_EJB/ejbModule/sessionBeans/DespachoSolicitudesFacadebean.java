@@ -51,7 +51,7 @@ public class DespachoSolicitudesFacadebean implements DespachoSolicitudesFacade 
 		solicitudes = new ArrayList<SolicitudArticulosView>();
 		articulos = adminArticulos.getArticulos();
 
-		HashMap<Long, Integer> stockArticulos = new HashMap<Long, Integer>();
+		HashMap<Long, Long> stockArticulos = new HashMap<Long, Long>();
 
 		for (ArticuloView articulo : articulos) {
 			stockArticulos.put(articulo.getCodigo(), articulo.getStock());
