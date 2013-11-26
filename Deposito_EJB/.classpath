@@ -43,5 +43,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="../lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Common/lib/jboss-client.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
