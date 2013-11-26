@@ -1,9 +1,14 @@
 package servicios;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import view.SolicitudArticulosView;
 import dao.ArticuloDAO;
 import dao.SolicitudArticulosDAO;
 import dto.SolicitudArticuloItemDTO;
@@ -17,7 +22,7 @@ import entities.SolicitudArticulosItem;
  */
 @Stateless
 @LocalBean
-public class AdministradorSolicitudArticulosBean implements AdministradorSolicitudArticulos {
+public class AdministradorSolicitudArticulosBean {
 
 	@EJB
 	private SolicitudArticulosDAO dao;
@@ -25,13 +30,9 @@ public class AdministradorSolicitudArticulosBean implements AdministradorSolicit
 	@EJB
 	private ArticuloDAO articuloDao;
 
-	/**
-	 * Default constructor.
-	 */
 	public AdministradorSolicitudArticulosBean() {
 	}
 
-	@Override
 	public void recibirSolicitudArticulos(SolicitudArticulosDTO solicitud) {
 
 		// TODO AR: Validar que los articulos existan en la base, de lo
@@ -58,19 +59,18 @@ public class AdministradorSolicitudArticulosBean implements AdministradorSolicit
 
 		return solicitudEntity;
 	}
-	
-	@Override
-	//envia los articulos a despacho
+
+	// envia los articulos a despacho
 	public void enviarArticulos(SolicitudCompraDTO compraDTO) {
 		try {
-//			SolicitudCompra entity = getEntity(compraDTO);
+			// SolicitudCompra entity = getEntity(compraDTO);
 
 			// TODO AR: Validar entity
 
 			// TODO AR: actualizar objeto y stock
-//			solicitudCompraDAO.merge(entity);
+			// solicitudCompraDAO.merge(entity);
 
-//			fabricaDAO.enviar(entity);
+			// fabricaDAO.enviar(entity);
 
 			// TODO AR: recepcion de respuesta?
 
@@ -78,8 +78,10 @@ public class AdministradorSolicitudArticulosBean implements AdministradorSolicit
 			// TODO AR: log de errores y rollback de todo
 			e.printStackTrace();
 		}
-
 	}
 
+	public List<SolicitudArticulos> getSolicitudesArticulos() {
+		return dao.getSolicitudes();
+	}
 
 }
