@@ -28,7 +28,7 @@ public abstract class ArticuloView implements Serializable{
 	@NotNull
 	private String foto;
 	@Min (value=0)
-	private Integer stock;
+	private Long stock;
 	private String tipo;
 	@Min (value=0)
 	private Number textPrecio;
@@ -43,7 +43,7 @@ public abstract class ArticuloView implements Serializable{
 	    precio=(float) 0;
 	    origen =null;
 	    codigoDeposito=Long.valueOf(6);
-	    stock = 0;
+	    stock = 0L;
 	    textCodigo = null;
 	    textPrecio = null;
 	}
@@ -105,10 +105,10 @@ public abstract class ArticuloView implements Serializable{
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	public Integer getStock() {
+	public Long getStock() {
 		return stock;
 	}
-	public void setStock(Integer stock) {
+	public void setStock(Long stock) {
 		this.stock = stock;
 	}
 	public abstract String getFichaTecnica();
