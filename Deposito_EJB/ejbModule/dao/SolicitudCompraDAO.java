@@ -26,17 +26,15 @@ import entities.SolicitudCompra;
 @Stateless
 @LocalBean
 public class SolicitudCompraDAO {
-	
+
 	@PersistenceContext
 	EntityManager em;
-	
+
 	private static final Logger logger = Logger.getLogger(ArticuloDAO.class);
 
-	
 	@EJB
 	Transformer transformer;
-	
-	
+
 	/**
 	 * Default constructor.
 	 */
@@ -58,34 +56,30 @@ public class SolicitudCompraDAO {
 	@SuppressWarnings("unchecked")
 	public SolicitudCompra getRecomendacionCompra() {
 		// TODO MF: aca falta obtener la recomendacion real esto es una truchada
-		SolicitudCompra sc=new SolicitudCompra();
+		SolicitudCompra sc = new SolicitudCompra();
 		sc.setFechaInicio(new Date());
 		sc.setCompletada(false);
 
-		try{
-			
-			Query q = em.createQuery("SELECT sum(s.items),articulo FROM SolicitudArticulos s join s.items where s.cumplida=false "
-					+ "group by s.items.articulo");
-			
-			List<SolicitudArticulosItem> items = q.getResultList();
-			
-			for(SolicitudArticulosItem item: items){
-				item.setCantidad(item.getCantidad()*2);
+		try {
+
+			//TODO: AR: Esta es la query que va, la otra es de prueba.
+			//Query q = em.createQuery("SELECT a.articulo.codigo, sum(a.cantidad) * 2 FROM SolicitudArticulos s join s.items a where s.cumplida=false group by a.articulo.codigo");
+			Query q = em.createQuery("SELECT a.codigo, sum(a.stock) * 2 FROM Articulo a group by a.codigo");
+
+			List<Object[]> result = q.getResultList();
+
+			for (Object[] item : result) {
+				ItemSolicitudCompra itemCompra = new ItemSolicitudCompra();
+				itemCompra.setArticulo(em.find(Articulo.class, item[0]));
+				long cantidad = (Long) item[0];
+				itemCompra.setCantidad((int) cantidad);
+				sc.getArticulos().add(itemCompra);
 			}
-			
-			List<ItemSolicitudCompra> itemsCompra =  transformer.toItemCompra(items);
-			
-			sc.setArticulos(itemsCompra);
-			 
-			
-//			logger.info("Find articulo persistido con código: ["+cod+"] ");
-		}catch(Exception e)
-		{
-//			logger.error("Error buscando Articulo codigo ["+cod+"]");
+		} catch (Exception e) {
 			logger.error(e);
 		}
 		return sc;
-		
+
 	}
 
 }
