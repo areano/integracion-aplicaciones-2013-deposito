@@ -111,7 +111,7 @@ public class DespachoDAO {
 		DespachoConexion p = obtenerConexion(a.getModuloId());
 		SolicitudArticulosParser parser = new SolicitudArticulosParser();
 		String xml = parser.toXML(a);
-		GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(), "user", "pass");
+		GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(),p.getUsuario(), p.getPassword());
 		try {
 			cliente.enviar(xml);
 			cliente.cerrarConexion();

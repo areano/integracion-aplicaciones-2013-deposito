@@ -84,7 +84,7 @@ public class PortalDAO {
 		this.obtenerConexiones();
 		String errorMessage = new String();
 		for (PortalConexion p : conexiones) {
-			GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(), "user", "pass");
+			GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(), p.getUsuario(), "deposito123");
 			try {
 				cliente.enviar(xml);
 				cliente.cerrarConexion();

@@ -28,6 +28,7 @@ public class ArticuloParser {
 			// TODO AR - Log error
 			e.printStackTrace();
 		}
+		xml=xml.replaceAll("codigoDeposito>", "idModulo>");
 		return xml;
 	}
 	
@@ -46,6 +47,7 @@ public class ArticuloParser {
 			// TODO AR - Log error
 			e.printStackTrace();
 		}
+		xml=xml.replaceAll("codigoDeposito>", "idModulo>");
 		return xml;
 	}
 	
@@ -64,6 +66,7 @@ public class ArticuloParser {
 			// TODO AR - Log error
 			e.printStackTrace();
 		}
+		xml=xml.replaceAll("codigoDeposito>", "idModulo>");
 		return xml;		
 	}
 
@@ -82,6 +85,7 @@ public class ArticuloParser {
 			// TODO AR - Log error
 			e.printStackTrace();
 		}
+		xml=xml.replaceAll("codigoDeposito>", "idModulo>");
 		return xml;		
 	}
 
