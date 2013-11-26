@@ -48,7 +48,7 @@ public class LogLogisticaDAO {
 					
 				} else {
 					
-					GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(), "user", "pass");
+					GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(),p.getUsuario(), p.getPassword());
 					cliente.enviar(xml);
 					cliente.cerrarConexion();
 					
