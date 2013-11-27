@@ -1,10 +1,15 @@
 package dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
+import view.SolicitudCompraView;
 import entities.SolicitudCompra;
 
 /**
@@ -31,5 +36,15 @@ public class SolicitudCompraDAOBean {
 	public SolicitudCompra find(long codigo) {
 		return em.find(SolicitudCompra.class, codigo);
 	}
+	
+
+	public List<SolicitudCompra> findAll() {
+		List <SolicitudCompra> lista=null;
+		TypedQuery<SolicitudCompra> q = em.createQuery("from SolicitudCompra", SolicitudCompra.class);
+		lista = q.getResultList();
+		return lista;
+	}
+	
+	
 
 }

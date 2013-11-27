@@ -1,10 +1,14 @@
 package servicios;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import transformer.Transformer;
+import view.SolicitudCompraView;
 import dao.DepositoDAOBean;
 import dao.SolicitudCompraDAOBean;
 import dto.ItemSolicitudCompraDTO;
@@ -15,6 +19,7 @@ import entities.SolicitudCompra;
 /**
  * Session Bean implementation class AdministradorSolicitudCompraBean
  */
+@LocalBean
 @Stateless
 public class AdministradorSolicitudCompraBean {
 
@@ -24,6 +29,12 @@ public class AdministradorSolicitudCompraBean {
 	@EJB
 	private DepositoDAOBean depositoDao;
 
+	@EJB
+	private Transformer trans;
+	
+	@EJB 
+	SolicitudCompraDAOBean scDAO;
+	
 	/**
 	 * Default constructor.
 	 */
@@ -34,7 +45,7 @@ public class AdministradorSolicitudCompraBean {
 
 		try {
 			// TODO AR: Validar entity
-			SolicitudCompra entity = getEntity(compra);
+			SolicitudCompra entity = trans.getEntity(compra);
 
 			solicitudCompraDao.persist(entity);
 			entregarCompra(compra); //TODO: sacar la respuesta automática de la fabrica cuando se implemente la UI.
@@ -60,23 +71,15 @@ public class AdministradorSolicitudCompraBean {
 		}
 	}
 
-	private SolicitudCompra getEntity(SolicitudCompraDTO compra) {
-
-		SolicitudCompra entity = new SolicitudCompra();
-
-		entity.setCodigo(compra.getCodigo());
-
-		for (ItemSolicitudCompraDTO item : compra.getArticulos()) {
-
-			ItemSolicitudCompra itemEntity = new ItemSolicitudCompra();
-
-			itemEntity.setCodArticulo(item.getCodArticulo());
-			itemEntity.setCantidad(item.getCantidad());
-
-			entity.getItemArticulos().add(itemEntity);
-
-		}
-
-		return entity;
+	public void entregarCompra(Long codigo ) {
+		SolicitudCompra entity = solicitudCompraDao.find(codigo);
+		entregarCompra(trans.toDTO(entity));
 	}
+	
+	public List<SolicitudCompra> getSolicitudesDeCompra() {
+		return scDAO.findAll();
+	
+	}
+
+	
 }

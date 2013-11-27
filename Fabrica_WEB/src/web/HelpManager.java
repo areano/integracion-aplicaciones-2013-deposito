@@ -8,7 +8,7 @@
  * 
  */
 
-package ar.com.edu.uade.depositoui;
+package web;
 
 import java.util.ArrayList;
 import java.util.List;
