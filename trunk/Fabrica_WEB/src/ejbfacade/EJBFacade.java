@@ -1,4 +1,4 @@
-package ar.com.edu.uade.ejbfacade;
+package ejbfacade;
 
 import java.util.ArrayList;
 import java.util.Collection;
