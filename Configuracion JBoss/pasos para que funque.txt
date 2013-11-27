@@ -1,0 +1,7 @@
+Con el ultimo xml, hace falta ponerle en la configuracion del jboss (doble clic en el nombre del server en eclipse) el hostname= IP en la red.
+
+Eso y crear el usuario test1/test12341. (no test.. test1) con grupo guest, asi nos pueden mandar cosas a la cola.
+
+
+
+
