@@ -77,6 +77,7 @@ public class Fabrica_webUI extends UI {
 			if (scv.getDate()!=null) formatoDelTexto.format(scv.getDate());
 //			if (scv.getCompletado) check.setEnabled(false);
 //			Falta deshabilitar las completas e indicarlo en algun lado
+
 			for (SolicitudArticulosItemView item: scv.getArticulos()){
 				textoArts=textoArts + "\n Art:" + item.getArticulo().getCodigo() + "|" + item.getCantidad() + "u." ;
 			}
@@ -138,36 +139,19 @@ public class Fabrica_webUI extends UI {
 	}
 
 	@Override
-	 protected void init(VaadinRequest request) {
+	protected void init(VaadinRequest request) {
 
-		 final VerticalLayout layout = new VerticalLayout();
-		 layout.setMargin(true);
-		 setContent(layout);
+		final VerticalLayout layout = new VerticalLayout();
+		layout.setMargin(true);
+		setContent(layout);
 			
-		
-		/* Create the table with a caption. */
 		Table table = armarTabla();
 		
 		layout.addComponent(table);
-
-		 
-		 Button button = crearBoton(layout, table);
-		 layout.addComponent(button);
-		 }
 		
-		// Allow selecting items from the table.
-//		table.setSelectable(true);
-		
-		// Send changes in selection immediately to server.
-//		table.setImmediate(true);
-		
-		
-//		// Handle selection change.
-//		table.addValueChangeListener(new Property.ValueChangeListener() {
-//		    public void valueChange(ValueChangeEvent event) {
-//		        current.setValue("Selected: " + table.getValue());
-//		    }
-//		});
-				 
-	 }
+		Button button = crearBoton(layout, table);
+		layout.addComponent(button);
+	}
+							 
+}
 
