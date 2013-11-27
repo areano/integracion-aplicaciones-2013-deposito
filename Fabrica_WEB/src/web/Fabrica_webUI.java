@@ -14,7 +14,6 @@ import javax.servlet.annotation.WebServlet;
 
 import view.SolicitudArticulosItemView;
 import view.SolicitudCompraView;
-import ar.com.edu.uade.ejbfacade.EJBFacade;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -32,6 +31,8 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+
+import ejbfacade.EJBFacade;
 
 @SuppressWarnings("serial")
 @Theme("fabrica_web")
