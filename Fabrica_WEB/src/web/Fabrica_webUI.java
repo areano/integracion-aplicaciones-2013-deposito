@@ -76,6 +76,7 @@ public class Fabrica_webUI extends UI {
 			
 			if (scv.getDate()!=null) formatoDelTexto.format(scv.getDate());
 //			if (scv.getCompletado) check.setEnabled(false);
+//			Falta deshabilitar las completas e indicarlo en algun lado
 			for (SolicitudArticulosItemView item: scv.getArticulos()){
 				textoArts=textoArts + "\n Art:" + item.getArticulo().getCodigo() + "|" + item.getCantidad() + "u." ;
 			}
