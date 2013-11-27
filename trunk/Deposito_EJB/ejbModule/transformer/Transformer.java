@@ -1,6 +1,7 @@
 package transformer;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -130,7 +131,8 @@ public class Transformer {
 		dto.setCodigo(a.getCodigo());
 		dto.setCodigoDeposito(6L);
 		dto.setDescripcion(a.getDescripcion());
-		dto.setFecha(new Timestamp(new java.util.Date().getTime()).toString());
+		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		dto.setFecha(formatoDelTexto.format(new java.util.Date()));
 		dto.setFoto(a.getFoto());
 		dto.setMarca(a.getMarca());
 		dto.setNombre(a.getNombre());
