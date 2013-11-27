@@ -1,21 +1,19 @@
 package sessionBeans;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
-import entities.Articulo;
 import entities.SolicitudArticulos;
 import servicios.AdministradorArticulosBean;
 import servicios.AdministradorSolicitudArticulosBean;
 import transformer.ViewTransformer;
 import view.ArticuloView;
-import view.ElectrodomesticoView;
-import view.ModaView;
 import view.SolicitudArticulosItemView;
 import view.SolicitudArticulosView;
 
@@ -35,6 +33,13 @@ public class DespachoSolicitudesFacadebean implements DespachoSolicitudesFacade 
 
 	private HashMap<Long, Long> stockArticulos;
 
+	private Comparator<SolicitudArticulosView> comparer = new Comparator<SolicitudArticulosView>() {
+		@Override
+		public int compare(SolicitudArticulosView o1, SolicitudArticulosView o2) {
+			return o1.getDate().compareTo(o2.getDate());
+		}
+	};
+
 	/**
 	 * this method should return all @SolicitudArticulosView. each
 	 * SolicitudArticulosView should be marked as selectable or not to be
@@ -43,10 +48,6 @@ public class DespachoSolicitudesFacadebean implements DespachoSolicitudesFacade 
 	 * */
 	@Override
 	public ArrayList<SolicitudArticulosView> getSolicitudes() {
-		// TODO Auto-generated method stub
-		// TODO delete this block, is just to testing ui purposes
-
-		// solicitudes = prueba();
 
 		solicitudes = inicializarSolicitudes();
 		stockArticulos = getStockArticulos();
@@ -79,26 +80,10 @@ public class DespachoSolicitudesFacadebean implements DespachoSolicitudesFacade 
 			SolicitudArticulosView view = transformer.toView(solicitud);
 			views.add(view);
 		}
+
+		// ordena las solicitudes por fecha
+		Collections.sort(views, comparer);
 		return views;
-	}
-
-	private void actualizarSolicitudes() {
-
-		for (SolicitudArticulosView view : solicitudes) {
-
-			if (view.isSelectable() && !view.isSelected()) {
-
-				for (SolicitudArticulosItemView itemView : view.getItems()) {
-
-					if (stockArticulos.get(itemView.getArticulo().getCodigo()) >= itemView.getCantidad()) {
-						itemView.setTotalSolicitado(itemView.getCantidad());
-					} else {
-						itemView.setTotalSolicitado(0);
-						view.setSelectable(false);
-					}
-				}
-			}
-		}
 	}
 
 	private HashMap<Long, Long> getStockArticulos() {
@@ -118,25 +103,7 @@ public class DespachoSolicitudesFacadebean implements DespachoSolicitudesFacade 
 	 * */
 	@Override
 	public ArrayList<SolicitudArticulosView> markSolicitud(SolicitudArticulosView s) {
-
-		for (SolicitudArticulosView view : solicitudes) {
-
-			if (view.getCodigoSolicitud() == s.getCodigoSolicitud()) {
-
-				view.setSelected(true);
-
-				for (SolicitudArticulosItemView viewItem : view.getItems()) {
-
-					Long codigoArticulo = viewItem.getArticulo().getCodigo();
-					if (stockArticulos.containsKey(codigoArticulo)) {
-						stockArticulos.put(codigoArticulo, stockArticulos.get(codigoArticulo) - viewItem.getCantidad());
-					}
-				}
-			}
-		}
-
-		actualizarSolicitudes();
-		return solicitudes;
+		return cambiarSolicitud(s, true);
 	}
 
 	/**
@@ -146,51 +113,105 @@ public class DespachoSolicitudesFacadebean implements DespachoSolicitudesFacade 
 	 * */
 	@Override
 	public ArrayList<SolicitudArticulosView> unmarkSolicitud(SolicitudArticulosView s) {
-		// TODO Auto-generated method stub
-		return null;
+		return cambiarSolicitud(s, false);
 	}
 
-	private static ArrayList<SolicitudArticulosView> prueba() {
-		ElectrodomesticoView electro = new ElectrodomesticoView();
-		ModaView moda = new ModaView();
-		electro.setCodigo(Long.valueOf(1));
-		electro.setDescripcion("Un electro");
-		electro.setFichaTecnica("una url");
-		electro.setMarca("Modila");
-		electro.setNombre("Supercalifragitisticoespiralidoso");
-		electro.setOrigen("Tierra cdel fuego");
-		electro.setPrecio(Float.parseFloat("12.5"));
+	public ArrayList<SolicitudArticulosView> cambiarSolicitud(SolicitudArticulosView solicitud, boolean seleccionada) {
 
-		moda.setCodigo(Long.valueOf(1));
-		moda.setDescripcion("una remera");
-		moda.setTalle("XL");
-		moda.setMarca("Mota");
-		moda.setNombre("Motta inside");
-		moda.setOrigen("El Salvador");
-		moda.setPrecio(Float.parseFloat("12.5"));
-		moda.setColor("Azul");
+		for (SolicitudArticulosView view : solicitudes) {
 
-		ArrayList<SolicitudArticulosView> solicitudes = new ArrayList<SolicitudArticulosView>();
-		SolicitudArticulosView dto = new SolicitudArticulosView();
+			if (view.getCodigoSolicitud() == solicitud.getCodigoSolicitud()) {
 
-		dto.setIdModulo(1);
-		SolicitudArticulosItemView item = new SolicitudArticulosItemView(electro, 2);
-		dto.addItemSolicitudArticulos(item);
+				view.setSelected(seleccionada);
 
-		dto.setDate(new java.util.Date());
-		dto.setCodigoSolicitud(1);
-		dto.setSelectable(true);
-		solicitudes.add(dto);
+				for (SolicitudArticulosItemView viewItem : view.getItems()) {
 
-		dto = new SolicitudArticulosView();
-		dto.setIdModulo(2);
-		dto.setDate(new java.util.Date());
-		dto.addItemSolicitudArticulos(new SolicitudArticulosItemView(electro, 5));
-		dto.addItemSolicitudArticulos(new SolicitudArticulosItemView(moda, 5));
-		dto.setCodigoSolicitud(2);
-		dto.setSelectable(false);
-		solicitudes.add(dto);
+					Long codigoArticulo = viewItem.getArticulo().getCodigo();
 
-		return solicitudes;
+					if (stockArticulos.containsKey(codigoArticulo)) {
+
+						int incremento = viewItem.getCantidad();
+						if (view.isSelected()) {
+							incremento = incremento * -1;
+						}
+						stockArticulos.put(codigoArticulo, stockArticulos.get(codigoArticulo) + incremento);
+					}
+				}
+			}
+		}
+
+		return actualizarSolicitudes();
 	}
+
+	private ArrayList<SolicitudArticulosView> actualizarSolicitudes() {
+
+		ArrayList<SolicitudArticulosView> actualizadas = new ArrayList<SolicitudArticulosView>();
+
+		for (SolicitudArticulosView view : solicitudes) {
+
+			if (view.isSelectable() && !view.isSelected()) {
+
+				actualizadas.add(view);
+
+				for (SolicitudArticulosItemView itemView : view.getItems()) {
+
+					if (stockArticulos.get(itemView.getArticulo().getCodigo()) >= itemView.getCantidad()) {
+						itemView.setTotalSolicitado(itemView.getCantidad());
+					} else {
+						itemView.setTotalSolicitado(0);
+						view.setSelectable(false);
+					}
+				}
+			}
+		}
+
+		return actualizadas;
+	}
+
+	// private static ArrayList<SolicitudArticulosView> prueba() {
+	// ElectrodomesticoView electro = new ElectrodomesticoView();
+	// ModaView moda = new ModaView();
+	// electro.setCodigo(Long.valueOf(1));
+	// electro.setDescripcion("Un electro");
+	// electro.setFichaTecnica("una url");
+	// electro.setMarca("Modila");
+	// electro.setNombre("Supercalifragitisticoespiralidoso");
+	// electro.setOrigen("Tierra cdel fuego");
+	// electro.setPrecio(Float.parseFloat("12.5"));
+	//
+	// moda.setCodigo(Long.valueOf(1));
+	// moda.setDescripcion("una remera");
+	// moda.setTalle("XL");
+	// moda.setMarca("Mota");
+	// moda.setNombre("Motta inside");
+	// moda.setOrigen("El Salvador");
+	// moda.setPrecio(Float.parseFloat("12.5"));
+	// moda.setColor("Azul");
+	//
+	// ArrayList<SolicitudArticulosView> solicitudes = new
+	// ArrayList<SolicitudArticulosView>();
+	// SolicitudArticulosView dto = new SolicitudArticulosView();
+	//
+	// dto.setIdModulo(1);
+	// SolicitudArticulosItemView item = new SolicitudArticulosItemView(electro,
+	// 2);
+	// dto.addItemSolicitudArticulos(item);
+	//
+	// dto.setDate(new java.util.Date());
+	// dto.setCodigoSolicitud(1);
+	// dto.setSelectable(true);
+	// solicitudes.add(dto);
+	//
+	// dto = new SolicitudArticulosView();
+	// dto.setIdModulo(2);
+	// dto.setDate(new java.util.Date());
+	// dto.addItemSolicitudArticulos(new SolicitudArticulosItemView(electro,
+	// 5));
+	// dto.addItemSolicitudArticulos(new SolicitudArticulosItemView(moda, 5));
+	// dto.setCodigoSolicitud(2);
+	// dto.setSelectable(false);
+	// solicitudes.add(dto);
+	//
+	// return solicitudes;
+	// }
 }

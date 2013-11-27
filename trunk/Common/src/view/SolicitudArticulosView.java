@@ -19,7 +19,8 @@ public class SolicitudArticulosView implements Serializable {
 	public void setItems(ArrayList<SolicitudArticulosItemView> items) {
 		this.items = items;
 	}
-	public void addItemSolicitudArticulos(SolicitudArticulosItemView item){
+
+	public void addItemSolicitudArticulos(SolicitudArticulosItemView item) {
 		items.add(item);
 	}
 
@@ -50,22 +51,39 @@ public class SolicitudArticulosView implements Serializable {
 	public ArrayList<SolicitudArticulosItemView> getArticulos() {
 		return items;
 	}
+
 	public ArrayList<SolicitudArticulosItemView> getItems() {
 		return items;
 	}
+
 	public boolean isSelectable() {
 		return selectable;
 	}
+
 	public void setSelectable(boolean selectable) {
 		this.selectable = selectable;
 	}
+
 	public boolean isSelected() {
 		return selected;
 	}
+
 	public void setSelected(boolean selected) {
 		if (selectable) {
 			this.selected = selected;
 		}
 	}
 
+	@Override
+	public boolean equals(Object object) {
+		if (object == null || object.getClass() != getClass()) {
+			return false;
+		}
+		return this.hashCode() == object.hashCode();
+	}
+
+	@Override
+	public int hashCode() {
+		return (int) codigoSolicitud;
+	}
 }

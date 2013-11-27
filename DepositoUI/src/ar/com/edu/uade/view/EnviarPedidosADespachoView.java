@@ -59,16 +59,17 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 	}	
 	private class ConfirmSend implements Button.ClickListener{
 		private static final long serialVersionUID = -115242109272197249L;
-		private ArrayList<SolicitudArticulosView> solicitudesToSend;
+		private ArrayList<SolicitudArticulosView> solicitudesToSend = new ArrayList<SolicitudArticulosView>();
+
 		@Override
 		public void buttonClick(ClickEvent event) {
-		   	for(SolicitudArticulosView s:map.keySet()){
-				if (map.get(s).getValue()){
+			for (SolicitudArticulosView s : map.keySet()) {
+				if (map.get(s).getValue()) {
 					solicitudesToSend.add(s);
 					System.out.println(s.getCodigoSolicitud());
 				}
-			} 
-		}		
+			}
+		}
 	}
 	private class DetailedRequest extends Window {
 		private static final long serialVersionUID = -1867392910754863989L;
@@ -152,20 +153,19 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 			confirm.addClickListener(new ConfirmSend());
 			addComponent(confirm);
 	}
-	private void solicitudValueChange(SolicitudArticulosView solicitud){
-	
+
+	private void solicitudValueChange(SolicitudArticulosView solicitud) {
+
 		ArrayList<SolicitudArticulosView> toChange;
-        
-        CheckBox cb;
-        if (map.get(solicitud).getValue())        
-        	toChange = facade.markSolicitud(solicitud);
-        else
-        	toChange = facade.unMarkSolicitud(solicitud);
-        for(SolicitudArticulosView s:toChange){
-        	cb = map.get(s);
-        	cb.setEnabled(!cb.isEnabled());        	
-        }
-		
+
+		if (map.get(solicitud).getValue())
+			toChange = facade.markSolicitud(solicitud);
+		else
+			toChange = facade.unMarkSolicitud(solicitud);
+		for (SolicitudArticulosView s : toChange) {
+			CheckBox cb = map.get(s);
+			cb.setEnabled(!cb.isEnabled());
+		}
 	}
 
 	public  EnviarPedidosADespachoView(){
