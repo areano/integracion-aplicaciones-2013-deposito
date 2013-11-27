@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.Locale;
 
 import javax.ejb.Stateful;
+
+//import log.LoggerBuilder;
 import ar.com.edu.uade.data.MyConverterFactory;
 import ar.com.edu.uade.view.*;
 
@@ -44,14 +46,16 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
-import org.apache.log4j.Logger;
+
 @Theme("dashboard")
 @Title("Administrador de Deposito")
 @Stateful
 public class DepositoUI extends UI {
     
-	private static final Logger logger = 
-			   Logger.getLogger(DepositoUI.class.getName());
+//	private static final Logger logger = 
+//			   Logger.getLogger(DepositoUI.class.getName());
+	
+//	LoggerBuilder logger = new LoggerBuilder(DepositoUI.class);
     private static final long serialVersionUID = 1L;
 
     CssLayout root = new CssLayout();
@@ -78,7 +82,7 @@ public class DepositoUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
-    	logger.info("*** Enter Application ***");
+//    	logger.info("*** Enter Application ***");
     	getSession().setConverterFactory(new MyConverterFactory());
 
         helpManager = new HelpManager(this);
@@ -280,7 +284,7 @@ public class DepositoUI extends UI {
             if (view.equals("crearpedidoafabrica")) {
                 // Add drop target to reports button
                 DragAndDropWrapper reports = new DragAndDropWrapper(b);
-                logger.info("*** CrearPedido ***");
+//                logger.info("*** CrearPedido ***");
                 reports.setDragStartMode(DragStartMode.NONE);
                 reports.setDropHandler(new DropHandler() {
 

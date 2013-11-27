@@ -87,14 +87,13 @@ public class ModaFormView extends CustomComponent {
 		color.addBlurListener(new InstallArticuloValidatorBlurListener(color,"color"));
 		talle.addBlurListener(new InstallArticuloValidatorBlurListener(talle,"talle"));    	
 		origen.addBlurListener(new InstallArticuloValidatorBlurListener(origen,"origen"));
-		layout.addComponent(color);
-		layout.addComponent(descripcion );
+		layout.addComponent(codigo);
 		layout.addComponent(marca);
 		layout.addComponent(nombre);
+		layout.addComponent(color);
+		layout.addComponent(descripcion );
 		layout.addComponent(precio);
-		layout.addComponent(foto);
-		layout.addComponent(codigo);
-		
+		layout.addComponent(foto);		
 		layout.addComponent(talle); 
 		layout.addComponent(origen);
 		if (editable){	    		

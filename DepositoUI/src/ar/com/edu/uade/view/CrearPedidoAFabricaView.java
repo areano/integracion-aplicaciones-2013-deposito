@@ -8,9 +8,13 @@ import view.SolicitudArticulosItemView;
 import view.SolicitudCompraView;
 import ar.com.edu.uade.ejbfacade.EJBFacade;
 import ar.com.edu.uade.view.solicitudcompra.SolicitudCompraFormView;
+import ar.com.edu.uade.view.solicitudcompra.TestItemAsTable;
+import ar.com.edu.uade.view.solicitudcompra.TestNestedBeanToTable;
+import ar.com.edu.uade.view.solicitudcompra.WithCheckbox;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.ui.Layout;
 import com.vaadin.ui.VerticalLayout;
 
 public class CrearPedidoAFabricaView extends VerticalLayout implements View {
@@ -28,12 +32,15 @@ public class CrearPedidoAFabricaView extends VerticalLayout implements View {
 	public void enter(ViewChangeEvent event) {
 		// TODO Esto es un hardcode de aquellos, se supone que manda pedido a fabrica que haga falta cuando se entra a esa pantalla.
 		
-//		SolicitudCompraView solicitud =  facade.getRecomendacionCompra();
-//		facade.crearSolicitudCompra(facade.getRecomendacionCompra());
-//		
-		SolicitudCompraFormView s = new SolicitudCompraFormView();
-		s.init();
-		addComponent(s);
+		TestItemAsTable t;
+		try {
+			t = new TestItemAsTable();
+			addComponent(t);
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 
