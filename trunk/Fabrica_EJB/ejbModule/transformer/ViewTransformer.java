@@ -61,6 +61,7 @@ public class ViewTransformer {
 	private ItemSolicitudCompra converToClass(SolicitudArticulosItemView iscv) {
 		ItemSolicitudCompra item = new ItemSolicitudCompra();
 		item.setCodArticulo(iscv.getArticulo().getCodigo());
+		item.setNombreArticulo(iscv.getArticulo().getNombre());
 		item.setCantidad(iscv.getCantidad());
 		return item;
 	}
@@ -68,9 +69,10 @@ public class ViewTransformer {
 
 	private SolicitudArticulosItemView toView(ItemSolicitudCompra item) {
 
-		ArticuloView av=new ElectrodomesticoView();
+		ArticuloView av = new ElectrodomesticoView();
 		av.setCodigo(item.getCodArticulo());
-		SolicitudArticulosItemView view = new SolicitudArticulosItemView( av, item.getCantidad());
+		av.setNombre(item.getNombreArticulo());
+		SolicitudArticulosItemView view = new SolicitudArticulosItemView(av, item.getCantidad());
 		return view;
 	}
 

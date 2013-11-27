@@ -31,10 +31,10 @@ public class AdministradorSolicitudCompraBean {
 
 	@EJB
 	private Transformer trans;
-	
-	@EJB 
+
+	@EJB
 	SolicitudCompraDAOBean scDAO;
-	
+
 	/**
 	 * Default constructor.
 	 */
@@ -48,7 +48,8 @@ public class AdministradorSolicitudCompraBean {
 			SolicitudCompra entity = trans.getEntity(compra);
 
 			solicitudCompraDao.persist(entity);
-			entregarCompra(compra); //TODO: sacar la respuesta automática de la fabrica cuando se implemente la UI.
+			// entregarCompra(compra); //TODO: sacar la respuesta automática de
+			// la fabrica cuando se implemente la UI.
 		} catch (Exception e) {
 			// TODO AR: log de errores y rollback de
 			e.printStackTrace();
@@ -57,29 +58,30 @@ public class AdministradorSolicitudCompraBean {
 	}
 
 	public void entregarCompra(SolicitudCompraDTO compra) {
+		entregarCompra(compra.getCodigo());
+	}
+
+	public void entregarCompra(Long codigo) {
+
 		try {
 			// TODO AR: Validar entity
-			SolicitudCompra entity = solicitudCompraDao.find(compra.getCodigo());
+			SolicitudCompra entity = solicitudCompraDao.find(codigo);
 
 			entity.setEstado(SolicitudCompra.COMPLETA);
-			
-			depositoDao.entregarCompra(compra);
+
+			SolicitudCompraDTO dto = trans.toDTO(entity);
+			depositoDao.entregarCompra(dto);
 
 		} catch (Exception e) {
 			// TODO AR: log de errores y rollback de las operaciones
 			e.printStackTrace();
 		}
+
 	}
 
-	public void entregarCompra(Long codigo ) {
-		SolicitudCompra entity = solicitudCompraDao.find(codigo);
-		entregarCompra(trans.toDTO(entity));
-	}
-	
 	public List<SolicitudCompra> getSolicitudesDeCompra() {
 		return scDAO.findAll();
-	
+
 	}
 
-	
 }

@@ -33,6 +33,7 @@ public class Transformer {
 			ItemSolicitudCompra itemEntity = new ItemSolicitudCompra();
 
 			itemEntity.setCodArticulo(item.getCodArticulo());
+			itemEntity.setNombreArticulo(item.getNomArticulo());
 			itemEntity.setCantidad(item.getCantidad());
 
 			entity.getItemArticulos().add(itemEntity);
