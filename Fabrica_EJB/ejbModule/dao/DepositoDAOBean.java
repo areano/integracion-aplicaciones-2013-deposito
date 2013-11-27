@@ -39,8 +39,20 @@ public class DepositoDAOBean  {
 	
 	public void enviar(String xml) {
 		String errorMessage = new String();
-//TODO: Ajustar y habilitar esto
-		GenericQueueClient cliente = new GenericQueueClient("jms/queue/recepcionCompra", "localhost" , "4447", "deposito", "deposito123");
+		//TODO: Ajustar y habilitar esto
+		java.net.InetAddress localMachine =null;
+		try {
+			
+			localMachine=java.net.InetAddress.getLocalHost();
+			
+			}
+			catch (java.net.UnknownHostException uhe) { // [beware typo in
+				uhe.printStackTrace();
+			}
+		
+		String ipStr=localMachine.getAddress()[0] + "."+ localMachine.getAddress()[1]+ "." + localMachine.getAddress()[2]+ "." + localMachine.getAddress()[3];
+		
+		GenericQueueClient cliente = new GenericQueueClient("jms/queue/recepcionCompra", ipStr , "4447", "deposito", "deposito123");
 		try {
 			cliente.enviar(xml);
 			cliente.cerrarConexion();
