@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 
 import ar.com.edu.uade.ejbfacade.EJBFacade;
 import ar.com.edu.uade.utils.InstallArticuloValidatorBlurListener;
+import ar.com.edu.uade.utils.StringToLongConverter;
 import ar.com.edu.uade.utils.ValidatorUtils;
 import view.InfantilView;
 
@@ -82,6 +83,7 @@ public class InfantilFormView extends CustomComponent {
 		edadRecomendada.setNullRepresentation("");
 		final AbstractTextField  stock =(AbstractTextField) binder.buildAndBind("Stock", "stock");
 		stock.setNullRepresentation("");
+		stock.setConverter(new StringToLongConverter());
     	final AbstractTextField  origen =(AbstractTextField) binder.buildAndBind("Origen", "origen");
     	origen.setNullRepresentation("");		
 

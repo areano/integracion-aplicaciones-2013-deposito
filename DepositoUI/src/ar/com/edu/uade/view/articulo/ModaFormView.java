@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 
 import ar.com.edu.uade.ejbfacade.EJBFacade;
 import ar.com.edu.uade.utils.InstallArticuloValidatorBlurListener;
+import ar.com.edu.uade.utils.StringToLongConverter;
 import ar.com.edu.uade.utils.ValidatorUtils;
 import view.ModaView;
 
@@ -73,6 +74,8 @@ public class ModaFormView extends CustomComponent {
 		talle.setNullRepresentation("");
 		final AbstractTextField  stock =(AbstractTextField) binder.buildAndBind("Stock", "stock");
 		stock.setNullRepresentation("");
+		stock.setConverter(new StringToLongConverter());
+		
     	final AbstractTextField  origen =(AbstractTextField) binder.buildAndBind("Origen", "origen");
     	origen.setNullRepresentation("");
 		descripcion.addBlurListener(new InstallArticuloValidatorBlurListener(descripcion, "descripcion"));

@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 
 import ar.com.edu.uade.ejbfacade.EJBFacade;
 import ar.com.edu.uade.utils.InstallArticuloValidatorBlurListener;
+import ar.com.edu.uade.utils.StringToLongConverter;
 import ar.com.edu.uade.utils.ValidatorUtils;
 import view.ElectrodomesticoView;
 
@@ -109,8 +110,9 @@ public class ElectrodomesticoFormView extends CustomComponent {
 			codigo.setNullRepresentation("");
 			fichaTecnica=(AbstractTextField) binder.buildAndBind("Ficha Tecnica", "fichaTecnica");
 			fichaTecnica.setNullRepresentation("");
-			stock =(AbstractTextField) binder.buildAndBind("Stock", "stock");
+			stock = (AbstractTextField) binder.buildAndBind("Stock", "stock");
 			stock.setNullRepresentation("");
+			stock.setConverter(new StringToLongConverter());
 			
 			origen =(AbstractTextField) binder.buildAndBind("Origen", "origen");
 			origen.setNullRepresentation("");
