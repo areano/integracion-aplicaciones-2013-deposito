@@ -94,7 +94,7 @@ public class DespachoDAO {
 		this.obtenerConexiones();
 
 		for (DespachoConexion p : conexiones) {
-			GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(), "user", "pass");
+			GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(), p.getUsuario(), p.getPassword());
 			try {
 				cliente.enviar(xml);
 				cliente.cerrarConexion();

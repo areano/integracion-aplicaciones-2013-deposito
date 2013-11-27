@@ -231,7 +231,7 @@ public class ViewTransformer {
 		conn.setIp(c.getIp());
 		conn.setActive(true);
 		conn.setUsuario("despacho");
-		conn.setPassword("despacho");
+		conn.setPassword("despacho123");
 		conn.setPuerto("4447");
 		conn.setQueueName("jms/queue/nuevosArticulos");
 		conn.setRestPath("/despacho_web/rest/despachador/recibirArticulos");
