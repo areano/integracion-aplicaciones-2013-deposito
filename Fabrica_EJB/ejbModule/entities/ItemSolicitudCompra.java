@@ -30,6 +30,7 @@ public class ItemSolicitudCompra implements Serializable {
 
 	private int cantidad;
 	private Long codArticulo;
+	private String nombreArticulo;
 
 	public int getCantidad() {
 		return cantidad;
@@ -45,6 +46,14 @@ public class ItemSolicitudCompra implements Serializable {
 
 	public Long getCodArticulo() {
 		return codArticulo;
+	}
+
+	public String getNombreArticulo() {
+		return nombreArticulo;
+	}
+
+	public void setNombreArticulo(String nombreArticulo) {
+		this.nombreArticulo = nombreArticulo;
 	}
 
 }
