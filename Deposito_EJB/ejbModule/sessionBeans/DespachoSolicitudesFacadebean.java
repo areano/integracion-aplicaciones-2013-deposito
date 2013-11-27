@@ -33,7 +33,7 @@ public class DespachoSolicitudesFacadebean implements DespachoSolicitudesFacade 
 
 	ArrayList<SolicitudArticulosView> solicitudes;
 
-	private ArrayList<ArticuloView> articulos;
+	private HashMap<Long, Long> stockArticulos;
 
 	/**
 	 * this method should return all @SolicitudArticulosView. each
@@ -48,14 +48,8 @@ public class DespachoSolicitudesFacadebean implements DespachoSolicitudesFacade 
 
 		// solicitudes = prueba();
 
-		solicitudes = new ArrayList<SolicitudArticulosView>();
-		articulos = adminArticulos.getArticulos();
-
-		HashMap<Long, Long> stockArticulos = new HashMap<Long, Long>();
-
-		for (ArticuloView articulo : articulos) {
-			stockArticulos.put(articulo.getCodigo(), articulo.getStock());
-		}
+		solicitudes = inicializarSolicitudes();
+		stockArticulos = getStockArticulos();
 
 		List<SolicitudArticulos> data = adminSolicitudes.getSolicitudesArticulos();
 
@@ -76,6 +70,47 @@ public class DespachoSolicitudesFacadebean implements DespachoSolicitudesFacade 
 		return solicitudes;
 	}
 
+	private ArrayList<SolicitudArticulosView> inicializarSolicitudes() {
+
+		ArrayList<SolicitudArticulosView> views = new ArrayList<SolicitudArticulosView>();
+		List<SolicitudArticulos> entities = adminSolicitudes.getSolicitudesArticulos();
+
+		for (SolicitudArticulos solicitud : entities) {
+			SolicitudArticulosView view = transformer.toView(solicitud);
+			views.add(view);
+		}
+		return views;
+	}
+
+	private void actualizarSolicitudes() {
+
+		for (SolicitudArticulosView view : solicitudes) {
+
+			if (view.isSelectable() && !view.isSelected()) {
+
+				for (SolicitudArticulosItemView itemView : view.getItems()) {
+
+					if (stockArticulos.get(itemView.getArticulo().getCodigo()) >= itemView.getCantidad()) {
+						itemView.setTotalSolicitado(itemView.getCantidad());
+					} else {
+						itemView.setTotalSolicitado(0);
+						view.setSelectable(false);
+					}
+				}
+			}
+		}
+	}
+
+	private HashMap<Long, Long> getStockArticulos() {
+		HashMap<Long, Long> stockArticulos = new HashMap<Long, Long>();
+
+		ArrayList<ArticuloView> articulos = adminArticulos.getArticulos();
+		for (ArticuloView articulo : articulos) {
+			stockArticulos.put(articulo.getCodigo(), articulo.getStock());
+		}
+		return stockArticulos;
+	}
+
 	/**
 	 * This method should should recalculate the SolicitudArticulosView that
 	 * could be delivered according the @SolicitudArticulosView checked by the
@@ -83,8 +118,25 @@ public class DespachoSolicitudesFacadebean implements DespachoSolicitudesFacade 
 	 * */
 	@Override
 	public ArrayList<SolicitudArticulosView> markSolicitud(SolicitudArticulosView s) {
-		// TODO Auto-generated method stub
-		return null;
+
+		for (SolicitudArticulosView view : solicitudes) {
+
+			if (view.getCodigoSolicitud() == s.getCodigoSolicitud()) {
+
+				view.setSelected(true);
+
+				for (SolicitudArticulosItemView viewItem : view.getItems()) {
+
+					Long codigoArticulo = viewItem.getArticulo().getCodigo();
+					if (stockArticulos.containsKey(codigoArticulo)) {
+						stockArticulos.put(codigoArticulo, stockArticulos.get(codigoArticulo) - viewItem.getCantidad());
+					}
+				}
+			}
+		}
+
+		actualizarSolicitudes();
+		return solicitudes;
 	}
 
 	/**

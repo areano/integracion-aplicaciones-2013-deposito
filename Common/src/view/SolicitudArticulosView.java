@@ -14,6 +14,7 @@ public class SolicitudArticulosView implements Serializable {
 	private Date date;
 	private long codigoSolicitud;
 	private boolean selectable;
+	private boolean selected;
 
 	public void setItems(ArrayList<SolicitudArticulosItemView> items) {
 		this.items = items;
@@ -57,6 +58,14 @@ public class SolicitudArticulosView implements Serializable {
 	}
 	public void setSelectable(boolean selectable) {
 		this.selectable = selectable;
+	}
+	public boolean isSelected() {
+		return selected;
+	}
+	public void setSelected(boolean selected) {
+		if (selectable) {
+			this.selected = selected;
+		}
 	}
 
 }
