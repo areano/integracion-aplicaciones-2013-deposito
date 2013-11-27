@@ -36,6 +36,31 @@ public class SolicitudArticulosParserTest {
 
 	}
 
+	@Test
+	public void testParseo2() {
+		
+
+		
+		SolicitudArticulosParser SAParser = new SolicitudArticulosParser();
+		SolicitudArticulosDTO SADTO = null;
+		String xml = new String(
+				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<solicitudArticulos>\n   <idSolicitud>1</idSolicitud>\n   <idModulo>13</idModulo>\n   <articulos>\n      <articulo>\n         <codigo>2</codigo>\n         <cantidad>5</cantidad>\n      </articulo>\n      <articulo>\n         <codigo>1</codigo>\n         <cantidad>10</cantidad>\n      </articulo>\n   </articulos>\n</solicitudArticulos>");
+
+		try {
+			SADTO = SAParser.toObject(xml);
+		} catch (ParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		assertTrue(SADTO.getIdSolicitud() == 1);
+		assertTrue(SADTO.getIdModulo() == 13);
+		assertTrue(SADTO.getLista().get(0).getCantidad() == 5);
+		assertEquals(SADTO.getLista().get(0).getCodigo(), "2");
+		assertEquals(SADTO.getLista().size(), 2);
+
+	}
+	
 	
 	@Test
 	public void testJson1() {
