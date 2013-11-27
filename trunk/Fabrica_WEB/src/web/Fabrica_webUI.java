@@ -43,7 +43,20 @@ public class Fabrica_webUI extends UI {
 	public static class Servlet extends VaadinServlet {
 	}
 
-	
+	@Override
+	protected void init(VaadinRequest request) {
+
+		final VerticalLayout layout = new VerticalLayout();
+		layout.setMargin(true);
+		setContent(layout);
+			
+		Table table = armarTabla();
+		
+		layout.addComponent(table);
+		
+		Button button = crearBoton(layout, table);
+		layout.addComponent(button);
+	}
 	private Table armarTabla(){
 		Table table= new Table("Solicitudes de compra");
 		List<SolicitudCompraView> listaView=null;
@@ -136,22 +149,7 @@ public class Fabrica_webUI extends UI {
 			e.printStackTrace();
 		}
 		
-	}
+	}					 
 
-	@Override
-	protected void init(VaadinRequest request) {
-
-		final VerticalLayout layout = new VerticalLayout();
-		layout.setMargin(true);
-		setContent(layout);
-			
-		Table table = armarTabla();
-		
-		layout.addComponent(table);
-		
-		Button button = crearBoton(layout, table);
-		layout.addComponent(button);
-	}
-							 
 }
 
