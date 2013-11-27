@@ -3,7 +3,9 @@ package view;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class SolicitudCompraView implements Serializable {
 
@@ -45,6 +47,23 @@ public class SolicitudCompraView implements Serializable {
 
 	public List<SolicitudArticulosItemView> getArticulos() {
 		return items;
+	}
+	public void reformular(Set<Object> selectedItemIds) {
+		 ArrayList<SolicitudArticulosItemView> tempArrayList = new ArrayList<SolicitudArticulosItemView>();
+		 for (Object object : selectedItemIds) {
+			 tempArrayList.add((SolicitudArticulosItemView)object);
+		}
+		items.clear();
+		items.addAll(tempArrayList);
+//		Iterator<SolicitudArticulosItemView> it = items.iterator();
+//		while (it.hasNext()) {
+//			SolicitudArticulosItemView item= it.next();
+//			if (!(selectedItemIds.contains(item))){
+//				it.remove();
+//			}			
+//		}
+
+		
 	}
 	
 }
