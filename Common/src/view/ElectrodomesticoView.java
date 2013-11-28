@@ -5,11 +5,8 @@ import javax.validation.constraints.NotNull;
 
 
 public class ElectrodomesticoView extends ArticuloView{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4674360310404545979L;
+
+	private static final long serialVersionUID = 1L;
 	@NotNull
 	private String fichaTecnica;
 	

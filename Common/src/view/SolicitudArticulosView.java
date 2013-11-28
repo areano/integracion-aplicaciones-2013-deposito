@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class SolicitudArticulosView implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -818101022335386849L;
+	private static final long serialVersionUID = 1L;
 	private ArrayList<SolicitudArticulosItemView> items = new ArrayList<SolicitudArticulosItemView>();
 	private int idModulo;
 	private Date date;

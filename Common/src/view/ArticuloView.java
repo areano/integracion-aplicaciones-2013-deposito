@@ -8,10 +8,7 @@ import javax.validation.constraints.NotNull;
 
 public abstract class ArticuloView implements Serializable{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 9148281066552614168L;
+	private static final long serialVersionUID = 1L;
 	@NotNull
 	private Long codigo;
 	@NotNull

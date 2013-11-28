@@ -5,10 +5,7 @@ import javax.validation.constraints.NotNull;
 public class MuebleView extends ArticuloView{
 	
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4347083384610652409L;
+	private static final long serialVersionUID = 1L;
 	@NotNull
 	private String material;
 	
