@@ -28,6 +28,7 @@ import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
+import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -49,24 +50,27 @@ public class Fabrica_webUI extends UI {
 		final VerticalLayout layout = new VerticalLayout();
 		layout.setMargin(true);
 		setContent(layout);
-			
-		Table table = armarTabla();
+		Table table= new Table("Solicitudes de compra");
+		
+		table = armarTabla(table);
 		
 		layout.addComponent(table);
 		
 		Button button = crearBoton(layout, table);
 		layout.addComponent(button);
 	}
-	private Table armarTabla(){
-		Table table= new Table("Solicitudes de compra");
+	
+	private Table armarTabla(Table table){
+
 		List<SolicitudCompraView> listaView=null;
-		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 		/* Define the names and data types of columns.
 		 * The "default value" parameter is meaningless here. */
-		table.addContainerProperty("Fecha", String.class,  null);
+		table.addContainerProperty("FechaCreacion", String.class,  null);
+		table.addContainerProperty("FechaFin", String.class,  null);
 		table.addContainerProperty("Codigo",  Long.class,  null);
-		table.addContainerProperty("Contenido", TextField.class, null);
+		table.addContainerProperty("Contenido", TextArea.class, null);
 		table.addContainerProperty("Enviar", CheckBox.class,  null);
 		
 		try {
@@ -75,7 +79,7 @@ public class Fabrica_webUI extends UI {
 			// TODO MostrarError de que no me pude conectar al ejb.
 			e.printStackTrace();
 			table.addItem(new Object[] {
-				    "2013/11/26","1",new TextField("ERROR DE CONEXION AL EJB"), new CheckBox("",false)}, new Integer(1));
+				    "2013/11/26","2013/11/26","1",new TextField("ERROR DE CONEXION AL EJB"), new CheckBox("",false)}, new Integer(1));
 			return table;
 		}
 		
@@ -84,25 +88,46 @@ public class Fabrica_webUI extends UI {
 		for (SolicitudCompraView scv : listaView){
 			String textoArts="";
 			String textoDate="";
+			String textoFechaFin="";
 			CheckBox check= new CheckBox("",false);
-			TextField articulos= new TextField("articulos");
+			TextArea articulos= new TextArea("articulos");
+			articulos.setWidth("150");
 			
-			if (scv.getDate()!=null) formatoDelTexto.format(scv.getDate());
-//			if (scv.getCompletado) check.setEnabled(false);
-//			Falta deshabilitar las completas e indicarlo en algun lado
-
-			for (SolicitudArticulosItemView item: scv.getArticulos()){
-				textoArts=textoArts + "\n Art:" + item.getArticulo().getCodigo() + "|" + item.getCantidad() + "u." ;
+			boolean completa=false;
+			int j=0; 
+			
+			if (scv.getEstado().equals(SolicitudCompraView.COMPLETA)) {
+				check.setEnabled(false);
+				check.setVisible(false);
+				completa=true;
 			}
 			
-			articulos.setValue(textoArts);
+			if (scv.getDate()!=null) {
+				textoDate=formatoDelTexto.format(scv.getDate());
+			}
 			
+			if (scv.getFechaFin()!=null) {
+				textoFechaFin=formatoDelTexto.format(scv.getFechaFin());	
+			}
+
+			for (SolicitudArticulosItemView item: scv.getArticulos()){
+				if (j!=0){ textoArts=textoArts + "\n";} 
+				textoArts=textoArts + " Art:" + item.getArticulo().getCodigo() + "|" + item.getArticulo().getNombre() + "|" + item.getCantidad() + "u." ;
+				j++;
+			}
+			
+			if (completa) {
+				textoArts=textoArts + "\n****COMPLETADA*****";
+				j++;
+			}
+			articulos.setValue(textoArts);
+			articulos.setRows(j);
 			table.addItem(new Object[] {
-					textoDate,scv.getCodigoSolicitud(),articulos, check}, new Integer(i));
+					textoDate, textoFechaFin,scv.getCodigoSolicitud(),articulos, check}, new Integer(i));
 			
 			i++;
 		}
-		
+		table.setPageLength(i);
 		return table;
 	}
 
@@ -112,6 +137,8 @@ public class Fabrica_webUI extends UI {
 		 public void buttonClick(ClickEvent event) {
 			 layout.addComponent(new Label("Enviado"));
 			 enviarSolicitudes(tabla);
+			 tabla.removeAllItems();
+			 armarTabla(tabla);
 		 }
 		 });
 		return button;
