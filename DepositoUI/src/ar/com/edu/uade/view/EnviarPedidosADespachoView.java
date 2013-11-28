@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 import javax.naming.NamingException;
 
-import org.vaadin.hene.flexibleoptiongroup.FlexibleOptionGroup;
+
 
 import view.ArticuloView;
 import view.SolicitudArticulosItemView;
@@ -108,11 +108,11 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 			FormLayout form ;
 
 			Table items = new Table ("Pedido");
-			FlexibleOptionGroup fop = new FlexibleOptionGroup();
+
 
 			CheckBox solicitudSelected = new CheckBox();
 			PopupView popUpView;
-			fop.setMultiSelect(true);
+
 
 			VerticalLayout base = new VerticalLayout();
 			base.addStyleName(Reindeer.THEME_NAME);
