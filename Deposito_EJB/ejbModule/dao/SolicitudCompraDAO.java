@@ -62,17 +62,19 @@ public class SolicitudCompraDAO {
 
 		try {
 
-			//TODO: AR: Esta es la query que va, la otra es de prueba.
-			//Query q = em.createQuery("SELECT a.articulo.codigo, sum(a.cantidad) * 2 FROM SolicitudArticulos s join s.items a where s.cumplida=false group by a.articulo.codigo");
-			Query q = em.createQuery("SELECT a.codigo, sum(a.stock) * 2 FROM Articulo a group by a.codigo");
+			// TODO: AR: Esta es la query que va, la otra es de prueba.
+			Query q = em.createQuery("SELECT a.articulo.codigo, sum(a.cantidad) * 2 FROM SolicitudArticulos s join s.items a where s.cumplida=false group by a.articulo.codigo");
+
+			// Query q =
+			// em.createQuery("SELECT a.codigo, sum(a.stock) * 2 FROM Articulo a group by a.codigo");
 
 			List<Object[]> result = q.getResultList();
 
 			for (Object[] item : result) {
 				ItemSolicitudCompra itemCompra = new ItemSolicitudCompra();
 				itemCompra.setArticulo(em.find(Articulo.class, item[0]));
-				long cantidad = (Long) item[0];
-				itemCompra.setCantidad((int) cantidad);
+				long cantidad = (Long) item[1];
+				itemCompra.setTotalSolicitado((int) cantidad);
 				sc.getArticulos().add(itemCompra);
 			}
 		} catch (Exception e) {
