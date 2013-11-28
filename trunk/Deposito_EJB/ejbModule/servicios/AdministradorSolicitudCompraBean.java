@@ -7,10 +7,13 @@ import javax.ejb.Stateless;
 import transformer.Transformer;
 import transformer.ViewTransformer;
 import view.SolicitudCompraView;
+import dao.ArticuloDAO;
 import dao.DespachoDAO;
 import dao.FabricaDAO;
 import dao.SolicitudCompraDAO;
 import dto.SolicitudCompraDTO;
+import entities.Articulo;
+import entities.ItemSolicitudCompra;
 import entities.SolicitudCompra;
 
 /**
@@ -28,20 +31,21 @@ public class AdministradorSolicitudCompraBean {
 
 	@EJB
 	private DespachoDAO despachoDAO;
-	
+
 	@EJB
 	private ViewTransformer vt;
 
 	@EJB
 	Transformer t;
+
+	@EJB
+	private ArticuloDAO articuloDao;
+
 	/**
 	 * Default constructor.
 	 */
 	public AdministradorSolicitudCompraBean() {
 	}
-
-	
-	
 
 	public void crear(SolicitudCompraView compraView) {
 
@@ -66,39 +70,28 @@ public class AdministradorSolicitudCompraBean {
 			e.printStackTrace();
 		}
 	}
-	
 
 	private SolicitudCompra getEntity(SolicitudCompraDTO compraDTO) {
-		
+
 		SolicitudCompra solicitud = t.converToClass(compraDTO);
 		return solicitud;
 	}
 
-
 	public void recibir(SolicitudCompraDTO compraDTO) {
-		/*
-		 * TODO: getEntity validar actualizar el stock de cada articulo marcar la
-		 * solicitud de compra com recibida
-		 */
+
 		SolicitudCompra compra = getEntity(compraDTO);
 
-		// for (Articulo art : compra.getArticulos()) {
-		// /*
-		// * buscar entity stock stock
-		// * actualizar stock
-		// * validar que se persista
-		// * */
-		// }
+		for (ItemSolicitudCompra item : compra.getArticulos()) {
+			Articulo articulo = articuloDao.find(item.getArticulo().getCodigo());
+			articulo.setStock(articulo.getStock() + item.getCantidad());
+		}
 
 		compra.setCompletada(true);
-		solicitudCompraDAO.merge(compra);
-
 	}
 
-	public SolicitudCompra getRecomendacionCompra(){
-		SolicitudCompra SC=solicitudCompraDAO.getRecomendacionCompra(); 
+	public SolicitudCompra getRecomendacionCompra() {
+		SolicitudCompra SC = solicitudCompraDAO.getRecomendacionCompra();
 		return SC;
 	}
-	
-	
+
 }
