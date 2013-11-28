@@ -7,11 +7,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+
 public class SolicitudCompraView implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<SolicitudArticulosItemView> items = new ArrayList<SolicitudArticulosItemView>();
 	private Date date;
+	private Date fechaFin;
 	private long codigoSolicitud;
+	
+	public static final String PENDIENTE = "Pendiente";
+	public static final String COMPLETA = "Completa";
+
+	private String estado = PENDIENTE;
+	
 	public ArrayList<SolicitudArticulosItemView> getItems() {
 		return items;
 	}
@@ -60,6 +70,22 @@ public class SolicitudCompraView implements Serializable {
 //		}
 
 		
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public Date getFechaFin() {
+		return fechaFin;
+	}
+
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
 	}
 	
 }

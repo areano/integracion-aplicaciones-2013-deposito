@@ -173,7 +173,14 @@ public class ViewTransformer {
 		SolicitudCompra solicitud = new SolicitudCompra();
 		solicitud.setCodigo(scv.getCodigoSolicitud());
 		solicitud.setFechaInicio(scv.getDate());
-		// TODO: MF falta agregar aca la fecha fin.
+		scv.setDate(solicitud.getFechaInicio());
+		if (solicitud.isCompletada()){
+			scv.setEstado(SolicitudCompraView.COMPLETA);
+		} else {
+			scv.setEstado(SolicitudCompraView.PENDIENTE);
+		}
+		scv.setFechaFin(solicitud.getFechaFin());
+
 		for (SolicitudArticulosItemView item : scv.getArticulos()) {
 			solicitud.getArticulos().add(this.converToClass(item));
 		}

@@ -34,11 +34,9 @@ public class ViewTransformer {
 	public SolicitudCompraView toView(SolicitudCompra solicitud) {
 		SolicitudCompraView view = new SolicitudCompraView();
 		view.setCodigoSolicitud(solicitud.getCodigo());
-		if (solicitud.getFechaFin() == null) {
-			// TODO: MF set no entregado.
-		} else {
-			// TODO: MF set entregado.
-		}
+		view.setDate(solicitud.getFechaInicio());
+		view.setEstado(solicitud.getEstado());
+		view.setFechaFin(solicitud.getFechaFin());
 
 		for (ItemSolicitudCompra i : solicitud.getItemArticulos()) {
 			view.getArticulos().add(toView(i));
@@ -49,7 +47,7 @@ public class ViewTransformer {
 	public SolicitudCompra converToClass(SolicitudCompraView scv) {
 		SolicitudCompra solicitud = new SolicitudCompra();
 		solicitud.setCodigo(scv.getCodigoSolicitud());
-
+		solicitud.setEstado(scv.getEstado());
 		// TODO: MF falta agregar aca la fecha fin.
 		for (SolicitudArticulosItemView item : scv.getArticulos()) {
 			solicitud.getItemArticulos().add(this.converToClass(item));
