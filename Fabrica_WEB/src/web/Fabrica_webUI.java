@@ -83,7 +83,7 @@ public class Fabrica_webUI extends UI {
 			return table;
 		}
 		
-		int i=0;
+		int cantSolicitudesCompra=0;
 
 		for (SolicitudCompraView scv : listaView){
 			String textoArts="";
@@ -94,7 +94,7 @@ public class Fabrica_webUI extends UI {
 			articulos.setWidth("150");
 			
 			boolean completa=false;
-			int j=0; 
+			int cantLineasDesc=0; 
 			
 			if (scv.getEstado().equals(SolicitudCompraView.COMPLETA)) {
 				check.setEnabled(false);
@@ -110,24 +110,25 @@ public class Fabrica_webUI extends UI {
 				textoFechaFin=formatoDelTexto.format(scv.getFechaFin());	
 			}
 
+			//Para cada item Solicitud Compra agrego una linea en el campo articulos con los datos del item.
 			for (SolicitudArticulosItemView item: scv.getArticulos()){
-				if (j!=0){ textoArts=textoArts + "\n";} 
+				if (cantLineasDesc!=0){ textoArts=textoArts + "\n";} 
 				textoArts=textoArts + " Art:" + item.getArticulo().getCodigo() + "|" + item.getArticulo().getNombre() + "|" + item.getCantidad() + "u." ;
-				j++;
+				cantLineasDesc++;
 			}
 			
 			if (completa) {
 				textoArts=textoArts + "\n****COMPLETADA*****";
-				j++;
+				cantLineasDesc++;
 			}
 			articulos.setValue(textoArts);
-			articulos.setRows(j);
+			articulos.setRows(cantLineasDesc); // configura la cantidad de lineas del campo articulos
 			table.addItem(new Object[] {
-					textoDate, textoFechaFin,scv.getCodigoSolicitud(),articulos, check}, new Integer(i));
+					textoDate, textoFechaFin,scv.getCodigoSolicitud(),articulos, check}, new Integer(cantSolicitudesCompra));
 			
-			i++;
+			cantSolicitudesCompra++;
 		}
-		table.setPageLength(i);
+		table.setPageLength(cantSolicitudesCompra);
 		return table;
 	}
 
@@ -135,10 +136,10 @@ public class Fabrica_webUI extends UI {
 		Button button=new Button("Enviar Solicitudes");
 		 button.addClickListener(new Button.ClickListener() {
 		 public void buttonClick(ClickEvent event) {
-			 layout.addComponent(new Label("Enviado"));
-			 enviarSolicitudes(tabla);
-			 tabla.removeAllItems();
-			 armarTabla(tabla);
+			 layout.addComponent(new Label("Enviado")); //Agrega un texto "enviado" bajo el botón.
+			 enviarSolicitudes(tabla); // Manda las solicitudes al deposito
+			 tabla.removeAllItems(); // Limpia la tabla
+			 armarTabla(tabla); //Vuelve a dibujar la tabla
 		 }
 		 });
 		return button;
