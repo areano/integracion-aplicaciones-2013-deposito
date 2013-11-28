@@ -54,18 +54,28 @@ public class DespachoSolicitudesFacadebean implements DespachoSolicitudesFacade 
 
 		for (SolicitudArticulosView view : solicitudes) {
 
-			for (SolicitudArticulosItemView itemView : view.getItems()) {
-
-				if (stockArticulos.get(itemView.getArticulo().getCodigo()) >= itemView.getCantidad()) {
-					itemView.setTotalSolicitado(itemView.getCantidad());
-				} else {
-					itemView.setTotalSolicitado(0);
-					view.setSelectable(false);
-				}
-			}
+			validarSolicitud(view);
 		}
 
 		return solicitudes;
+	}
+
+	private void validarSolicitud(SolicitudArticulosView view) {
+
+		view.setSelectable(true);
+
+		for (SolicitudArticulosItemView itemView : view.getItems()) {
+
+			Long codigoArticulo = itemView.getArticulo().getCodigo();
+			Long stock = stockArticulos.get(codigoArticulo);
+
+			if (stock >= itemView.getCantidad()) {
+				itemView.setTotalSolicitado(itemView.getCantidad());
+			} else {
+				itemView.setTotalSolicitado(0);
+				view.setSelectable(false);
+			}
+		}
 	}
 
 	private ArrayList<SolicitudArticulosView> inicializarSolicitudes() {
@@ -115,29 +125,34 @@ public class DespachoSolicitudesFacadebean implements DespachoSolicitudesFacade 
 
 	public ArrayList<SolicitudArticulosView> cambiarSolicitud(SolicitudArticulosView solicitud, boolean seleccionada) {
 
-		for (SolicitudArticulosView view : solicitudes) {
+		SolicitudArticulosView view = buscarSolicitud(solicitud.getCodigoSolicitud());
 
-			if (view.getCodigoSolicitud() == solicitud.getCodigoSolicitud()) {
+		view.setSelected(seleccionada);
 
-				view.setSelected(seleccionada);
+		for (SolicitudArticulosItemView viewItem : view.getItems()) {
 
-				for (SolicitudArticulosItemView viewItem : view.getItems()) {
+			Long codigoArticulo = viewItem.getArticulo().getCodigo();
 
-					Long codigoArticulo = viewItem.getArticulo().getCodigo();
+			if (stockArticulos.containsKey(codigoArticulo)) {
 
-					if (stockArticulos.containsKey(codigoArticulo)) {
-
-						int incremento = viewItem.getCantidad();
-						if (view.isSelected()) {
-							incremento = incremento * -1;
-						}
-						stockArticulos.put(codigoArticulo, stockArticulos.get(codigoArticulo) + incremento);
-					}
+				int incremento = viewItem.getCantidad();
+				if (view.isSelected()) {
+					incremento = incremento * -1;
 				}
+				stockArticulos.put(codigoArticulo, stockArticulos.get(codigoArticulo) + incremento);
 			}
 		}
 
 		return actualizarSolicitudes();
+	}
+
+	private SolicitudArticulosView buscarSolicitud(Long codigo) {
+		for (SolicitudArticulosView view : solicitudes) {
+			if (view.getCodigoSolicitud() == codigo) {
+				return view;
+			}
+		}
+		return null;
 	}
 
 	private ArrayList<SolicitudArticulosView> actualizarSolicitudes() {
@@ -146,9 +161,10 @@ public class DespachoSolicitudesFacadebean implements DespachoSolicitudesFacade 
 
 		for (SolicitudArticulosView view : solicitudes) {
 
-			if (view.isSelectable() && !view.isSelected()) {
+			if (!view.isSelected()) {
 
 				actualizadas.add(view);
+				view.setSelectable(true);
 
 				for (SolicitudArticulosItemView itemView : view.getItems()) {
 
@@ -157,6 +173,7 @@ public class DespachoSolicitudesFacadebean implements DespachoSolicitudesFacade 
 					} else {
 						itemView.setTotalSolicitado(0);
 						view.setSelectable(false);
+						break;
 					}
 				}
 			}

@@ -165,7 +165,7 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 			toChange = facade.unMarkSolicitud(solicitud);
 		for (SolicitudArticulosView s : toChange) {
 			CheckBox cb = map.get(s);
-			cb.setEnabled(!cb.isEnabled());
+			cb.setEnabled(s.isSelectable());
 		}
 	}
 
