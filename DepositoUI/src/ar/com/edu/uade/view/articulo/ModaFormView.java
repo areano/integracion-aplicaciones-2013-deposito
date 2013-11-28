@@ -74,7 +74,7 @@ public class ModaFormView extends CustomComponent {
 		talle.setNullRepresentation("");
 		final AbstractTextField  stock =(AbstractTextField) binder.buildAndBind("Stock", "textStock");
 		stock.setNullRepresentation("");
-		stock.setConverter(new StringToLongConverter());
+		//stock.setConverter(new StringToLongConverter());
 		
     	final AbstractTextField  origen =(AbstractTextField) binder.buildAndBind("Origen", "origen");
     	origen.setNullRepresentation("");

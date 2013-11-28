@@ -76,7 +76,7 @@ public class MuebleFormView extends CustomComponent {
 		material.setNullRepresentation("");
 		final AbstractTextField  stock =(AbstractTextField) binder.buildAndBind("Stock", "textStock");
 		stock.setNullRepresentation("");
-		stock.setConverter(new StringToLongConverter());
+		//stock.setConverter(new StringToLongConverter());
     	final AbstractTextField  origen =(AbstractTextField) binder.buildAndBind("Origen", "origen");
     	origen.setNullRepresentation("");	
 

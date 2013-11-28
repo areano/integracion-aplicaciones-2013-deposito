@@ -106,7 +106,7 @@ public class ElectrodomesticoFormView extends CustomComponent {
 			fichaTecnica.setNullRepresentation("");
 			stock = (AbstractTextField) binder.buildAndBind("Stock", "textStock");
 			stock.setNullRepresentation("");
-			stock.setConverter(new StringToLongConverter());
+			//stock.setConverter(new StringToLongConverter());
 			
 			origen =(AbstractTextField) binder.buildAndBind("Origen", "origen");
 			origen.setNullRepresentation("");
