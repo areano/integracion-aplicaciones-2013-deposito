@@ -74,7 +74,7 @@ public class SolicitudCompraDAO {
 				ItemSolicitudCompra itemCompra = new ItemSolicitudCompra();
 				itemCompra.setArticulo(em.find(Articulo.class, item[0]));
 				long cantidad = (Long) item[1];
-				itemCompra.setTotalSolicitado((int) cantidad);
+				itemCompra.setCantidad((int) cantidad);
 				sc.getArticulos().add(itemCompra);
 			}
 		} catch (Exception e) {
