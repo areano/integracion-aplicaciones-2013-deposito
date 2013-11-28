@@ -31,6 +31,9 @@ public abstract class ArticuloView implements Serializable{
 	private Number textPrecio;
 	@NotNull
 	private Number textCodigo;
+	@Min (value = 0)
+	private Number textStock;
+
 	public ArticuloView(){
 	    codigo=null;
 	    descripcion=null;
@@ -49,6 +52,7 @@ public abstract class ArticuloView implements Serializable{
 	}
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
+		textCodigo = codigo;
 	}
 	public String getDescripcion() {
 		return descripcion;
@@ -79,6 +83,7 @@ public abstract class ArticuloView implements Serializable{
 	}
 	public void setPrecio(Float precio) {
 		this.precio = precio;
+		textPrecio = precio;
 	
 	}
 	public String getOrigen() {
@@ -107,6 +112,7 @@ public abstract class ArticuloView implements Serializable{
 	}
 	public void setStock(Long stock) {
 		this.stock = stock;
+		textStock =  stock;
 	}
 	public abstract String getFichaTecnica();
 	public abstract String getColor() ;
@@ -126,6 +132,13 @@ public abstract class ArticuloView implements Serializable{
 	public void setTextCodigo(Number textCodigo) {
 		this.textCodigo = textCodigo;
 		codigo =  textCodigo.longValue();
+	}
+	public Number getTextStock() {
+		return textStock;
+	}
+	public void setTextStock(Number textStock) {
+		this.textStock = textStock;
+		stock =  textStock.longValue();
 	}
 	public String toString(){
 		return "Art.: "+codigo+" - "+tipo+" - "+marca+" "+ nombre;
