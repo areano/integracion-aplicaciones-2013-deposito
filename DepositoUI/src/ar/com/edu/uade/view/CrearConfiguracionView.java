@@ -1,9 +1,10 @@
 package ar.com.edu.uade.view;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.naming.NamingException;
+
+import org.apache.log4j.Logger;
 
 import view.ConnectionView;
 import ar.com.edu.uade.customcomponents.IPConfiguratorPanel;
@@ -17,12 +18,10 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ChameleonTheme;
 
 public class CrearConfiguracionView extends VerticalLayout implements View {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8923865045603639957L;
 	EJBFacade facade;
+	private static final Logger logger = 
+			   Logger.getLogger(CrearConfiguracionView.class);
 	public  CrearConfiguracionView(){
 		try {
 			facade =  EJBFacade.getIntance();
@@ -33,6 +32,9 @@ public class CrearConfiguracionView extends VerticalLayout implements View {
 	}
 	@Override
 	public void enter(ViewChangeEvent event) {
+		
+		logger.info("*** Crear Configuracion ***");
+		logger.error(new Exception().getStackTrace());
 		addStyleName("reindeer");
 		Label caption = new Label("Configuracion de IP's <span>Seleccione para Activar</span>", ContentMode.HTML);
 		caption.addStyleName(ChameleonTheme.LABEL_H1);

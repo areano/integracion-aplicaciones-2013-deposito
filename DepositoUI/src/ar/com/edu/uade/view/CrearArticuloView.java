@@ -1,5 +1,9 @@
 package ar.com.edu.uade.view;
 
+import org.apache.log4j.Logger;
+
+
+
 import ar.com.edu.uade.view.articulo.ElectrodomesticoFormView;
 import ar.com.edu.uade.view.articulo.InfantilFormView;
 import ar.com.edu.uade.view.articulo.ModaFormView;
@@ -21,13 +25,13 @@ public class CrearArticuloView extends VerticalLayout implements View {
 	private CssLayout root = new CssLayout();
 	private CssLayout menu = new CssLayout();
     private CssLayout content = new CssLayout();
+	private static final Logger logger = 
+			   Logger.getLogger(CrearArticuloView.class);
+	@SuppressWarnings("unused")
 	@Override
 	public void enter(ViewChangeEvent event) {
-//		addStyleName("articulos");
-//		setSizeFull();
-//        root.addStyleName("articulos");
-//        content.addStyleName("articulos");
-//        menu.addStyleName("articulos");
+
+		logger.info("*** Crear Articulo ***");
 		addStyleName("chameleon");
 		setSizeFull();
         root.addStyleName("chameleon");
@@ -45,6 +49,8 @@ public class CrearArticuloView extends VerticalLayout implements View {
         menu.addComponent(menuBar);
         addComponent(root);        
 		MenuBar.Command mycommand = new MenuBar.Command() {
+			private static final long serialVersionUID = 1L;
+
 			@Override
 		    public void menuSelected(MenuItem selectedItem) {
 				Articulos item =  Articulos.valueOf(selectedItem.getText().toUpperCase());	
@@ -81,6 +87,8 @@ public class CrearArticuloView extends VerticalLayout implements View {
 		    }
 		};
 		MenuBar.Command buscarCommand = new MenuBar.Command() {
+			private static final long serialVersionUID = 1L;
+
 			@Override
 		    public void menuSelected(MenuItem selectedItem) {
 				content.removeAllComponents();
@@ -94,9 +102,7 @@ public class CrearArticuloView extends VerticalLayout implements View {
 		MenuBar.MenuItem electrodomesticoArticuloMenu = articuloMenu.addItem("Electrodomestico", null, mycommand);
 		MenuBar.MenuItem modaArticuloMenu = articuloMenu.addItem("Moda", null, mycommand);
 		MenuBar.MenuItem muebleArticuloMenu = articuloMenu.addItem("Mueble", null, mycommand); 
-		MenuBar.MenuItem infantilArticuloMenu = articuloMenu.addItem("Infantil", null, mycommand); 
-		
-        
+		MenuBar.MenuItem infantilArticuloMenu = articuloMenu.addItem("Infantil", null, mycommand);         
 		
 	}
 
