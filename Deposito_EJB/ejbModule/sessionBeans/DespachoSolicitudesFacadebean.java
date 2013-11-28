@@ -52,10 +52,8 @@ public class DespachoSolicitudesFacadebean implements DespachoSolicitudesFacade 
 		solicitudes = inicializarSolicitudes();
 		stockArticulos = getStockArticulos();
 
-		List<SolicitudArticulos> data = adminSolicitudes.getSolicitudesArticulos();
+		for (SolicitudArticulosView view : solicitudes) {
 
-		for (SolicitudArticulos solicitud : data) {
-			SolicitudArticulosView view = transformer.toView(solicitud);
 			for (SolicitudArticulosItemView itemView : view.getItems()) {
 
 				if (stockArticulos.get(itemView.getArticulo().getCodigo()) >= itemView.getCantidad()) {
@@ -65,7 +63,6 @@ public class DespachoSolicitudesFacadebean implements DespachoSolicitudesFacade 
 					view.setSelectable(false);
 				}
 			}
-			solicitudes.add(view);
 		}
 
 		return solicitudes;
