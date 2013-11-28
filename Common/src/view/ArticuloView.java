@@ -46,6 +46,7 @@ public abstract class ArticuloView implements Serializable{
 	    stock = 0L;
 	    textCodigo = null;
 	    textPrecio = null;
+	    textStock = 0;
 	}
 	public Long getCodigo() {
 		return codigo;
