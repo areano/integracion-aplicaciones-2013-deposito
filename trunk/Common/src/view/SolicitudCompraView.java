@@ -8,11 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 public class SolicitudCompraView implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4708137109886579361L;
+	private static final long serialVersionUID = 1L;
 	private ArrayList<SolicitudArticulosItemView> items = new ArrayList<SolicitudArticulosItemView>();
 	private Date date;
 	private long codigoSolicitud;
