@@ -135,4 +135,8 @@ public class EJBFacade {
 	public ArrayList<SolicitudArticulosView> unMarkSolicitud(SolicitudArticulosView solicitud) {
 		return despachoSolicitudesFacade.unmarkSolicitud(solicitud);
 	}
+
+	public void enviarArticulos(ArrayList<SolicitudArticulosView> solicitudes) {
+		despachoSolicitudesFacade.enviarArticulos(solicitudes);
+	}
 }

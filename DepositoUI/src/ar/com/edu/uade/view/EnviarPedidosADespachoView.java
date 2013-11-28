@@ -69,6 +69,7 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 					System.out.println(s.getCodigoSolicitud());
 				}
 			}
+			facade.enviarArticulos(solicitudesToSend);
 		}
 	}
 	private class DetailedRequest extends Window {

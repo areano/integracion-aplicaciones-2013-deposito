@@ -23,11 +23,4 @@ public interface Facade {
 	 * Crea una nueva solicitud de compra y la envia a Fabrica
 	 */
 	public void crearSolicitudCompra(SolicitudCompraView compra);
-
-	/**
-	 * Envia los articulos de la solicitud compra a Despacho
-	 */
-	public void enviarArticulos(SolicitudCompraDTO compra);
-
-
 }

@@ -13,4 +13,6 @@ public interface DespachoSolicitudesFacade {
 	public ArrayList<SolicitudArticulosView> markSolicitud(SolicitudArticulosView s);
 
 	public ArrayList<SolicitudArticulosView> unmarkSolicitud(SolicitudArticulosView s);
+
+	public void enviarArticulos(ArrayList<SolicitudArticulosView> solicitudes);
 }

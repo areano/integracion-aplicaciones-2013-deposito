@@ -168,6 +168,11 @@ public class DespachoSolicitudesFacadebean implements DespachoSolicitudesFacade 
 		return actualizadas;
 	}
 
+	@Override
+	public void enviarArticulos(ArrayList<SolicitudArticulosView> solicitudes) {
+		adminSolicitudes.enviarArticulos(solicitudes);
+	}
+
 	// private static ArrayList<SolicitudArticulosView> prueba() {
 	// ElectrodomesticoView electro = new ElectrodomesticoView();
 	// ModaView moda = new ModaView();

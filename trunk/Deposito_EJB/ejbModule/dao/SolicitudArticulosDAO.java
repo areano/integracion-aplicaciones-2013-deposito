@@ -38,4 +38,8 @@ public class SolicitudArticulosDAO {
 		Query q = em.createQuery("from SolicitudArticulos");
 		return (List<SolicitudArticulos>) q.getResultList();
 	}
+
+	public SolicitudArticulos find(long codigoSolicitud) {
+		return em.find(SolicitudArticulos.class, codigoSolicitud);
+	}
 }

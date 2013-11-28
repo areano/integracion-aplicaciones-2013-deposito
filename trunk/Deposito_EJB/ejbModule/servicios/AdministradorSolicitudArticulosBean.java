@@ -10,10 +10,12 @@ import javax.ejb.Stateless;
 
 import view.SolicitudArticulosView;
 import dao.ArticuloDAO;
+import dao.DespachoDAO;
 import dao.SolicitudArticulosDAO;
 import dto.SolicitudArticuloItemDTO;
 import dto.SolicitudArticulosDTO;
 import dto.SolicitudCompraDTO;
+import entities.Articulo;
 import entities.SolicitudArticulos;
 import entities.SolicitudArticulosItem;
 
@@ -25,10 +27,13 @@ import entities.SolicitudArticulosItem;
 public class AdministradorSolicitudArticulosBean {
 
 	@EJB
-	private SolicitudArticulosDAO dao;
+	private SolicitudArticulosDAO solicitudArticulosDao;
 
 	@EJB
 	private ArticuloDAO articuloDao;
+
+	@EJB
+	private DespachoDAO despachoDao;
 
 	public AdministradorSolicitudArticulosBean() {
 	}
@@ -41,7 +46,7 @@ public class AdministradorSolicitudArticulosBean {
 		SolicitudArticulos sa = getEntity(solicitud);
 
 		sa.setCumplida(false);
-		dao.persist(sa);
+		solicitudArticulosDao.persist(sa);
 	}
 
 	private SolicitudArticulos getEntity(SolicitudArticulosDTO solicitud) {
@@ -61,18 +66,29 @@ public class AdministradorSolicitudArticulosBean {
 	}
 
 	// envia los articulos a despacho
-	public void enviarArticulos(SolicitudCompraDTO compraDTO) {
+	public void enviarArticulos(List<SolicitudArticulosView> solicitudes) {
 		try {
-			// SolicitudCompra entity = getEntity(compraDTO);
 
-			// TODO AR: Validar entity
+			for (SolicitudArticulosView view : solicitudes) {
 
-			// TODO AR: actualizar objeto y stock
-			// solicitudCompraDAO.merge(entity);
+				SolicitudArticulos solicitud = solicitudArticulosDao.find(view.getCodigoSolicitud());
 
-			// fabricaDAO.enviar(entity);
+				// por cada articulo descuento el stock de lo enviado
+				for (SolicitudArticulosItem item : solicitud.getItems()) {
 
-			// TODO AR: recepcion de respuesta?
+					Articulo articulo = item.getArticulo();
+
+					articulo.setStock(articulo.getStock() - item.getCantidad());
+				}
+
+				solicitud.setCumplida(true);
+
+				// TODO AR: Validar entity
+
+				despachoDao.enviar(solicitud);
+
+				// TODO AR: recepcion de respuesta?
+			}
 
 		} catch (Exception e) {
 			// TODO AR: log de errores y rollback de todo
@@ -81,7 +97,7 @@ public class AdministradorSolicitudArticulosBean {
 	}
 
 	public List<SolicitudArticulos> getSolicitudesArticulos() {
-		return dao.getSolicitudes();
+		return solicitudArticulosDao.getSolicitudes();
 	}
 
 }
