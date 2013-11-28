@@ -16,6 +16,8 @@ public class SolicitudArticulosItemView implements Serializable {
 		this.articulo = articulo;
 		this.cantidad = cantidad;
 		txtCantidad = String.valueOf(cantidad);
+		totalSolicitado = cantidad /2;
+		
 		setSolicitarItem(true);
 	}
 	public ArticuloView getArticulo() {
