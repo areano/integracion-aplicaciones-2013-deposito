@@ -6,6 +6,9 @@ import java.util.Locale;
 
 import javax.ejb.Stateful;
 
+
+import org.apache.log4j.Logger;
+
 //import log.LoggerBuilder;
 import ar.com.edu.uade.data.MyConverterFactory;
 import ar.com.edu.uade.view.*;
@@ -52,8 +55,8 @@ import com.vaadin.ui.VerticalLayout;
 @Stateful
 public class DepositoUI extends UI {
     
-//	private static final Logger logger = 
-//			   Logger.getLogger(DepositoUI.class.getName());
+	private static final Logger logger = 
+			   Logger.getLogger(DepositoUI.class);
 	
 //	LoggerBuilder logger = new LoggerBuilder(DepositoUI.class);
     private static final long serialVersionUID = 1L;
@@ -66,7 +69,9 @@ public class DepositoUI extends UI {
     CssLayout content = new CssLayout();
 
     HashMap<String, Class<? extends View>> routes = new HashMap<String, Class<? extends View>>() {
-        {
+		private static final long serialVersionUID = 1L;
+
+		{
             put("/creararticulo", CrearArticuloView.class);
             put("/crearconfiguracion", CrearConfiguracionView.class);
             put("/versolicitudespendientes", ar.com.edu.uade.view.EnviarPedidosADespachoView.class);
@@ -82,7 +87,7 @@ public class DepositoUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
-//    	logger.info("*** Enter Application ***");
+    	logger.info("*** Enter Application ***");
     	getSession().setConverterFactory(new MyConverterFactory());
 
         helpManager = new HelpManager(this);
@@ -145,14 +150,18 @@ public class DepositoUI extends UI {
 
         final ShortcutListener enter = new ShortcutListener("Ingresar",
                 KeyCode.ENTER, null) {
-            @Override
+			private static final long serialVersionUID = 1L;
+
+			@Override
             public void handleAction(Object sender, Object target) {
                 signin.click();
             }
         };
 
         signin.addClickListener(new ClickListener() {
-            @Override
+			private static final long serialVersionUID = 1L;
+
+			@Override
             public void buttonClick(ClickEvent event) {
               signin.removeShortcutListener(enter);
               buildMainView();
