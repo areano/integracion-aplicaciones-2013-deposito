@@ -72,7 +72,7 @@ public class ModaFormView extends CustomComponent {
 		color.setNullRepresentation("");
 		final AbstractTextField  talle=(AbstractTextField) binder.buildAndBind("Talle", "talle");
 		talle.setNullRepresentation("");
-		final AbstractTextField  stock =(AbstractTextField) binder.buildAndBind("Stock", "stock");
+		final AbstractTextField  stock =(AbstractTextField) binder.buildAndBind("Stock", "textStock");
 		stock.setNullRepresentation("");
 		stock.setConverter(new StringToLongConverter());
 		
@@ -98,7 +98,7 @@ public class ModaFormView extends CustomComponent {
 		layout.addComponent(origen);
 		if (editable){	    		
 			layout.addComponent(stock);
-			stock.addBlurListener(new InstallArticuloValidatorBlurListener(stock,"stock"));
+			stock.addBlurListener(new InstallArticuloValidatorBlurListener(stock,"textStock"));
 		}
 
 		// Buffer the form content
@@ -109,7 +109,7 @@ public class ModaFormView extends CustomComponent {
 			public void buttonClick(ClickEvent event) {
 		        try {
 		        	if (editable) {
-		        		ValidatorUtils.installSingleValidator(stock,"stock");
+		        		ValidatorUtils.installSingleValidator(stock,"textStock");
 		        	}
 		        	ValidatorUtils.installSingleValidator(marca,"marca");
 		        	ValidatorUtils.installSingleValidator(nombre,"nombre");

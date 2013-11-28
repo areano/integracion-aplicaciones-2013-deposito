@@ -74,7 +74,7 @@ public class MuebleFormView extends CustomComponent {
 		codigo.setNullRepresentation("");
 		final AbstractTextField  material=(AbstractTextField) binder.buildAndBind("Material", "material");
 		material.setNullRepresentation("");
-		final AbstractTextField  stock =(AbstractTextField) binder.buildAndBind("Stock", "stock");
+		final AbstractTextField  stock =(AbstractTextField) binder.buildAndBind("Stock", "textStock");
 		stock.setNullRepresentation("");
 		stock.setConverter(new StringToLongConverter());
     	final AbstractTextField  origen =(AbstractTextField) binder.buildAndBind("Origen", "origen");
@@ -99,7 +99,7 @@ public class MuebleFormView extends CustomComponent {
 		layout.addComponent(origen);
 		if (editable){	    		
 			layout.addComponent(stock);
-			stock.addBlurListener(new InstallArticuloValidatorBlurListener(stock,"stock"));
+			stock.addBlurListener(new InstallArticuloValidatorBlurListener(stock,"textStock"));
 		}
 
 		// Buffer the form content
@@ -110,7 +110,7 @@ public class MuebleFormView extends CustomComponent {
 			public void buttonClick(ClickEvent event) {
 		        try {
 		        	if (editable) {
-		        		ValidatorUtils.installSingleValidator(stock,"stock");
+		        		ValidatorUtils.installSingleValidator(stock,"textStock");
 		        	}
 		        	ValidatorUtils.installSingleValidator(marca,"marca");
 		        	ValidatorUtils.installSingleValidator(nombre,"nombre");

@@ -23,7 +23,7 @@ public class ElectrodomesticoFormView extends CustomComponent {
 	
 
 	private class ButtonSave implements Button.ClickListener{
-		
+		private static final long serialVersionUID = 1L;
 		EJBFacade facade;
 		public ButtonSave(){
 			super();
@@ -38,19 +38,17 @@ public class ElectrodomesticoFormView extends CustomComponent {
 		public void buttonClick(ClickEvent event) {
 	        try {
 	        	if (editable) {
-	        		ValidatorUtils.installSingleValidator(stock,"stock");
+	        		ValidatorUtils.installSingleValidator(stock,"textStock");
 	        	}
 	        	ValidatorUtils.installSingleValidator(codigo,"textCodigo");
 	        	ValidatorUtils.installSingleValidator(marca,"marca");
 	        	ValidatorUtils.installSingleValidator(nombre,"nombre");
 	        	ValidatorUtils.installSingleValidator(precio,"textPrecio");
-	        	//bindeable.setPrecio(Float.parseFloat(precio.getValue()));
 	        	ValidatorUtils.installSingleValidator(foto,"foto");
 	        	ValidatorUtils.installSingleValidator(fichaTecnica,"fichaTecnica");
 	        	ValidatorUtils.installSingleValidator(origen,"origen");
 	        	binder.commit();
-	            //EJBFacade.getIntance().altaElectrodomestico(bindeable);
-	        		facade.altaElectrodomestico(bindeable);
+        		facade.altaElectrodomestico(bindeable);
 	        } catch (CommitException e) {
 	        	try{
 	        		for(Field<?> f:binder.getFields()){
@@ -64,11 +62,7 @@ public class ElectrodomesticoFormView extends CustomComponent {
 	        		j.printStackTrace();
 	        	}
 	        }	
-//	        catch (NamingException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-			
+		
 		}
 		
 	} 
@@ -110,7 +104,7 @@ public class ElectrodomesticoFormView extends CustomComponent {
 			codigo.setNullRepresentation("");
 			fichaTecnica=(AbstractTextField) binder.buildAndBind("Ficha Tecnica", "fichaTecnica");
 			fichaTecnica.setNullRepresentation("");
-			stock = (AbstractTextField) binder.buildAndBind("Stock", "stock");
+			stock = (AbstractTextField) binder.buildAndBind("Stock", "textStock");
 			stock.setNullRepresentation("");
 			stock.setConverter(new StringToLongConverter());
 			
@@ -139,27 +133,7 @@ public class ElectrodomesticoFormView extends CustomComponent {
     private void buildLayout(FormLayout layout,
 			final BeanFieldGroup<ElectrodomesticoView> binder) {
     	
-//    	final AbstractTextField  descripcion = (AbstractTextField) binder.buildAndBind("Descripcion", "descripcion");
-//    	descripcion.setNullRepresentation("");
-//    	final AbstractTextField  marca=(AbstractTextField) binder.buildAndBind("Marca", "marca");
-//    	marca.setNullRepresentation("");
-//    	final AbstractTextField  nombre=(AbstractTextField) binder.buildAndBind("Nombre", "nombre");
-//    	nombre.setNullRepresentation("");
-//    	final AbstractTextField  precio=(AbstractTextField) binder.buildAndBind("Precio", "textPrecio");
-//    	precio.setNullRepresentation("");
-//    	final AbstractTextField  foto=(AbstractTextField) binder.buildAndBind("Foto", "foto");
-//    	foto.setNullRepresentation("");
-//    	final AbstractTextField  codigo=(AbstractTextField) binder.buildAndBind("Codigo", "textCodigo");
-//    	//final LongField  codigo=(LongField) binder.buildAndBind("Codigo", "codigo");
-//    	codigo.setNullRepresentation("");
-//    	final AbstractTextField  fichaTecnica=(AbstractTextField) binder.buildAndBind("Ficha Tecnica", "fichaTecnica");
-//    	fichaTecnica.setNullRepresentation("");
-//    	final AbstractTextField  stock =(AbstractTextField) binder.buildAndBind("Stock", "stock");
-//    	stock.setNullRepresentation("");
-//
-//    	final AbstractTextField  origen =(AbstractTextField) binder.buildAndBind("Origen", "origen");
-//    	origen.setNullRepresentation("");
-    	
+   	
     	descripcion.addBlurListener(new InstallArticuloValidatorBlurListener(descripcion, "descripcion"));
     	marca.addBlurListener(new InstallArticuloValidatorBlurListener(marca,"marca"));
     	nombre.addBlurListener(new InstallArticuloValidatorBlurListener(nombre,"nombre"));
@@ -178,7 +152,7 @@ public class ElectrodomesticoFormView extends CustomComponent {
     	layout.addComponent(origen);
     	if (editable){	    		
     		layout.addComponent(stock);
-    		stock.addBlurListener(new InstallArticuloValidatorBlurListener(stock,"stock"));
+    		stock.addBlurListener(new InstallArticuloValidatorBlurListener(stock,"textStock"));
     	}
     	// Buffer the form content
     	binder.setBuffered(true);

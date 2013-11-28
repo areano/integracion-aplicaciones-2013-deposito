@@ -17,13 +17,6 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.FormLayout;
-
-
-
-
-
-
-
 public class InfantilFormView extends CustomComponent {
 	
 	private static final long serialVersionUID = 1739709695326530748L;
@@ -81,7 +74,7 @@ public class InfantilFormView extends CustomComponent {
 		codigo.setNullRepresentation("");
 		final AbstractTextField  edadRecomendada=(AbstractTextField) binder.buildAndBind("Edad Recomendada", "edadRecomendada");
 		edadRecomendada.setNullRepresentation("");
-		final AbstractTextField  stock =(AbstractTextField) binder.buildAndBind("Stock", "stock");
+		final AbstractTextField  stock =(AbstractTextField) binder.buildAndBind("Stock", "textStock");
 		stock.setNullRepresentation("");
 		stock.setConverter(new StringToLongConverter());
     	final AbstractTextField  origen =(AbstractTextField) binder.buildAndBind("Origen", "origen");
@@ -105,7 +98,7 @@ public class InfantilFormView extends CustomComponent {
 		layout.addComponent(origen);
 		if (editable){	    		
 			layout.addComponent(stock);
-			stock.addBlurListener(new InstallArticuloValidatorBlurListener(stock,"stock"));
+			stock.addBlurListener(new InstallArticuloValidatorBlurListener(stock,"textStock"));
 		}
 
 
@@ -117,7 +110,7 @@ public class InfantilFormView extends CustomComponent {
 			public void buttonClick(ClickEvent event) {
 		        try {
 		        	if (editable) {
-		        		ValidatorUtils.installSingleValidator(stock,"stock");
+		        		ValidatorUtils.installSingleValidator(stock,"textStock");
 		        	}
 		        	ValidatorUtils.installSingleValidator(marca,"marca");
 		        	ValidatorUtils.installSingleValidator(nombre,"nombre");
@@ -127,7 +120,6 @@ public class InfantilFormView extends CustomComponent {
 		        	ValidatorUtils.installSingleValidator(edadRecomendada,"edadRecomendada");
 		        	ValidatorUtils.installSingleValidator(origen,"origen");
 		            binder.commit();
-		            //EJBFacade.getIntance().altaInfatil(bindeable);
 		            facade.altaInfatil(bindeable);
 		        } catch (CommitException e) {
     	        	try{

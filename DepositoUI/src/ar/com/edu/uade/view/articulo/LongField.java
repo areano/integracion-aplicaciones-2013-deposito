@@ -5,6 +5,7 @@ import com.vaadin.event.FieldEvents.TextChangeListener;
 import com.vaadin.ui.TextField;
 
 public class LongField extends TextField implements TextChangeListener {
+		private static final long serialVersionUID = 1L;
 		String lastValue;
 
 		public LongField() {
