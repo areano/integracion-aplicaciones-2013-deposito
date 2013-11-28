@@ -23,17 +23,19 @@ public class FabricaDAO {
 
 	public FabricaDAO(){
 		clienteRest = new GenericRestClient();
-		java.net.InetAddress localMachine =null;
+		//java.net.InetAddress localMachine =null;
+		String localMachine =null;
 		try {
 			
-			localMachine=java.net.InetAddress.getLocalHost();
+			localMachine=java.net.InetAddress.getLocalHost().getHostAddress();
 			
+			//localMachine=java.net.InetAddress.getLoopbackAddress();
 			}
 			catch (java.net.UnknownHostException uhe) { // [beware typo in
 				uhe.printStackTrace();
 			}
-		
-		clienteRest.setIp(localMachine.getAddress()[0] + "."+ localMachine.getAddress()[1]+ "." + localMachine.getAddress()[2]+ "." + localMachine.getAddress()[3]);
+		clienteRest.setIp(localMachine);
+		//clienteRest.setIp(localMachine.getAddress()[0] + "."+ localMachine.getAddress()[1]+ "." + localMachine.getAddress()[2]+ "." + localMachine.getAddress()[3]);
 		clienteRest.setPort("8080");
 		clienteRest.setMetodo("Fabrica_WEB/Fabrica/RecibirSolicitud");
 	}
