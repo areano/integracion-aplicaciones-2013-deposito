@@ -52,25 +52,46 @@ public class Fabrica_webUI extends UI {
 		setContent(layout);
 		Table table= new Table("Solicitudes de compra");
 		
-		table = armarTabla(table);
+		armarTabla(table);
 		
 		layout.addComponent(table);
+
+//		No logré que se ponga de un color x cuando el estado es tal o cual, no hace falta pero dejo el codigo por si alguien lo queire arreglar.
+//		table.setCellStyleGenerator(new Table.CellStyleGenerator() {
+//			@Override
+//			public String getStyle(Table source, Object itemId, Object propertyId) {
+//				if (propertyId == null) {
+//					// Styling for row
+//					Item item = source.getItem(itemId);
+//					String estado = (String) item.getItemProperty("Estado").getValue();
+//					if (estado=="PENDIENTE") {
+//						return "highlight-red";
+//					}  else {
+//						return "highlight-green";
+//					}
+//				} else {
+//					// styling for column propertyId
+//					return null;
+//				}
+//			}
+//		});
 		
 		Button button = crearBoton(layout, table);
 		layout.addComponent(button);
 	}
 	
-	private Table armarTabla(Table table){
+	private Table armarTabla(final Table table){
 
 		List<SolicitudCompraView> listaView=null;
 		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 		/* Define the names and data types of columns.
 		 * The "default value" parameter is meaningless here. */
-		table.addContainerProperty("FechaCreacion", String.class,  null);
-		table.addContainerProperty("FechaFin", String.class,  null);
 		table.addContainerProperty("Codigo",  Long.class,  null);
+		table.addContainerProperty("Fecha de Creación", String.class,  null);
+		table.addContainerProperty("Fecha de Entrega", String.class,  null);
 		table.addContainerProperty("Contenido", TextArea.class, null);
+		table.addContainerProperty("Estado", String.class, null);
 		table.addContainerProperty("Enviar", CheckBox.class,  null);
 		
 		try {
@@ -89,6 +110,7 @@ public class Fabrica_webUI extends UI {
 			String textoArts="";
 			String textoDate="";
 			String textoFechaFin="";
+			String textoEstado="PENDIENTE";
 			CheckBox check= new CheckBox("",false);
 			TextArea articulos= new TextArea("articulos");
 			articulos.setWidth("150");
@@ -100,6 +122,7 @@ public class Fabrica_webUI extends UI {
 				check.setEnabled(false);
 				check.setVisible(false);
 				completa=true;
+				textoEstado="COMPLETADA";
 			}
 			
 			if (scv.getDate()!=null) {
@@ -117,18 +140,17 @@ public class Fabrica_webUI extends UI {
 				cantLineasDesc++;
 			}
 			
-			if (completa) {
-				textoArts=textoArts + "\n****COMPLETADA*****";
-				cantLineasDesc++;
-			}
+
 			articulos.setValue(textoArts);
 			articulos.setRows(cantLineasDesc); // configura la cantidad de lineas del campo articulos
 			table.addItem(new Object[] {
-					textoDate, textoFechaFin,scv.getCodigoSolicitud(),articulos, check}, new Integer(cantSolicitudesCompra));
+					scv.getCodigoSolicitud(),textoDate, textoFechaFin,articulos, textoEstado, check}, new Integer(cantSolicitudesCompra));
 			
 			cantSolicitudesCompra++;
+
 		}
 		table.setPageLength(cantSolicitudesCompra);
+		
 		return table;
 	}
 
