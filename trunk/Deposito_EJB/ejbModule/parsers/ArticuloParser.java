@@ -1,19 +1,24 @@
 package parsers;
 
 import java.io.StringWriter;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+
+import org.apache.log4j.Logger;
+
 import dto.ElectrodomesticoDTO;
 import dto.InfantilDTO;
 import dto.ModaDTO;
 import dto.MuebleDTO;
+import excepctions.BackEndException;
 
 public class ArticuloParser {
-
+	private static final Logger logger = Logger.getLogger(ArticuloParser.class);
 	public ArticuloParser(){}
 	
-	public String toXML(MuebleDTO mDTO) {
+	public String toXML(MuebleDTO mDTO) throws BackEndException {
 		JAXBContext jaxbCtx;
 		String xml = null;
 		java.io.StringWriter sw = new StringWriter();
@@ -27,12 +32,14 @@ public class ArticuloParser {
 		} catch (JAXBException e) {
 			// TODO AR - Log error
 			e.printStackTrace();
+			logger.error("Error Parseando Mueble DTO a XML",e);
+			throw new BackEndException(e);
 		}
 		xml=xml.replaceAll("codigoDeposito>", "idModulo>");
 		return xml;
 	}
 	
-	public String toXML(InfantilDTO iDTO) {
+	public String toXML(InfantilDTO iDTO) throws BackEndException {
 		JAXBContext jaxbCtx;
 		String xml = null;
 		java.io.StringWriter sw = new StringWriter();
@@ -44,14 +51,16 @@ public class ArticuloParser {
 			xml=sw.toString();
 			
 		} catch (JAXBException e) {
-			// TODO AR - Log error
+		
 			e.printStackTrace();
+			logger.error("Error Parseando Infantil DTO a XML",e);
+			throw new BackEndException(e);
 		}
 		xml=xml.replaceAll("codigoDeposito>", "idModulo>");
 		return xml;
 	}
 	
-	public String toXML(ModaDTO mDTO) {
+	public String toXML(ModaDTO mDTO) throws BackEndException {
 		JAXBContext jaxbCtx;
 		String xml = null;
 		java.io.StringWriter sw = new StringWriter();
@@ -63,14 +72,15 @@ public class ArticuloParser {
 			xml=sw.toString();
 			
 		} catch (JAXBException e) {
-			// TODO AR - Log error
 			e.printStackTrace();
+			logger.error("Error Parseando Moda DTO a XML",e);
+			throw new BackEndException(e);
 		}
 		xml=xml.replaceAll("codigoDeposito>", "idModulo>");
 		return xml;		
 	}
 
-	public String toXML(ElectrodomesticoDTO eDTO) {
+	public String toXML(ElectrodomesticoDTO eDTO) throws BackEndException {
 		JAXBContext jaxbCtx;
 		String xml = null;
 		java.io.StringWriter sw = new StringWriter();
@@ -82,32 +92,33 @@ public class ArticuloParser {
 			xml=sw.toString();
 			
 		} catch (JAXBException e) {
-			// TODO AR - Log error
 			e.printStackTrace();
+			logger.error("Error Parseando Electrodomestico DTO a XML",e);
+			throw new BackEndException(e);
 		}
 		xml=xml.replaceAll("codigoDeposito>", "idModulo>");
 		return xml;		
 	}
 
-	public String toXMLSmall(MuebleDTO mDTO) {
+	public String toXMLSmall(MuebleDTO mDTO) throws BackEndException {
 		String xml = toXML(mDTO);
 		xml=shrinkXML(xml);
 		return xml;
 	}
 	
-	public String toXMLSmall(InfantilDTO iDTO) {
+	public String toXMLSmall(InfantilDTO iDTO) throws BackEndException {
 		String xml=toXML(iDTO);
 		xml=shrinkXML(xml);
 		return xml;
 	}
 	
-	public String toXMLSmall(ModaDTO mDTO) {
+	public String toXMLSmall(ModaDTO mDTO) throws BackEndException {
 		String xml=toXML(mDTO);
 		xml=shrinkXML(xml);
 		return xml;		
 	}
 
-	public String toXMLSmall(ElectrodomesticoDTO eDTO) {
+	public String toXMLSmall(ElectrodomesticoDTO eDTO) throws BackEndException {
 		String xml=toXML(eDTO);
 		xml=shrinkXML(xml);
 		return xml;		

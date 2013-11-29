@@ -25,6 +25,7 @@ import entities.Moda;
 import entities.Mueble;
 import entities.SolicitudArticulosItem;
 import entities.SolicitudCompra;
+import excepctions.BackEndException;
 
 @Stateless
 @LocalBean
@@ -106,7 +107,7 @@ public class Transformer {
 		return m;
 	}
 	
-	public SolicitudCompra converToClass(SolicitudCompraDTO dto){
+	public SolicitudCompra converToClass(SolicitudCompraDTO dto) throws BackEndException{
 		SolicitudCompra solicitud = new SolicitudCompra();
 		solicitud.setCodigo(dto.getCodigo());
 		solicitud.setFechaInicio(dto.getFechaInicio());
@@ -119,7 +120,7 @@ public class Transformer {
 		return solicitud;
 	}
 	
-	private ItemSolicitudCompra converToClass(ItemSolicitudCompraDTO dto){
+	private ItemSolicitudCompra converToClass(ItemSolicitudCompraDTO dto) throws BackEndException{
 		ItemSolicitudCompra item = new ItemSolicitudCompra();
 		item.setArticulo(articuloDAO.find(dto.getCodArticulo()));
 		item.setCantidad(dto.getCantidad());

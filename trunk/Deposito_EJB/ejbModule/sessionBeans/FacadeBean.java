@@ -10,6 +10,7 @@ import servicios.AdministradorSolicitudCompraBean;
 import view.SolicitudCompraView;
 import dto.SolicitudCompraDTO;
 import dto.SolicitudArticulosDTO;
+import excepctions.BackEndException;
 
 /**
  * Session Bean implementation class FacadeBean
@@ -30,21 +31,20 @@ public class FacadeBean implements Facade {
 	public FacadeBean() {
 	}
 
-	public void recibirSolicitudArticulos(SolicitudArticulosDTO solicitud) {
-		try {
-			admArticulos.recibirSolicitudArticulos(solicitud);
-		} catch (ParserException e) {
-			// TODO aca toca manejarlo o hacer raise?
-			e.printStackTrace();
-		}
+	public void recibirSolicitudArticulos(SolicitudArticulosDTO solicitud) throws BackEndException {
+			try {
+				admArticulos.recibirSolicitudArticulos(solicitud);
+			} catch (ParserException e) {
+				throw new BackEndException(e);
+			}
 	}
 
-	public void recibirSolicitudCompra(SolicitudCompraDTO compra) {
+	public void recibirSolicitudCompra(SolicitudCompraDTO compra) throws BackEndException {
 		admSolicitudCompra.recibir(compra);
 	}
 
 	@Override
-	public void crearSolicitudCompra(SolicitudCompraView compra) {
+	public void crearSolicitudCompra(SolicitudCompraView compra) throws BackEndException {
 		admSolicitudCompra.crear(compra);
 	}
 }

@@ -29,6 +29,7 @@ import entities.PortalConexion;
 import entities.SolicitudArticulos;
 import entities.SolicitudArticulosItem;
 import entities.SolicitudCompra;
+import excepctions.BackEndException;
 
 @Stateless
 @LocalBean
@@ -169,7 +170,7 @@ public class ViewTransformer {
 		return view;
 	}
 
-	public SolicitudCompra converToClass(SolicitudCompraView scv) {
+	public SolicitudCompra converToClass(SolicitudCompraView scv) throws BackEndException {
 		SolicitudCompra solicitud = new SolicitudCompra();
 		solicitud.setCodigo(scv.getCodigoSolicitud());
 		solicitud.setFechaInicio(scv.getDate());
@@ -188,20 +189,20 @@ public class ViewTransformer {
 		return solicitud;
 	}
 
-	private ItemSolicitudCompra converToClass(SolicitudArticulosItemView iscv) {
+	private ItemSolicitudCompra converToClass(SolicitudArticulosItemView iscv) throws BackEndException {
 		ItemSolicitudCompra item = new ItemSolicitudCompra();
 		item.setArticulo(articuloDAO.find(iscv.getArticulo().getCodigo()));
 		item.setCantidad(iscv.getCantidad());
 		return item;
 	}
 
-	public SolicitudArticulos converToClass(SolicitudArticulosView scv) {
+	public SolicitudArticulos converToClass(SolicitudArticulosView scv) throws BackEndException {
 		SolicitudArticulos solicitud = new SolicitudArticulos();
 		solicitud = solicitudArticulosDAO.buscarSolicitud(scv.getCodigoSolicitud());
 		return solicitud;
 	}
 
-	private SolicitudArticulosItem converToSolicitudArticulosItem(SolicitudArticulosItemView iscv) {
+	private SolicitudArticulosItem converToSolicitudArticulosItem(SolicitudArticulosItemView iscv) throws BackEndException {
 		SolicitudArticulosItem item = new SolicitudArticulosItem();
 		item.setArticulo(articuloDAO.find(iscv.getArticulo().getCodigo()));
 		item.setCantidad(iscv.getCantidad());

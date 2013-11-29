@@ -8,9 +8,12 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
+import org.apache.log4j.Logger;
+
 import parsers.ParserException;
 import parsers.SolicitudCompraXMLParser;
 import dto.SolicitudCompraDTO;
+import excepctions.BackEndException;
 import sessionBeans.Facade;
 
 /**
@@ -24,7 +27,7 @@ public class RecepcionCompras implements MessageListener {
 	@EJB
 	Facade facade;
 
-	
+	private static final Logger logger = Logger.getLogger(RecepcionCompras.class);
 	SolicitudCompraXMLParser parser=SolicitudCompraXMLParser.obtenerInstancia();
 	/**
 	 * Default constructor.
@@ -44,9 +47,15 @@ public class RecepcionCompras implements MessageListener {
 		} catch (JMSException e) {
 			// TODO AR - log error
 			e.printStackTrace();
+			logger.error("JMS Error", e);
 		} catch (ParserException e) {
 			// TODO AR - log error
 			e.printStackTrace();
+			logger.error("Error parseando XML de JMS", e);
+		} catch (BackEndException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error("Error de Durante La recepcion", e);
 		}
 
 	}

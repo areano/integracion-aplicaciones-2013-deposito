@@ -27,6 +27,7 @@ import entities.Electrodomestico;
 import entities.Infantil;
 import entities.Moda;
 import entities.Mueble;
+import excepctions.BackEndException;
 
 /**
  * Session Bean implementation class AdministradorArticulos
@@ -132,7 +133,7 @@ public class AdministradorArticulosBean {
 		return null;
 	}
 
-	public ArrayList<ArticuloView> getArticulos() {
+	public ArrayList<ArticuloView> getArticulos() throws BackEndException {
 
 		ArrayList<ArticuloView> retorno = new ArrayList<ArticuloView>();
 
@@ -143,7 +144,7 @@ public class AdministradorArticulosBean {
 		return retorno;
 	}
 
-	public ArrayList<ElectrodomesticoView> getElectroDomesticos() {
+	public ArrayList<ElectrodomesticoView> getElectroDomesticos() throws BackEndException {
 		List<Electrodomestico> al = articuloDAO.findAllElectrodomesticos();
 		ArrayList<ElectrodomesticoView> retorno = new ArrayList<ElectrodomesticoView>();
 		for (Electrodomestico articulo : al) {
@@ -152,7 +153,7 @@ public class AdministradorArticulosBean {
 		return retorno;
 	}
 
-	public ArrayList<ModaView> getModa() {
+	public ArrayList<ModaView> getModa() throws BackEndException {
 		List<Moda> al = articuloDAO.findAllByModa();
 		ArrayList<ModaView> retorno = new ArrayList<ModaView>();
 		Moda articulo;
@@ -163,7 +164,7 @@ public class AdministradorArticulosBean {
 		return retorno;
 	}
 
-	public ArrayList<InfantilView> getInfantil() {
+	public ArrayList<InfantilView> getInfantil() throws BackEndException {
 		List<Infantil> al = articuloDAO.findAllInfantil();
 		ArrayList<InfantilView> retorno = new ArrayList<InfantilView>();
 		for (Infantil articulo : al) {
@@ -172,7 +173,7 @@ public class AdministradorArticulosBean {
 		return retorno;
 	}
 
-	public ArrayList<MuebleView> getMueble() {
+	public ArrayList<MuebleView> getMueble() throws BackEndException {
 		List<Mueble> al = articuloDAO.findAllMuebles();
 		ArrayList<MuebleView> retorno = new ArrayList<MuebleView>();
 		for (Mueble articulo : al) {

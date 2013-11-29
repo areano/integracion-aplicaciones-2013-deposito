@@ -3,39 +3,35 @@ package dao;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import org.apache.log4j.Logger;
+
 import parsers.ParserException;
 import parsers.SolicitudCompraJSONParser;
 import clientes.GenericRestClient;
 import dto.SolicitudCompraDTO;
+import excepctions.BackEndException;
 
 /**
  * Session Bean implementation class FabricaDAO
  */
 @Stateless
 @LocalBean
-public class FabricaDAO {
-
-	
-	SolicitudCompraJSONParser parser=SolicitudCompraJSONParser.obtenerInstancia();
-	
+public class FabricaDAO {	
+	SolicitudCompraJSONParser parser=SolicitudCompraJSONParser.obtenerInstancia();	
 	GenericRestClient clienteRest ;
-	
+	private static final Logger logger = Logger.getLogger(FabricaDAO.class);
 
-	public FabricaDAO(){
+	public FabricaDAO() throws BackEndException{
 		clienteRest = new GenericRestClient();
-		//java.net.InetAddress localMachine =null;
 		String localMachine =null;
 		try {
-			
 			localMachine=java.net.InetAddress.getLocalHost().getHostAddress();
-			
-			//localMachine=java.net.InetAddress.getLoopbackAddress();
 			}
 			catch (java.net.UnknownHostException uhe) { // [beware typo in
-				uhe.printStackTrace();
+				logger.error("Error Getting Machine Local Address / Host", uhe);
+				throw new BackEndException(uhe);
 			}
 		clienteRest.setIp(localMachine);
-		//clienteRest.setIp(localMachine.getAddress()[0] + "."+ localMachine.getAddress()[1]+ "." + localMachine.getAddress()[2]+ "." + localMachine.getAddress()[3]);
 		clienteRest.setPort("8080");
 		clienteRest.setMetodo("Fabrica_WEB/Fabrica/RecibirSolicitud");
 	}
@@ -46,7 +42,7 @@ public class FabricaDAO {
     	
     }
 
-	public void enviar(SolicitudCompraDTO compra) {
+	public void enviar(SolicitudCompraDTO compra) throws BackEndException {
 		
 		try {
 			String mensaje = parser.toString(compra);
@@ -54,8 +50,12 @@ public class FabricaDAO {
 			
 		} catch (ParserException e) {
 			e.printStackTrace();
+			logger.error("Error Parseando XML", e);
+			throw new BackEndException(e);
 		}catch (Exception e) {
 			e.printStackTrace();
+			logger.error("Error Enviando XML de compra", e);
+			throw new BackEndException(e);
 		}
 	}
 }
