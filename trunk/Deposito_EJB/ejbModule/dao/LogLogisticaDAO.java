@@ -15,8 +15,8 @@ import org.apache.log4j.Logger;
 import clientes.GenericQueueClient;
 import parsers.LogParser;
 import parsers.ParserException;
-import dao.logistica.webservice.LogisticaMonitoreoBeanService;
-import dao.logistica.webservice.LogisticaMonitoreoWS;
+import dao.webservice.LogisticaMonitoreoBeanService;
+import dao.webservice.LogisticaMonitoreoWS;
 import dto.LogDTO;
 import entities.MonitoreoConexion;
 
@@ -57,19 +57,20 @@ public class LogLogisticaDAO {
 					LogisticaMonitoreoBeanService ws = new LogisticaMonitoreoBeanService(url);
 					LogisticaMonitoreoWS puerto = ws.getLogisticaMonitoreoWSPort();
 					puerto.informarLog(xml);
-					
+					logger.info("*** Enviado al Webservice de Monitoreo [" +p.getIp()+":"+p.getWsPuerto() + p.getWsPath() + "] Grupo [" + p.getMonitoreoId() + "]***");
 				} else {
 					
 					GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(),p.getUsuario(), p.getPassword());
 					cliente.enviar(xml);
 					cliente.cerrarConexion();
+					logger.info("*** Enviado al JMS de Monitoreo IP[" + p.getIp() + "] Grupo [" + p.getMonitoreoId() + "]***");
 					
 				}
 			} catch (JMSException e) {
 				String errorMessage = "*** Error enviando xml a jms de Monitoreo IP[" + p.getIp() + "] Grupo [" + p.getMonitoreoId() + "]***";
 				logger.error(errorMessage, e);
 			} catch (MalformedURLException e) {
-				String errorMessage = "*** Conectando al Webservice de Monitoreo [" +p.getIp()+":"+p.getWsPuerto() + p.getWsPath() + "]***";
+				String errorMessage = "*** Error conectando al Webservice de Monitoreo [" +p.getIp()+":"+p.getWsPuerto() + p.getWsPath() + "]***";
 				logger.error(errorMessage, e);
 			} catch (NamingException e) {
 				String errorMessage = "*** Error conectando a cola jms de Monitoreo IP[" + p.getIp() + "] Grupo [" + p.getMonitoreoId() + "]***";
