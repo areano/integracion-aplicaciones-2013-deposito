@@ -71,6 +71,38 @@
                 <suffix value=".yyyy-MM-dd"/>
                 <append value="true"/>
             </periodic-rotating-file-handler>
+            <periodic-rotating-file-handler name="FILETWO">
+                <formatter>
+                    <pattern-formatter pattern="%d{HH:mm:ss,SSS} %-5p [%c] (%t) %s%E%n"/>
+                </formatter>
+                <file relative-to="jboss.server.log.dir" path="depositoui.log"/>
+                <suffix value=".yyyy-MM-dd"/>
+                <append value="true"/>
+            </periodic-rotating-file-handler>
+            <periodic-rotating-file-handler name="FILETHREE">
+                <formatter>
+                    <pattern-formatter pattern="%d{HH:mm:ss,SSS} %-5p [%c] (%t) %s%E%n"/>
+                </formatter>
+                <file relative-to="jboss.server.log.dir" path="depositoejb.log"/>
+                <suffix value=".yyyy-MM-dd"/>
+                <append value="true"/>
+            </periodic-rotating-file-handler>
+            <periodic-rotating-file-handler name="FILEFOUR">
+                <formatter>
+                    <pattern-formatter pattern="%d{HH:mm:ss,SSS} %-5p [%c] (%t) %s%E%n"/>
+                </formatter>
+                <file relative-to="jboss.server.log.dir" path="fabricaejb.log"/>
+                <suffix value=".yyyy-MM-dd"/>
+                <append value="true"/>
+            </periodic-rotating-file-handler>
+            <periodic-rotating-file-handler name="FILEFIVE">
+                <formatter>
+                    <pattern-formatter pattern="%d{HH:mm:ss,SSS} %-5p [%c] (%t) %s%E%n"/>
+                </formatter>
+                <file relative-to="jboss.server.log.dir" path="fabricaui.log"/>
+                <suffix value=".yyyy-MM-dd"/>
+                <append value="true"/>
+            </periodic-rotating-file-handler
             <logger category="com.arjuna">
                 <level name="WARN"/>
             </logger>
@@ -86,6 +118,118 @@
             <logger category="jacorb.config">
                 <level name="ERROR"/>
             </logger>
+            <logger category="ar.com">
+                <level name="DEBUG"/>
+                <handlers>
+                    <handler name="CONSOLE"/>
+                    <handler name="FILETWO"/>
+                </handlers>
+            </logger>
+            <logger category="parsers">
+                <level name="DEBUG"/>
+                <handlers>
+                    <handler name="CONSOLE"/>
+                    <handler name="FILETHREE"/>
+                </handlers>
+            </logger>
+            <logger category="dao">
+                <level name="DEBUG"/>
+                <handlers>
+                    <handler name="CONSOLE"/>
+                    <handler name="FILETHREE"/>
+                </handlers>
+            </logger>
+            <logger category="dto">
+                <level name="DEBUG"/>
+                <handlers>
+                    <handler name="CONSOLE"/>
+                    <handler name="FILETHREE"/>
+                </handlers>
+            </logger>
+            <logger category="entities">
+                <level name="DEBUG"/>
+                <handlers>
+                    <handler name="CONSOLE"/>
+                    <handler name="FILETHREE"/>
+                </handlers>
+            </logger>
+            <logger category="jms">
+                <level name="DEBUG"/>
+                <handlers>
+                    <handler name="CONSOLE"/>
+                    <handler name="FILETHREE"/>
+                </handlers>
+            </logger>
+            <logger category="servicios">
+                <level name="DEBUG"/>
+                <handlers>
+                    <handler name="CONSOLE"/>
+                    <handler name="FILETHREE"/>
+                </handlers>
+            </logger>
+            <logger category="sessionBeans">
+                <level name="DEBUG"/>
+                <handlers>
+                    <handler name="CONSOLE"/>
+                    <handler name="FILETHREE"/>
+                </handlers>
+            </logger>  
+            <logger category="dao">
+                <level name="DEBUG"/>
+                <handlers>
+                    <handler name="CONSOLE"/>
+                    <handler name="FILEFOUR"/>
+                </handlers>
+            </logger>
+            <logger category="entities">
+                <level name="DEBUG"/>
+                <handlers>
+                    <handler name="CONSOLE"/>
+                    <handler name="FILEFOUR"/>
+                </handlers>
+            </logger> 
+            <logger category="facade">
+                <level name="DEBUG"/>
+                <handlers>
+                    <handler name="CONSOLE"/>
+                    <handler name="FILEFOUR"/>
+                </handlers>
+            </logger>  
+            <logger category="servicios">
+                <level name="DEBUG"/>
+                <handlers>
+                    <handler name="CONSOLE"/>
+                    <handler name="FILEFOUR"/>
+                </handlers>
+            </logger>
+            <logger category="transformer">
+                <level name="DEBUG"/>
+                <handlers>
+                    <handler name="CONSOLE"/>
+                    <handler name="FILEFOUR"/>
+                </handlers>
+            </logger>
+            <logger category="ejbfacade">
+                <level name="DEBUG"/>
+                <handlers>
+                    <handler name="CONSOLE"/>
+                    <handler name="FILEFIVE"/>
+                </handlers>
+            </logger>      
+            <logger category="rest">
+                <level name="DEBUG"/>
+                <handlers>
+                    <handler name="CONSOLE"/>
+                    <handler name="FILEFIVE"/>
+                </handlers>
+            </logger> 
+            <logger category="web">
+                <level name="DEBUG"/>
+                <handlers>
+                    <handler name="CONSOLE"/>
+                    <handler name="FILEFIVE"/>
+                </handlers>
+            </logger>                                                                                              
             <root-logger>
                 <level name="INFO"/>
                 <handlers>
