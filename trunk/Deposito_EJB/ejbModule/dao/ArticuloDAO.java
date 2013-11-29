@@ -63,11 +63,11 @@ public class ArticuloDAO {
 			System.out.println(a==null);
 			System.out.println(em==null);
 			em.persist(a);
+			em.flush();
 			logger.info("Articuo codigo ["+a.getCodigo()+"] persistido");
 		}catch(Exception e)
 		{
-			logger.error(e);
-			throw(new ErrorDeJPAException("Error persistiendo Articulo codigo",e));
+			throw(new ErrorDeJPAException("Error persistiendo Articulo codigo "+ a.getCodigo(),e));
 		}
 	}
 	
@@ -75,6 +75,7 @@ public class ArticuloDAO {
 		try{
 			
 			em.merge(a);
+			em.flush();
 			logger.info("Articuo codigo ["+a.getCodigo()+"] persistido");
 		}catch(Exception e)
 		{
