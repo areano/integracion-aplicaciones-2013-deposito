@@ -3,6 +3,7 @@ package dao;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.jms.JMSException;
+import javax.naming.NamingException;
 
 import org.apache.log4j.Logger;
 
@@ -52,14 +53,16 @@ public class DepositoDAOBean  {
 		
 		String ipStr=localMachine;//.getAddress()[0] + "."+ localMachine.getAddress()[1]+ "." + localMachine.getAddress()[2]+ "." + localMachine.getAddress()[3];
 		
-		GenericQueueClient cliente = new GenericQueueClient("jms/queue/recepcionCompra", ipStr , "4447", "deposito", "deposito123");
 		try {
+			GenericQueueClient cliente = new GenericQueueClient("jms/queue/recepcionCompra", ipStr , "4447", "deposito", "deposito123");
 			cliente.enviar(xml);
 			cliente.cerrarConexion();
 		} catch (JMSException e) {
-			errorMessage = "*** Error enviando xml a jms de DEPOSITO ***";
+			errorMessage = "*** Error enviando xml a jms de DEPOSITO IP[" + ipStr + "] ***";
 			logger.error(errorMessage, e);
-			e.printStackTrace();
+		} catch (NamingException e) {
+			errorMessage = "*** Error conectando a cola jms de DEPOSITO IP[" + ipStr + "] ***";
+			logger.error(errorMessage, e);
 		}
 	}
 }

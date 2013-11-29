@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.jms.JMSException;
+import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -94,15 +95,16 @@ public class DespachoDAO {
 		this.obtenerConexiones();
 
 		for (DespachoConexion p : conexiones) {
-			GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(), p.getUsuario(), p.getPassword());
 			try {
+				GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(), p.getUsuario(), p.getPassword());
 				cliente.enviar(xml);
 				cliente.cerrarConexion();
 			} catch (JMSException e) {
 				errorMessage = "*** Error enviando xml a jms de Despacho IP[" + p.getIp() + "] Grupo [" + p.getDespachoId() + "]***";
 				logger.error(errorMessage, e);
-				e.printStackTrace();
-			}
+			} catch (NamingException e) {
+				errorMessage = "*** Error conectandose a jms de Despacho IP[" + p.getIp() + "] Grupo [" + p.getDespachoId() + "]***";
+				logger.error(errorMessage, e);			}
 		}
 	}
 
@@ -111,14 +113,16 @@ public class DespachoDAO {
 		DespachoConexion p = obtenerConexion(a.getModuloId());
 		SolicitudArticulosParser parser = new SolicitudArticulosParser();
 		String xml = parser.toXML(a);
-		GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(),p.getUsuario(), p.getPassword());
 		try {
+			GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(),p.getUsuario(), p.getPassword());
 			cliente.enviar(xml);
 			cliente.cerrarConexion();
 		} catch (JMSException e) {
 			errorMessage = "*** Error enviando xml a jms de Despacho IP[" + p.getIp() + "] Grupo [" + p.getDespachoId() + "]***";
 			logger.error(errorMessage, e);
-			e.printStackTrace();
+		} catch (NamingException e) {
+			errorMessage = "*** Error conectando a cola jms de Despacho IP[" + p.getIp() + "] Grupo [" + p.getDespachoId() + "]***";
+			logger.error(errorMessage, e);
 		}
 	}
 

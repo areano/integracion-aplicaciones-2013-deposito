@@ -8,6 +8,9 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.jms.JMSException;
+import javax.naming.NamingException;
+
+import org.apache.log4j.Logger;
 
 import clientes.GenericQueueClient;
 import parsers.LogParser;
@@ -25,6 +28,8 @@ import entities.MonitoreoConexion;
 @LocalBean
 public class LogLogisticaDAO {
 
+	private static final Logger logger = Logger.getLogger(LogLogisticaDAO.class);
+	
 	@EJB
 	ConnectionDAO cDAO;
 	private List<MonitoreoConexion> conexiones;
@@ -35,13 +40,20 @@ public class LogLogisticaDAO {
 
 	public void log(LogDTO entrada){
 		conexiones = cDAO.getMonitoreos();
+		String xml="";
+		try{
+			xml=LogParser.obtenerInstancia().toString(entrada);
+		} catch (ParserException e) {
+			String errorMessage = "*** Error parseando un DTO para log ***";
+			logger.error(errorMessage, e);
+		}
 		
-		try {
-			String xml=LogParser.obtenerInstancia().toString(entrada);
-			for (MonitoreoConexion p : conexiones) {
+		for (MonitoreoConexion p : conexiones) {
+			try {			
 				if (p.isSyncronico()){
 					
-					URL url = new URL(p.getIp()+":"+p.getPuerto() + p.getQueueName());
+					URL url = new URL("http://" + p.getIp()+":"+p.getWsPuerto() + p.getWsPath() + "?wsdl");
+					//TODO: AGREGAR TIMEOUT a la conexion al webservice
 					LogisticaMonitoreoBeanService ws = new LogisticaMonitoreoBeanService(url);
 					LogisticaMonitoreoWS puerto = ws.getLogisticaMonitoreoWSPort();
 					puerto.informarLog(xml);
@@ -53,16 +65,16 @@ public class LogLogisticaDAO {
 					cliente.cerrarConexion();
 					
 				}
+			} catch (JMSException e) {
+				String errorMessage = "*** Error enviando xml a jms de Monitoreo IP[" + p.getIp() + "] Grupo [" + p.getMonitoreoId() + "]***";
+				logger.error(errorMessage, e);
+			} catch (MalformedURLException e) {
+				String errorMessage = "*** Conectando al Webservice de Monitoreo [" +p.getIp()+":"+p.getWsPuerto() + p.getWsPath() + "]***";
+				logger.error(errorMessage, e);
+			} catch (NamingException e) {
+				String errorMessage = "*** Error conectando a cola jms de Monitoreo IP[" + p.getIp() + "] Grupo [" + p.getMonitoreoId() + "]***";
+				logger.error(errorMessage, e);
 			}
-		} catch (ParserException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JMSException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 

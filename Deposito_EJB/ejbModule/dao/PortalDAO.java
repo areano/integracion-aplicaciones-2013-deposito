@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.jms.JMSException;
+import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -84,12 +85,16 @@ public class PortalDAO {
 		this.obtenerConexiones();
 		String errorMessage = new String();
 		for (PortalConexion p : conexiones) {
-			GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(), p.getUsuario(), p.getPassword());
 			try {
+				GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(), p.getUsuario(), p.getPassword());
 				cliente.enviar(xml);
 				cliente.cerrarConexion();
+				logger.info("*** Enviado xml a jms de Portal IP[" + p.getIp() + "] Grupo [" + p.getPortalId() + "]***");
 			} catch (JMSException e) {
 				errorMessage = "*** Error enviando xml a jms de Portal IP[" + p.getIp() + "] Grupo [" + p.getPortalId() + "]***";
+				logger.error(errorMessage, e);
+			} catch (NamingException e) {
+				errorMessage = "*** Error conectando a cola jms de Portal IP[" + p.getIp() + "] Grupo [" + p.getPortalId() + "]***";
 				logger.error(errorMessage, e);
 			}
 		}

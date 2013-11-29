@@ -26,7 +26,7 @@ public class GenericQueueClient {
 	private String password;
 	private MessageProducer producer;
 
-	public GenericQueueClient(String queueName, String ip, String port, String username, String password) {
+	public GenericQueueClient(String queueName, String ip, String port, String username, String password) throws NamingException, JMSException {
 		this.queueName = queueName;
 		this.ip = ip;
 		this.port = port;
@@ -36,8 +36,8 @@ public class GenericQueueClient {
 		this.establecerConexion();
 	}
 
-	private void establecerConexion() {
-		try {
+	private void establecerConexion() throws NamingException, JMSException   {
+
 			// Set up the context for the JNDI lookup
 			env = new Properties();
 			env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
@@ -59,20 +59,16 @@ public class GenericQueueClient {
 			connection.start();
 
 			producer = session.createProducer(destination);
-
-		} catch (NamingException e) {
-			e.printStackTrace();
-		} catch (JMSException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public void enviar(String mensaje) throws JMSException {
-		
-			// crear un mensaje de tipo text y setearle el contenido
-			TextMessage message = session.createTextMessage();
-			message.setText(mensaje);
-			producer.send(message);
+			if (session!=null){
+				// crear un mensaje de tipo text y setearle el contenido
+				TextMessage message = session.createTextMessage();
+				message.setText(mensaje);
+				producer.send(message);
+			} else throw new JMSException("Fallo el envio JMS, no está abierta la sesión");
+
 	}
 
 	public void cerrarConexion() throws JMSException {
