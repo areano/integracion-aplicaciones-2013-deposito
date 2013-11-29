@@ -102,7 +102,7 @@
                 <file relative-to="jboss.server.log.dir" path="fabricaui.log"/>
                 <suffix value=".yyyy-MM-dd"/>
                 <append value="true"/>
-            </periodic-rotating-file-handler
+            </periodic-rotating-file-handler>
             <logger category="com.arjuna">
                 <level name="WARN"/>
             </logger>
