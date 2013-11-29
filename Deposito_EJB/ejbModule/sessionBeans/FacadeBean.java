@@ -4,6 +4,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import parsers.ParserException;
 import servicios.AdministradorSolicitudArticulosBean;
 import servicios.AdministradorSolicitudCompraBean;
 import view.SolicitudCompraView;
@@ -30,7 +31,12 @@ public class FacadeBean implements Facade {
 	}
 
 	public void recibirSolicitudArticulos(SolicitudArticulosDTO solicitud) {
-		admArticulos.recibirSolicitudArticulos(solicitud);
+		try {
+			admArticulos.recibirSolicitudArticulos(solicitud);
+		} catch (ParserException e) {
+			// TODO aca toca manejarlo o hacer raise?
+			e.printStackTrace();
+		}
 	}
 
 	public void recibirSolicitudCompra(SolicitudCompraDTO compra) {

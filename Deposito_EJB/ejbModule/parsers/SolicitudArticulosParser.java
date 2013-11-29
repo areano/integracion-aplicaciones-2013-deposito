@@ -30,9 +30,9 @@ public class SolicitudArticulosParser implements Parser<SolicitudArticulosDTO> {
 			});
 			StringReader reader = new StringReader(data);
 			sa = (SolicitudArticulosDTO) u.unmarshal(reader);
-		} catch (JAXBException e) {
+		} catch (Exception e) {
 			// TODO AR - Log error
-			e.printStackTrace();
+			throw(new ParserException("Error parseando solicitud de Articulos \n" + data, e ));			
 		}
 
 		return sa;
