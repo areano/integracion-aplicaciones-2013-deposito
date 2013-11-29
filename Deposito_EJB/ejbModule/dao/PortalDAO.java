@@ -26,6 +26,7 @@ import entities.Infantil;
 import entities.Moda;
 import entities.Mueble;
 import entities.PortalConexion;
+import excepctions.BackEndException;
 
 /**
  * Session Bean implementation class PortalDAO
@@ -49,39 +50,39 @@ public class PortalDAO {
 		conexiones = new ArrayList<PortalConexion>();
 	}
 
-	private void obtenerConexiones() {
+	private void obtenerConexiones() throws BackEndException {
 		conexiones = cDAO.getPortales();
 	}
 
-	public void enviar(Mueble m) {
+	public void enviar(Mueble m) throws BackEndException {
 		ArticuloParser parser = new ArticuloParser();
 		MuebleDTO mDTO = t.toDTO(m);
 		String xml = parser.toXML(mDTO);
 		enviar(xml);
 	}
 
-	public void enviar(Infantil i) {
+	public void enviar(Infantil i) throws BackEndException {
 		ArticuloParser parser = new ArticuloParser();
 		InfantilDTO mDTO = t.toDTO(i);
 		String xml = parser.toXML(mDTO);
 		enviar(xml);
 	}
 
-	public void enviar(Electrodomestico e) {
+	public void enviar(Electrodomestico e) throws BackEndException {
 		ArticuloParser parser = new ArticuloParser();
 		ElectrodomesticoDTO eDTO = t.toDTO(e);
 		String xml = parser.toXML(eDTO);
 		enviar(xml);
 	}
 
-	public void enviar(Moda m) {
+	public void enviar(Moda m) throws BackEndException {
 		ArticuloParser parser = new ArticuloParser();
 		ModaDTO mDTO = t.toDTO(m);
 		String xml = parser.toXML(mDTO);
 		enviar(xml);
 	}
 
-	public void enviar(String xml) {
+	public void enviar(String xml) throws BackEndException {
 		this.obtenerConexiones();
 		String errorMessage = new String();
 		for (PortalConexion p : conexiones) {
@@ -93,9 +94,11 @@ public class PortalDAO {
 			} catch (JMSException e) {
 				errorMessage = "*** Error enviando xml a jms de Portal IP[" + p.getIp() + "] Grupo [" + p.getPortalId() + "]***";
 				logger.error(errorMessage, e);
+				throw new BackEndException(e);
 			} catch (NamingException e) {
 				errorMessage = "*** Error conectando a cola jms de Portal IP[" + p.getIp() + "] Grupo [" + p.getPortalId() + "]***";
 				logger.error(errorMessage, e);
+				throw new BackEndException(e);
 			}
 		}
 	}

@@ -18,6 +18,7 @@ import entities.Electrodomestico;
 import entities.Infantil;
 import entities.Moda;
 import entities.Mueble;
+import excepctions.BackEndException;
 import excepctions.ErrorDeJPAException;
 
 @Stateless
@@ -32,7 +33,7 @@ public class ArticuloDAO {
 	public ArticuloDAO() {
 	}
 	
-	public Articulo find(Long cod){
+	public Articulo find(Long cod) throws BackEndException{
 		Articulo a=null;
 		try{
 			
@@ -42,10 +43,11 @@ public class ArticuloDAO {
 		{
 			logger.error("Error buscando Articulo codigo ["+cod+"]");
 			logger.error(e);
+			throw new BackEndException(e);
 		}
 		return a;
 	}
-	public List<Articulo> findAll(){
+	public List<Articulo> findAll() throws BackEndException{
 		List<Articulo> al = new ArrayList<Articulo>();
 		try{
 			TypedQuery<Articulo> q = em.createQuery("from Articulo", Articulo.class);
@@ -55,6 +57,7 @@ public class ArticuloDAO {
 		{
 			logger.error("Error on Get All Articulos");
 			logger.error(e);
+			throw new BackEndException(e);
 		}
 		return al;
 	}
@@ -71,7 +74,7 @@ public class ArticuloDAO {
 		}
 	}
 	
-	public void actualizarArticulo(Articulo a){
+	public void actualizarArticulo(Articulo a) throws BackEndException{
 		try{
 			
 			em.merge(a);
@@ -81,11 +84,12 @@ public class ArticuloDAO {
 		{
 			logger.error("Error persistiendo Articulo codigo ["+a.getCodigo()+"]");
 			logger.error(e);
+			throw new BackEndException(e);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	public Collection<Articulo> findAllArticulos() {
+	public Collection<Articulo> findAllArticulos() throws BackEndException {
 		
 		try{
 			Query q = em.createQuery("from Articulo ");
@@ -96,12 +100,13 @@ public class ArticuloDAO {
 		{
 			logger.error("Error on Get All Electrodomestico");
 			logger.error(e);
+			throw new BackEndException(e);
 		}
-		return null;
+
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Electrodomestico> findAllElectrodomesticos() {
+	public List<Electrodomestico> findAllElectrodomesticos() throws BackEndException {
 		List<Electrodomestico> al = new ArrayList<Electrodomestico>();
 		try{
 			Query q = em.createQuery(" from Electrodomestico");
@@ -111,11 +116,12 @@ public class ArticuloDAO {
 		{
 			logger.error("Error on Get All Electrodomestico");
 			logger.error(e);
+			throw new BackEndException(e);
 		}
 		return al;
 	}
 	@SuppressWarnings("unchecked")
-	public List<Moda> findAllByModa() {
+	public List<Moda> findAllByModa() throws BackEndException {
 		List<Moda> al = new ArrayList<Moda>();
 		try{
 			Query q = em.createQuery("from Moda");
@@ -125,11 +131,12 @@ public class ArticuloDAO {
 		{
 			logger.error("Error on Get All Moda");
 			logger.error(e);
+			throw new BackEndException(e);
 		}
 		return al;
 	}
 	@SuppressWarnings("unchecked")
-	public List<Infantil> findAllInfantil() {
+	public List<Infantil> findAllInfantil() throws BackEndException {
 		List<Infantil> al = new ArrayList<Infantil>();
 		try{
 			Query q = em.createQuery("from Infantil");
@@ -139,11 +146,12 @@ public class ArticuloDAO {
 		{
 			logger.error("Error on Get All Infantil");
 			logger.error(e);
+			throw new BackEndException(e);
 		}
 		return al;
 	}
 	@SuppressWarnings("unchecked")
-	public List<Mueble> findAllMuebles() {
+	public List<Mueble> findAllMuebles() throws BackEndException {
 		List<Mueble> al = new ArrayList<Mueble>();
 		try{
 			Query q = em.createQuery("from Mueble");
@@ -153,6 +161,7 @@ public class ArticuloDAO {
 		{
 			logger.error("Error on Get All Mueble");
 			logger.error(e);
+			throw new BackEndException(e);
 		}
 		return al;
 	}

@@ -27,6 +27,7 @@ import entities.Infantil;
 import entities.Moda;
 import entities.Mueble;
 import entities.SolicitudArticulos;
+import excepctions.BackEndException;
 
 /**
  * Session Bean implementation class DespachoDAO
@@ -50,47 +51,83 @@ public class DespachoDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void obtenerConexiones() {
-		Query q = em.createQuery("from DespachoConexion where active = TRUE");
-		conexiones = (List<DespachoConexion>) q.getResultList();
+	private void obtenerConexiones() throws BackEndException {
+		try {
+			Query q = em.createQuery("from DespachoConexion where active = TRUE");
+			conexiones = (List<DespachoConexion>) q.getResultList();
+		}catch  (Exception e)
+		{
+			logger.error(e);
+			throw new BackEndException(e);
+		}
 	}
 
-	private DespachoConexion obtenerConexion(final long despachoId) {
-		Query q = em.createQuery("from DespachoConexion where id =:despachoId and active = TRUE");
-		q.setParameter("despachoId", despachoId);
-		conexion = (DespachoConexion) q.getSingleResult();
-		return conexion;
+	private DespachoConexion obtenerConexion(final long despachoId) throws BackEndException {
+		try {
+			Query q = em.createQuery("from DespachoConexion where id =:despachoId and active = TRUE");
+			q.setParameter("despachoId", despachoId);
+			conexion = (DespachoConexion) q.getSingleResult();
+			return conexion;
+		}catch  (Exception e)
+		{
+			logger.error(e);
+			throw new BackEndException(e);
+		}
 	}
 
-	public void enviar(Mueble m) {
-		ArticuloParser parser = new ArticuloParser();
-		MuebleDTO mDTO = t.toDTO(m);
-		String xml = parser.toXML(mDTO);
-		enviar(xml);
+	public void enviar(Mueble m) throws BackEndException {
+		try {
+			ArticuloParser parser = new ArticuloParser();
+			MuebleDTO mDTO = t.toDTO(m);
+			String xml = parser.toXML(mDTO);
+			enviar(xml);
+		}catch  (Exception e)
+		{
+			logger.error(e);
+			throw new BackEndException(e);
+		}
 	}
 
-	public void enviar(Infantil i) {
-		ArticuloParser parser = new ArticuloParser();
-		InfantilDTO mDTO = t.toDTO(i);
-		String xml = parser.toXML(mDTO);
-		enviar(xml);
+	public void enviar(Infantil i) throws BackEndException {
+		try {
+			ArticuloParser parser = new ArticuloParser();
+			InfantilDTO mDTO = t.toDTO(i);
+			String xml = parser.toXML(mDTO);
+			enviar(xml);
+		}catch  (Exception e)
+		{
+			logger.error(e);
+			throw new BackEndException(e);
+		}
 	}
 
-	public void enviar(Electrodomestico e) {
-		ArticuloParser parser = new ArticuloParser();
-		ElectrodomesticoDTO eDTO = t.toDTO(e);
-		String xml = parser.toXML(eDTO);
-		enviar(xml);
+	public void enviar(Electrodomestico e) throws BackEndException {
+		try {
+			ArticuloParser parser = new ArticuloParser();
+			ElectrodomesticoDTO eDTO = t.toDTO(e);
+			String xml = parser.toXML(eDTO);
+			enviar(xml);
+		}catch  (Exception ex)
+		{
+			logger.error(ex);
+			throw new BackEndException(ex);
+		}
 	}
 
-	public void enviar(Moda m) {
-		ArticuloParser parser = new ArticuloParser();
-		ModaDTO mDTO = t.toDTO(m);
-		String xml = parser.toXML(mDTO);
-		enviar(xml);
+	public void enviar(Moda m) throws BackEndException {
+		try {
+			ArticuloParser parser = new ArticuloParser();
+			ModaDTO mDTO = t.toDTO(m);
+			String xml = parser.toXML(mDTO);
+			enviar(xml);
+		}catch  (Exception e)
+		{
+			logger.error(e);
+			throw new BackEndException(e);
+		}
 	}
 
-	public void enviar(String xml) {
+	public void enviar(String xml) throws BackEndException {
 		String errorMessage = new String();
 		this.obtenerConexiones();
 
@@ -102,13 +139,16 @@ public class DespachoDAO {
 			} catch (JMSException e) {
 				errorMessage = "*** Error enviando xml a jms de Despacho IP[" + p.getIp() + "] Grupo [" + p.getDespachoId() + "]***";
 				logger.error(errorMessage, e);
+				throw new BackEndException(e);
 			} catch (NamingException e) {
 				errorMessage = "*** Error conectandose a jms de Despacho IP[" + p.getIp() + "] Grupo [" + p.getDespachoId() + "]***";
-				logger.error(errorMessage, e);			}
+				logger.error(errorMessage, e);
+				throw new BackEndException(e);
+				}
 		}
 	}
 
-	public void enviar(SolicitudArticulos a) {
+	public void enviar(SolicitudArticulos a) throws BackEndException {
 		String errorMessage = new String();
 		DespachoConexion p = obtenerConexion(a.getModuloId());
 		SolicitudArticulosParser parser = new SolicitudArticulosParser();
@@ -120,9 +160,11 @@ public class DespachoDAO {
 		} catch (JMSException e) {
 			errorMessage = "*** Error enviando xml a jms de Despacho IP[" + p.getIp() + "] Grupo [" + p.getDespachoId() + "]***";
 			logger.error(errorMessage, e);
+			throw new BackEndException(e);
 		} catch (NamingException e) {
 			errorMessage = "*** Error conectando a cola jms de Despacho IP[" + p.getIp() + "] Grupo [" + p.getDespachoId() + "]***";
 			logger.error(errorMessage, e);
+			throw new BackEndException(e);
 		}
 	}
 

@@ -20,7 +20,9 @@ import org.apache.log4j.Logger;
 
 
 
+
 import entities.SolicitudCompra;
+import excepctions.BackEndException;
 import servicios.AdministradorArticulosBean;
 import servicios.AdministradorConecctionsBean;
 import servicios.AdministradorSolicitudCompraBean;
@@ -84,7 +86,7 @@ public class DepositoFacadeBean implements DepositoFacade {
 //	}
 	
 	@Override
-	public ArrayList<ArticuloView> getArticulos() {
+	public ArrayList<ArticuloView> getArticulos() throws BackEndException {
 		return admin.getArticulos();
 	}
 	
@@ -93,12 +95,12 @@ public class DepositoFacadeBean implements DepositoFacade {
 		return null;
 	}
 	@Override
-	public ArrayList<ConnectionView> getMonitoreosConnection() {
+	public ArrayList<ConnectionView> getMonitoreosConnection() throws BackEndException {
 		return connAdmin.getMonitoreos();
 	}
 	
 	@Override
-	public ArrayList<ConnectionView> getDespachosConnection() {
+	public ArrayList<ConnectionView> getDespachosConnection() throws BackEndException {
 		return connAdmin.getDespachos();
 	}
 	
@@ -107,27 +109,27 @@ public class DepositoFacadeBean implements DepositoFacade {
 		return connAdmin.getDespacho(idModulo);
 	}
 	@Override
-	public ArrayList<ConnectionView> getPortalesConnection() {
+	public ArrayList<ConnectionView> getPortalesConnection() throws BackEndException {
 		
 		return connAdmin.getPortales();
 	}
 	@Override
-	public void savePortalesConnection(ArrayList<ConnectionView> activas) {
+	public void savePortalesConnection(ArrayList<ConnectionView> activas) throws BackEndException {
 		connAdmin.savePortalesConnection(activas);
 		
 	}
 
 	@Override
-	public void saveDespachosConnection(ArrayList<ConnectionView> activas) {
+	public void saveDespachosConnection(ArrayList<ConnectionView> activas) throws BackEndException {
 		connAdmin.saveDespachosConnection(activas);
 		
 	}
-	public void crearSolicitudCompra(SolicitudCompraView compra){
+	public void crearSolicitudCompra(SolicitudCompraView compra) throws BackEndException{
 
 		admSC.crear(compra);	
 	}
 	
-	public SolicitudCompraView getRecomendacionCompra(){
+	public SolicitudCompraView getRecomendacionCompra() throws BackEndException{
 		SolicitudCompra SC=admSC.getRecomendacionCompra();
 		
 		return vt.toView(SC);
@@ -140,7 +142,7 @@ public class DepositoFacadeBean implements DepositoFacade {
 	}
 
 	@Override
-	public void saveMonitoreoConnection(ArrayList<ConnectionView> activas) {
+	public void saveMonitoreoConnection(ArrayList<ConnectionView> activas) throws BackEndException {
 		connAdmin.saveMonitoreoConnection(activas);
 		
 	}

@@ -28,6 +28,7 @@ import entities.Moda;
 import entities.MonitoreoConexion;
 import entities.Mueble;
 import entities.PortalConexion;
+import excepctions.BackEndException;
 
 /**
  * Session Bean implementation class AdministradorArticulos
@@ -114,7 +115,7 @@ public class AdministradorConecctionsBean implements AdministradorConecctions {
 	}
 
 	@Override
-	public void savePortalesConnection(ArrayList<ConnectionView> activas) {
+	public void savePortalesConnection(ArrayList<ConnectionView> activas) throws BackEndException {
 		connectionDAO.borrarPortales();
 		for (ConnectionView connectionView : activas) {
 			
@@ -129,7 +130,7 @@ public class AdministradorConecctionsBean implements AdministradorConecctions {
 	}
 
 	@Override
-	public void saveDespachosConnection(ArrayList<ConnectionView> activas) {
+	public void saveDespachosConnection(ArrayList<ConnectionView> activas) throws BackEndException {
 		connectionDAO.borrarDespachos();
 		for (ConnectionView connectionView : activas) {
 			
@@ -151,7 +152,7 @@ public class AdministradorConecctionsBean implements AdministradorConecctions {
 	}
 
 	@Override
-	public void saveMonitoreoConnection(ArrayList<ConnectionView> activas) {
+	public void saveMonitoreoConnection(ArrayList<ConnectionView> activas) throws BackEndException {
 		connectionDAO.borrarMonitoreos();
 		for (ConnectionView connectionView : activas) {
 			
@@ -165,7 +166,7 @@ public class AdministradorConecctionsBean implements AdministradorConecctions {
 
 
 	@Override
-	public ArrayList<ConnectionView> getPortales() {
+	public ArrayList<ConnectionView> getPortales() throws BackEndException {
 		List<PortalConexion> pc = connectionDAO.getPortales();
 		ArrayList<ConnectionView> retorno = new ArrayList<ConnectionView>();
 		for (PortalConexion c : pc) {
@@ -177,7 +178,7 @@ public class AdministradorConecctionsBean implements AdministradorConecctions {
 
 
 	@Override
-	public ArrayList<ConnectionView> getDespachos() {
+	public ArrayList<ConnectionView> getDespachos() throws BackEndException {
 		List<DespachoConexion> pc = connectionDAO.getDespachos();
 		ArrayList<ConnectionView> retorno = new ArrayList<ConnectionView>();
 		for (DespachoConexion c : pc) {
@@ -189,7 +190,7 @@ public class AdministradorConecctionsBean implements AdministradorConecctions {
 
 
 	@Override
-	public ArrayList<ConnectionView> getMonitoreos() {
+	public ArrayList<ConnectionView> getMonitoreos() throws BackEndException {
 		
 		List<MonitoreoConexion> pc = connectionDAO.getMonitoreos();
 		ArrayList<ConnectionView> retorno = new ArrayList<ConnectionView>();

@@ -16,6 +16,7 @@ import transformer.Transformer;
 import entities.Articulo;
 import entities.ItemSolicitudCompra;
 import entities.SolicitudCompra;
+import excepctions.BackEndException;
 
 /**
  * Session Bean implementation class SolicitudCompraDAO
@@ -27,7 +28,7 @@ public class SolicitudCompraDAO {
 	@PersistenceContext
 	EntityManager em;
 
-	private static final Logger logger = Logger.getLogger(ArticuloDAO.class);
+	private static final Logger logger = Logger.getLogger(SolicitudCompraDAO.class);
 
 	@EJB
 	Transformer transformer;
@@ -38,18 +39,28 @@ public class SolicitudCompraDAO {
 	public SolicitudCompraDAO() {
 	}
 
-	public void persist(SolicitudCompra compra) {
-		em.persist(compra);
-		em.flush();
+	public void persist(SolicitudCompra compra) throws BackEndException {
+		try {
+			em.persist(compra);
+			em.flush();
+		}catch (Exception e){
+			logger.error("Error durante Persistencia de Solicitude De compra", e);
+			throw new BackEndException(e);
+		}
 	}
 
-	public void merge(SolicitudCompra compra) {
+	public void merge(SolicitudCompra compra) throws BackEndException {
+		try {
 		em.merge(compra);
 		em.flush();
+		}catch (Exception e){
+			logger.error("Error durante Update de Solicitude De compra", e);
+			throw new BackEndException(e);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
-	public SolicitudCompra getRecomendacionCompra() {
+	public SolicitudCompra getRecomendacionCompra() throws BackEndException {
 		// TODO MF: aca falta obtener la recomendacion real esto es una truchada
 		SolicitudCompra sc = new SolicitudCompra();
 		sc.setFechaInicio(new Date());
@@ -81,6 +92,7 @@ public class SolicitudCompraDAO {
 			}
 		} catch (Exception e) {
 			logger.error(e);
+			throw new BackEndException(e);
 		}
 
 		return sc;

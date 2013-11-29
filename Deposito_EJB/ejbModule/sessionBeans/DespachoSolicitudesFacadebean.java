@@ -10,6 +10,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
 import entities.SolicitudArticulos;
+import excepctions.BackEndException;
 import servicios.AdministradorArticulosBean;
 import servicios.AdministradorSolicitudArticulosBean;
 import transformer.ViewTransformer;
@@ -45,9 +46,10 @@ public class DespachoSolicitudesFacadebean implements DespachoSolicitudesFacade 
 	 * SolicitudArticulosView should be marked as selectable or not to be
 	 * delivered according if the stock of @Articulo could complete the
 	 * SolicitudArticulosView
+	 * @throws BackEndException 
 	 * */
 	@Override
-	public ArrayList<SolicitudArticulosView> getSolicitudes() {
+	public ArrayList<SolicitudArticulosView> getSolicitudes() throws BackEndException {
 
 		solicitudes = inicializarSolicitudes();
 		stockArticulos = getStockArticulos();
@@ -78,7 +80,7 @@ public class DespachoSolicitudesFacadebean implements DespachoSolicitudesFacade 
 		}
 	}
 
-	private ArrayList<SolicitudArticulosView> inicializarSolicitudes() {
+	private ArrayList<SolicitudArticulosView> inicializarSolicitudes() throws BackEndException {
 
 		ArrayList<SolicitudArticulosView> views = new ArrayList<SolicitudArticulosView>();
 		List<SolicitudArticulos> entities = adminSolicitudes.getSolicitudesArticulos();
@@ -93,7 +95,7 @@ public class DespachoSolicitudesFacadebean implements DespachoSolicitudesFacade 
 		return views;
 	}
 
-	private HashMap<Long, Long> getStockArticulos() {
+	private HashMap<Long, Long> getStockArticulos() throws BackEndException {
 		HashMap<Long, Long> stockArticulos = new HashMap<Long, Long>();
 
 		ArrayList<ArticuloView> articulos = adminArticulos.getArticulos();
@@ -183,54 +185,9 @@ public class DespachoSolicitudesFacadebean implements DespachoSolicitudesFacade 
 	}
 
 	@Override
-	public void enviarArticulos(ArrayList<SolicitudArticulosView> solicitudes) {
+	public void enviarArticulos(ArrayList<SolicitudArticulosView> solicitudes) throws BackEndException {
 		adminSolicitudes.enviarArticulos(solicitudes);
 	}
 
-	// private static ArrayList<SolicitudArticulosView> prueba() {
-	// ElectrodomesticoView electro = new ElectrodomesticoView();
-	// ModaView moda = new ModaView();
-	// electro.setCodigo(Long.valueOf(1));
-	// electro.setDescripcion("Un electro");
-	// electro.setFichaTecnica("una url");
-	// electro.setMarca("Modila");
-	// electro.setNombre("Supercalifragitisticoespiralidoso");
-	// electro.setOrigen("Tierra cdel fuego");
-	// electro.setPrecio(Float.parseFloat("12.5"));
-	//
-	// moda.setCodigo(Long.valueOf(1));
-	// moda.setDescripcion("una remera");
-	// moda.setTalle("XL");
-	// moda.setMarca("Mota");
-	// moda.setNombre("Motta inside");
-	// moda.setOrigen("El Salvador");
-	// moda.setPrecio(Float.parseFloat("12.5"));
-	// moda.setColor("Azul");
-	//
-	// ArrayList<SolicitudArticulosView> solicitudes = new
-	// ArrayList<SolicitudArticulosView>();
-	// SolicitudArticulosView dto = new SolicitudArticulosView();
-	//
-	// dto.setIdModulo(1);
-	// SolicitudArticulosItemView item = new SolicitudArticulosItemView(electro,
-	// 2);
-	// dto.addItemSolicitudArticulos(item);
-	//
-	// dto.setDate(new java.util.Date());
-	// dto.setCodigoSolicitud(1);
-	// dto.setSelectable(true);
-	// solicitudes.add(dto);
-	//
-	// dto = new SolicitudArticulosView();
-	// dto.setIdModulo(2);
-	// dto.setDate(new java.util.Date());
-	// dto.addItemSolicitudArticulos(new SolicitudArticulosItemView(electro,
-	// 5));
-	// dto.addItemSolicitudArticulos(new SolicitudArticulosItemView(moda, 5));
-	// dto.setCodigoSolicitud(2);
-	// dto.setSelectable(false);
-	// solicitudes.add(dto);
-	//
-	// return solicitudes;
-	// }
+
 }

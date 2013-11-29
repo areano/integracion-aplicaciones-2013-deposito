@@ -12,13 +12,14 @@ import entities.Electrodomestico;
 import entities.Infantil;
 import entities.Moda;
 import entities.Mueble;
+import excepctions.BackEndException;
 import parsers.ArticuloParser;
 import transformer.Transformer;
 
 public class ArticulosParserTest {
 
 	@Test
-	public void testInfantilToXML() {
+	public void testInfantilToXML() throws BackEndException {
 		ArticuloParser SAParser = new ArticuloParser();
 		Infantil i= new Infantil();
 		i.setCodigo(1);
@@ -51,7 +52,7 @@ public class ArticulosParserTest {
 	}
 	
 	@Test
-	public void testInfantilToXMLSmall() {
+	public void testInfantilToXMLSmall() throws BackEndException {
 		ArticuloParser SAParser = new ArticuloParser();
 		Infantil i= new Infantil();
 		i.setCodigo(1);
@@ -74,7 +75,7 @@ public class ArticulosParserTest {
 				+ "</articulo>\n");
 	}
 	@Test
-	public void testElectrodomesticoToXML() {
+	public void testElectrodomesticoToXML() throws BackEndException {
 		ArticuloParser SAParser = new ArticuloParser();
 		Electrodomestico e= new Electrodomestico();
 		e.setCodigo(2);
@@ -108,7 +109,7 @@ public class ArticulosParserTest {
 
 
 	@Test
-	public void testElectrodomesticoToXMLSmall() {
+	public void testElectrodomesticoToXMLSmall() throws BackEndException {
 		ArticuloParser SAParser = new ArticuloParser();
 		Electrodomestico e= new Electrodomestico();
 		e.setCodigo(2);
@@ -133,7 +134,7 @@ public class ArticulosParserTest {
 
 
 	@Test
-	public void testMuebleToXML() {
+	public void testMuebleToXML() throws BackEndException {
 		ArticuloParser SAParser = new ArticuloParser();
 		Mueble m= new Mueble();
 		m.setCodigo(1);
@@ -166,7 +167,7 @@ public class ArticulosParserTest {
 	}
 
 	@Test
-	public void testMuebleToXMLSmall() {
+	public void testMuebleToXMLSmall() throws BackEndException {
 		ArticuloParser SAParser = new ArticuloParser();
 		Mueble m= new Mueble();
 		m.setCodigo(1);
@@ -190,7 +191,7 @@ public class ArticulosParserTest {
 	}
 	
 	@Test
-	public void testModaToXML() {
+	public void testModaToXML() throws BackEndException {
 		ArticuloParser SAParser = new ArticuloParser();
 		Moda m= new Moda();
 		m.setCodigo(1);
@@ -224,7 +225,7 @@ public class ArticulosParserTest {
 
 
 	@Test
-	public void testModaToXMLSmall() {
+	public void testModaToXMLSmall() throws BackEndException {
 		ArticuloParser SAParser = new ArticuloParser();
 		Moda m= new Moda();
 		m.setCodigo(1);
