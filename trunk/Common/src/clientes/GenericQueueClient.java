@@ -68,11 +68,11 @@ public class GenericQueueClient {
 	}
 
 	public void enviar(String mensaje) throws JMSException {
-
-		// crear un mensaje de tipo text y setearle el contenido
-		TextMessage message = session.createTextMessage();
-		message.setText(mensaje);
-		producer.send(message);
+		
+			// crear un mensaje de tipo text y setearle el contenido
+			TextMessage message = session.createTextMessage();
+			message.setText(mensaje);
+			producer.send(message);
 	}
 
 	public void cerrarConexion() throws JMSException {

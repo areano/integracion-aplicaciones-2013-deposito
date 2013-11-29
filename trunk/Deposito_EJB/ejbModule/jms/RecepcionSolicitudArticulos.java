@@ -40,12 +40,9 @@ public class RecepcionSolicitudArticulos implements MessageListener {
 			SolicitudArticulosParser parser = new SolicitudArticulosParser();
 			SolicitudArticulosDTO solicitud = parser.toObject(txtMessage.getText());
 			facade.recibirSolicitudArticulos(solicitud);
-		} catch (JMSException e) {
-			// TODO AR - log error
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (ParserException e) {
-			// TODO AR - log error
-			e.printStackTrace();
+//			LOG
 		}
 	}
 }

@@ -17,6 +17,8 @@ import org.apache.log4j.Logger;
 
 
 
+
+import excepctions.BackEndException;
 import facade.FabricaFacade;
 import facade.FabricaWebFacade;
 import sessionBeans.DepositoFacade;
@@ -54,11 +56,22 @@ public class EJBFacade {
 	}
 	
 	public List<SolicitudCompraView> getSolicitudesDeCompra(){		
-		return fabricaWebFacade.getSolicitudesDeCompra();
+		try {
+			return fabricaWebFacade.getSolicitudesDeCompra();
+		} catch (BackEndException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	public void entregarCompras(List<Long> lista){
-		fabricaWebFacade.entregarCompras(lista);
+		try {
+			fabricaWebFacade.entregarCompras(lista);
+		} catch (BackEndException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private void getFabricaFacade() throws NamingException{

@@ -2,11 +2,13 @@ package ar.com.edu.uade.ejbfacade;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import org.apache.log4j.Logger;
 
+import excepctions.BackEndException;
 import sessionBeans.DepositoFacade;
 import sessionBeans.DespachoSolicitudesFacade;
 import view.ArticuloView;
@@ -40,15 +42,33 @@ public class EJBFacade {
 	}
 
 	public ArrayList<ConnectionView> getPortalConections() {
-		return systemFacade.getPortalesConnection();
+		try {
+			return systemFacade.getPortalesConnection();
+		} catch (BackEndException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public ArrayList<ConnectionView> getDespachoConnection() {
-		return systemFacade.getDespachosConnection();
+		try {
+			return systemFacade.getDespachosConnection();
+		} catch (BackEndException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public ArrayList<ConnectionView> getMonitoreoConnection() {
-		return systemFacade.getMonitoreosConnection();
+		try {
+			return systemFacade.getMonitoreosConnection();
+		} catch (BackEndException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public ArrayList<ConnectionView> getFabricaConnection() {
@@ -57,7 +77,13 @@ public class EJBFacade {
 	}
 
 	public ArrayList<SolicitudArticulosView> getSolicitudesDeArticulos() {
-		return despachoSolicitudesFacade.getSolicitudes();
+		try {
+			return despachoSolicitudesFacade.getSolicitudes();
+		} catch (BackEndException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public ArrayList<SolicitudCompraView> getSolicitudesDeCompra() {
@@ -65,47 +91,104 @@ public class EJBFacade {
 	}
 
 	public void crearSolicitudCompra(SolicitudCompraView compra) {
-		systemFacade.crearSolicitudCompra(compra);
+		try {
+			systemFacade.crearSolicitudCompra(compra);
+		} catch (BackEndException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public SolicitudCompraView getRecomendacionCompra() {
-		return systemFacade.getRecomendacionCompra();
+		try {
+			return systemFacade.getRecomendacionCompra();
+		} catch (BackEndException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public Collection<? extends ArticuloView> getAllArticulos() {
-		return systemFacade.getArticulos();
+		try {
+			return systemFacade.getArticulos();
+		} catch (BackEndException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public void altaElectrodomestico(ElectrodomesticoView e) {
-		systemFacade.altaElectrodomestico(e);
+		try {
+			systemFacade.altaElectrodomestico(e);
+		} catch (BackEndException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	public void altaModa(ModaView m) {
-		systemFacade.altaModa(m);
+		try {
+			systemFacade.altaModa(m);
+		} catch (BackEndException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void altaMueble(MuebleView m) {
-		systemFacade.altaMueble(m);
+		try {
+			systemFacade.altaMueble(m);
+		} catch (BackEndException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void altaInfatil(InfantilView i) {
-		systemFacade.altaInfatil(i);
+		try {
+			systemFacade.altaInfatil(i);
+		} catch (BackEndException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void savePortalesConnection(ArrayList<ConnectionView> activas) {
-		systemFacade.savePortalesConnection(activas);
+		try {
+			systemFacade.savePortalesConnection(activas);
+		} catch (BackEndException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void saveMonitoreosConnection(ArrayList<ConnectionView> activas) {
-		systemFacade.saveMonitoreoConnection(activas);
+		try {
+			systemFacade.saveMonitoreoConnection(activas);
+		} catch (BackEndException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void saveDespachosConnection(ArrayList<ConnectionView> activas) {
-		systemFacade.saveDespachosConnection(activas);
+		try {
+			systemFacade.saveDespachosConnection(activas);
+		} catch (BackEndException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void saveFabricaConnection(ArrayList<ConnectionView> activas) {
-		systemFacade.savePortalesConnection(activas);
+		try {
+			systemFacade.savePortalesConnection(activas);
+		} catch (BackEndException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void getDepositoFacade() throws NamingException {
@@ -129,14 +212,31 @@ public class EJBFacade {
 	}
 
 	public ArrayList<SolicitudArticulosView> markSolicitud(SolicitudArticulosView solicitud) {
-		return despachoSolicitudesFacade.markSolicitud(solicitud);
+		try {
+			return despachoSolicitudesFacade.markSolicitud(solicitud);
+		} catch (BackEndException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public ArrayList<SolicitudArticulosView> unMarkSolicitud(SolicitudArticulosView solicitud) {
-		return despachoSolicitudesFacade.unmarkSolicitud(solicitud);
+		try {
+			return despachoSolicitudesFacade.unmarkSolicitud(solicitud);
+		} catch (BackEndException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public void enviarArticulos(ArrayList<SolicitudArticulosView> solicitudes) {
-		despachoSolicitudesFacade.enviarArticulos(solicitudes);
+		try {
+			despachoSolicitudesFacade.enviarArticulos(solicitudes);
+		} catch (BackEndException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

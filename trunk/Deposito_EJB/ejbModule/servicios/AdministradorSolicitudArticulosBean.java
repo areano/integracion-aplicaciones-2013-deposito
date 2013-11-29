@@ -8,6 +8,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import parsers.ParserException;
 import view.SolicitudArticulosView;
 import dao.ArticuloDAO;
 import dao.DespachoDAO;
@@ -38,7 +39,7 @@ public class AdministradorSolicitudArticulosBean {
 	public AdministradorSolicitudArticulosBean() {
 	}
 
-	public void recibirSolicitudArticulos(SolicitudArticulosDTO solicitud) {
+	public void recibirSolicitudArticulos(SolicitudArticulosDTO solicitud) throws ParserException {
 
 		// TODO AR: Validar que los articulos existan en la base, de lo
 		// contrario error? Tener en cuenta otro tipo de validaciones
@@ -49,20 +50,26 @@ public class AdministradorSolicitudArticulosBean {
 		solicitudArticulosDao.persist(sa);
 	}
 
-	private SolicitudArticulos getEntity(SolicitudArticulosDTO solicitud) {
+	private SolicitudArticulos getEntity(SolicitudArticulosDTO solicitud) throws ParserException {
 
-		SolicitudArticulos solicitudEntity = new SolicitudArticulos();
-		solicitudEntity.setModuloId(solicitud.getIdSolicitud());
+		try {
+			SolicitudArticulos solicitudEntity = new SolicitudArticulos();
+			solicitudEntity.setModuloId(solicitud.getIdSolicitud());
 
-		for (SolicitudArticuloItemDTO item : solicitud.getLista()) {
+			for (SolicitudArticuloItemDTO item : solicitud.getLista()) {
 
-			SolicitudArticulosItem itemEntity = new SolicitudArticulosItem();
-			itemEntity.setArticulo(articuloDao.find(Long.parseLong(item.getCodigo())));
-			itemEntity.setCantidad(item.getCantidad());
-			solicitudEntity.getItems().add(itemEntity);
+				SolicitudArticulosItem itemEntity = new SolicitudArticulosItem();
+				itemEntity.setArticulo(articuloDao.find(Long.parseLong(item.getCodigo())));
+				itemEntity.setCantidad(item.getCantidad());
+				solicitudEntity.getItems().add(itemEntity);
+			}
+
+			return solicitudEntity;
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			throw (new ParserException("Error en el codigo de articulo, no vino un numero válido",e));
+			
 		}
-
-		return solicitudEntity;
 	}
 
 	// envia los articulos a despacho
