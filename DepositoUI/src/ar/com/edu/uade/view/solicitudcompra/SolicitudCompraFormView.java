@@ -14,9 +14,13 @@ import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.ui.AbstractTextField;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.FormLayout;
+
+import excepctions.BackEndException;
 
 public class SolicitudCompraFormView extends CustomComponent{
 
@@ -42,8 +46,12 @@ public class SolicitudCompraFormView extends CustomComponent{
             			toBind.commit();
             			facade.crearSolicitudCompra(bindeable);
 				} catch (CommitException e) {
-					// TODO Auto-generated catch block
+					logger.error(e);
+    	        	Notification.show("Error Durante Binding del Formulario", Type.ERROR_MESSAGE);
 					e.printStackTrace();
+				} catch (BackEndException e) {
+					logger.error(e);
+    	        	Notification.show("Error Durante la cracionde la Solicitud", Type.ERROR_MESSAGE);
 				}
 		}
 	}
@@ -54,19 +62,22 @@ public class SolicitudCompraFormView extends CustomComponent{
 				facade = EJBFacade.getIntance();
 				
 			} catch (NamingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.error(e);
+	        	Notification.show("Error Durante la Set Up de Fachada del Sistema", Type.ERROR_MESSAGE);
 			}
 	}
     public void init(){
         FormLayout layout = new FormLayout();
         setCompositionRoot(layout);
-        
-       
-        binderList = new ArrayList<BeanFieldGroup<SolicitudArticulosItemView>>();
-        bindeable = facade.getRecomendacionCompra();
-        //binder.setItemDataSource(bindeable);   	
-    	buildLayout(layout, binder);
+        try{	       
+	        binderList = new ArrayList<BeanFieldGroup<SolicitudArticulosItemView>>();
+	        bindeable = facade.getRecomendacionCompra();
+	        //binder.setItemDataSource(bindeable);   	
+	    	buildLayout(layout, binder);
+		} catch (BackEndException e) {
+			logger.error(e);
+        	Notification.show("Error Durante la Gestion de Solicitud Recomendada", Type.ERROR_MESSAGE);
+		}
     }
 	private void buildLayout(FormLayout layout,
 			BeanFieldGroup<SolicitudArticulosItemView> binder) {

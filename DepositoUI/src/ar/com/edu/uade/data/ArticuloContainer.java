@@ -3,12 +3,15 @@ package ar.com.edu.uade.data;
 
 
 import java.io.Serializable;
+
 import javax.naming.NamingException;
 
 import ar.com.edu.uade.ejbfacade.EJBFacade;
 import view.ArticuloView;
 
 import com.vaadin.data.util.BeanItemContainer;
+
+import excepctions.BackEndException;
 
 @SuppressWarnings("serial")
 public class ArticuloContainer extends BeanItemContainer<ArticuloView> implements
@@ -28,42 +31,16 @@ public class ArticuloContainer extends BeanItemContainer<ArticuloView> implement
     	 "Codigo Artitulo","Marca","Nombre", "Descripcion", "Foto","precio","Stock Disponible" };
 
     EJBFacade facade;
-    public ArticuloContainer() throws InstantiationException,
-            IllegalAccessException {
+    public ArticuloContainer() throws NamingException   {
         super(ArticuloView.class);
-        try {
-			facade = EJBFacade.getIntance();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		};
+		facade = EJBFacade.getIntance();
+
     }
-//    public  void init(){
-//    	EJBFacade facade = new EJBFacade();
-//    	addAll(facade.getAllArticulos());
-//    	
-//    }
-    public  void init() {
-//    	ArticuloContainer c = null;
-//        try {
-//            c = new ArticuloContainer();
-////            EJBFacade facade = EJBFacade.getIntance();
-//        	c.addAll(facade.getAllArticulos());
+
+    public  void init() throws BackEndException {
+
         	this.addAll(facade.getAllArticulos());
 
-//        } catch (InstantiationException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        } catch (IllegalAccessException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        } 
-//            catch (NamingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
-        //return this;
     }
    
 

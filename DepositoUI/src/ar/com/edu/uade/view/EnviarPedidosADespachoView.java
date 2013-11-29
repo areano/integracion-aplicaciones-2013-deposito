@@ -8,6 +8,9 @@ import javax.naming.NamingException;
 
 
 
+
+
+
 import view.ArticuloView;
 import view.SolicitudArticulosItemView;
 import view.SolicitudArticulosView;
@@ -22,16 +25,21 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.OptionGroup;
 import com.vaadin.ui.PopupView;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.themes.Reindeer;
 import com.vaadin.ui.themes.Runo;
+
+import excepctions.BackEndException;
 
 
 
@@ -69,7 +77,13 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 					System.out.println(s.getCodigoSolicitud());
 				}
 			}
-			facade.enviarArticulos(solicitudesToSend);
+			try {
+				facade.enviarArticulos(solicitudesToSend);
+				UI.getCurrent().getNavigator().navigateTo("/creararticulo");
+			} catch (BackEndException e) {
+				// TODO Auto-generated catch block
+				Notification.show("Erorr Enviando La solicitud A despacho", Type.ERROR_MESSAGE);
+			}
 		}
 	}
 	private class DetailedRequest extends Window {
@@ -102,8 +116,14 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 	@Override
 	public void enter(ViewChangeEvent event) {
 		
+			
 			addStyleName("runo");
-			solicitudes =  facade.getSolicitudesDeArticulos();
+			try {
+				solicitudes =  facade.getSolicitudesDeArticulos();
+			} catch (BackEndException e) {
+				Notification.show("Error Recuperando Las Solicitudes existentes", Type.ERROR_MESSAGE);
+				return;
+			}
 			OptionGroup selectSolitudes =  new OptionGroup("Solicitudes Pendientes");
 			FormLayout form ;
 
@@ -159,13 +179,18 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 
 		ArrayList<SolicitudArticulosView> toChange;
 
-		if (map.get(solicitud).getValue())
-			toChange = facade.markSolicitud(solicitud);
-		else
-			toChange = facade.unMarkSolicitud(solicitud);
-		for (SolicitudArticulosView s : toChange) {
-			CheckBox cb = map.get(s);
-			cb.setEnabled(s.isSelectable());
+		try{
+			if (map.get(solicitud).getValue())
+				toChange = facade.markSolicitud(solicitud);
+			else
+				toChange = facade.unMarkSolicitud(solicitud);
+			
+			for (SolicitudArticulosView s : toChange) {
+				CheckBox cb = map.get(s);
+				cb.setEnabled(s.isSelectable());
+			}
+		}catch(BackEndException e){
+			Notification.show("Error Durante la actualizacion de Solicitudes", Type.ERROR_MESSAGE);
 		}
 	}
 

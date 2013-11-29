@@ -14,8 +14,12 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.themes.ChameleonTheme;
+
+import excepctions.BackEndException;
 
 public class CrearConfiguracionView extends VerticalLayout implements View {
 	private static final long serialVersionUID = -8923865045603639957L;
@@ -40,7 +44,7 @@ public class CrearConfiguracionView extends VerticalLayout implements View {
 		caption.addStyleName(ChameleonTheme.LABEL_H1);
 		addComponent(caption);
 		
-//		try {
+		try {
 			HashMap<Integer, ConnectionView> portales = new HashMap<Integer, ConnectionView>();
 			
 			ArrayList<ConnectionView> connections =  facade.getPortalConections();//EJBFacade.getIntance().getPortalConections();
@@ -73,10 +77,10 @@ public class CrearConfiguracionView extends VerticalLayout implements View {
 			
 			IPConfiguratorPanel ipConfigurator =  new IPConfiguratorPanel(portales,despachos, monitoreos, fabricas);
 			addComponent(ipConfigurator);
-//		} catch (NamingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} 
+		} catch (BackEndException e) {
+			// TODO Auto-generated catch block
+			Notification.show("Error Durante la busqueda de IP's salvadas", Type.ERROR_MESSAGE);
+		} 
 
 		
 		

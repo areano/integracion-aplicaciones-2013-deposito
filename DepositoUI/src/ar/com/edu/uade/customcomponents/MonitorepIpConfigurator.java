@@ -30,6 +30,8 @@ import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.Window;
 
+import excepctions.BackEndException;
+
 
 public class MonitorepIpConfigurator extends CustomComponent {
 
@@ -198,8 +200,13 @@ public class MonitorepIpConfigurator extends CustomComponent {
 		        	Notification.show("No IP's Selected, select at least one", Type.WARNING_MESSAGE);
 		        	return;
 		        }
+				try{	
 					facade.saveMonitoreosConnection(activas);
-
+					Notification.show("Ip Monitoreo Creadas", Type.HUMANIZED_MESSAGE);
+					 UI.getCurrent().getNavigator().navigateTo("/creararticulo");
+				}catch (BackEndException e){
+					Notification.show("IP's no pueden ser salvadas", Type.ERROR_MESSAGE);
+				}	
 		         
 			}
 		});

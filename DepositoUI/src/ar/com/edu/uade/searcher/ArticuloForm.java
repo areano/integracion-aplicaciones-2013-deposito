@@ -3,6 +3,8 @@ package ar.com.edu.uade.searcher;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.naming.NamingException;
+
 import view.ArticuloView;
 import ar.com.edu.uade.data.ArticuloContainer;
 
@@ -29,7 +31,7 @@ public class ArticuloForm extends Form implements ClickListener {
     private ArticuloView newPerson = null;
     private ArticuloContainer container ;
     @SuppressWarnings("unchecked")
-	public ArticuloForm() {
+	public ArticuloForm() throws NamingException {
         
 
         /*
@@ -38,15 +40,7 @@ public class ArticuloForm extends Form implements ClickListener {
          * through to the underlying object.)
          */
         
-    	try {
-			container = new ArticuloContainer();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		container = new ArticuloContainer();
         HorizontalLayout footer = new HorizontalLayout();
         footer.setSpacing(true);
         footer.addComponent(save);

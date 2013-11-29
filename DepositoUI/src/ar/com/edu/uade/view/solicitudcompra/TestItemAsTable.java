@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.naming.NamingException;
 
+import org.apache.log4j.Logger;
 import org.apache.tools.ant.taskdefs.Sleep;
 
 import view.SolicitudArticulosItemView;
@@ -21,12 +22,16 @@ import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Field;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.TableFieldFactory;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Notification.Type;
+
+import excepctions.BackEndException;
 
 public class TestItemAsTable extends CustomComponent{
 
@@ -35,12 +40,20 @@ public class TestItemAsTable extends CustomComponent{
 	VerticalLayout layout;
 	private ArrayList<SolicitudArticulosItemView> items = new ArrayList<SolicitudArticulosItemView>();
 	final EJBFacade facade;
-	public TestItemAsTable() throws NamingException{
+	private static final Logger logger = 
+			   Logger.getLogger(TestItemAsTable.class);
+	public TestItemAsTable() throws NamingException {	
 		facade = EJBFacade.getIntance();
-		solicitud =facade.getRecomendacionCompra();
-		items = solicitud.getItems();
-		layout = new VerticalLayout();
-		buildLayout();
+		try{
+			
+			solicitud =facade.getRecomendacionCompra();
+			items = solicitud.getItems();
+			layout = new VerticalLayout();
+			buildLayout();
+		}catch (BackEndException e){
+			logger.error(e);
+			Notification.show("Error Durante la Gestion de Solicitud Recomendada", Type.ERROR_MESSAGE);
+		} 
 	}
 	private void buildLayout(){
 		final BeanItemContainer<SolicitudArticulosItemView> itemContainer;
@@ -119,10 +132,16 @@ public class TestItemAsTable extends CustomComponent{
 				
 				@Override
 				public void buttonClick(ClickEvent event) {
-					table.commit();					
-					solicitud.reformular(selectedItemIds);
-					facade.crearSolicitudCompra(solicitud);
-					UI.getCurrent().getNavigator().navigateTo("/creararticulo");
+					try{
+						table.commit();					
+						solicitud.reformular(selectedItemIds);
+						facade.crearSolicitudCompra(solicitud);
+						Notification.show("Solicitud Enviada", Type.HUMANIZED_MESSAGE);
+						UI.getCurrent().getNavigator().navigateTo("/creararticulo");
+					}catch (BackEndException e){
+						logger.error(e);
+						Notification.show("Error Durante el Envio del Pedido", Type.ERROR_MESSAGE);
+					}
 				}
 			});
 			layout.addComponent(sendPedido);	

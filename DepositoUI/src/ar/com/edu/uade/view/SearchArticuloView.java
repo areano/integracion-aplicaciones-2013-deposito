@@ -1,6 +1,8 @@
 package ar.com.edu.uade.view;
 
 
+import javax.naming.NamingException;
+
 import ar.com.edu.uade.data.ArticuloContainer;
 import ar.com.edu.uade.searcher.ArticuloForm;
 import ar.com.edu.uade.searcher.ArticuloList;
@@ -19,23 +21,24 @@ import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.NativeSelect;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
+import excepctions.BackEndException;
+
 @SuppressWarnings("serial")
 public class SearchArticuloView extends VerticalLayout implements View  {
 	private class PerformSearhButton implements ClickListener{
-
 		@Override
 		public void buttonClick(ClickEvent event) {
-			performSearch();
-			
-		}
-		
+			performSearch();			
+		}		
 	}
     private TextField tf;
     private NativeSelect fieldToSearch;
@@ -55,16 +58,18 @@ public class SearchArticuloView extends VerticalLayout implements View  {
         /* Use a FormLayout as main layout for this Panel */
         FormLayout formLayout = new FormLayout();
         addComponent(formLayout);
-        try {
-			container = new ArticuloContainer();
-			container.init();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			try {
+				container = new ArticuloContainer();
+				container.init();
+			} catch (NamingException e) {
+				Notification.show("Error Durante la Gestion del Container de Articulos", Type.ERROR_MESSAGE);
+				e.printStackTrace();
+			} catch (BackEndException e) {
+				Notification.show("Error Durante la Gestion del Container de Articuloss", Type.ERROR_MESSAGE);
+				e.printStackTrace();
+			}
+			
+
         /* Create UI components */
         tf = new TextField("Search term");
         fieldToSearch = new NativeSelect("Field to search");
@@ -91,14 +96,11 @@ public class SearchArticuloView extends VerticalLayout implements View  {
     private void performSearch() {
         String searchTerm = (String) tf.getValue();
         if (searchTerm == null || searchTerm.equals("")) {
-//            Notification.show("La busqueda no puede estar vacia",Notification.Type.WARNING_MESSAGE);
-//            return;
         	searchTerm = "";
         }
         SearchFilter searchFilter = new SearchFilter(fieldToSearch.getValue(),
                 searchTerm);
-        search(searchFilter);
-       
+        search(searchFilter);       
 
     }
     public void search(SearchFilter searchFilter) {
@@ -180,7 +182,7 @@ public class SearchArticuloView extends VerticalLayout implements View  {
      * View getters exist so we can lazily generate the views, resulting in
      * faster application startup time.
      */
-    private ListView getListView() {
+    private ListView getListView() throws NamingException {
         articuloList = new ArticuloList(container);
         articuloList.setVisible(true);
         articuloForm = new ArticuloForm();

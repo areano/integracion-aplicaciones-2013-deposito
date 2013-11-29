@@ -29,6 +29,8 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.TableFieldFactory;
 import com.vaadin.ui.TextField;
 
+import excepctions.BackEndException;
+
 public class TestNestedBeanToTable extends CustomComponent {
 
 	private static final long serialVersionUID = 4027479393578050192L;
@@ -102,7 +104,7 @@ public class TestNestedBeanToTable extends CustomComponent {
 		}
 	}
 	    
-	public void nestedtable(Layout rootLayout) throws NamingException {
+	public void nestedtable(Layout rootLayout) throws NamingException, BackEndException {
 	    // Create a nested bean
 //	    Planet jupiter = new Planet("Jupiter");
 //	    jupiter.setMoons(Arrays.asList(

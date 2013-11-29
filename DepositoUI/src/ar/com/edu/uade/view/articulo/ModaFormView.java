@@ -14,9 +14,14 @@ import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.ui.AbstractTextField;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.UI;
+
+import excepctions.BackEndException;
 
 
 
@@ -38,8 +43,8 @@ public class ModaFormView extends CustomComponent {
     		try {
 				facade = EJBFacade.getIntance();
 			} catch (NamingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Notification.show("Error Durante La instanciacion de la Fachada de Sistema", Type.ERROR_MESSAGE);
+				logger.error(e);
 			}
 	}
     public void init( ModaView bean) {
@@ -122,6 +127,8 @@ public class ModaFormView extends CustomComponent {
 		            binder.commit();
 		            //EJBFacade.getIntance().altaModa(bindeable);
 		            facade.altaModa(bindeable);
+		            Notification.show("Articulo Moda creado", Type.HUMANIZED_MESSAGE);
+		            UI.getCurrent().getNavigator().navigateTo("/creararticulo");
 		        } catch (CommitException e) {
     	        	try{
     	        		for(Field<?> f:binder.getFields()){
@@ -130,9 +137,12 @@ public class ModaFormView extends CustomComponent {
     	        	
     	        	}catch(Exception j){
     	        		logger.error(j);
-    	        		j.printStackTrace();
+    	        		Notification.show("Error Durante la Valiadacion del Formulario", Type.ERROR_MESSAGE);
     	        	}
-		        } 
+    	        } catch (BackEndException e) {
+    	        	logger.error(e);
+    	        	Notification.show("Error Durante la Persistencia del Formulario", Type.ERROR_MESSAGE);
+				} 
 				
 			}
 		} ));

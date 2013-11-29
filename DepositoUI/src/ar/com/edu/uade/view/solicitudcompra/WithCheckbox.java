@@ -38,9 +38,11 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.Reindeer;
 
+import excepctions.BackEndException;
+
 public class WithCheckbox extends CustomComponent{
 	VerticalLayout layout =  new VerticalLayout();
-	public WithCheckbox(){
+	public WithCheckbox() throws BackEndException{
 		try {
 			buildLayout();
 		} catch (NamingException e) {
@@ -48,7 +50,7 @@ public class WithCheckbox extends CustomComponent{
 			e.printStackTrace();
 		}
 	}
-	void buildLayout() throws NamingException{
+	void buildLayout() throws NamingException, BackEndException{
 		// The data model + some data
 		final BeanItemContainer<SolicitudArticulosItemView> beans =
 		        new BeanItemContainer<SolicitudArticulosItemView>(SolicitudArticulosItemView.class);

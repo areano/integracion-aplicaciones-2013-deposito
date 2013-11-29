@@ -22,7 +22,6 @@ import view.SolicitudCompraView;
 
 public class EJBFacade {
 
-	private static final Logger logger = Logger.getLogger(EJBFacade.class);
 
 	static EJBFacade instance = null;
 
@@ -35,208 +34,141 @@ public class EJBFacade {
 	}
 
 	public static EJBFacade getIntance() throws NamingException {
-		if (instance == null) {
+		if (instance == null)  {
 			instance = new EJBFacade();
 		}
 		return instance;
 	}
 
-	public ArrayList<ConnectionView> getPortalConections() {
-		try {
+	public ArrayList<ConnectionView> getPortalConections() throws BackEndException {
+
 			return systemFacade.getPortalesConnection();
-		} catch (BackEndException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
+
 	}
 
-	public ArrayList<ConnectionView> getDespachoConnection() {
-		try {
+	public ArrayList<ConnectionView> getDespachoConnection() throws BackEndException {
+
 			return systemFacade.getDespachosConnection();
-		} catch (BackEndException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
+
+
 	}
 
-	public ArrayList<ConnectionView> getMonitoreoConnection() {
-		try {
+	public ArrayList<ConnectionView> getMonitoreoConnection() throws BackEndException {
+
 			return systemFacade.getMonitoreosConnection();
-		} catch (BackEndException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
+
 	}
 
-	public ArrayList<ConnectionView> getFabricaConnection() {
+	public ArrayList<ConnectionView> getFabricaConnection() throws BackEndException {
 		ArrayList<ConnectionView> retorno = new ArrayList<ConnectionView>();
 		return retorno;
 	}
 
-	public ArrayList<SolicitudArticulosView> getSolicitudesDeArticulos() {
-		try {
+	public ArrayList<SolicitudArticulosView> getSolicitudesDeArticulos() throws BackEndException {
+
 			return despachoSolicitudesFacade.getSolicitudes();
-		} catch (BackEndException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
+
 	}
 
-	public ArrayList<SolicitudCompraView> getSolicitudesDeCompra() {
+	public ArrayList<SolicitudCompraView> getSolicitudesDeCompra() throws BackEndException {
 		return null;
 	}
 
-	public void crearSolicitudCompra(SolicitudCompraView compra) {
-		try {
+	public void crearSolicitudCompra(SolicitudCompraView compra) throws BackEndException {
+
 			systemFacade.crearSolicitudCompra(compra);
-		} catch (BackEndException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 
-	public SolicitudCompraView getRecomendacionCompra() {
-		try {
+	public SolicitudCompraView getRecomendacionCompra() throws BackEndException {
+
 			return systemFacade.getRecomendacionCompra();
-		} catch (BackEndException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
+
 	}
 
-	public Collection<? extends ArticuloView> getAllArticulos() {
-		try {
+	public Collection<? extends ArticuloView> getAllArticulos() throws BackEndException {
+
 			return systemFacade.getArticulos();
-		} catch (BackEndException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
+
 	}
 
-	public void altaElectrodomestico(ElectrodomesticoView e) {
-		try {
+	public void altaElectrodomestico(ElectrodomesticoView e) throws BackEndException {
+
 			systemFacade.altaElectrodomestico(e);
-		} catch (BackEndException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
 	}
 
-	public void altaModa(ModaView m) {
-		try {
+	public void altaModa(ModaView m) throws BackEndException {
+
 			systemFacade.altaModa(m);
-		} catch (BackEndException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 
-	public void altaMueble(MuebleView m) {
-		try {
+	public void altaMueble(MuebleView m) throws BackEndException {
+
 			systemFacade.altaMueble(m);
-		} catch (BackEndException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 
-	public void altaInfatil(InfantilView i) {
-		try {
+	public void altaInfatil(InfantilView i) throws BackEndException {
+
 			systemFacade.altaInfatil(i);
-		} catch (BackEndException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 
-	public void savePortalesConnection(ArrayList<ConnectionView> activas) {
-		try {
+	public void savePortalesConnection(ArrayList<ConnectionView> activas) throws BackEndException {
+
 			systemFacade.savePortalesConnection(activas);
-		} catch (BackEndException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 
-	public void saveMonitoreosConnection(ArrayList<ConnectionView> activas) {
-		try {
+	public void saveMonitoreosConnection(ArrayList<ConnectionView> activas) throws BackEndException {
+
 			systemFacade.saveMonitoreoConnection(activas);
-		} catch (BackEndException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 
-	public void saveDespachosConnection(ArrayList<ConnectionView> activas) {
-		try {
+	public void saveDespachosConnection(ArrayList<ConnectionView> activas) throws BackEndException {
+
 			systemFacade.saveDespachosConnection(activas);
-		} catch (BackEndException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 
-	public void saveFabricaConnection(ArrayList<ConnectionView> activas) {
-		try {
+	public void saveFabricaConnection(ArrayList<ConnectionView> activas) throws BackEndException {
+
 			systemFacade.savePortalesConnection(activas);
-		} catch (BackEndException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 
 	public void getDepositoFacade() throws NamingException {
-		try {
+
 			InitialContext ic = new InitialContext();
 			systemFacade = (DepositoFacade) ic.lookup("java:global/Depostio_EAR/Deposito_EJB/DepositoFacadeBean");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 
 	public void getDespachoFacade() throws NamingException {
-		try {
+
 			InitialContext ic = new InitialContext();
 			despachoSolicitudesFacade = (DespachoSolicitudesFacade) ic.lookup("java:global/Depostio_EAR/Deposito_EJB/DespachoSolicitudesFacadebean");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 
-	public ArrayList<SolicitudArticulosView> markSolicitud(SolicitudArticulosView solicitud) {
-		try {
+	public ArrayList<SolicitudArticulosView> markSolicitud(SolicitudArticulosView solicitud) throws BackEndException {
+
 			return despachoSolicitudesFacade.markSolicitud(solicitud);
-		} catch (BackEndException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
+
 	}
 
-	public ArrayList<SolicitudArticulosView> unMarkSolicitud(SolicitudArticulosView solicitud) {
-		try {
+	public ArrayList<SolicitudArticulosView> unMarkSolicitud(SolicitudArticulosView solicitud) throws BackEndException {
+
 			return despachoSolicitudesFacade.unmarkSolicitud(solicitud);
-		} catch (BackEndException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
+
 	}
 
-	public void enviarArticulos(ArrayList<SolicitudArticulosView> solicitudes) {
-		try {
+	public void enviarArticulos(ArrayList<SolicitudArticulosView> solicitudes) throws BackEndException {
+
 			despachoSolicitudesFacade.enviarArticulos(solicitudes);
-		} catch (BackEndException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 }
