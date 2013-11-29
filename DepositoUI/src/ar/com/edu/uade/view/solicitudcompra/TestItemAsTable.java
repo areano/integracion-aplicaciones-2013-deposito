@@ -109,8 +109,8 @@ public class TestItemAsTable extends CustomComponent{
 			table.setPageLength(table.size());
 
 			// Have to set explicitly to hide the "equatorial" property
-			table.setVisibleColumns(new Object[]{"articulo.nombre",
-			    "articulo.stock", "cantidad","totalSolicitado", "txtCantidad","selected"});
+			table.setVisibleColumns(new Object[] { "articulo.nombre", "articulo.stock", 
+					"totalSolicitado", "cantidad", "txtCantidad", "selected" });
 			table.setEditable(true);
 			layout.addComponent(table);
 			/*Save Button*/
