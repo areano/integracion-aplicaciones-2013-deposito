@@ -174,62 +174,20 @@
                     <handler name="FILETHREE"/>
                 </handlers>
             </logger>  
-            <logger category="dao">
+            <logger category="ar.com.uade.fabricaejb">
                 <level name="DEBUG"/>
                 <handlers>
                     <handler name="CONSOLE"/>
                     <handler name="FILEFOUR"/>
                 </handlers>
-            </logger>
-            <logger category="entities">
-                <level name="DEBUG"/>
-                <handlers>
-                    <handler name="CONSOLE"/>
-                    <handler name="FILEFOUR"/>
-                </handlers>
-            </logger> 
-            <logger category="facade">
-                <level name="DEBUG"/>
-                <handlers>
-                    <handler name="CONSOLE"/>
-                    <handler name="FILEFOUR"/>
-                </handlers>
-            </logger>  
-            <logger category="servicios">
-                <level name="DEBUG"/>
-                <handlers>
-                    <handler name="CONSOLE"/>
-                    <handler name="FILEFOUR"/>
-                </handlers>
-            </logger>
-            <logger category="transformer">
-                <level name="DEBUG"/>
-                <handlers>
-                    <handler name="CONSOLE"/>
-                    <handler name="FILEFOUR"/>
-                </handlers>
-            </logger>
-            <logger category="ejbfacade">
+            </logger>   
+            <logger category="ar.com.uade.fabricaweb">
                 <level name="DEBUG"/>
                 <handlers>
                     <handler name="CONSOLE"/>
                     <handler name="FILEFIVE"/>
                 </handlers>
-            </logger>      
-            <logger category="rest">
-                <level name="DEBUG"/>
-                <handlers>
-                    <handler name="CONSOLE"/>
-                    <handler name="FILEFIVE"/>
-                </handlers>
-            </logger> 
-            <logger category="web">
-                <level name="DEBUG"/>
-                <handlers>
-                    <handler name="CONSOLE"/>
-                    <handler name="FILEFIVE"/>
-                </handlers>
-            </logger>                                                                                              
+            </logger>                                                                                                         
             <root-logger>
                 <level name="INFO"/>
                 <handlers>
