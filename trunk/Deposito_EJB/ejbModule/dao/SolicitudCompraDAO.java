@@ -1,6 +1,5 @@
 package dao;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,8 +15,6 @@ import org.apache.log4j.Logger;
 import transformer.Transformer;
 import entities.Articulo;
 import entities.ItemSolicitudCompra;
-import entities.SolicitudArticulos;
-import entities.SolicitudArticulosItem;
 import entities.SolicitudCompra;
 
 /**
@@ -44,13 +41,11 @@ public class SolicitudCompraDAO {
 	public void persist(SolicitudCompra compra) {
 		em.persist(compra);
 		em.flush();
-		em.persist(compra);
 	}
 
 	public void merge(SolicitudCompra compra) {
 		em.merge(compra);
 		em.flush();
-		em.merge(compra);
 	}
 
 	@SuppressWarnings("unchecked")
