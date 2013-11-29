@@ -68,20 +68,22 @@ public class SolicitudCompraDAO {
 			for (Object[] item : result) {
 
 				Articulo articulo = em.find(Articulo.class, item[0]);
-				long cantidad = articulo.getStock() - (Long) item[1];
+				long cantidadSolicitada = (Long) item[1];
+				long cantidad = articulo.getStock() - cantidadSolicitada;
 
 				if (cantidad < 0) {
 					ItemSolicitudCompra itemCompra = new ItemSolicitudCompra();
 					itemCompra.setArticulo(articulo);
-					itemCompra.setCantidad((int) cantidad * 2);
+					itemCompra.setCantidad(Math.abs((int) cantidad) * 2);
+					itemCompra.setCantidadSolicitada((int) cantidadSolicitada);
 					sc.getArticulos().add(itemCompra);
 				}
 			}
 		} catch (Exception e) {
 			logger.error(e);
 		}
-		return sc;
 
+		return sc;
 	}
 
 }

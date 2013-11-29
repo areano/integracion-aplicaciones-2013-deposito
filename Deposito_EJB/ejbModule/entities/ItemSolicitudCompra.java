@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "SolicitudCompraItem")
@@ -31,6 +32,9 @@ public class ItemSolicitudCompra {
 
 	private int cantidad;
 
+	@Transient
+	private int cantidadSolicitada;
+
 	public ItemSolicitudCompra() {
 	}
 
@@ -52,5 +56,13 @@ public class ItemSolicitudCompra {
 
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
+	}
+
+	public int getCantidadSolicitada() {
+		return cantidadSolicitada;
+	}
+
+	public void setCantidadSolicitada(int cantidadSolicitada) {
+		this.cantidadSolicitada = cantidadSolicitada;
 	}
 }

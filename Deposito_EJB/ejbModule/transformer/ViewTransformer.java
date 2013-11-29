@@ -214,6 +214,7 @@ public class ViewTransformer {
 		ArticuloView av = actualizarArticuloView(a);
 
 		SolicitudArticulosItemView view = new SolicitudArticulosItemView(av, item.getCantidad());
+		view.setTotalSolicitado(item.getCantidadSolicitada());
 		return view;
 	}
 
