@@ -1,4 +1,4 @@
-package servicios;
+package ar.com.uade.fabricaejb.servicios;
 
 import java.util.Date;
 import java.util.List;
@@ -7,14 +7,14 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import transformer.Transformer;
+import ar.com.uade.fabricaejb.dao.DepositoDAOBean;
+import ar.com.uade.fabricaejb.dao.SolicitudCompraDAOBean;
+import ar.com.uade.fabricaejb.entities.ItemSolicitudCompra;
+import ar.com.uade.fabricaejb.entities.SolicitudCompra;
+import ar.com.uade.fabricaejb.transformer.Transformer;
 import view.SolicitudCompraView;
-import dao.DepositoDAOBean;
-import dao.SolicitudCompraDAOBean;
 import dto.ItemSolicitudCompraDTO;
 import dto.SolicitudCompraDTO;
-import entities.ItemSolicitudCompra;
-import entities.SolicitudCompra;
 
 /**
  * Session Bean implementation class AdministradorSolicitudCompraBean

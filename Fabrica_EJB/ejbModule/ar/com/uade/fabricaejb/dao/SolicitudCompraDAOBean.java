@@ -1,4 +1,4 @@
-package dao;
+package ar.com.uade.fabricaejb.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import ar.com.uade.fabricaejb.entities.SolicitudCompra;
 import view.SolicitudCompraView;
-import entities.SolicitudCompra;
 
 /**
  * Session Bean implementation class SolicitudCompraDAOBean

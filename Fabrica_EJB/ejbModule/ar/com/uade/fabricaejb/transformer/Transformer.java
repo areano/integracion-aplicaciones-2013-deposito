@@ -1,12 +1,12 @@
-package transformer;
+package ar.com.uade.fabricaejb.transformer;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import ar.com.uade.fabricaejb.entities.ItemSolicitudCompra;
+import ar.com.uade.fabricaejb.entities.SolicitudCompra;
 import dto.ItemSolicitudCompraDTO;
 import dto.SolicitudCompraDTO;
-import entities.ItemSolicitudCompra;
-import entities.SolicitudCompra;
 
 /**
  * Session Bean implementation class Transformer

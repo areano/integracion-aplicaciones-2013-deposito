@@ -1,4 +1,4 @@
-package dao;
+package ar.com.uade.fabricaejb.dao;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;

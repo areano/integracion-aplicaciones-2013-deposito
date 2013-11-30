@@ -1,4 +1,4 @@
-package entities;
+package ar.com.uade.fabricaejb.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;

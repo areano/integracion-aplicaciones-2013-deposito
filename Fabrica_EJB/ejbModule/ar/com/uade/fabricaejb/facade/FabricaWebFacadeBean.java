@@ -1,4 +1,4 @@
-package facade;
+package ar.com.uade.fabricaejb.facade;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,10 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import entities.SolicitudCompra;
-import servicios.AdministradorSolicitudCompraBean;
-import transformer.ViewTransformer;
+import facade.FabricaWebFacade;
+import ar.com.uade.fabricaejb.entities.SolicitudCompra;
+import ar.com.uade.fabricaejb.servicios.AdministradorSolicitudCompraBean;
+import ar.com.uade.fabricaejb.transformer.ViewTransformer;
 import view.SolicitudCompraView;
 @Stateless
 public class FabricaWebFacadeBean implements FabricaWebFacade {
