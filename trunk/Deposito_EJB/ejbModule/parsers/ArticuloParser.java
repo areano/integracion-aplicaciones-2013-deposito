@@ -36,6 +36,7 @@ public class ArticuloParser {
 			throw new BackEndException(e);
 		}
 		xml=xml.replaceAll("codigoDeposito>", "idModulo>");
+		xml=xml.replaceAll("<fotoURL>", "<fotoURL>http://");
 		return xml;
 	}
 	
@@ -57,6 +58,7 @@ public class ArticuloParser {
 			throw new BackEndException(e);
 		}
 		xml=xml.replaceAll("codigoDeposito>", "idModulo>");
+		xml=xml.replaceAll("<fotoURL>", "<fotoURL>http://");
 		return xml;
 	}
 	
@@ -77,6 +79,7 @@ public class ArticuloParser {
 			throw new BackEndException(e);
 		}
 		xml=xml.replaceAll("codigoDeposito>", "idModulo>");
+		xml=xml.replaceAll("<fotoURL>", "<fotoURL>http://");
 		return xml;		
 	}
 
@@ -97,6 +100,7 @@ public class ArticuloParser {
 			throw new BackEndException(e);
 		}
 		xml=xml.replaceAll("codigoDeposito>", "idModulo>");
+		xml=xml.replaceAll("<fotoURL>", "<fotoURL>http://");
 		return xml;		
 	}
 
