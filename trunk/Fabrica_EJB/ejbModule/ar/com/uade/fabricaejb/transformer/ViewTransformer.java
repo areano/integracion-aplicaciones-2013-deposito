@@ -1,4 +1,4 @@
-package transformer;
+package ar.com.uade.fabricaejb.transformer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,9 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import ar.com.uade.fabricaejb.dao.SolicitudCompraDAOBean;
+import ar.com.uade.fabricaejb.entities.ItemSolicitudCompra;
+import ar.com.uade.fabricaejb.entities.SolicitudCompra;
 import view.ArticuloView;
 import view.ConnectionView;
 import view.ElectrodomesticoView;
@@ -16,10 +19,6 @@ import view.MuebleView;
 import view.SolicitudArticulosItemView;
 import view.SolicitudArticulosView;
 import view.SolicitudCompraView;
-
-import dao.SolicitudCompraDAOBean;
-import entities.ItemSolicitudCompra;
-import entities.SolicitudCompra;
 
 @Stateless
 @LocalBean

@@ -1,10 +1,11 @@
-package facade;
+package ar.com.uade.fabricaejb.facade;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import servicios.AdministradorSolicitudCompraBean;
+import ar.com.uade.fabricaejb.servicios.AdministradorSolicitudCompraBean;
 import dto.SolicitudCompraDTO;
+import facade.FabricaFacade;
 
 /**
  * Session Bean implementation class DepositoFacadeBean
