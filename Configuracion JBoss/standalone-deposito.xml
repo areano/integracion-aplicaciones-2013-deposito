@@ -173,21 +173,21 @@
                     <handler name="CONSOLE"/>
                     <handler name="FILETHREE"/>
                 </handlers>
-            </logger>  
+            </logger>
             <logger category="ar.com.uade.fabricaejb">
                 <level name="DEBUG"/>
                 <handlers>
                     <handler name="CONSOLE"/>
                     <handler name="FILEFOUR"/>
                 </handlers>
-            </logger>   
+            </logger>
             <logger category="ar.com.uade.fabricaweb">
                 <level name="DEBUG"/>
                 <handlers>
                     <handler name="CONSOLE"/>
                     <handler name="FILEFIVE"/>
                 </handlers>
-            </logger>                                                                                               
+            </logger>
             <root-logger>
                 <level name="INFO"/>
                 <handlers>
@@ -221,7 +221,6 @@
                     <driver name="h2" module="com.h2database.h2">
                         <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
                     </driver>
-					<!-- IA: Driver SQL SERVER -->
                     <driver name="sqljdbc" module="com.microsoft.sqlserver">
                         <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
                     </driver>
@@ -411,11 +410,23 @@
                         </entries>
                     </pooled-connection-factory>
                 </jms-connection-factories>
+
                 <jms-destinations>
-					<!-- IA: Colas -->
                     <jms-queue name="depositoQueue">
                         <entry name="jms/queue/solicitud"/>
                         <entry name="java:jboss/exported/jms/queue/solicitud"/>
+                    </jms-queue>
+                    <jms-queue name="PortalArticuloTestQueue">
+                        <entry name="jms/queue/deposito"/>
+                        <entry name="java:jboss/exported/jms/queue/deposito"/>
+                    </jms-queue>
+                    <jms-queue name="DespachoArticuloTestQueue">
+                        <entry name="jms/queue/nuevosArticulos"/>
+                        <entry name="java:jboss/exported/jms/queue/nuevosArticulos"/>
+                    </jms-queue>
+                    <jms-queue name="LogisticaLogTestQueue">
+                        <entry name="jms/queue/log"/>
+                        <entry name="java:jboss/exported/jms/queue/log"/>
                     </jms-queue>
                     <jms-queue name="recepcionCompraQueue">
                         <entry name="jms/queue/recepcionCompra"/>
