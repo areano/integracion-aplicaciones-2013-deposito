@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 
 
+
 import ar.com.edu.uade.view.articulo.ElectrodomesticoFormView;
 import ar.com.edu.uade.view.articulo.InfantilFormView;
 import ar.com.edu.uade.view.articulo.ModaFormView;
@@ -14,6 +15,7 @@ import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.MenuBar.MenuItem;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 
 public class CrearArticuloView extends VerticalLayout implements View {
@@ -59,27 +61,30 @@ public class CrearArticuloView extends VerticalLayout implements View {
 						content.removeAllComponents();
 						ElectrodomesticoFormView eForm =  new ElectrodomesticoFormView();
 						eForm.init();
-						content.addComponent( eForm);
+						content.addComponent(new Panel(eForm));
+						//content.addComponent( eForm);
 						
 						break;
 					case MODA:
 						content.removeAllComponents();
 						ModaFormView mForm =  new ModaFormView();
 						mForm.init();
-						content.addComponent( mForm);
+						//content.addComponent( mForm);
+						content.addComponent(new Panel(mForm));
 						break;
 					case MUEBLE:
 						content.removeAllComponents();
 						MuebleFormView uForm = new MuebleFormView();
 						uForm.init();
-						content.addComponent( uForm);
+						//content.addComponent( uForm);
+						content.addComponent(new Panel(uForm));
 						break;
 					case INFANTIL:	
 						content.removeAllComponents();
 						InfantilFormView iForm = new InfantilFormView();
 						iForm.init();
-						content.addComponent( iForm);
-
+						//content.addComponent( iForm);
+						content.addComponent(new Panel(iForm));
 						break;	
 					default:
 						break;

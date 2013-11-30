@@ -1,25 +1,35 @@
 package ar.com.edu.uade.view.articulo;
+import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import javax.naming.NamingException;
 
 import org.apache.log4j.Logger;
 
 import ar.com.edu.uade.ejbfacade.EJBFacade;
+import ar.com.edu.uade.utils.ImageUploader;
 import ar.com.edu.uade.utils.InstallArticuloValidatorBlurListener;
-import ar.com.edu.uade.utils.StringToLongConverter;
 import ar.com.edu.uade.utils.ValidatorUtils;
 import view.InfantilView;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
+import com.vaadin.server.FileResource;
 import com.vaadin.ui.AbstractTextField;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.CustomComponent;
+import com.vaadin.ui.Embedded;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Layout;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
+import com.vaadin.ui.Upload;
 
 import excepctions.BackEndException;
 public class InfantilFormView extends CustomComponent {
@@ -30,6 +40,10 @@ public class InfantilFormView extends CustomComponent {
 	private InfantilView bindeable;
 	private static final Logger logger = 
 			   Logger.getLogger(InfantilFormView.class);
+	Upload upload;// = new Upload("Upload it here", receiver);
+	// Show uploaded file in this placeholder
+	private Embedded image;// = new Embedded("Uploaded Image");
+	private Panel imagePanel; 
 	public InfantilFormView(){
 		super();
         try {
@@ -59,7 +73,16 @@ public class InfantilFormView extends CustomComponent {
         editable = true;
         /* Field Creation Section*/    	
     	buildLayout(layout, binder);
-    	
+        URI uri;
+		try {
+			uri = new URI("http://"+bean.getFoto());
+			File file = new File("../welcome-content"+uri.getPath());
+	        image.setSource(new FileResource(file)); 
+	        buildLayout(layout, binder);
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}    	
 
     }
 	private void buildLayout(FormLayout layout,
@@ -73,8 +96,26 @@ public class InfantilFormView extends CustomComponent {
 		final AbstractTextField  precio=(AbstractTextField) binder.buildAndBind("Precio", "textPrecio");
 		//final TextField precio= new TextField("Precio","0");
 		precio.setNullRepresentation("");
-		final AbstractTextField  foto=(AbstractTextField) binder.buildAndBind("Foto", "foto");
+		final AbstractTextField  foto=(AbstractTextField) binder.buildAndBind("Foto", "fotoForm");
 		foto.setNullRepresentation("");
+		/** 
+		 * Image
+		 */
+			image = new Embedded("Uploaded Image");
+			image.setVisible(false);
+			image.setHeight("150px");
+			image.setWidth("200px");
+			ImageUploader receiver = new ImageUploader(image,foto); 
+			upload = new Upload("Suba la imagen aqui", receiver);
+			upload.addSucceededListener(receiver);
+			// Put the components in a panel
+			imagePanel = new Panel();
+			Layout panelContent = new HorizontalLayout();
+			panelContent.addComponents(upload, image);
+			imagePanel.setContent(panelContent);
+		/**
+		 * End upload  Image
+		 */
 		final AbstractTextField  codigo=(AbstractTextField) binder.buildAndBind("Codigo", "textCodigo");
 		codigo.setNullRepresentation("");
 		final AbstractTextField  edadRecomendada=(AbstractTextField) binder.buildAndBind("Edad Recomendada", "edadRecomendada");
@@ -89,7 +130,7 @@ public class InfantilFormView extends CustomComponent {
 		marca.addBlurListener(new InstallArticuloValidatorBlurListener(marca,"marca"));
 		nombre.addBlurListener(new InstallArticuloValidatorBlurListener(nombre,"nombre"));
 		precio.addBlurListener(new InstallArticuloValidatorBlurListener(precio,"textPrecio"));
-		foto.addBlurListener(new InstallArticuloValidatorBlurListener(foto,"foto"));
+		foto.addBlurListener(new InstallArticuloValidatorBlurListener(foto,"fotoForm"));
 		codigo.addBlurListener(new InstallArticuloValidatorBlurListener(codigo,"textCodigo"));
 		edadRecomendada.addBlurListener(new InstallArticuloValidatorBlurListener(edadRecomendada,"edadRecomendada"));
 		origen.addBlurListener(new InstallArticuloValidatorBlurListener(origen,"origen"));
@@ -98,7 +139,10 @@ public class InfantilFormView extends CustomComponent {
 		layout.addComponent(marca);
 		layout.addComponent(nombre);
 		layout.addComponent(precio);
-		layout.addComponent(foto);		
+    	HorizontalLayout fotoUpload =  new HorizontalLayout();
+    	fotoUpload.addComponentAsFirst(foto);
+    	fotoUpload.addComponent(imagePanel);
+    	layout.addComponent(fotoUpload);		
 		layout.addComponent(edadRecomendada);
 		layout.addComponent(origen);
 		if (editable){	    		
@@ -120,7 +164,8 @@ public class InfantilFormView extends CustomComponent {
 		        	ValidatorUtils.installSingleValidator(marca,"marca");
 		        	ValidatorUtils.installSingleValidator(nombre,"nombre");
 		        	ValidatorUtils.installSingleValidator(precio,"textPrecio");
-		        	ValidatorUtils.installSingleValidator(foto,"foto");
+		        	foto.setValue(((FileResource) image.getSource()).getFilename());
+		        	ValidatorUtils.installSingleValidator(foto,"fotoForm");		        	
 		        	ValidatorUtils.installSingleValidator(codigo,"textCodigo");
 		        	ValidatorUtils.installSingleValidator(edadRecomendada,"edadRecomendada");
 		        	ValidatorUtils.installSingleValidator(origen,"origen");
