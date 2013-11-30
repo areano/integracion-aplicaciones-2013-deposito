@@ -45,7 +45,18 @@ public class ViewTransformer {
 	}
 
 	public Articulo converToClass(ArticuloView av) {
-		Articulo a = new Articulo();
+		Articulo a = null;
+		String tipo =  av.getTipo();
+		
+		if(tipo.equalsIgnoreCase("electrodomestico"))
+			a = new Electrodomestico();
+		if(tipo.equalsIgnoreCase("moda"))
+			a = new Moda();
+		if(tipo.equalsIgnoreCase("mueble"))
+			a = new Mueble();
+		if(tipo.equalsIgnoreCase("infantil"))
+			a = new Infantil();
+		
 		a.setCodigo(av.getCodigo());
 		a.setCodigoDeposito(av.getCodigoDeposito());
 		a.setDescripcion(av.getDescripcion());
