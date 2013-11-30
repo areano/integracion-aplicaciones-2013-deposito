@@ -1,6 +1,7 @@
 package view;
 
 import java.io.Serializable;
+import java.net.UnknownHostException;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -33,11 +34,14 @@ public abstract class ArticuloView implements Serializable{
 	private Number textCodigo;
 	@Min (value = 0)
 	private Number textStock;
-
+	@NotNull
+	private String fotoForm;
+	
 	public ArticuloView(){
 	    codigo=null;
 	    descripcion=null;
 	    foto = null;
+	    fotoForm = null;
 	    marca=null;
 	    nombre=null;
 	    precio=(float) 0;
@@ -65,7 +69,24 @@ public abstract class ArticuloView implements Serializable{
 		return foto;
 	}
 	public void setFoto(String foto) {
-		this.foto = foto;
+			this.foto = foto;
+			this.fotoForm = foto;
+		
+	}
+	public String getFotoForm() {
+		return fotoForm;
+	}
+	public void setFotoForm(String fotoForm) {
+		
+		try {
+			String ip = java.net.InetAddress.getLocalHost().getHostAddress();
+			String route =  ip+":8080/deposito/";
+			this.fotoForm = route+fotoForm;
+			this.foto = this.fotoForm;
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public String getMarca() {
 		return marca;
