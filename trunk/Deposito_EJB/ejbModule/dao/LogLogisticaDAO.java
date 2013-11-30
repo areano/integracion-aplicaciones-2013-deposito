@@ -47,7 +47,7 @@ public class LogLogisticaDAO {
 		} catch (ParserException e) {
 			String errorMessage = "*** Error parseando un DTO para log ***";
 			logger.error(errorMessage, e);
-			throw new BackEndException(e);
+//			throw new BackEndException(e);
 		}
 		
 		for (MonitoreoConexion p : conexiones) {
@@ -71,15 +71,15 @@ public class LogLogisticaDAO {
 			} catch (JMSException e) {
 				String errorMessage = "*** Error enviando xml a jms de Monitoreo IP[" + p.getIp() + "] Grupo [" + p.getMonitoreoId() + "]***";
 				logger.error(errorMessage, e);
-				throw new BackEndException(e);
+//				throw new BackEndException(e);
 			} catch (MalformedURLException e) {
 				String errorMessage = "*** Error conectando al Webservice de Monitoreo [" +p.getIp()+":"+p.getWsPuerto() + p.getWsPath() + "]***";
 				logger.error(errorMessage, e);
-				throw new BackEndException(e);
+//				throw new BackEndException(e);
 			} catch (NamingException e) {
 				String errorMessage = "*** Error conectando a cola jms de Monitoreo IP[" + p.getIp() + "] Grupo [" + p.getMonitoreoId() + "]***";
 				logger.error(errorMessage, e);
-				throw new BackEndException(e);
+//				throw new BackEndException(e);
 			}
 		}
 	}

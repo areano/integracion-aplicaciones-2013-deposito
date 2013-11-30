@@ -58,7 +58,7 @@ public class DespachoDAO {
 		}catch  (Exception e)
 		{
 			logger.error(e);
-			throw new BackEndException(e);
+//			throw new BackEndException(e);
 		}
 	}
 
@@ -71,7 +71,8 @@ public class DespachoDAO {
 		}catch  (Exception e)
 		{
 			logger.error(e);
-			throw new BackEndException(e);
+//			throw new BackEndException(e);
+			return null;
 		}
 	}
 
@@ -84,7 +85,7 @@ public class DespachoDAO {
 		}catch  (Exception e)
 		{
 			logger.error(e);
-			throw new BackEndException(e);
+//			throw new BackEndException(e);
 		}
 	}
 
@@ -97,7 +98,7 @@ public class DespachoDAO {
 		}catch  (Exception e)
 		{
 			logger.error(e);
-			throw new BackEndException(e);
+//			throw new BackEndException(e);
 		}
 	}
 
@@ -110,7 +111,7 @@ public class DespachoDAO {
 		}catch  (Exception ex)
 		{
 			logger.error(ex);
-			throw new BackEndException(ex);
+//			throw new BackEndException(ex);
 		}
 	}
 
@@ -123,7 +124,7 @@ public class DespachoDAO {
 		}catch  (Exception e)
 		{
 			logger.error(e);
-			throw new BackEndException(e);
+//			throw new BackEndException(e);
 		}
 	}
 
@@ -160,11 +161,11 @@ public class DespachoDAO {
 		} catch (JMSException e) {
 			errorMessage = "*** Error enviando xml a jms de Despacho IP[" + p.getIp() + "] Grupo [" + p.getDespachoId() + "]***";
 			logger.error(errorMessage, e);
-			throw new BackEndException(e);
+//			throw new BackEndException(e);
 		} catch (NamingException e) {
 			errorMessage = "*** Error conectando a cola jms de Despacho IP[" + p.getIp() + "] Grupo [" + p.getDespachoId() + "]***";
 			logger.error(errorMessage, e);
-			throw new BackEndException(e);
+//			throw new BackEndException(e);
 		}
 	}
 
