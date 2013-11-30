@@ -6,7 +6,7 @@ import java.util.Collection;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import org.apache.log4j.Logger;
+
 
 import excepctions.BackEndException;
 import sessionBeans.DepositoFacade;
