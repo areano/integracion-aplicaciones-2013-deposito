@@ -29,7 +29,7 @@ public class FabricaDAO {
 			}
 			catch (java.net.UnknownHostException uhe) { // [beware typo in
 				logger.error("Error Getting Machine Local Address / Host", uhe);
-				throw new BackEndException(uhe);
+//				throw new BackEndException(uhe);
 			}
 		clienteRest.setIp(localMachine);
 		clienteRest.setPort("8080");
@@ -51,11 +51,11 @@ public class FabricaDAO {
 		} catch (ParserException e) {
 			e.printStackTrace();
 			logger.error("Error Parseando XML", e);
-			throw new BackEndException(e);
+//			throw new BackEndException(e);
 		}catch (Exception e) {
 			e.printStackTrace();
 			logger.error("Error Enviando XML de compra", e);
-			throw new BackEndException(e);
+//			throw new BackEndException(e);
 		}
 	}
 }

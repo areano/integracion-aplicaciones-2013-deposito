@@ -30,10 +30,9 @@ public class SolicitudArticulosDAO {
 	public void persist(SolicitudArticulos solicitud) throws BackEndException {
 		try{
 				em.persist(solicitud);
+				em.flush();
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error("Error Buscando Solicitud",e);
-			throw new BackEndException(e);
+			logger.error("Error guardando Solicitud",e);
 		}
 
 	}

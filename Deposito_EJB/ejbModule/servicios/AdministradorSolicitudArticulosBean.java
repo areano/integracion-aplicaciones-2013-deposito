@@ -1,5 +1,6 @@
 package servicios;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -43,8 +44,10 @@ public class AdministradorSolicitudArticulosBean {
 
 		// TODO AR: Validar que los articulos existan en la base, de lo
 		// contrario error? Tener en cuenta otro tipo de validaciones
+
 		SolicitudArticulos sa = getEntity(solicitud);
 		sa.setCumplida(false);
+		sa.setFechaInicio(new Date());
 		solicitudArticulosDao.persist(sa);
 	}
 
@@ -52,7 +55,8 @@ public class AdministradorSolicitudArticulosBean {
 
 		try {
 			SolicitudArticulos solicitudEntity = new SolicitudArticulos();
-			solicitudEntity.setModuloId(solicitud.getIdSolicitud());
+			solicitudEntity.setModuloId(solicitud.getIdModulo());
+			solicitudEntity.setSolicitudId(solicitud.getIdSolicitud());
 
 			for (SolicitudArticuloItemDTO item : solicitud.getLista()) {
 

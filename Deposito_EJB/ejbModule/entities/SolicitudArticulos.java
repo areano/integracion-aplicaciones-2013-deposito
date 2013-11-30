@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,13 +17,21 @@ import javax.persistence.Table;
 @Table(name = "SolicitudArticulos")
 public class SolicitudArticulos {
 
+	public void setSolicitudId(long solicitudId) {
+		this.solicitudId = solicitudId;
+	}
+
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
 	@Id
 	@Column(name = "solicitudArticulosId")
 	private long solicitudId;
 
 	private int moduloId;
 
-	@OneToMany()
+	@OneToMany(cascade = { CascadeType.ALL })	
 	@JoinColumn(referencedColumnName = "solicitudArticulosId")
 	private List<SolicitudArticulosItem> items = new ArrayList<SolicitudArticulosItem>();
 

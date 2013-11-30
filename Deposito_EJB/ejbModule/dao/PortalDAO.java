@@ -94,11 +94,11 @@ public class PortalDAO {
 			} catch (JMSException e) {
 				errorMessage = "*** Error enviando xml a jms de Portal IP[" + p.getIp() + "] Grupo [" + p.getPortalId() + "]***";
 				logger.error(errorMessage, e);
-				throw new BackEndException(e);
+//				throw new BackEndException(e);
 			} catch (NamingException e) {
 				errorMessage = "*** Error conectando a cola jms de Portal IP[" + p.getIp() + "] Grupo [" + p.getPortalId() + "]***";
 				logger.error(errorMessage, e);
-				throw new BackEndException(e);
+//				throw new BackEndException(e);
 			}
 		}
 	}
