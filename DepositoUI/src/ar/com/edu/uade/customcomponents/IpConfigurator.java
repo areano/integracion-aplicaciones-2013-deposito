@@ -170,13 +170,14 @@ public class IpConfigurator extends CustomComponent {
 				String nuevo = optionGroup_2.getValue().toString().substring(1, 
 						optionGroup_2.getValue().toString().length()-1);
 				
-		        String[] list = nuevo.split(",");
-		        for (int i = 0; i < list.length; i++) {
-					String string = list[i];					
-					activas.add(mappedIPs.get(string.trim()));					
-					System.out.println(mappedIPs.get(string.trim()));
-					}
-				
+		        if (nuevo.length() > 0) {
+					String[] list = nuevo.split(",");
+			        for (int i = 0; i < list.length; i++) {
+						String string = list[i];					
+						activas.add(mappedIPs.get(string.trim()));					
+						System.out.println(mappedIPs.get(string.trim()));
+						}
+		        }
 		        if (mappedIPs.size()==0) {
 		        	Notification.show("No IP's Selected, select at least one", Type.WARNING_MESSAGE);
 		        	return;
@@ -196,7 +197,7 @@ public class IpConfigurator extends CustomComponent {
 							facade.saveFabricaConnection(activas);
 							Notification.show("Ip Fabrica Creadas", Type.HUMANIZED_MESSAGE);
 					}
-					 UI.getCurrent().getNavigator().navigateTo("/creararticulo");
+					 //UI.getCurrent().getNavigator().navigateTo("/creararticulo");
 				}catch (BackEndException e){
 					Notification.show("IP's no pueden ser salvadas", Type.ERROR_MESSAGE);
 				}
