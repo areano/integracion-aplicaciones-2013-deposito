@@ -165,7 +165,10 @@ public class ModaFormView extends CustomComponent {
 		        	ValidatorUtils.installSingleValidator(origen,"origen");
 		            binder.commit();
 		            //EJBFacade.getIntance().altaModa(bindeable);
-		            facade.altaModa(bindeable);
+	        		if (editable)
+	        			facade.updateStock(bindeable);	
+	        		else
+	        			facade.altaModa(bindeable);
 		            Notification.show("Articulo Moda creado", Type.HUMANIZED_MESSAGE);
 		            UI.getCurrent().getNavigator().navigateTo("/creararticulo");
 		        } catch (CommitException e) {

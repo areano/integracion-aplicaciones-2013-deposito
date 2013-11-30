@@ -172,7 +172,10 @@ public class MuebleFormView extends CustomComponent {
 		        	ValidatorUtils.installSingleValidator(origen,"origen");
 		            binder.commit();
 		            //EJBFacade.getIntance().altaMueble(bindeable);
-		            facade.altaMueble(bindeable);
+	        		if (editable)
+	        			facade.updateStock(bindeable);	
+	        		else
+	        			facade.altaMueble(bindeable);
 		            Notification.show("Articulo Mueble creado", Type.HUMANIZED_MESSAGE);
 		            UI.getCurrent().getNavigator().navigateTo("/creararticulo");
 		        } catch (CommitException e) {

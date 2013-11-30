@@ -171,4 +171,8 @@ public class EJBFacade {
 			despachoSolicitudesFacade.enviarArticulos(solicitudes);
 
 	}
+	public void updateStock(ArticuloView view) throws BackEndException{
+		systemFacade.actualizarStock(view, view.getStock());
+	}
+	
 }

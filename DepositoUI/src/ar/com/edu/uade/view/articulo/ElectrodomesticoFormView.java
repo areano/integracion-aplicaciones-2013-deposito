@@ -66,7 +66,12 @@ public class ElectrodomesticoFormView extends CustomComponent {
 	        	ValidatorUtils.installSingleValidator(fichaTecnica,"fichaTecnica");
 	        	ValidatorUtils.installSingleValidator(origen,"origen");
 	        	binder.commit();
-        		facade.altaElectrodomestico(bindeable);
+	        	
+        		if (editable)
+        			facade.updateStock(bindeable);	
+        		else
+        			facade.altaElectrodomestico(bindeable);
+        		
         		Notification.show("Articulo Electrodomestico creado", Type.HUMANIZED_MESSAGE);
         		UI.getCurrent().getNavigator().navigateTo("/creararticulo");
 	        } catch (CommitException e) {

@@ -170,7 +170,10 @@ public class InfantilFormView extends CustomComponent {
 		        	ValidatorUtils.installSingleValidator(edadRecomendada,"edadRecomendada");
 		        	ValidatorUtils.installSingleValidator(origen,"origen");
 		            binder.commit();
-		            facade.altaInfatil(bindeable);
+	        		if (editable)
+	        			facade.updateStock(bindeable);	
+	        		else
+	        			facade.altaInfatil(bindeable);
 		            Notification.show("Articulo Infantil creado", Type.HUMANIZED_MESSAGE);
 		            UI.getCurrent().getNavigator().navigateTo("/creararticulo");
 		        } catch (CommitException e) {
