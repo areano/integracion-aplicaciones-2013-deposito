@@ -139,11 +139,11 @@ public class DespachoDAO {
 			} catch (JMSException e) {
 				errorMessage = "*** Error enviando xml a jms de Despacho IP[" + p.getIp() + "] Grupo [" + p.getDespachoId() + "]***";
 				logger.error(errorMessage, e);
-				throw new BackEndException(e);
+				//throw new BackEndException(e);
 			} catch (NamingException e) {
 				errorMessage = "*** Error conectandose a jms de Despacho IP[" + p.getIp() + "] Grupo [" + p.getDespachoId() + "]***";
 				logger.error(errorMessage, e);
-				throw new BackEndException(e);
+				//throw new BackEndException(e);
 				}
 		}
 	}
