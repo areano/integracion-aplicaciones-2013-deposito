@@ -126,7 +126,7 @@ public class TestItemAsTable extends CustomComponent{
 			table.setEditable(true);
 			layout.addComponent(table);
 			/*Save Button*/
-			Button sendPedido = new Button("Enviar A Fabricar");
+			Button sendPedido = new Button("Enviar");
 			sendPedido.addClickListener(new Button.ClickListener() {
 				
 				@Override

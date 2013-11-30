@@ -11,6 +11,7 @@ import javax.naming.NamingException;
 
 
 
+
 import view.ArticuloView;
 import view.SolicitudArticulosItemView;
 import view.SolicitudArticulosView;
@@ -25,6 +26,7 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.FormLayout;
@@ -159,7 +161,7 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 						items);
 				popUpView.addStyleName(Reindeer.THEME_NAME);
 				popUpView.setStyleName(Reindeer.THEME_NAME);
-				solicitudSelected = new CheckBox("CB");
+				solicitudSelected = new CheckBox();
 				solicitudSelected.addValueChangeListener(new CheckValueEventListener(solicitudArticulosView));
 				
 				if (!solicitudArticulosView.isSelectable()) {
@@ -167,10 +169,10 @@ public class EnviarPedidosADespachoView extends VerticalLayout implements View {
 				}
 
 				map.put(solicitudArticulosView,solicitudSelected);
-				base.addComponent(new VerticalLayout(solicitudSelected,popUpView));
+				base.addComponent(new HorizontalLayout(solicitudSelected,popUpView));
 				addComponent(base);
 			}
-			Button confirm =  new Button("Confirm");
+			Button confirm =  new Button("Enviar");
 			confirm.addClickListener(new ConfirmSend());
 			addComponent(confirm);
 	}
