@@ -34,18 +34,18 @@ public class Transformer {
 	ArticuloDAO articuloDAO;
 	
 	
-	public Articulo converToClass(ArticuloDTO dto){
-		Articulo a = new Articulo();
-		a.setCodigo(dto.getCodigo());
-		a.setCodigoDeposito(dto.getCodigoDeposito());
-		a.setDescripcion(dto.getDescripcion());
-		a.setFoto(dto.getFoto());
-		a.setMarca(dto.getMarca());
-		a.setNombre(dto.getNombre());
-		a.setOrigen(dto.getOrigen());
-		a.setPrecio(dto.getPrecio());
-		return a;
-	}
+//	public Articulo converToClass(ArticuloDTO dto){
+//		Articulo a = new Articulo();
+//		a.setCodigo(dto.getCodigo());
+//		a.setCodigoDeposito(dto.getCodigoDeposito());
+//		a.setDescripcion(dto.getDescripcion());
+//		a.setFoto(dto.getFoto());
+//		a.setMarca(dto.getMarca());
+//		a.setNombre(dto.getNombre());
+//		a.setOrigen(dto.getOrigen());
+//		a.setPrecio(dto.getPrecio());
+//		return a;
+//	}
 	
 	public Electrodomestico converToClass(ElectrodomesticoDTO dto){
 		Electrodomestico e = new Electrodomestico();
