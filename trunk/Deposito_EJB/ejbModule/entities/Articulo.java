@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name = "Articulo")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
-public class Articulo {
+public abstract class Articulo {
 
 	@Id
 	private long codigo;
