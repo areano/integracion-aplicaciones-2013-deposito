@@ -80,7 +80,7 @@ public class MuebleFormView extends CustomComponent {
 			uri = new URI("http://"+bean.getFoto());
 			File file = new File("../welcome-content"+uri.getPath());
 	        image.setSource(new FileResource(file)); 
-	        buildLayout(layout, binder);
+//	        buildLayout(layout, binder);
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -127,7 +127,6 @@ public class MuebleFormView extends CustomComponent {
     	final AbstractTextField  origen =(AbstractTextField) binder.buildAndBind("Origen", "origen");
     	origen.setNullRepresentation("");	
 
-		descripcion.addBlurListener(new InstallArticuloValidatorBlurListener(descripcion, "descripcion"));
 		marca.addBlurListener(new InstallArticuloValidatorBlurListener(marca,"marca"));
 		nombre.addBlurListener(new InstallArticuloValidatorBlurListener(nombre,"nombre"));
 		precio.addBlurListener(new InstallArticuloValidatorBlurListener(precio,"textPrecio"));
