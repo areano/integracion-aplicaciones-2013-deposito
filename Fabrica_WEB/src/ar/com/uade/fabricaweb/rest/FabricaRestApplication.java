@@ -1,4 +1,4 @@
-package rest;
+package ar.com.uade.fabricaweb.rest;
 
 import java.util.Set;
 import java.util.HashSet;

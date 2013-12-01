@@ -1,4 +1,4 @@
-package rest;
+package ar.com.uade.fabricaweb.rest;
 
 import javax.naming.InitialContext;
 import javax.ws.rs.Consumes;
@@ -15,48 +15,41 @@ import facade.FabricaFacade;
 @Path("/Fabrica")
 public class FabricaRest {
 
-	
-	SolicitudCompraJSONParser parser=SolicitudCompraJSONParser.obtenerInstancia();
+	SolicitudCompraJSONParser parser = SolicitudCompraJSONParser.obtenerInstancia();
 
+	FabricaFacade facade = null;
 
-	FabricaFacade facade=null;
+	private void getFabricaFacade() {
+		if (facade == null) {
 
-	 private void getFabricaFacade() {
-		 if (facade==null){
-		 
-		 try {
+			try {
 				InitialContext ic = new InitialContext();
 				facade = (FabricaFacade) ic.lookup("java:global/Fabrica_EAR/Fabrica_EJB/FabricaFacadeBean");
 
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
-	 }	 
+	}
+
 	@POST
 	@Path("/RecibirSolicitud")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public String guardar(String compra) {
 
-		
 		try {
 			getFabricaFacade();
-			
+
 			SolicitudCompraDTO dto = parser.toObject(compra);
 
 			facade.recibirSolicitudCompra(dto);
 		} catch (ParserException e) {
-			// TODO AR: log error
 			e.printStackTrace();
-		} 
-		
-		return compra;
+		}
 
-		// TODO AR: Verificar si necesitamos devolver algo para el otro lado...
+		return compra;
 	}
-	
-	
+
 }

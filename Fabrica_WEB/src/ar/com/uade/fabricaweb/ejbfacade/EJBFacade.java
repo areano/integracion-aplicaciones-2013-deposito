@@ -1,4 +1,4 @@
-package ejbfacade;
+package ar.com.uade.fabricaweb.ejbfacade;
 
 import java.util.ArrayList;
 import java.util.Collection;
