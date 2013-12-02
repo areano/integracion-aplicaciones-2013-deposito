@@ -68,7 +68,7 @@ public class ModaFormView extends CustomComponent {
 			uri = new URI("http://"+bean.getFoto());
 			File file = new File("../welcome-content"+uri.getPath());
 	        image.setSource(new FileResource(file)); 
-	        buildLayout(layout, binder);
+//	        buildLayout(layout, binder);
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
