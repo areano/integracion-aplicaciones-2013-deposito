@@ -33,7 +33,7 @@ public class FabricaDAO {
 			}
 		clienteRest.setIp(localMachine);
 		clienteRest.setPort("8080");
-		clienteRest.setMetodo("Fabrica_WEB/Fabrica/RecibirSolicitud");
+		clienteRest.setMetodo("/Fabrica_WEB/Fabrica/RecibirSolicitud");
 	}
 	
     public FabricaDAO(String ip, String puerto, String metodo) {

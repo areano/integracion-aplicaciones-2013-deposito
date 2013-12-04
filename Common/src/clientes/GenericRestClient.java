@@ -25,7 +25,7 @@ public class GenericRestClient {
 	public String enviar(String mensaje) throws Exception {
 
 		CloseableHttpClient httpclient = HttpClients.createDefault();
-		HttpPost httpPost = new HttpPost("http://" + ip + ":" + port + "/" + metodo);
+		HttpPost httpPost = new HttpPost("http://" + ip + ":" + 8080 +  metodo);
 		httpPost.addHeader("Content-Type", "application/json");
 		httpPost.setEntity(new StringEntity(mensaje));
 		CloseableHttpResponse response = httpclient.execute(httpPost);

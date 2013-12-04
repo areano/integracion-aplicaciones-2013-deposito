@@ -1,6 +1,7 @@
 package parsers;
 
 import java.io.StringReader;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -10,6 +11,7 @@ import javax.xml.bind.ValidationEventHandler;
 import dto.SolicitudArticuloItemDTO;
 import dto.SolicitudArticulosDTO;
 import entities.SolicitudArticulos;
+import entities.SolicitudArticulosItem;
 
 public class SolicitudArticulosParser implements Parser<SolicitudArticulosDTO> {
 
@@ -72,6 +74,29 @@ public class SolicitudArticulosParser implements Parser<SolicitudArticulosDTO> {
 		return json;		
 		
 	}
-	
+	public String toJson(SolicitudArticulos sa){
+		String json="{\n"
+				+ "   idModulo:6,\n"
+				+ "   idSolicitud:"+ sa.getSolicitudId();
+		if (sa.getItems().size()>0){
+			int i=1;
+			int j=sa.getItems().size();
+			json=json + ",\n\n   items: [\n";
+			for (SolicitudArticulosItem a : sa.getItems()){
+				if (i<j) {
+					json=json + "   {codigo:"+a.getArticulo().getCodigo()+", cantidad: "+a.getCantidad()+"},\n";
+					i=i+1;
+				} else{
+					json=json + "   {codigo:"+a.getArticulo().getCodigo()+", cantidad: "+a.getCantidad()+"}\n";					
+				}
+			}
+			json=json + "   ]\n}\n";
+		} else { 
+			json=json + "\n}\n";
+		}
+		
+		return json;		
+		
+	}
 	
 }
