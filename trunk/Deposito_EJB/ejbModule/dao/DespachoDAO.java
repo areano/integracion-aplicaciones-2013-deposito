@@ -17,6 +17,7 @@ import parsers.ArticuloParser;
 import parsers.SolicitudArticulosParser;
 import transformer.Transformer;
 import clientes.GenericQueueClient;
+import clientes.GenericRestClient;
 import dto.ElectrodomesticoDTO;
 import dto.InfantilDTO;
 import dto.ModaDTO;
@@ -65,7 +66,7 @@ public class DespachoDAO {
 	private DespachoConexion obtenerConexion(final long despachoId) throws BackEndException {
 		try {
 			Query q = em.createQuery("from DespachoConexion where id =:despachoId and active = TRUE");
-			q.setParameter("despachoId", despachoId);
+			q.setParameter("despachoId", (int)despachoId);
 			conexion = (DespachoConexion) q.getSingleResult();
 			return conexion;
 		}catch  (Exception e)
@@ -153,11 +154,12 @@ public class DespachoDAO {
 		String errorMessage = new String();
 		DespachoConexion p = obtenerConexion(a.getModuloId());
 		SolicitudArticulosParser parser = new SolicitudArticulosParser();
-		String xml = parser.toXML(a);
+		String jSon = parser.toJson(a);
 		try {
-			GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(),p.getUsuario(), p.getPassword());
-			cliente.enviar(xml);
-			cliente.cerrarConexion();
+			//GenericQueueClient cliente = new GenericQueueClient(p.getQueueName(), p.getIp(), p.getPuerto(),p.getUsuario(), p.getPassword());
+			GenericRestClient client = new GenericRestClient(p.getIp(), p.getRestPort(), p.getRestPath());
+			client.enviar(jSon);
+			
 		} catch (JMSException e) {
 			errorMessage = "*** Error enviando xml a jms de Despacho IP[" + p.getIp() + "] Grupo [" + p.getDespachoId() + "]***";
 			logger.error(errorMessage, e);
@@ -166,6 +168,10 @@ public class DespachoDAO {
 			errorMessage = "*** Error conectando a cola jms de Despacho IP[" + p.getIp() + "] Grupo [" + p.getDespachoId() + "]***";
 			logger.error(errorMessage, e);
 //			throw new BackEndException(e);
+		} catch (Exception e) {
+			errorMessage = "*** Error conectando a REST de Despacho IP[" + p.getIp() + "] Grupo [" + p.getDespachoId() + "]***";
+			logger.error(errorMessage, e);
+
 		}
 	}
 
